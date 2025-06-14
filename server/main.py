@@ -110,6 +110,25 @@ def create_plot(results: List[dict], bank: str, month: str) -> io.BytesIO:
 
     return buf
 
+@app.get("/categories/")
+async def get_categories() -> dict:
+    """
+    Retrieve categories from parser. The categories contain keyword strings that map back to it
+    so if any keywords are found in the description we can defer the category.
+
+    ex: {
+    'GAS': {'GAS', 'CHEVRON', 'SHELL'}
+    ...
+    }
+    :return: hashmap of categories and keywords
+    """
+    try:
+        categories = Parser.keyword_to_category
+        return categories
+    except Exception as e:
+        log.error(f"Error retrieving records from database: {e}")
+        raise HTTPException(status_code=500, detail="Error retrieving records from database.")
+
 @app.get("/records/")
 async def get_records(bank_name: Optional[str] = Query(None)) -> dict:
     """
