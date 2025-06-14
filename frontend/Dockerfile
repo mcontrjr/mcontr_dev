@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 5173
 
 # Command to run the server
-CMD ["npx", "vite"]
+CMD ["npm", "run", "dev"]

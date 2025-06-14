@@ -16,10 +16,10 @@ services:
     ports:
       - "${DB_PORT}:${DB_PORT}"
 
-  app:
+  server:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./server/Dockerfile
     container_name: server
     restart: always
     environment:
@@ -36,11 +36,11 @@ services:
 
   frontend:
     build:
-      context: ./mcontr_dev
-      dockerfile: Dockerfile
+      context: ./frontend
+      dockerfile: ./frontend/Dockerfile
     container_name: frontend
     volumes:
-      - ./mcontr_dev:/app
+      - ./frontend:/app
     ports:
       - "5173:5173"
     environment:
@@ -48,7 +48,7 @@ services:
       - SERVER_PORT=${SERVER_PORT}
       - PORT=${FRONTEND_PORT}
     depends_on:
-      - app
+      - server
     networks:
       - finance_network
 
