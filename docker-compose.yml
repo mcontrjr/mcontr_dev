@@ -33,7 +33,6 @@ services:
       - db
     volumes:
       - ./server:/app
-    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "${SERVER_PORT}", "--reload"]
 
   frontend:
     build:
@@ -48,7 +47,6 @@ services:
       - API_URL=${API_URL}
       - SERVER_PORT=${SERVER_PORT}
       - PORT=${FRONTEND_PORT}
-    command: npm run dev
     depends_on:
       - app
     networks:

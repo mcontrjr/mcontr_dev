@@ -1,6 +1,8 @@
 .vscode/
-*/node_modules
+**/node_modules
 notes.md
+**/package-lock.json
+logs/
 # ignore venv
 **venv/
 backups/
