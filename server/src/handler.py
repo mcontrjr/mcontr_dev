@@ -96,3 +96,33 @@ class PostgresHandler:
         finally:
             if conn is not None:
                 conn.close()
+
+    def clear_records(self) -> dict:
+        """
+        Clears all records from the bank_statements table.
+        Returns the number of records deleted.
+        """
+        conn = None
+        try:
+            conn = psycopg2.connect(**self.config)
+            cur = conn.cursor()
+            
+            # Get the count of records before deletion
+            cur.execute("SELECT COUNT(*) FROM bank_statements")
+            count_before = cur.fetchone()[0]
+            
+            # Delete all records
+            cur.execute("DELETE FROM bank_statements")
+            conn.commit()
+            
+            log.info(f"Cleared {count_before} records from the database.")
+            return {
+                'message': 'Successfully cleared all records',
+                'records_deleted': count_before
+            }
+        except Exception as e:
+            log.error(f"Error clearing records from database: {e}")
+            raise HTTPException(status_code=500, detail="Error clearing records from database.")
+        finally:
+            if conn is not None:
+                conn.close()

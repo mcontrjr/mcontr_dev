@@ -99,20 +99,26 @@ const AmountBar = ({ lineData }) => {
     // Process data into weekly chunks
     const processWeeklyData = (data) => {
         const weeklyData = {};
-        
+        const monthNames = [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+
         data.labels.forEach((date, index) => {
             const [year, month, day] = date.split('-');
             const weekNum = Math.ceil(parseInt(day) / 7);
+            const monthIndex = parseInt(month, 10) - 1;
+            const monthName = monthNames[monthIndex] || month;
             const weekKey = `${year}-${month}-W${weekNum}`;
-            
+
             if (!weeklyData[weekKey]) {
-                weeklyData[weekKey] = {
-                    purchases: 0,
-                    payments: 0,
-                    label: `Week ${weekNum} (${month}/${year})`
-                };
+            weeklyData[weekKey] = {
+                purchases: 0,
+                payments: 0,
+                label: `${monthName} Week ${weekNum}`
+            };
             }
-            
+
             // Add purchases and payments
             weeklyData[weekKey].purchases += data.datasets[0].data[index] || 0;
             weeklyData[weekKey].payments += Math.abs(data.datasets[1].data[index] || 0);
@@ -562,7 +568,7 @@ const FinanceTabs = ({ activeTab, bankName, bankNames, setBankName, setActiveTab
     </div>
 );
 
-const UploadTab = ({uploadMessage, setUploadMessage, fetchRecords}) => (
+const UploadTab = ({uploadMessage, setUploadMessage, fetchRecords, fetchBankNames}) => (
     <div className="text-center">
         <div className="my-card" style={{ maxWidth: '500px', margin: '0 auto' }}>
             <div className="my-card-body">
@@ -606,7 +612,8 @@ const UploadTab = ({uploadMessage, setUploadMessage, fetchRecords}) => (
                             
                             const data = await response.json();
                             setUploadMessage(`Successfully uploaded ${files.length} file(s)! Switch to Analyze tab to view your data.`);
-                            fetchRecords();
+                            // Update both records and bank names after successful upload
+                            await Promise.all([fetchRecords(), fetchBankNames()]);
                         } catch (error) {
                             console.error('Error uploading files:', error);
                             setUploadMessage('Error uploading files. Please try again.');

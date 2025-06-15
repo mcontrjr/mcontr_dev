@@ -165,7 +165,9 @@ async def get_records(bank_name: Optional[str] = Query(None)) -> dict:
     except Exception as e:
         log.error(f"Error retrieving records from database: {e}")
         raise HTTPException(status_code=500, detail="Error retrieving records from database.")
-    
+
+
+
 @app.get("/plot/")
 async def plot_records(bank: Optional[str] = Form(None), month: Optional[str] = Form(None)):
     """
@@ -290,3 +292,14 @@ async def get_system_info():
     except Exception as e:
         log.error(f"Error retrieving system information: {e}")
         raise HTTPException(status_code=500, detail="Error retrieving system information")
+
+@app.post("/clear/")
+async def clear_records():
+    """
+    Endpoint to clear all records from the bank_statements table.
+    """
+    try:
+        return handler.clear_records()
+    except Exception as e:
+        log.error(f"Error clearing records from database: {e}")
+        raise HTTPException(status_code=500, detail="Error clearing records from database.")

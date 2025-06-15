@@ -1,13 +1,16 @@
 #!/bin/bash
 
+set -e
+
 SHOW_HELP=false
 PORT=8000
 
 setup() {
     echo "Setting up venv..."
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install --no-cache-dir -r requirements.txt
+    python3 -m venv venv || { echo "Failed to create virtual environment"; exit 1; }
+    source venv/bin/activate || { echo "Failed to activate virtual environment"; exit 1; }
+    python -m pip install --upgrade pip || { echo "Failed to upgrade pip"; exit 1; }
+    pip install --no-cache-dir -r requirements.txt || { echo "Failed to install requirements"; exit 1; }
     echo "Done"
 }
 

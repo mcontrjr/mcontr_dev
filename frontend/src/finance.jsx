@@ -65,7 +65,6 @@ const Finance = () => {
     const [bankName, setBankName] = useState('');
     const [bankNames, setBankNames] = useState([]);
     const [uploadMessage, setUploadMessage] = useState('Upload your statements here..');
-    const [analyzeMessage, setAnalyzeMessage] = useState('No records to analyze. Upload in the next tab!');
     const [records, setRecords] = useState([]);
     const [lineData, setLineData] = useState({});
     const [pieData, setPieData] = useState({});
@@ -128,23 +127,23 @@ const fetchRecords = async () => {
     }
 };
     
-    useEffect(() => {
-        const fetchBankNames = async () => {
-            try {
-                const response = await fetch(`${API_URL}/records`);
-                
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                
-                const data = await response.json();
-                const fetchedBankNames = [...new Set(data.records.map(record => record.bank))];
-                setBankNames(fetchedBankNames);
-            } catch (error) {
-                console.error('Error fetching bank names:', error);
+    const fetchBankNames = async () => {
+        try {
+            const response = await fetch(`${API_URL}/records`);
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        };
+            
+            const data = await response.json();
+            const fetchedBankNames = [...new Set(data.records.map(record => record.bank))];
+            setBankNames(fetchedBankNames);
+        } catch (error) {
+            console.error('Error fetching bank names:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchBankNames();
         fetchRecords();
     }, [selectedMonths, bankName]);
@@ -198,7 +197,7 @@ const fetchRecords = async () => {
         // Prepare data for the pie chart (purchases only - positive amounts)
         const categoryData = {};
         const purchaseRecords = sortedRecords.filter(record => record.amount > 0);
-        
+
         purchaseRecords.forEach(record => {
             if (categoryData[record.category]) {
                 categoryData[record.category] += record.amount;
@@ -207,8 +206,13 @@ const fetchRecords = async () => {
             }
         });
 
-        const pieLabels = Object.keys(categoryData);
-        const pieAmounts = Object.values(categoryData);
+        const sortedCategories = Object.fromEntries(
+            Object.entries(categoryData)
+                .sort(([, a], [, b]) => b - a)
+        );
+
+        const pieLabels = Object.keys(sortedCategories);
+        const pieAmounts = Object.values(sortedCategories);
 
         setPieData({
             labels: pieLabels,
@@ -348,6 +352,7 @@ const fetchRecords = async () => {
                                             uploadMessage={uploadMessage}
                                             setUploadMessage={setUploadMessage}
                                             fetchRecords={fetchRecords}
+                                            fetchBankNames={fetchBankNames}
                                         />
                                     </div>
                                 )}

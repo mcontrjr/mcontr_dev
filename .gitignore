@@ -9,3 +9,6 @@ backups/
 # ignore Python cache files
 __pycache__/
 server/uploads/
+**/.env
+.env
+server/logs

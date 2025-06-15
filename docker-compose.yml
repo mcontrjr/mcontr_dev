@@ -8,18 +8,19 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
-      - finance_data:/var/lib/postgresql/data
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./sql/postgresql.conf:/etc/postgresql/postgresql.conf
-      - ./logs/pg_log:/var/lib/postgresql/data
+      - ./logs/pg_log:/var/log/postgresql
     command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
     ports:
       - "${DB_PORT}:${DB_PORT}"
+    networks:
+      - finance_network
 
   server:
     build:
-      context: .
-      dockerfile: ./server/Dockerfile
+      context: ./server
+      dockerfile: Dockerfile
     container_name: server
     restart: always
     environment:
@@ -33,20 +34,25 @@ services:
       - db
     volumes:
       - ./server:/app
+      - /app/__pycache__
+    networks:
+      - finance_network
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: ./frontend/Dockerfile
+      dockerfile: Dockerfile
     container_name: frontend
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     ports:
       - "5173:5173"
     environment:
       - API_URL=${API_URL}
       - SERVER_PORT=${SERVER_PORT}
       - PORT=${FRONTEND_PORT}
+      - VITE_API_URL=${API_URL}
     depends_on:
       - server
     networks:
