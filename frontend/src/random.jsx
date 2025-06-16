@@ -94,65 +94,20 @@ async function getLoremPicsumImages(keyword, page = 1) {
   const baseOffset = (page - 1) * 9;
   for (let i = 0; i < 9; i++) {
     const imageIndex = baseOffset + i;
-    const seed = keyword ? `${keyword}-${imageIndex}` : `random-${Date.now()}-${imageIndex}`;
-    images.push({ id: `picsum-${imageIndex}`, url: `https://picsum.photos/seed/${seed}/400/400` });
-  }
-  return { success: true, images };
-}
-
-// Flickr API image fetching
-async function getFlickrImages(keyword, page = 1) {
-  try {
-    const apiKey = import.meta.env.VITE_FLICKR_API_KEY;
-    
-    if (!apiKey) {
-      // Fallback to Lorem Flickr if no API key
-      return getLoremFlickrImages(keyword, page);
-    }
-    
-    let searchText = keyword && keyword.trim() !== '' ? keyword.trim() : 'nature';
-    
-    const response = await fetch(
-      `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${encodeURIComponent(searchText)}&page=${page}&per_page=9&format=json&nojsoncallback=1&safe_search=1&content_type=1`
-    );
-    
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    
-    const data = await response.json();
-    if (data.photos.photo.length === 0) return { success: false, error: 'No photos found' };
-    
-    const images = data.photos.photo.map(photo => ({
-      id: `flickr-${photo.id}`,
-      url: `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_z.jpg`
-    }));
-    
-    return { success: true, images };
-  } catch (error) {
-    return getLoremFlickrImages(keyword, page);
-  }
-}
-
-// Lorem Flickr fallback (creative placeholder images)
-async function getLoremFlickrImages(keyword, page = 1) {
-  const images = [];
-  const baseOffset = (page - 1) * 9;
-  const categories = ['nature', 'city', 'abstract', 'people', 'technology', 'food', 'animals', 'architecture', 'art'];
-  
-  for (let i = 0; i < 9; i++) {
-    const imageIndex = baseOffset + i;
-    const category = keyword ? keyword : categories[imageIndex % categories.length];
-    const seed = `flickr-${category}-${imageIndex}`;
+    const timestamp = Date.now();
+    const seed = keyword ? `${keyword}-${imageIndex}-${timestamp}` : `random-${imageIndex}-${timestamp}`;
     images.push({ 
-      id: `lorem-flickr-${imageIndex}`, 
-      url: `https://picsum.photos/seed/${seed}/400/400?random=${imageIndex}` 
+      id: `picsum-${imageIndex}`, 
+      url: `https://picsum.photos/seed/${seed}/400/400` 
     });
   }
   return { success: true, images };
 }
 
 
-// Components
 
+
+// Components
 function SearchInterface({ keyword, setKeyword, onSearch, onClear, loading, message, hasSearched, hasImages }) {
   return (
     <div className="my-card animate-fade-in-up" style={{ maxWidth: '500px', margin: '0 auto 3rem auto' }}>
@@ -262,12 +217,6 @@ function TabulatedGallery({ pexelsImages, picsumImages, flickrImages, loading, a
         >
           Lorem Picsum
         </button>
-        <button 
-          className={`gallery-tab ${activeTab === 'flickr' ? 'active' : ''}`}
-          onClick={() => setActiveTab('flickr')}
-        >
-          Flickr
-        </button>
       </div>
       
       <div className="gallery-tab-content">
@@ -304,28 +253,11 @@ function TabulatedGallery({ pexelsImages, picsumImages, flickrImages, loading, a
             <ErrorState engine="Lorem Picsum" />
           )}
         </div>
-        
-        <div className={`gallery-tab-pane ${activeTab === 'flickr' ? 'active' : ''}`}>
-          <div className="gallery-engine-info">
-            <h4 className="gallery-engine-title">Flickr Gallery</h4>
-            <p className="gallery-engine-description">
-              Community-driven photos from photographers around the world
-            </p>
-          </div>
-          
-          {loading.flickr ? (
-            <LoadingState />
-          ) : flickrImages.length > 0 ? (
-            <ImageGrid images={flickrImages} engine="Flickr" />
-          ) : (
-            <ErrorState engine="Flickr" />
-          )}
-        </div>
       </div>
       
       <div className="photo-credits">
         <p><strong>Photo Credits:</strong></p>
-        <p>Photos provided by <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer">Pexels</a>, <a href="https://picsum.photos" target="_blank" rel="noopener noreferrer">Lorem Picsum</a>, and <a href="https://www.flickr.com" target="_blank" rel="noopener noreferrer">Flickr</a></p>
+        <p>Photos provided by <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer">Pexels</a> and <a href="https://picsum.photos" target="_blank" rel="noopener noreferrer">Lorem Picsum</a></p>
         <p>Click any photo to view full size</p>
       </div>
     </div>
@@ -338,12 +270,11 @@ export default function RandomPage() {
   const [keyword, setKeyword] = useState('');
   const [pexelsImages, setPexelsImages] = useState([]);
   const [picsumImages, setPicsumImages] = useState([]);
-  const [flickrImages, setFlickrImages] = useState([]);
   const [message, setMessage] = useState('Enter a keyword to discover amazing photos!');
-  const [loading, setLoading] = useState({ pexels: false, picsum: false, flickr: false });
+  const [loading, setLoading] = useState({ pexels: false, picsum: false });
   const [hasSearched, setHasSearched] = useState(false);
   const [lastSearchedKeyword, setLastSearchedKeyword] = useState('');
-  const [currentPage, setCurrentPage] = useState({ pexels: 1, picsum: 1, flickr: 1 });
+  const [currentPage, setCurrentPage] = useState({ pexels: 1, picsum: 1 });
   const [activeTab, setActiveTab] = useState('pexels');
 
   useEffect(() => {
@@ -377,30 +308,14 @@ export default function RandomPage() {
       setMessage(searchKeyword === '' ? 'Generating random photos...' : `Searching for "${searchKeyword}"...`);
     }
 
-    // Search all three engines simultaneously
-    const [pexelsResult, picsumResult, flickrResult] = await Promise.all([
+    // Search both engines simultaneously
+    const [pexelsResult, picsumResult] = await Promise.all([
       getPexelsImages(searchKeyword, pexelsPage),
-      getLoremPicsumImages(searchKeyword, picsumPage),
-      getFlickrImages(searchKeyword, flickrPage)
+      getLoremPicsumImages(picsumPage)
     ]);
     
-    if (pexelsResult.success) {
-      setPexelsImages(pexelsResult.images);
-    } else {
-      setPexelsImages([]);
-    }
-    
-    if (picsumResult.success) {
-      setPicsumImages(picsumResult.images);
-    } else {
-      setPicsumImages([]);
-    }
-    
-    if (flickrResult.success) {
-      setFlickrImages(flickrResult.images);
-    } else {
-      setFlickrImages([]);
-    }
+    setPexelsImages(pexelsResult.success ? pexelsResult.images : []);
+    setPicsumImages(picsumResult.success ? picsumResult.images : []);
     
     setMessage(searchKeyword === '' ? 'Here are some photos for you!' : `Found photos for "${searchKeyword}"`);
     setLoading({ pexels: false, picsum: false, flickr: false });
@@ -433,14 +348,13 @@ export default function RandomPage() {
               loading={loading.pexels || loading.picsum || loading.flickr}
               message={message}
               hasSearched={hasSearched}
-              hasImages={pexelsImages.length > 0 || picsumImages.length > 0 || flickrImages.length > 0}
+              hasImages={pexelsImages.length > 0 || picsumImages.length > 0}
             />
 
-            {(hasSearched || pexelsImages.length > 0 || picsumImages.length > 0 || flickrImages.length > 0) && (
+            {(hasSearched || pexelsImages.length > 0 || picsumImages.length > 0 ) && (
               <TabulatedGallery
                 pexelsImages={pexelsImages}
                 picsumImages={picsumImages}
-                flickrImages={flickrImages}
                 loading={loading}
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
