@@ -717,6 +717,9 @@ input[type='text']::placeholder {
   border-top: 3px solid var(--accent);
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .photo-search-container {
@@ -1213,6 +1216,9 @@ input[type='text']::placeholder {
 
 .gallery-loading-state {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 2rem;
 }
 
