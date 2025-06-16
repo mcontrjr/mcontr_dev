@@ -3,7 +3,10 @@
 # Initialize variables
 COMPOSE_FILE="docker-compose.yml"
 SHOW_HELP=false
-export $(grep -v '\#' .env | xargs)
+BUILD=false
+
+# Load environment variables for script usage only
+source .env
 
 backup_db() {
     if docker container ls --filter "name=postgres" --format '{{.Names}}' | grep -q .; then
@@ -26,10 +29,10 @@ teardown() {
     backup_db
 
     echo "Stopping running containers..."
-    docker compose -f $COMPOSE_FILE down --remove-orphans
+    docker compose -f $COMPOSE_FILE down --remove-orphans  --volumes
 
     echo "Removing existing pg_log directory..."
-    sudo rm -rf ./logs/pg_log
+    rm -rf ./logs/pg_log
 }
 
 # Parse command line arguments
@@ -39,13 +42,13 @@ while [[ $# -gt 0 ]]; do
             SHOW_HELP=true
             shift
             ;;
-        --dev)
-            COMPOSE_FILE="docker-compose.dev.yml"
-            shift
-            ;;
         --down)
             teardown
             exit 0
+            ;;
+        --build)
+            BUILD=true
+            shift
             ;;
         *)
             echo "Unknown option: $1"
@@ -62,8 +65,6 @@ Usage: $0 [OPTIONS]
 
 Options:
   -h, --help    Show this help message
-  --dev         Use docker-compose.dev.yml configuration
-  --db          Use docker-compose.db.yml configuration
 
 Description:
   This script manages the Finance application containers.
@@ -81,12 +82,17 @@ mkdir -p ./logs/pg_log
 
 # Set correct permissions for postgres user (UID 999 is typically postgres in the container)
 echo "Setting correct permissions..."
-sudo chown -R $(whoami):$(whoami) ./logs/pg_log
-sudo chmod -R 750 ./logs/pg_log
+chown -R $(whoami):$(whoami) ./logs/pg_log
+chmod -R 750 ./logs/pg_log
 
 # Start the containers
-echo "Starting containers with $COMPOSE_FILE..."
-docker compose -f $COMPOSE_FILE up -d
+if [ "$BUILD" = true ]; then
+    echo "Building and starting containers with $COMPOSE_FILE..."
+    docker compose --env-file .env -f $COMPOSE_FILE up -d --build
+else
+    echo "Starting containers with $COMPOSE_FILE..."
+    docker compose --env-file .env -f $COMPOSE_FILE up -d
+fi
 
 # Wait for PostgreSQL to be ready
 echo "Waiting for PostgreSQL to be ready..."

@@ -62,6 +62,9 @@ function ModernHeader({ theme, toggleTheme }) {
 async function getWeatherData(location) {
   try {
     const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+    if (!apiKey) {
+      throw new Error('Weather API key not found. Please check environment variables.');
+    }
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(location)}&aqi=no`);
     
     if (!response.ok) {
