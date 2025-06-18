@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
 import error_img from './assets/rainy.svg';
-import {useTheme, ModernHeader, Footer} from './components/MainComponents';
+import {useTheme, AltModernHeader, Footer} from './components/MainComponents';
 import { SearchInterface, WeatherProfileCard, WeatherTable } from './components/WeatherComponents';
 import logo from './assets/weather-logo.svg';
 
@@ -99,7 +99,7 @@ export default function WeatherPage() {
 
   return (
     <>
-      <ModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo}/>
+      <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo}/>
       <main>
         <section className="my-section">
           <div className="my-container">

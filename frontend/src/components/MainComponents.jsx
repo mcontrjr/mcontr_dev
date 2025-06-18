@@ -35,20 +35,84 @@ function ThemeToggle({ theme, toggleTheme }) {
   );
 }
 
-function ModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
+function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
+  const playground = [
+    {
+      title: "Weather Check",
+      description: "Check weather conditions in real-time",
+      href: "/weather"
+    },
+    {
+      title: "Guessing Game",
+      description: "Test your knowledge with a fun guessing game",
+      href: "/guess"
+    }
+  ];
+
+  const tools = [
+    {
+      title: "Finance Tools",
+      description: "Analyze your financial statements",
+      href: "/finance"
+    },
+    {
+      title: "Image Generator",
+      description: "Create unique images from text",
+      href: "/random"
+    },
+    {
+      title: "Documentation",
+      description: "Learn how to use our tools",
+      href: "/docs"
+    },
+    {
+      title: "About",
+      description: "Learn more about our project",
+      href: "/about"
+    }
+  ];
+
   return (
-    <header className="my-header">
-      <div className="my-header-content">
-        <div className="my-logo">
-          {theme === 'light' ? <img src={light_logo} alt="Dark mode" /> : <img src={dark_logo} alt="Light mode" />}
-          <div className="my-logo-text">mcontr</div>
-        </div>
-        <nav className="my-nav" style={{ gap: '0.5rem' }}>
-          <a href="/" className="my-button">
-            Home
+    <header className="alt-header">
+      <div className="alt-header-content">
+        <div className="alt-header-left">
+          <a href="/" className="alt-logo">
+            {theme === 'light' ? 
+              <img src={light_logo} alt="Logo" /> : 
+              <img src={dark_logo} alt="Logo" />
+            }
+            <span className="alt-logo-text">mcontr</span>
           </a>
+        </div>
+
+        <div className="alt-right-section">
+          <nav className="alt-nav">
+            <div className="alt-nav-item">
+              Playground
+              <div className="alt-dropdown">
+                {playground.map((play, index) => (
+                  <a key={index} href={play.href} className="alt-dropdown-item">
+                    <span className="alt-dropdown-title">{play.title}</span>
+                    <span className="alt-dropdown-description">{play.description}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+            
+            <div className="alt-nav-item">
+              Tools
+              <div className="alt-dropdown">
+                {tools.map((tool, index) => (
+                  <a key={index} href={tool.href} className="alt-dropdown-item">
+                    <span className="alt-dropdown-title">{tool.title}</span>
+                    <span className="alt-dropdown-description">{tool.description}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </nav>
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-        </nav>
+        </div>
       </div>
     </header>
   );
@@ -230,4 +294,4 @@ function Footer() {
 
 
 
-export {useTheme, ThemeToggle, ModernHeader, HeroSection, FeatureCard, ToolCard, PlaygroundSection, ToolsSection, Footer}
+export {useTheme, ThemeToggle, AltModernHeader, HeroSection, FeatureCard, ToolCard, PlaygroundSection, ToolsSection, Footer}

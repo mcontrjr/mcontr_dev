@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import '../styles/stock.css';
 import logo from './assets/random-logo.svg';
 import { SearchInterface, TabulatedGallery } from './components/RandomComponents';
-import {useTheme, ModernHeader, Footer} from './components/MainComponents';
+import {useTheme, AltModernHeader, Footer} from './components/MainComponents';
 
 
 // Pexels API image fetching
@@ -120,7 +120,7 @@ export default function RandomPage() {
 
   return (
     <>
-      <ModernHeader 
+      <AltModernHeader 
         theme={theme} 
         toggleTheme={toggleTheme} 
         light_logo={logo} 

@@ -65,6 +65,8 @@ Usage: $0 [OPTIONS]
 
 Options:
   -h, --help    Show this help message
+  --down        Stop and remove containers, networks, volumes, and images created by 'up'
+  --build       Build images before starting containers
 
 Description:
   This script manages the Finance application containers.

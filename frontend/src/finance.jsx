@@ -41,7 +41,7 @@ function ThemeToggle({ theme, toggleTheme }) {
 }
 
 // Modern Header Component
-function ModernHeader({ theme, toggleTheme }) {
+function AltModernHeader({ theme, toggleTheme }) {
     return (
         <header className="my-header">
             <div className="my-header-content">
@@ -273,7 +273,7 @@ const fetchRecords = async () => {
 
     if (error) return (
         <>
-            <ModernHeader theme={theme} toggleTheme={toggleTheme} />
+            <AltModernHeader theme={theme} toggleTheme={toggleTheme} />
             <div className="my-container">
                 <div style={{ textAlign: 'center' }}>
                     <div className="my-card">
@@ -300,7 +300,7 @@ const fetchRecords = async () => {
 
     return (
         <>
-            <ModernHeader theme={theme} toggleTheme={toggleTheme} />
+            <AltModernHeader theme={theme} toggleTheme={toggleTheme} />
             <main>
                 <section className="my-section">
                     <div className="my-container">                        

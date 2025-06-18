@@ -37,7 +37,7 @@ function ThemeToggle({ theme, toggleTheme }) {
 }
 
 // Modern Header Component
-function ModernHeader({ theme, toggleTheme }) {
+function AltModernHeader({ theme, toggleTheme }) {
   return (
     <header className="my-header">
       <div className="my-header-content">
@@ -87,7 +87,7 @@ export default function InfoPage() {
     // console.log(`Error state: ${error}`)
     if (loading) return (
         <>
-            <ModernHeader theme={theme} toggleTheme={toggleTheme} />
+            <AltModernHeader theme={theme} toggleTheme={toggleTheme} />
             <div className="my-container">
                 <div style={{ textAlign: 'center', padding: '2rem' }}>
                     <div style={{ 
@@ -107,7 +107,7 @@ export default function InfoPage() {
 
     if (error) return (
         <>
-            <ModernHeader theme={theme} toggleTheme={toggleTheme} />
+            <AltModernHeader theme={theme} toggleTheme={toggleTheme} />
             <div className="my-container">
                 <div style={{ textAlign: 'center' }}>
                     <img src={error_img} alt="error" style={{ width: '300px', height: '300px', maxWidth: '100%' }} />
@@ -119,7 +119,7 @@ export default function InfoPage() {
 
     return (
         <>
-            <ModernHeader theme={theme} toggleTheme={toggleTheme} />
+            <AltModernHeader theme={theme} toggleTheme={toggleTheme} />
             <main>
                 <section className="my-section">
                     <div className="my-container">
