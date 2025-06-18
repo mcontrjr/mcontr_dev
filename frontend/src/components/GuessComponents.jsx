@@ -1,4 +1,4 @@
-import '../styles/stock.css'
+import '../../styles/stock.css'
 
 // Keypad Component
 function GameKeypad({ guess, onKeypadPress, onClear, onBackspace, gameWon }) {

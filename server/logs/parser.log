@@ -11004,3 +11004,753 @@ current billing period won't be available for redemption until your next stateme
 2025-05-31 08:33:37,580 - INFO - No bank name passed in query. Returning all records...
 2025-05-31 08:33:37,597 - INFO - Query: SELECT * FROM bank_statements
 2025-05-31 08:33:37,598 - INFO - Retrieved 44 records from the database.
+2025-06-18 03:46:42,184 - INFO - Query: SELECT * FROM bank_statements
+2025-06-18 03:46:42,188 - INFO - Retrieved 0 records from the database.
+2025-06-18 03:46:42,204 - INFO - No bank name passed in query. Returning all records...
+2025-06-18 03:46:42,233 - INFO - Query: SELECT * FROM bank_statements
+2025-06-18 03:46:42,234 - INFO - Retrieved 0 records from the database.
+2025-06-18 03:46:42,252 - INFO - Query: SELECT * FROM bank_statements
+2025-06-18 03:46:42,253 - INFO - Retrieved 0 records from the database.
+2025-06-18 03:46:42,256 - INFO - No bank name passed in query. Returning all records...
+2025-06-18 03:46:42,285 - INFO - Query: SELECT * FROM bank_statements
+2025-06-18 03:46:42,286 - INFO - Retrieved 0 records from the database.
+2025-06-18 03:46:59,811 - DEBUG - Calling on_part_begin with no data
+2025-06-18 03:46:59,812 - DEBUG - Calling on_header_field with data[42:61]
+2025-06-18 03:46:59,814 - DEBUG - Calling on_header_value with data[63:122]
+2025-06-18 03:46:59,814 - DEBUG - Calling on_header_end with no data
+2025-06-18 03:46:59,815 - DEBUG - Calling on_header_field with data[124:136]
+2025-06-18 03:46:59,815 - DEBUG - Calling on_header_value with data[138:153]
+2025-06-18 03:46:59,816 - DEBUG - Calling on_header_end with no data
+2025-06-18 03:46:59,817 - DEBUG - Calling on_headers_finished with no data
+2025-06-18 03:46:59,818 - DEBUG - Calling on_part_data with data[157:98304]
+2025-06-18 03:46:59,835 - DEBUG - Calling on_part_data with data[0:262144]
+2025-06-18 03:46:59,842 - DEBUG - Calling on_part_data with data[0:262144]
+2025-06-18 03:46:59,843 - DEBUG - Calling on_part_data with data[0:259716]
+2025-06-18 03:46:59,843 - DEBUG - Calling on_part_end with no data
+2025-06-18 03:46:59,844 - DEBUG - Calling on_end with no data
+2025-06-18 03:46:59,860 - INFO - Received 1 files: ['2024-12-15_amex.pdf']
+2025-06-18 03:46:59,862 - INFO - Processing pdf file: 2024-12-15_amex.pdf
+2025-06-18 03:46:59,879 - INFO - Opening PDF file: ./uploads/2024-12-15_amex.pdf
+2025-06-18 03:46:59,940 - DEBUG - First and Last page: Blue Cash Preferred® from American Express
+MARTIN CONTRERAS
+Closing Date 12/15/24
+Account Ending 4-21003
+Customer Care: 1-888-258-3741
+TTY: Use Relay 711
+Website: americanexpress.com
+Amount  Enclosed
+Payment Coupon
+Do not staple or use paper clips
+Pay by Computer
+americanexpress.com/pbc
+Pay by Phone
+1-800-472-9297
+Account Ending 4-21003
+Enter 15 digit account # on all payments.
+Make check payable to American Express.
+MARTIN CONTRERAS
+467 S BUENA VIS AVE
+APT 10
+SAN JOSE CA 95126-3214
+Payment Due Date
+01/09/25
+New Balance
+$184.83
+AutoPay Amount
+$184.83
+See reverse side for instructions
+on how to update your address,
+phone number, or email.
+AMERICAN EXPRESS
+PO BOX 60189
+CITY OF INDUSTRY CA 91716-0189
+$ .
+0000349992891098006 000018483000004000 11 Á
+See page 2 for important information about your account.
+Please refer to the IMPORTANT NOTICES section.
+We  will  debit  your  bank  account  for  your  payment  of $184.83  on
+12/30/24. This date may not be the same date your bank will debit your
+bank  account.  Any  inquiry  to  American  Express  concerning  this  debit
+should be made before 12/28/24. If your AutoPay payment is less than
+your  Minimum  Payment  Due,  we  must  receive  an  additional  payment
+for at least the difference by 01/09/25.
+New Balance
+Minimum Payment Due
+$184.83
+$40.00
+New Balance $184.83
+Minimum Payment Due $40.00
+Payment Due Date 01/09/25
+Late  Payment  Warning: If  we  do  not  receive  your  Minimum  Payment  Due  by
+the  Payment  Due  Date  of 01/09/25,  you  may  have  to  pay  a  late  fee  of  up  to
+$40.00 and your APRs may be increased to the Penalty APR of 29.99%.
+Minimum Payment Warning: If you have a Non-Plan Balance and make only the
+minimum payment each period, you will pay more in interest and it will take you longer
+to pay off your Non-Plan Balance. For example:
+If you make no additional
+charges and each month
+you pay...
+You will pay off the balance
+shown on this statement in
+about...
+And you will pay an
+estimated total of...
+Only the
+Minimum Payment Due 5 months $196
+If you would like information about credit counseling services, call 1-888-733-4139.
+Reward Dollars
+as of 11/16/2024
+              442.16
+For more details about Rewards, visit
+americanexpress.com/cashbackrewards
+Account Summary
+Previous Balance
+Payments/Credits
+New Charges
+Fees
+Interest Charged
+$426.20
+-$2,374.75
++$2,133.38
++$0.00
++$0.00
+Credit Limit
+Available Credit
+$14,900.00
+$14,715.17
+Cash Advance Limit
+Available Cash
+$3,000.00
+$3,000.00
+p. 1/7
+*917160189891*
+
+2025-06-18 03:46:59,940 - INFO - Bank config determined: AMEX
+2025-06-18 03:46:59,941 - INFO - Found 8 pages in statement. Starting on page 3
+2025-06-18 03:46:59,962 - DEBUG - New page: Blue Cash Preferred® from American Express
+MARTIN CONTRERAS
+Closing Date 12/15/24 Account Ending 4-21003
+Customer Care & Billing Inquiries
+International Collect
+Cash Advance at ATMs Inquiries
+Large Print & Braille Statements
+1-888-258-3741
+1-336-393-1111
+1-800-CASH-NOW
+1-888-258-3741
+Hearing Impaired
+Online chat at americanexpress.com or use Relay dial 711 and 1-888-258-3741
+Website: americanexpress.com
+Customer Care
+& Billing Inquiries
+P.O. BOX 981535
+EL PASO, TX
+79998-1535
+Payments
+PO BOX 60189
+CITY OF INDUSTRY
+CA
+91716-0189
+Payments and Credits
+Summary
+Total
+Payments -$2,367.75
+Credits -$7.00
+Total Payments and Credits -$2,374.75
+Detail *Indicates posting date
+Payments Amount
+11/20/24* MOBILE PAYMENT - THANK YOU -$596.73
+12/08/24* MOBILE PAYMENT - THANK YOU -$1,393.99
+12/13/24* MOBILE PAYMENT - THANK YOU -$377.03
+Credits Amount
+12/02/24* $84 Disney Bundle Credit
+TRANSACTION PROCESSED BY AMERICAN EXPRESS
+-$7.00
+New Charges
+Summary
+Total
+Total  New Charges $2,133.38
+Detail
+MARTIN CONTRERAS
+Card Ending 4-21003
+Amount
+11/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA
+6265993700
+$61.72
+11/16/24 PARAMOUNT+ WEST HOLLYWOO CA
+888-274-5343
+$12.99
+11/16/24 APPLE.COM/BILL INTERNET CHARGE CA
+RECORD STORE
+$7.99
+11/17/24 AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA
+9999999999
+$15.18
+11/17/24 AplPay TRADER JOE S #212 000000212 SAN JOSE CA
+6265993700
+$72.65
+11/18/24 PAYPAL *BESTBUY COM 8882378289 MN
+8882378289
+$185.93
+11/19/24 SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA
+9999999999
+$55.56
+11/20/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL
+5618105936
+$10.00
+p. 3/7
+Continued on reverse
+2025-06-18 03:46:59,978 - DEBUG - New page: MARTIN CONTRERAS Account Ending 4-21003
+Detail Continued
+Amount
+11/24/24 DISNEYPLUS 888-905-7888 CA
+888-905-7888
+$26.99
+11/27/24 AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA
+619-686-8142
+$4.67
+11/29/24 NETFLIX.COM 866-579-7172 CA
+CABLE & PAY TV
+$24.97
+11/30/24 AplPay SP FIGS INC. LOS ANGELES CA
++18774448411
+$80.39
+12/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA
++15413165747
+$117.00
+12/01/24 AplPay THE HOME DEPOT CAMPBELL CA
+800-654-0688
+$32.76
+12/01/24 AplPay ROSS DRESS FOR LESS CAMPBELL CA
+999-999-9999
+$42.40
+12/01/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA
+6265993700
+$130.39
+12/01/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA
+4083715000
+$32.46
+12/03/24 PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY
+2126640138
+$7.99
+12/04/24 PAYPAL *GARMININTER 104524363397 8884427646 KS
+8884427646
+$646.49
+12/06/24 APPLE.COM/BILL INTERNET CHARGE CA
+RECORD STORE
+$2.99
+12/07/24 GEICO AUTO (800)841-3000 DC
+INSURANCE
+$179.62
+12/07/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL
+5618105936
+$10.00
+12/08/24 APPLE.COM/BILL INTERNET CHARGE CA
+RECORD STORE
+$10.99
+12/08/24 AplPay CRATE & BARREL SAN JOSE CA
+111 95128
+$128.73
+12/08/24 AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN
++16789941528
+$27.69
+12/11/24 HONK NORTHSTAR 00-08036347717 TRUCKEE CA
+PARKING LOT & GARAGE
+$20.00
+12/12/24 PAYPAL *UNITEDSTATE 4029357733 DC
+4029357733
+$31.05
+12/14/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL
+5618105936
+$10.00
+12/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA
+6265993700
+$121.09
+12/14/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA
+4083715000
+$22.69
+Fees
+Amount
+Total Fees for this Period $0.00
+p. 4/7
+Continued on next page
+2025-06-18 03:46:59,995 - DEBUG - New page: Blue Cash Preferred® from American Express
+MARTIN CONTRERAS
+Closing Date 12/15/24 Account Ending 4-21003
+Interest Charged
+Amount
+Total Interest Charged for this Period $0.00
+About Trailing Interest
+You may see interest on your next statement even if you pay the new balance in full and on time and make no new charges. This is called
+"trailing  interest".  Trailing  interest  is  the  interest  charged  when,  for  example,  you  didn't  pay  your  previous  balance  in  full.  When  that
+happens, we charge interest from the first day of the billing period until we receive your payment in full. You can avoid paying interest
+on purchases by paying your balance in full (or if you have a Plan balance, by paying your Adjusted Balance on your billing statement) by
+the due date each month. Please see the "When we charge interest" sub-section in your Cardmember Agreement for details.
+2024 Fees and Interest Totals Year-to-Date
+Amount
+Total Fees in 2024 $97.05
+Total Interest in 2024 $0.00
+Interest Charge Calculation Days in Billing Period: 31
+Your Annual Percentage Rate (APR) is the annual interest rate on your account.
+Variable APRs will not exceed 29.99%.
+     Transactions Dated
+                                                                                                               From                  To
+Annual
+Percentage
+Rate
+Balance
+Subject to
+Interest Rate
+Interest
+Charge
+Purchases 07/16/2021 26.49% (v) $0.00 $0.00
+Cash Advances 07/16/2021 29.74% (v) $0.00 $0.00
+Total $0.00
+(v) Variable Rate
+p. 5/7
+2025-06-18 03:46:59,999 - DEBUG - New page: MARTIN CONTRERAS Account Ending 4-21003 p. 6/7
+2025-06-18 03:47:00,024 - DEBUG - New page: MARTIN CONTRERAS Closing Date 12/15/24 Account Ending 4-21003
+    IMPORTANT NOTICES
+EFT Error Resolution Notice
+In  Case  of  Errors  or  Questions  About  Your  Electronic  Transfers  Telephone  us  at  1-800-IPAY-AXP for Pay By
+Phone questions, at 1-800-528-2122 for Pay By Computer questions, and at 1-800-528-4800 for AutoPay. You
+may also write us at American Express, Electronic Funds Services, P.O. Box 981531, El Paso TX 79998-1531, or
+contact us online at www.americanexpress.com/inquirycenter as soon as you can, if you think your statement or
+receipt is wrong or if you need more information about a transfer on the statement or receipt. We must hear from
+you no later than 60 days after we sent you the FIRST statement on which the error or problem appeared.
+1. Tell us your name and account number (if any).
+2. Describe  the  error  or  the  transfer  you  are  unsure  about,  and  explain  as  clearly  as  you  can  why  you
+believe it is an error or why you need more information.
+3. Tell us the dollar amount of the suspected error.
+We will investigate your complaint and will correct any error promptly. If we take more than 10 business days to
+do this, we will credit your account for the amount you think is in error, so that you will have the use of the money
+during the time it takes us to complete our investigation.
+    
+p. 7/7
+End of Important Notices.
+2025-06-18 03:47:00,025 - DEBUG - New page: 
+2025-06-18 03:47:00,026 - INFO - Successfully extracted text from PDF: ./uploads/2024-12-15_amex.pdf
+2025-06-18 03:47:00,027 - INFO - Parsing extracted text...
+2025-06-18 03:47:00,028 - DEBUG - Found date: 11/20/24 in line 32: 11/20/24* MOBILE PAYMENT - THANK YOU -$596.73
+2025-06-18 03:47:00,029 - DEBUG - Extracting description from lines: ['11/20/24* MOBILE PAYMENT - THANK YOU -$596.73', '12/08/24* MOBILE PAYMENT - THANK YOU -$1,393.99'] with date: 11/20/24
+2025-06-18 03:47:00,029 - DEBUG - Description: * MOBILE PAYMENT - THANK YOU -. Lines: ['11/20/24* MOBILE PAYMENT - THANK YOU -$596.73', '12/08/24* MOBILE PAYMENT - THANK YOU -$1,393.99']. Date endpos: 45
+2025-06-18 03:47:00,088 - DEBUG - Amount Line: 11/20/24* MOBILE PAYMENT - THANK YOU -$596.73 12/08/24* MOBILE PAYMENT - THANK YOU -$1,393.99 12/13/24* MOBILE PAYMENT - THANK YOU -$377.03 Credits Amount 12/02/24* $84 Disney Bundle Credit
+2025-06-18 03:47:00,089 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/20/24*MOBILEPAYMENT-THANKYOU-$596.7312/08/24*MOBILEPAYMENT-THANKYOU-$1,393.9912/13/24*MOBILEPAYMENT-THANKYOU-$377.03CreditsAmount12/02/24*$84DisneyBundleCredit
+2025-06-18 03:47:00,089 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/20/24*MOBILEPAYMENT-THANKYOU-$596.7312/08/24*MOBILEPAYMENT-THANKYOU-$1,393.9912/13/24*MOBILEPAYMENT-THANKYOU-$377.03CreditsAmount12/02/24*$84DisneyBundleCredit
+2025-06-18 03:47:00,089 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/20/24*MOBILEPAYMENT-THANKYOU-$596.7312/08/24*MOBILEPAYMENT-THANKYOU-$1,393.9912/13/24*MOBILEPAYMENT-THANKYOU-$377.03CreditsAmount12/02/24*$84DisneyBundleCredit
+2025-06-18 03:47:00,090 - INFO - Found a purchase on 11/20/24 under OTHER for $-596.73 with description: 
+	* MOBILE PAYMENT - THANK YOU -
+
+2025-06-18 03:47:00,091 - DEBUG - Found date: 12/08/24 in line 33: 12/08/24* MOBILE PAYMENT - THANK YOU -$1,393.99
+2025-06-18 03:47:00,091 - DEBUG - Extracting description from lines: ['12/08/24* MOBILE PAYMENT - THANK YOU -$1,393.99', '12/13/24* MOBILE PAYMENT - THANK YOU -$377.03'] with date: 12/08/24
+2025-06-18 03:47:00,091 - DEBUG - Description: * MOBILE PAYMENT - THANK YOU -. Lines: ['12/08/24* MOBILE PAYMENT - THANK YOU -$1,393.99', '12/13/24* MOBILE PAYMENT - THANK YOU -$377.03']. Date endpos: 47
+2025-06-18 03:47:00,092 - DEBUG - Amount Line: 12/08/24* MOBILE PAYMENT - THANK YOU -$1,393.99 12/13/24* MOBILE PAYMENT - THANK YOU -$377.03 Credits Amount 12/02/24* $84 Disney Bundle Credit TRANSACTION PROCESSED BY AMERICAN EXPRESS
+2025-06-18 03:47:00,092 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/08/24*MOBILEPAYMENT-THANKYOU-$1,393.9912/13/24*MOBILEPAYMENT-THANKYOU-$377.03CreditsAmount12/02/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS
+2025-06-18 03:47:00,092 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/08/24*MOBILEPAYMENT-THANKYOU-$1,393.9912/13/24*MOBILEPAYMENT-THANKYOU-$377.03CreditsAmount12/02/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS
+2025-06-18 03:47:00,092 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/08/24*MOBILEPAYMENT-THANKYOU-$1,393.9912/13/24*MOBILEPAYMENT-THANKYOU-$377.03CreditsAmount12/02/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS
+2025-06-18 03:47:00,093 - INFO - Found a purchase on 12/08/24 under OTHER for $-1393.99 with description: 
+	* MOBILE PAYMENT - THANK YOU -
+
+2025-06-18 03:47:00,093 - DEBUG - Found date: 12/13/24 in line 34: 12/13/24* MOBILE PAYMENT - THANK YOU -$377.03
+2025-06-18 03:47:00,094 - DEBUG - Extracting description from lines: ['12/13/24* MOBILE PAYMENT - THANK YOU -$377.03', 'Credits Amount'] with date: 12/13/24
+2025-06-18 03:47:00,094 - DEBUG - Description: * MOBILE PAYMENT - THANK YOU -. Lines: ['12/13/24* MOBILE PAYMENT - THANK YOU -$377.03', 'Credits Amount']. Date endpos: 45
+2025-06-18 03:47:00,094 - DEBUG - Amount Line: 12/13/24* MOBILE PAYMENT - THANK YOU -$377.03 Credits Amount 12/02/24* $84 Disney Bundle Credit TRANSACTION PROCESSED BY AMERICAN EXPRESS -$7.00
+2025-06-18 03:47:00,094 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/13/24*MOBILEPAYMENT-THANKYOU-$377.03CreditsAmount12/02/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.00
+2025-06-18 03:47:00,095 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/13/24*MOBILEPAYMENT-THANKYOU-$377.03CreditsAmount12/02/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.00
+2025-06-18 03:47:00,095 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/13/24*MOBILEPAYMENT-THANKYOU-$377.03CreditsAmount12/02/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.00
+2025-06-18 03:47:00,095 - INFO - Found a purchase on 12/13/24 under OTHER for $-377.03 with description: 
+	* MOBILE PAYMENT - THANK YOU -
+
+2025-06-18 03:47:00,096 - DEBUG - Found date: 12/02/24 in line 36: 12/02/24* $84 Disney Bundle Credit
+2025-06-18 03:47:00,096 - DEBUG - Extracting description from lines: ['12/02/24* $84 Disney Bundle Credit', 'TRANSACTION PROCESSED BY AMERICAN EXPRESS'] with date: 12/02/24
+2025-06-18 03:47:00,096 - DEBUG - Description: *. Lines: ['12/02/24* $84 Disney Bundle Credit', 'TRANSACTION PROCESSED BY AMERICAN EXPRESS']. Date endpos: 34
+2025-06-18 03:47:00,096 - DEBUG - Amount Line: 12/02/24* $84 Disney Bundle Credit TRANSACTION PROCESSED BY AMERICAN EXPRESS -$7.00 New Charges Summary
+2025-06-18 03:47:00,097 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/02/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.00NewChargesSummary
+2025-06-18 03:47:00,097 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/02/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.00NewChargesSummary
+2025-06-18 03:47:00,097 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/02/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.00NewChargesSummary
+2025-06-18 03:47:00,098 - INFO - Found a purchase on 12/02/24 under OTHER for $-7.0 with description: 
+	*
+
+2025-06-18 03:47:00,098 - DEBUG - Found date: 11/14/24 in line 47: 11/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA
+2025-06-18 03:47:00,098 - DEBUG - Extracting description from lines: ['11/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA', '6265993700'] with date: 11/14/24
+2025-06-18 03:47:00,098 - DEBUG - Description: AplPay TRADER JOE S #073 000000073 CAMPBELL CA. Lines: ['11/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA', '6265993700']. Date endpos: 55
+2025-06-18 03:47:00,099 - DEBUG - Amount Line: 11/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA 6265993700 $61.72 11/16/24 PARAMOUNT+ WEST HOLLYWOO CA 888-274-5343
+2025-06-18 03:47:00,099 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/14/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700$61.7211/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343
+2025-06-18 03:47:00,099 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/14/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700$61.7211/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343
+2025-06-18 03:47:00,099 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/14/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700$61.7211/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343
+2025-06-18 03:47:00,100 - INFO - Found a purchase on 11/14/24 under GROCERIES for $61.72 with description: 
+	AplPay TRADER JOE S #073 000000073 CAMPBELL CA
+
+2025-06-18 03:47:00,100 - DEBUG - Found date: 11/16/24 in line 50: 11/16/24 PARAMOUNT+ WEST HOLLYWOO CA
+2025-06-18 03:47:00,100 - DEBUG - Extracting description from lines: ['11/16/24 PARAMOUNT+ WEST HOLLYWOO CA', '888-274-5343'] with date: 11/16/24
+2025-06-18 03:47:00,100 - DEBUG - Description: PARAMOUNT+ WEST HOLLYWOO CA. Lines: ['11/16/24 PARAMOUNT+ WEST HOLLYWOO CA', '888-274-5343']. Date endpos: 36
+2025-06-18 03:47:00,101 - DEBUG - Amount Line: 11/16/24 PARAMOUNT+ WEST HOLLYWOO CA 888-274-5343 $12.99 11/16/24 APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE
+2025-06-18 03:47:00,101 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343$12.9911/16/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-18 03:47:00,101 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343$12.9911/16/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-18 03:47:00,101 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343$12.9911/16/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-18 03:47:00,101 - INFO - Found a purchase on 11/16/24 under STREAMING for $12.99 with description: 
+	PARAMOUNT+ WEST HOLLYWOO CA
+
+2025-06-18 03:47:00,102 - DEBUG - Found date: 11/16/24 in line 53: 11/16/24 APPLE.COM/BILL INTERNET CHARGE CA
+2025-06-18 03:47:00,102 - DEBUG - Extracting description from lines: ['11/16/24 APPLE.COM/BILL INTERNET CHARGE CA', 'RECORD STORE'] with date: 11/16/24
+2025-06-18 03:47:00,102 - DEBUG - Description: APPLE.COM/BILL INTERNET CHARGE CA. Lines: ['11/16/24 APPLE.COM/BILL INTERNET CHARGE CA', 'RECORD STORE']. Date endpos: 42
+2025-06-18 03:47:00,102 - DEBUG - Amount Line: 11/16/24 APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE $7.99 11/17/24 AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA 9999999999
+2025-06-18 03:47:00,102 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/16/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$7.9911/17/24AplPaySPROUTSFARMERSMKT#4630000000009SANJOSECA9999999999
+2025-06-18 03:47:00,103 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/16/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$7.9911/17/24AplPaySPROUTSFARMERSMKT#4630000000009SANJOSECA9999999999
+2025-06-18 03:47:00,103 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/16/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$7.9911/17/24AplPaySPROUTSFARMERSMKT#4630000000009SANJOSECA9999999999
+2025-06-18 03:47:00,103 - INFO - Found a purchase on 11/16/24 under INTERNET for $7.99 with description: 
+	APPLE.COM/BILL INTERNET CHARGE CA
+
+2025-06-18 03:47:00,103 - DEBUG - Found date: 11/17/24 in line 56: 11/17/24 AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA
+2025-06-18 03:47:00,104 - DEBUG - Extracting description from lines: ['11/17/24 AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA', '9999999999'] with date: 11/17/24
+2025-06-18 03:47:00,104 - DEBUG - Description: AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA. Lines: ['11/17/24 AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA', '9999999999']. Date endpos: 63
+2025-06-18 03:47:00,104 - DEBUG - Amount Line: 11/17/24 AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA 9999999999 $15.18 11/17/24 AplPay TRADER JOE S #212 000000212 SAN JOSE CA 6265993700
+2025-06-18 03:47:00,104 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/17/24AplPaySPROUTSFARMERSMKT#4630000000009SANJOSECA9999999999$15.1811/17/24AplPayTRADERJOES#212000000212SANJOSECA6265993700
+2025-06-18 03:47:00,104 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/17/24AplPaySPROUTSFARMERSMKT#4630000000009SANJOSECA9999999999$15.1811/17/24AplPayTRADERJOES#212000000212SANJOSECA6265993700
+2025-06-18 03:47:00,105 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/17/24AplPaySPROUTSFARMERSMKT#4630000000009SANJOSECA9999999999$15.1811/17/24AplPayTRADERJOES#212000000212SANJOSECA6265993700
+2025-06-18 03:47:00,105 - INFO - Found a purchase on 11/17/24 under GROCERIES for $15.18 with description: 
+	AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA
+
+2025-06-18 03:47:00,105 - DEBUG - Found date: 11/17/24 in line 59: 11/17/24 AplPay TRADER JOE S #212 000000212 SAN JOSE CA
+2025-06-18 03:47:00,105 - DEBUG - Extracting description from lines: ['11/17/24 AplPay TRADER JOE S #212 000000212 SAN JOSE CA', '6265993700'] with date: 11/17/24
+2025-06-18 03:47:00,105 - DEBUG - Description: AplPay TRADER JOE S #212 000000212 SAN JOSE CA. Lines: ['11/17/24 AplPay TRADER JOE S #212 000000212 SAN JOSE CA', '6265993700']. Date endpos: 55
+2025-06-18 03:47:00,106 - DEBUG - Amount Line: 11/17/24 AplPay TRADER JOE S #212 000000212 SAN JOSE CA 6265993700 $72.65 11/18/24 PAYPAL *BESTBUY COM 8882378289 MN 8882378289
+2025-06-18 03:47:00,106 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/17/24AplPayTRADERJOES#212000000212SANJOSECA6265993700$72.6511/18/24PAYPAL*BESTBUYCOM8882378289MN8882378289
+2025-06-18 03:47:00,106 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/17/24AplPayTRADERJOES#212000000212SANJOSECA6265993700$72.6511/18/24PAYPAL*BESTBUYCOM8882378289MN8882378289
+2025-06-18 03:47:00,106 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/17/24AplPayTRADERJOES#212000000212SANJOSECA6265993700$72.6511/18/24PAYPAL*BESTBUYCOM8882378289MN8882378289
+2025-06-18 03:47:00,107 - INFO - Found a purchase on 11/17/24 under GROCERIES for $72.65 with description: 
+	AplPay TRADER JOE S #212 000000212 SAN JOSE CA
+
+2025-06-18 03:47:00,107 - DEBUG - Found date: 11/18/24 in line 62: 11/18/24 PAYPAL *BESTBUY COM 8882378289 MN
+2025-06-18 03:47:00,107 - DEBUG - Extracting description from lines: ['11/18/24 PAYPAL *BESTBUY COM 8882378289 MN', '8882378289'] with date: 11/18/24
+2025-06-18 03:47:00,107 - DEBUG - Description: PAYPAL *BESTBUY COM 8882378289 MN. Lines: ['11/18/24 PAYPAL *BESTBUY COM 8882378289 MN', '8882378289']. Date endpos: 42
+2025-06-18 03:47:00,108 - DEBUG - Amount Line: 11/18/24 PAYPAL *BESTBUY COM 8882378289 MN 8882378289 $185.93 11/19/24 SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA 9999999999
+2025-06-18 03:47:00,110 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/18/24PAYPAL*BESTBUYCOM8882378289MN8882378289$185.9311/19/24SPROUTSFARMERSMKT#4630000000009459SANJOSECA9999999999
+2025-06-18 03:47:00,110 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/18/24PAYPAL*BESTBUYCOM8882378289MN8882378289$185.9311/19/24SPROUTSFARMERSMKT#4630000000009459SANJOSECA9999999999
+2025-06-18 03:47:00,110 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/18/24PAYPAL*BESTBUYCOM8882378289MN8882378289$185.9311/19/24SPROUTSFARMERSMKT#4630000000009459SANJOSECA9999999999
+2025-06-18 03:47:00,110 - INFO - Found a purchase on 11/18/24 under PAYPAL for $185.93 with description: 
+	PAYPAL *BESTBUY COM 8882378289 MN
+
+2025-06-18 03:47:00,111 - DEBUG - Found date: 11/19/24 in line 65: 11/19/24 SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA
+2025-06-18 03:47:00,111 - DEBUG - Extracting description from lines: ['11/19/24 SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA', '9999999999'] with date: 11/19/24
+2025-06-18 03:47:00,111 - DEBUG - Description: SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA. Lines: ['11/19/24 SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA', '9999999999']. Date endpos: 59
+2025-06-18 03:47:00,111 - DEBUG - Amount Line: 11/19/24 SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA 9999999999 $55.56 11/20/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL 5618105936
+2025-06-18 03:47:00,112 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/19/24SPROUTSFARMERSMKT#4630000000009459SANJOSECA9999999999$55.5611/20/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936
+2025-06-18 03:47:00,112 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/19/24SPROUTSFARMERSMKT#4630000000009459SANJOSECA9999999999$55.5611/20/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936
+2025-06-18 03:47:00,112 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/19/24SPROUTSFARMERSMKT#4630000000009459SANJOSECA9999999999$55.5611/20/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936
+2025-06-18 03:47:00,113 - INFO - Found a purchase on 11/19/24 under GROCERIES for $55.56 with description: 
+	SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA
+
+2025-06-18 03:47:00,113 - DEBUG - Found date: 11/20/24 in line 68: 11/20/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL
+2025-06-18 03:47:00,114 - DEBUG - Extracting description from lines: ['11/20/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', '5618105936'] with date: 11/20/24
+2025-06-18 03:47:00,114 - DEBUG - Description: KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL. Lines: ['11/20/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', '5618105936']. Date endpos: 64
+2025-06-18 03:47:00,114 - DEBUG - Amount Line: 11/20/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL 5618105936 $10.00 p. 3/7 Continued on reverse
+2025-06-18 03:47:00,115 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/20/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936$10.00p.3/7Continuedonreverse
+2025-06-18 03:47:00,115 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/20/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936$10.00p.3/7Continuedonreverse
+2025-06-18 03:47:00,116 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/20/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936$10.00p.3/7Continuedonreverse
+2025-06-18 03:47:00,116 - INFO - Found a purchase on 11/20/24 under LAUNDRY for $10.0 with description: 
+	KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL
+
+2025-06-18 03:47:00,116 - DEBUG - Found date: 11/24/24 in line 76: 11/24/24 DISNEYPLUS 888-905-7888 CA
+2025-06-18 03:47:00,117 - DEBUG - Extracting description from lines: ['11/24/24 DISNEYPLUS 888-905-7888 CA', '888-905-7888'] with date: 11/24/24
+2025-06-18 03:47:00,117 - DEBUG - Description: DISNEYPLUS 888-905-7888 CA. Lines: ['11/24/24 DISNEYPLUS 888-905-7888 CA', '888-905-7888']. Date endpos: 35
+2025-06-18 03:47:00,117 - DEBUG - Amount Line: 11/24/24 DISNEYPLUS 888-905-7888 CA 888-905-7888 $26.99 11/27/24 AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA 619-686-8142
+2025-06-18 03:47:00,118 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/24/24DISNEYPLUS888-905-7888CA888-905-7888$26.9911/27/24AplPayPORTOFSDNORTHEMBPRK0000SANDIEGOCA619-686-8142
+2025-06-18 03:47:00,118 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/24/24DISNEYPLUS888-905-7888CA888-905-7888$26.9911/27/24AplPayPORTOFSDNORTHEMBPRK0000SANDIEGOCA619-686-8142
+2025-06-18 03:47:00,118 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/24/24DISNEYPLUS888-905-7888CA888-905-7888$26.9911/27/24AplPayPORTOFSDNORTHEMBPRK0000SANDIEGOCA619-686-8142
+2025-06-18 03:47:00,119 - INFO - Found a purchase on 11/24/24 under STREAMING for $26.99 with description: 
+	DISNEYPLUS 888-905-7888 CA
+
+2025-06-18 03:47:00,119 - DEBUG - Found date: 11/27/24 in line 79: 11/27/24 AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA
+2025-06-18 03:47:00,119 - DEBUG - Extracting description from lines: ['11/27/24 AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA', '619-686-8142'] with date: 11/27/24
+2025-06-18 03:47:00,119 - DEBUG - Description: AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA. Lines: ['11/27/24 AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA', '619-686-8142']. Date endpos: 58
+2025-06-18 03:47:00,120 - DEBUG - Amount Line: 11/27/24 AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA 619-686-8142 $4.67 11/29/24 NETFLIX.COM 866-579-7172 CA CABLE & PAY TV
+2025-06-18 03:47:00,120 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/27/24AplPayPORTOFSDNORTHEMBPRK0000SANDIEGOCA619-686-8142$4.6711/29/24NETFLIX.COM866-579-7172CACABLE&PAYTV
+2025-06-18 03:47:00,120 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/27/24AplPayPORTOFSDNORTHEMBPRK0000SANDIEGOCA619-686-8142$4.6711/29/24NETFLIX.COM866-579-7172CACABLE&PAYTV
+2025-06-18 03:47:00,121 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/27/24AplPayPORTOFSDNORTHEMBPRK0000SANDIEGOCA619-686-8142$4.6711/29/24NETFLIX.COM866-579-7172CACABLE&PAYTV
+2025-06-18 03:47:00,121 - INFO - Found a purchase on 11/27/24 under APPLE PAY for $4.67 with description: 
+	AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA
+
+2025-06-18 03:47:00,121 - DEBUG - Found date: 11/29/24 in line 82: 11/29/24 NETFLIX.COM 866-579-7172 CA
+2025-06-18 03:47:00,121 - DEBUG - Extracting description from lines: ['11/29/24 NETFLIX.COM 866-579-7172 CA', 'CABLE & PAY TV'] with date: 11/29/24
+2025-06-18 03:47:00,121 - DEBUG - Description: NETFLIX.COM 866-579-7172 CA. Lines: ['11/29/24 NETFLIX.COM 866-579-7172 CA', 'CABLE & PAY TV']. Date endpos: 36
+2025-06-18 03:47:00,122 - DEBUG - Amount Line: 11/29/24 NETFLIX.COM 866-579-7172 CA CABLE & PAY TV $24.97 11/30/24 AplPay SP FIGS INC. LOS ANGELES CA +18774448411
+2025-06-18 03:47:00,122 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/29/24NETFLIX.COM866-579-7172CACABLE&PAYTV$24.9711/30/24AplPaySPFIGSINC.LOSANGELESCA+18774448411
+2025-06-18 03:47:00,122 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/29/24NETFLIX.COM866-579-7172CACABLE&PAYTV$24.9711/30/24AplPaySPFIGSINC.LOSANGELESCA+18774448411
+2025-06-18 03:47:00,123 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/29/24NETFLIX.COM866-579-7172CACABLE&PAYTV$24.9711/30/24AplPaySPFIGSINC.LOSANGELESCA+18774448411
+2025-06-18 03:47:00,123 - INFO - Found a purchase on 11/29/24 under STREAMING for $24.97 with description: 
+	NETFLIX.COM 866-579-7172 CA
+
+2025-06-18 03:47:00,124 - DEBUG - Found date: 11/30/24 in line 85: 11/30/24 AplPay SP FIGS INC. LOS ANGELES CA
+2025-06-18 03:47:00,124 - DEBUG - Extracting description from lines: ['11/30/24 AplPay SP FIGS INC. LOS ANGELES CA', '+18774448411'] with date: 11/30/24
+2025-06-18 03:47:00,124 - DEBUG - Description: AplPay SP FIGS INC. LOS ANGELES CA. Lines: ['11/30/24 AplPay SP FIGS INC. LOS ANGELES CA', '+18774448411']. Date endpos: 43
+2025-06-18 03:47:00,125 - DEBUG - Amount Line: 11/30/24 AplPay SP FIGS INC. LOS ANGELES CA +18774448411 $80.39 12/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA +15413165747
+2025-06-18 03:47:00,125 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 11/30/24AplPaySPFIGSINC.LOSANGELESCA+18774448411$80.3912/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747
+2025-06-18 03:47:00,125 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 11/30/24AplPaySPFIGSINC.LOSANGELESCA+18774448411$80.3912/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747
+2025-06-18 03:47:00,126 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 11/30/24AplPaySPFIGSINC.LOSANGELESCA+18774448411$80.3912/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747
+2025-06-18 03:47:00,126 - INFO - Found a purchase on 11/30/24 under APPLE PAY for $80.39 with description: 
+	AplPay SP FIGS INC. LOS ANGELES CA
+
+2025-06-18 03:47:00,126 - DEBUG - Found date: 12/01/24 in line 88: 12/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA
+2025-06-18 03:47:00,127 - DEBUG - Extracting description from lines: ['12/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA', '+15413165747'] with date: 12/01/24
+2025-06-18 03:47:00,127 - DEBUG - Description: MOVEMENT SUNNYVALE SUNNYVALE CA. Lines: ['12/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA', '+15413165747']. Date endpos: 40
+2025-06-18 03:47:00,127 - DEBUG - Amount Line: 12/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA +15413165747 $117.00 12/01/24 AplPay THE HOME DEPOT CAMPBELL CA 800-654-0688
+2025-06-18 03:47:00,127 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747$117.0012/01/24AplPayTHEHOMEDEPOTCAMPBELLCA800-654-0688
+2025-06-18 03:47:00,128 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747$117.0012/01/24AplPayTHEHOMEDEPOTCAMPBELLCA800-654-0688
+2025-06-18 03:47:00,128 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747$117.0012/01/24AplPayTHEHOMEDEPOTCAMPBELLCA800-654-0688
+2025-06-18 03:47:00,128 - INFO - Found a purchase on 12/01/24 under GYM for $117.0 with description: 
+	MOVEMENT SUNNYVALE SUNNYVALE CA
+
+2025-06-18 03:47:00,128 - DEBUG - Found date: 12/01/24 in line 91: 12/01/24 AplPay THE HOME DEPOT CAMPBELL CA
+2025-06-18 03:47:00,129 - DEBUG - Extracting description from lines: ['12/01/24 AplPay THE HOME DEPOT CAMPBELL CA', '800-654-0688'] with date: 12/01/24
+2025-06-18 03:47:00,129 - DEBUG - Description: AplPay THE HOME DEPOT CAMPBELL CA. Lines: ['12/01/24 AplPay THE HOME DEPOT CAMPBELL CA', '800-654-0688']. Date endpos: 42
+2025-06-18 03:47:00,129 - DEBUG - Amount Line: 12/01/24 AplPay THE HOME DEPOT CAMPBELL CA 800-654-0688 $32.76 12/01/24 AplPay ROSS DRESS FOR LESS CAMPBELL CA 999-999-9999
+2025-06-18 03:47:00,130 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/01/24AplPayTHEHOMEDEPOTCAMPBELLCA800-654-0688$32.7612/01/24AplPayROSSDRESSFORLESSCAMPBELLCA999-999-9999
+2025-06-18 03:47:00,130 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/01/24AplPayTHEHOMEDEPOTCAMPBELLCA800-654-0688$32.7612/01/24AplPayROSSDRESSFORLESSCAMPBELLCA999-999-9999
+2025-06-18 03:47:00,131 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/01/24AplPayTHEHOMEDEPOTCAMPBELLCA800-654-0688$32.7612/01/24AplPayROSSDRESSFORLESSCAMPBELLCA999-999-9999
+2025-06-18 03:47:00,131 - INFO - Found a purchase on 12/01/24 under APPLE PAY for $32.76 with description: 
+	AplPay THE HOME DEPOT CAMPBELL CA
+
+2025-06-18 03:47:00,131 - DEBUG - Found date: 12/01/24 in line 94: 12/01/24 AplPay ROSS DRESS FOR LESS CAMPBELL CA
+2025-06-18 03:47:00,132 - DEBUG - Extracting description from lines: ['12/01/24 AplPay ROSS DRESS FOR LESS CAMPBELL CA', '999-999-9999'] with date: 12/01/24
+2025-06-18 03:47:00,132 - DEBUG - Description: AplPay ROSS DRESS FOR LESS CAMPBELL CA. Lines: ['12/01/24 AplPay ROSS DRESS FOR LESS CAMPBELL CA', '999-999-9999']. Date endpos: 47
+2025-06-18 03:47:00,132 - DEBUG - Amount Line: 12/01/24 AplPay ROSS DRESS FOR LESS CAMPBELL CA 999-999-9999 $42.40 12/01/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA 6265993700
+2025-06-18 03:47:00,133 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/01/24AplPayROSSDRESSFORLESSCAMPBELLCA999-999-9999$42.4012/01/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700
+2025-06-18 03:47:00,133 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/01/24AplPayROSSDRESSFORLESSCAMPBELLCA999-999-9999$42.4012/01/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700
+2025-06-18 03:47:00,133 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/01/24AplPayROSSDRESSFORLESSCAMPBELLCA999-999-9999$42.4012/01/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700
+2025-06-18 03:47:00,133 - INFO - Found a purchase on 12/01/24 under APPLE PAY for $42.4 with description: 
+	AplPay ROSS DRESS FOR LESS CAMPBELL CA
+
+2025-06-18 03:47:00,133 - DEBUG - Found date: 12/01/24 in line 97: 12/01/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA
+2025-06-18 03:47:00,134 - DEBUG - Extracting description from lines: ['12/01/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA', '6265993700'] with date: 12/01/24
+2025-06-18 03:47:00,134 - DEBUG - Description: AplPay TRADER JOE S #073 000000073 CAMPBELL CA. Lines: ['12/01/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA', '6265993700']. Date endpos: 55
+2025-06-18 03:47:00,134 - DEBUG - Amount Line: 12/01/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA 6265993700 $130.39 12/01/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA 4083715000
+2025-06-18 03:47:00,134 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/01/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700$130.3912/01/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000
+2025-06-18 03:47:00,135 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/01/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700$130.3912/01/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000
+2025-06-18 03:47:00,135 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/01/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700$130.3912/01/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000
+2025-06-18 03:47:00,135 - INFO - Found a purchase on 12/01/24 under GROCERIES for $130.39 with description: 
+	AplPay TRADER JOE S #073 000000073 CAMPBELL CA
+
+2025-06-18 03:47:00,135 - DEBUG - Found date: 12/01/24 in line 100: 12/01/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA
+2025-06-18 03:47:00,136 - DEBUG - Extracting description from lines: ['12/01/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', '4083715000'] with date: 12/01/24
+2025-06-18 03:47:00,136 - DEBUG - Description: AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA. Lines: ['12/01/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', '4083715000']. Date endpos: 56
+2025-06-18 03:47:00,136 - DEBUG - Amount Line: 12/01/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA 4083715000 $32.46 12/03/24 PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY 2126640138
+2025-06-18 03:47:00,136 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/01/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000$32.4612/03/24PAYPAL*PEACOCKTVLLF4CCE2126640138NY2126640138
+2025-06-18 03:47:00,136 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/01/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000$32.4612/03/24PAYPAL*PEACOCKTVLLF4CCE2126640138NY2126640138
+2025-06-18 03:47:00,137 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/01/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000$32.4612/03/24PAYPAL*PEACOCKTVLLF4CCE2126640138NY2126640138
+2025-06-18 03:47:00,137 - INFO - Found a purchase on 12/01/24 under GROCERIES for $32.46 with description: 
+	AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA
+
+2025-06-18 03:47:00,137 - DEBUG - Found date: 12/03/24 in line 103: 12/03/24 PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY
+2025-06-18 03:47:00,137 - DEBUG - Extracting description from lines: ['12/03/24 PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY', '2126640138'] with date: 12/03/24
+2025-06-18 03:47:00,138 - DEBUG - Description: PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY. Lines: ['12/03/24 PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY', '2126640138']. Date endpos: 48
+2025-06-18 03:47:00,138 - DEBUG - Amount Line: 12/03/24 PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY 2126640138 $7.99 12/04/24 PAYPAL *GARMININTER 104524363397 8884427646 KS 8884427646
+2025-06-18 03:47:00,138 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/03/24PAYPAL*PEACOCKTVLLF4CCE2126640138NY2126640138$7.9912/04/24PAYPAL*GARMININTER1045243633978884427646KS8884427646
+2025-06-18 03:47:00,139 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/03/24PAYPAL*PEACOCKTVLLF4CCE2126640138NY2126640138$7.9912/04/24PAYPAL*GARMININTER1045243633978884427646KS8884427646
+2025-06-18 03:47:00,139 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/03/24PAYPAL*PEACOCKTVLLF4CCE2126640138NY2126640138$7.9912/04/24PAYPAL*GARMININTER1045243633978884427646KS8884427646
+2025-06-18 03:47:00,139 - INFO - Found a purchase on 12/03/24 under PAYPAL for $7.99 with description: 
+	PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY
+
+2025-06-18 03:47:00,139 - DEBUG - Found date: 12/04/24 in line 106: 12/04/24 PAYPAL *GARMININTER 104524363397 8884427646 KS
+2025-06-18 03:47:00,139 - DEBUG - Extracting description from lines: ['12/04/24 PAYPAL *GARMININTER 104524363397 8884427646 KS', '8884427646'] with date: 12/04/24
+2025-06-18 03:47:00,140 - DEBUG - Description: PAYPAL *GARMININTER 104524363397 8884427646 KS. Lines: ['12/04/24 PAYPAL *GARMININTER 104524363397 8884427646 KS', '8884427646']. Date endpos: 55
+2025-06-18 03:47:00,140 - DEBUG - Amount Line: 12/04/24 PAYPAL *GARMININTER 104524363397 8884427646 KS 8884427646 $646.49 12/06/24 APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE
+2025-06-18 03:47:00,140 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/04/24PAYPAL*GARMININTER1045243633978884427646KS8884427646$646.4912/06/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-18 03:47:00,140 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/04/24PAYPAL*GARMININTER1045243633978884427646KS8884427646$646.4912/06/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-18 03:47:00,140 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/04/24PAYPAL*GARMININTER1045243633978884427646KS8884427646$646.4912/06/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-18 03:47:00,141 - INFO - Found a purchase on 12/04/24 under PAYPAL for $646.49 with description: 
+	PAYPAL *GARMININTER 104524363397 8884427646 KS
+
+2025-06-18 03:47:00,141 - DEBUG - Found date: 12/06/24 in line 109: 12/06/24 APPLE.COM/BILL INTERNET CHARGE CA
+2025-06-18 03:47:00,141 - DEBUG - Extracting description from lines: ['12/06/24 APPLE.COM/BILL INTERNET CHARGE CA', 'RECORD STORE'] with date: 12/06/24
+2025-06-18 03:47:00,141 - DEBUG - Description: APPLE.COM/BILL INTERNET CHARGE CA. Lines: ['12/06/24 APPLE.COM/BILL INTERNET CHARGE CA', 'RECORD STORE']. Date endpos: 42
+2025-06-18 03:47:00,142 - DEBUG - Amount Line: 12/06/24 APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE $2.99 12/07/24 GEICO AUTO (800)841-3000 DC INSURANCE
+2025-06-18 03:47:00,142 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/06/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$2.9912/07/24GEICOAUTO(800)841-3000DCINSURANCE
+2025-06-18 03:47:00,142 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/06/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$2.9912/07/24GEICOAUTO(800)841-3000DCINSURANCE
+2025-06-18 03:47:00,143 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/06/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$2.9912/07/24GEICOAUTO(800)841-3000DCINSURANCE
+2025-06-18 03:47:00,143 - INFO - Found a purchase on 12/06/24 under INTERNET for $2.99 with description: 
+	APPLE.COM/BILL INTERNET CHARGE CA
+
+2025-06-18 03:47:00,143 - DEBUG - Found date: 12/07/24 in line 112: 12/07/24 GEICO AUTO (800)841-3000 DC
+2025-06-18 03:47:00,143 - DEBUG - Extracting description from lines: ['12/07/24 GEICO AUTO (800)841-3000 DC', 'INSURANCE'] with date: 12/07/24
+2025-06-18 03:47:00,144 - DEBUG - Description: GEICO AUTO (800)841-3000 DC. Lines: ['12/07/24 GEICO AUTO (800)841-3000 DC', 'INSURANCE']. Date endpos: 36
+2025-06-18 03:47:00,144 - DEBUG - Amount Line: 12/07/24 GEICO AUTO (800)841-3000 DC INSURANCE $179.62 12/07/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL 5618105936
+2025-06-18 03:47:00,144 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/07/24GEICOAUTO(800)841-3000DCINSURANCE$179.6212/07/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936
+2025-06-18 03:47:00,145 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/07/24GEICOAUTO(800)841-3000DCINSURANCE$179.6212/07/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936
+2025-06-18 03:47:00,145 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/07/24GEICOAUTO(800)841-3000DCINSURANCE$179.6212/07/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936
+2025-06-18 03:47:00,145 - INFO - Found a purchase on 12/07/24 under AUTO for $179.62 with description: 
+	GEICO AUTO (800)841-3000 DC
+
+2025-06-18 03:47:00,146 - DEBUG - Found date: 12/07/24 in line 115: 12/07/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL
+2025-06-18 03:47:00,146 - DEBUG - Extracting description from lines: ['12/07/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', '5618105936'] with date: 12/07/24
+2025-06-18 03:47:00,146 - DEBUG - Description: KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL. Lines: ['12/07/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', '5618105936']. Date endpos: 64
+2025-06-18 03:47:00,146 - DEBUG - Amount Line: 12/07/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL 5618105936 $10.00 12/08/24 APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE
+2025-06-18 03:47:00,147 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/07/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936$10.0012/08/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-18 03:47:00,147 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/07/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936$10.0012/08/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-18 03:47:00,147 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/07/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936$10.0012/08/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-18 03:47:00,147 - INFO - Found a purchase on 12/07/24 under LAUNDRY for $10.0 with description: 
+	KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL
+
+2025-06-18 03:47:00,147 - DEBUG - Found date: 12/08/24 in line 118: 12/08/24 APPLE.COM/BILL INTERNET CHARGE CA
+2025-06-18 03:47:00,148 - DEBUG - Extracting description from lines: ['12/08/24 APPLE.COM/BILL INTERNET CHARGE CA', 'RECORD STORE'] with date: 12/08/24
+2025-06-18 03:47:00,148 - DEBUG - Description: APPLE.COM/BILL INTERNET CHARGE CA. Lines: ['12/08/24 APPLE.COM/BILL INTERNET CHARGE CA', 'RECORD STORE']. Date endpos: 42
+2025-06-18 03:47:00,148 - DEBUG - Amount Line: 12/08/24 APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE $10.99 12/08/24 AplPay CRATE & BARREL SAN JOSE CA 111 95128
+2025-06-18 03:47:00,148 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/08/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$10.9912/08/24AplPayCRATE&BARRELSANJOSECA11195128
+2025-06-18 03:47:00,148 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/08/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$10.9912/08/24AplPayCRATE&BARRELSANJOSECA11195128
+2025-06-18 03:47:00,149 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/08/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$10.9912/08/24AplPayCRATE&BARRELSANJOSECA11195128
+2025-06-18 03:47:00,149 - INFO - Found a purchase on 12/08/24 under INTERNET for $10.99 with description: 
+	APPLE.COM/BILL INTERNET CHARGE CA
+
+2025-06-18 03:47:00,149 - DEBUG - Found date: 12/08/24 in line 121: 12/08/24 AplPay CRATE & BARREL SAN JOSE CA
+2025-06-18 03:47:00,149 - DEBUG - Extracting description from lines: ['12/08/24 AplPay CRATE & BARREL SAN JOSE CA', '111 95128'] with date: 12/08/24
+2025-06-18 03:47:00,149 - DEBUG - Description: AplPay CRATE & BARREL SAN JOSE CA. Lines: ['12/08/24 AplPay CRATE & BARREL SAN JOSE CA', '111 95128']. Date endpos: 42
+2025-06-18 03:47:00,149 - DEBUG - Amount Line: 12/08/24 AplPay CRATE & BARREL SAN JOSE CA 111 95128 $128.73 12/08/24 AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN +16789941528
+2025-06-18 03:47:00,150 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/08/24AplPayCRATE&BARRELSANJOSECA11195128$128.7312/08/24AplPaySPFISHOUTOFWATERBOOKBERRYHILLTN+16789941528
+2025-06-18 03:47:00,150 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/08/24AplPayCRATE&BARRELSANJOSECA11195128$128.7312/08/24AplPaySPFISHOUTOFWATERBOOKBERRYHILLTN+16789941528
+2025-06-18 03:47:00,150 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/08/24AplPayCRATE&BARRELSANJOSECA11195128$128.7312/08/24AplPaySPFISHOUTOFWATERBOOKBERRYHILLTN+16789941528
+2025-06-18 03:47:00,150 - INFO - Found a purchase on 12/08/24 under APPLE PAY for $128.73 with description: 
+	AplPay CRATE & BARREL SAN JOSE CA
+
+2025-06-18 03:47:00,151 - DEBUG - Found date: 12/08/24 in line 124: 12/08/24 AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN
+2025-06-18 03:47:00,151 - DEBUG - Extracting description from lines: ['12/08/24 AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN', '+16789941528'] with date: 12/08/24
+2025-06-18 03:47:00,151 - DEBUG - Description: AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN. Lines: ['12/08/24 AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN', '+16789941528']. Date endpos: 51
+2025-06-18 03:47:00,151 - DEBUG - Amount Line: 12/08/24 AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN +16789941528 $27.69 12/11/24 HONK NORTHSTAR 00-08036347717 TRUCKEE CA PARKING LOT & GARAGE
+2025-06-18 03:47:00,152 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/08/24AplPaySPFISHOUTOFWATERBOOKBERRYHILLTN+16789941528$27.6912/11/24HONKNORTHSTAR00-08036347717TRUCKEECAPARKINGLOT&GARAGE
+2025-06-18 03:47:00,152 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/08/24AplPaySPFISHOUTOFWATERBOOKBERRYHILLTN+16789941528$27.6912/11/24HONKNORTHSTAR00-08036347717TRUCKEECAPARKINGLOT&GARAGE
+2025-06-18 03:47:00,152 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/08/24AplPaySPFISHOUTOFWATERBOOKBERRYHILLTN+16789941528$27.6912/11/24HONKNORTHSTAR00-08036347717TRUCKEECAPARKINGLOT&GARAGE
+2025-06-18 03:47:00,152 - INFO - Found a purchase on 12/08/24 under APPLE PAY for $27.69 with description: 
+	AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN
+
+2025-06-18 03:47:00,153 - DEBUG - Found date: 12/11/24 in line 127: 12/11/24 HONK NORTHSTAR 00-08036347717 TRUCKEE CA
+2025-06-18 03:47:00,153 - DEBUG - Extracting description from lines: ['12/11/24 HONK NORTHSTAR 00-08036347717 TRUCKEE CA', 'PARKING LOT & GARAGE'] with date: 12/11/24
+2025-06-18 03:47:00,153 - DEBUG - Description: HONK NORTHSTAR 00-08036347717 TRUCKEE CA. Lines: ['12/11/24 HONK NORTHSTAR 00-08036347717 TRUCKEE CA', 'PARKING LOT & GARAGE']. Date endpos: 49
+2025-06-18 03:47:00,154 - DEBUG - Amount Line: 12/11/24 HONK NORTHSTAR 00-08036347717 TRUCKEE CA PARKING LOT & GARAGE $20.00 12/12/24 PAYPAL *UNITEDSTATE 4029357733 DC 4029357733
+2025-06-18 03:47:00,154 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/11/24HONKNORTHSTAR00-08036347717TRUCKEECAPARKINGLOT&GARAGE$20.0012/12/24PAYPAL*UNITEDSTATE4029357733DC4029357733
+2025-06-18 03:47:00,154 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/11/24HONKNORTHSTAR00-08036347717TRUCKEECAPARKINGLOT&GARAGE$20.0012/12/24PAYPAL*UNITEDSTATE4029357733DC4029357733
+2025-06-18 03:47:00,155 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/11/24HONKNORTHSTAR00-08036347717TRUCKEECAPARKINGLOT&GARAGE$20.0012/12/24PAYPAL*UNITEDSTATE4029357733DC4029357733
+2025-06-18 03:47:00,155 - INFO - Found a purchase on 12/11/24 under OTHER for $20.0 with description: 
+	HONK NORTHSTAR 00-08036347717 TRUCKEE CA
+
+2025-06-18 03:47:00,155 - DEBUG - Found date: 12/12/24 in line 130: 12/12/24 PAYPAL *UNITEDSTATE 4029357733 DC
+2025-06-18 03:47:00,155 - DEBUG - Extracting description from lines: ['12/12/24 PAYPAL *UNITEDSTATE 4029357733 DC', '4029357733'] with date: 12/12/24
+2025-06-18 03:47:00,155 - DEBUG - Description: PAYPAL *UNITEDSTATE 4029357733 DC. Lines: ['12/12/24 PAYPAL *UNITEDSTATE 4029357733 DC', '4029357733']. Date endpos: 42
+2025-06-18 03:47:00,156 - DEBUG - Amount Line: 12/12/24 PAYPAL *UNITEDSTATE 4029357733 DC 4029357733 $31.05 12/14/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL 5618105936
+2025-06-18 03:47:00,156 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/12/24PAYPAL*UNITEDSTATE4029357733DC4029357733$31.0512/14/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936
+2025-06-18 03:47:00,156 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/12/24PAYPAL*UNITEDSTATE4029357733DC4029357733$31.0512/14/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936
+2025-06-18 03:47:00,156 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/12/24PAYPAL*UNITEDSTATE4029357733DC4029357733$31.0512/14/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936
+2025-06-18 03:47:00,156 - INFO - Found a purchase on 12/12/24 under PAYPAL for $31.05 with description: 
+	PAYPAL *UNITEDSTATE 4029357733 DC
+
+2025-06-18 03:47:00,157 - DEBUG - Found date: 12/14/24 in line 133: 12/14/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL
+2025-06-18 03:47:00,157 - DEBUG - Extracting description from lines: ['12/14/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', '5618105936'] with date: 12/14/24
+2025-06-18 03:47:00,157 - DEBUG - Description: KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL. Lines: ['12/14/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', '5618105936']. Date endpos: 64
+2025-06-18 03:47:00,157 - DEBUG - Amount Line: 12/14/24 KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL 5618105936 $10.00 12/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA 6265993700
+2025-06-18 03:47:00,158 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/14/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936$10.0012/14/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700
+2025-06-18 03:47:00,158 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/14/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936$10.0012/14/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700
+2025-06-18 03:47:00,158 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/14/24KIOSOFTTECHNOLOGIESLLC6500000127033BOYNTONBEACHFL5618105936$10.0012/14/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700
+2025-06-18 03:47:00,159 - INFO - Found a purchase on 12/14/24 under LAUNDRY for $10.0 with description: 
+	KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL
+
+2025-06-18 03:47:00,159 - DEBUG - Found date: 12/14/24 in line 136: 12/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA
+2025-06-18 03:47:00,159 - DEBUG - Extracting description from lines: ['12/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA', '6265993700'] with date: 12/14/24
+2025-06-18 03:47:00,160 - DEBUG - Description: AplPay TRADER JOE S #073 000000073 CAMPBELL CA. Lines: ['12/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA', '6265993700']. Date endpos: 55
+2025-06-18 03:47:00,160 - DEBUG - Amount Line: 12/14/24 AplPay TRADER JOE S #073 000000073 CAMPBELL CA 6265993700 $121.09 12/14/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA 4083715000
+2025-06-18 03:47:00,160 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/14/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700$121.0912/14/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000
+2025-06-18 03:47:00,161 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/14/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700$121.0912/14/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000
+2025-06-18 03:47:00,161 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/14/24AplPayTRADERJOES#073000000073CAMPBELLCA6265993700$121.0912/14/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000
+2025-06-18 03:47:00,161 - INFO - Found a purchase on 12/14/24 under GROCERIES for $121.09 with description: 
+	AplPay TRADER JOE S #073 000000073 CAMPBELL CA
+
+2025-06-18 03:47:00,162 - DEBUG - Found date: 12/14/24 in line 139: 12/14/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA
+2025-06-18 03:47:00,162 - DEBUG - Extracting description from lines: ['12/14/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', '4083715000'] with date: 12/14/24
+2025-06-18 03:47:00,162 - DEBUG - Description: AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA. Lines: ['12/14/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', '4083715000']. Date endpos: 56
+2025-06-18 03:47:00,163 - DEBUG - Amount Line: 12/14/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA 4083715000 $22.69 Fees Amount
+2025-06-18 03:47:00,163 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 12/14/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000$22.69FeesAmount
+2025-06-18 03:47:00,163 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 12/14/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000$22.69FeesAmount
+2025-06-18 03:47:00,164 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 12/14/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000$22.69FeesAmount
+2025-06-18 03:47:00,164 - INFO - Found a purchase on 12/14/24 under GROCERIES for $22.69 with description: 
+	AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA
+
+2025-06-18 03:47:00,164 - INFO - Successfully parsed purchases from text: [{'Bank': 'AMEX', 'Date': '2024-11-20', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -596.73, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -1393.99, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-12-13', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -377.03, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-12-02', 'Description': '*', 'Amount': -7.0, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-11-14', 'Description': 'AplPay TRADER JOE S #073 000000073 CAMPBELL CA', 'Amount': 61.72, 'Category': 'GROCERIES'}, {'Bank': 'AMEX', 'Date': '2024-11-16', 'Description': 'PARAMOUNT+ WEST HOLLYWOO CA', 'Amount': 12.99, 'Category': 'STREAMING'}, {'Bank': 'AMEX', 'Date': '2024-11-16', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 7.99, 'Category': 'INTERNET'}, {'Bank': 'AMEX', 'Date': '2024-11-17', 'Description': 'AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA', 'Amount': 15.18, 'Category': 'GROCERIES'}, {'Bank': 'AMEX', 'Date': '2024-11-17', 'Description': 'AplPay TRADER JOE S #212 000000212 SAN JOSE CA', 'Amount': 72.65, 'Category': 'GROCERIES'}, {'Bank': 'AMEX', 'Date': '2024-11-18', 'Description': 'PAYPAL *BESTBUY COM 8882378289 MN', 'Amount': 185.93, 'Category': 'PAYPAL'}, {'Bank': 'AMEX', 'Date': '2024-11-19', 'Description': 'SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA', 'Amount': 55.56, 'Category': 'GROCERIES'}, {'Bank': 'AMEX', 'Date': '2024-11-20', 'Description': 'KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', 'Amount': 10.0, 'Category': 'LAUNDRY'}, {'Bank': 'AMEX', 'Date': '2024-11-24', 'Description': 'DISNEYPLUS 888-905-7888 CA', 'Amount': 26.99, 'Category': 'STREAMING'}, {'Bank': 'AMEX', 'Date': '2024-11-27', 'Description': 'AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA', 'Amount': 4.67, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-11-29', 'Description': 'NETFLIX.COM 866-579-7172 CA', 'Amount': 24.97, 'Category': 'STREAMING'}, {'Bank': 'AMEX', 'Date': '2024-11-30', 'Description': 'AplPay SP FIGS INC. LOS ANGELES CA', 'Amount': 80.39, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'MOVEMENT SUNNYVALE SUNNYVALE CA', 'Amount': 117.0, 'Category': 'GYM'}, {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay THE HOME DEPOT CAMPBELL CA', 'Amount': 32.76, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay ROSS DRESS FOR LESS CAMPBELL CA', 'Amount': 42.4, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay TRADER JOE S #073 000000073 CAMPBELL CA', 'Amount': 130.39, 'Category': 'GROCERIES'}, {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', 'Amount': 32.46, 'Category': 'GROCERIES'}, {'Bank': 'AMEX', 'Date': '2024-12-03', 'Description': 'PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY', 'Amount': 7.99, 'Category': 'PAYPAL'}, {'Bank': 'AMEX', 'Date': '2024-12-04', 'Description': 'PAYPAL *GARMININTER 104524363397 8884427646 KS', 'Amount': 646.49, 'Category': 'PAYPAL'}, {'Bank': 'AMEX', 'Date': '2024-12-06', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 2.99, 'Category': 'INTERNET'}, {'Bank': 'AMEX', 'Date': '2024-12-07', 'Description': 'GEICO AUTO (800)841-3000 DC', 'Amount': 179.62, 'Category': 'AUTO'}, {'Bank': 'AMEX', 'Date': '2024-12-07', 'Description': 'KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', 'Amount': 10.0, 'Category': 'LAUNDRY'}, {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 10.99, 'Category': 'INTERNET'}, {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': 'AplPay CRATE & BARREL SAN JOSE CA', 'Amount': 128.73, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': 'AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN', 'Amount': 27.69, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-12-11', 'Description': 'HONK NORTHSTAR 00-08036347717 TRUCKEE CA', 'Amount': 20.0, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-12-12', 'Description': 'PAYPAL *UNITEDSTATE 4029357733 DC', 'Amount': 31.05, 'Category': 'PAYPAL'}, {'Bank': 'AMEX', 'Date': '2024-12-14', 'Description': 'KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', 'Amount': 10.0, 'Category': 'LAUNDRY'}, {'Bank': 'AMEX', 'Date': '2024-12-14', 'Description': 'AplPay TRADER JOE S #073 000000073 CAMPBELL CA', 'Amount': 121.09, 'Category': 'GROCERIES'}, {'Bank': 'AMEX', 'Date': '2024-12-14', 'Description': 'AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', 'Amount': 22.69, 'Category': 'GROCERIES'}]
+2025-06-18 03:47:00,194 - INFO - Query: SELECT * FROM bank_statements
+2025-06-18 03:47:00,212 - INFO - Retrieved 0 records from the database.
+2025-06-18 03:47:00,213 - DEBUG - Existing purchases in database: []
+2025-06-18 03:47:00,214 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-20', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -596.73, 'Category': 'OTHER'}
+2025-06-18 03:47:00,257 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-20', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -596.73, 'Category': 'OTHER'}
+2025-06-18 03:47:00,257 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -1393.99, 'Category': 'OTHER'}
+2025-06-18 03:47:00,258 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -1393.99, 'Category': 'OTHER'}
+2025-06-18 03:47:00,258 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-13', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -377.03, 'Category': 'OTHER'}
+2025-06-18 03:47:00,259 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-13', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -377.03, 'Category': 'OTHER'}
+2025-06-18 03:47:00,259 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-02', 'Description': '*', 'Amount': -7.0, 'Category': 'OTHER'}
+2025-06-18 03:47:00,260 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-02', 'Description': '*', 'Amount': -7.0, 'Category': 'OTHER'}
+2025-06-18 03:47:00,260 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-14', 'Description': 'AplPay TRADER JOE S #073 000000073 CAMPBELL CA', 'Amount': 61.72, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,262 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-14', 'Description': 'AplPay TRADER JOE S #073 000000073 CAMPBELL CA', 'Amount': 61.72, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,262 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-16', 'Description': 'PARAMOUNT+ WEST HOLLYWOO CA', 'Amount': 12.99, 'Category': 'STREAMING'}
+2025-06-18 03:47:00,263 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-16', 'Description': 'PARAMOUNT+ WEST HOLLYWOO CA', 'Amount': 12.99, 'Category': 'STREAMING'}
+2025-06-18 03:47:00,263 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-16', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 7.99, 'Category': 'INTERNET'}
+2025-06-18 03:47:00,264 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-16', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 7.99, 'Category': 'INTERNET'}
+2025-06-18 03:47:00,264 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-17', 'Description': 'AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA', 'Amount': 15.18, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,265 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-17', 'Description': 'AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA', 'Amount': 15.18, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,266 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-17', 'Description': 'AplPay TRADER JOE S #212 000000212 SAN JOSE CA', 'Amount': 72.65, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,266 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-17', 'Description': 'AplPay TRADER JOE S #212 000000212 SAN JOSE CA', 'Amount': 72.65, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,267 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-18', 'Description': 'PAYPAL *BESTBUY COM 8882378289 MN', 'Amount': 185.93, 'Category': 'PAYPAL'}
+2025-06-18 03:47:00,268 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-18', 'Description': 'PAYPAL *BESTBUY COM 8882378289 MN', 'Amount': 185.93, 'Category': 'PAYPAL'}
+2025-06-18 03:47:00,268 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-19', 'Description': 'SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA', 'Amount': 55.56, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,269 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-19', 'Description': 'SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA', 'Amount': 55.56, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,270 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-20', 'Description': 'KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', 'Amount': 10.0, 'Category': 'LAUNDRY'}
+2025-06-18 03:47:00,270 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-20', 'Description': 'KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', 'Amount': 10.0, 'Category': 'LAUNDRY'}
+2025-06-18 03:47:00,271 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-24', 'Description': 'DISNEYPLUS 888-905-7888 CA', 'Amount': 26.99, 'Category': 'STREAMING'}
+2025-06-18 03:47:00,272 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-24', 'Description': 'DISNEYPLUS 888-905-7888 CA', 'Amount': 26.99, 'Category': 'STREAMING'}
+2025-06-18 03:47:00,272 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-27', 'Description': 'AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA', 'Amount': 4.67, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,273 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-27', 'Description': 'AplPay PORT OF SD NORTH EMB PRK 0000 SAN DIEGO CA', 'Amount': 4.67, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,273 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-29', 'Description': 'NETFLIX.COM 866-579-7172 CA', 'Amount': 24.97, 'Category': 'STREAMING'}
+2025-06-18 03:47:00,274 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-29', 'Description': 'NETFLIX.COM 866-579-7172 CA', 'Amount': 24.97, 'Category': 'STREAMING'}
+2025-06-18 03:47:00,276 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-11-30', 'Description': 'AplPay SP FIGS INC. LOS ANGELES CA', 'Amount': 80.39, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,276 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-11-30', 'Description': 'AplPay SP FIGS INC. LOS ANGELES CA', 'Amount': 80.39, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,277 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'MOVEMENT SUNNYVALE SUNNYVALE CA', 'Amount': 117.0, 'Category': 'GYM'}
+2025-06-18 03:47:00,277 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'MOVEMENT SUNNYVALE SUNNYVALE CA', 'Amount': 117.0, 'Category': 'GYM'}
+2025-06-18 03:47:00,278 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay THE HOME DEPOT CAMPBELL CA', 'Amount': 32.76, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,279 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay THE HOME DEPOT CAMPBELL CA', 'Amount': 32.76, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,279 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay ROSS DRESS FOR LESS CAMPBELL CA', 'Amount': 42.4, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,280 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay ROSS DRESS FOR LESS CAMPBELL CA', 'Amount': 42.4, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,280 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay TRADER JOE S #073 000000073 CAMPBELL CA', 'Amount': 130.39, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,281 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay TRADER JOE S #073 000000073 CAMPBELL CA', 'Amount': 130.39, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,281 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', 'Amount': 32.46, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,282 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-01', 'Description': 'AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', 'Amount': 32.46, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,283 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-03', 'Description': 'PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY', 'Amount': 7.99, 'Category': 'PAYPAL'}
+2025-06-18 03:47:00,283 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-03', 'Description': 'PAYPAL *PEACOCKTVLL F4CCE 2126640138 NY', 'Amount': 7.99, 'Category': 'PAYPAL'}
+2025-06-18 03:47:00,284 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-04', 'Description': 'PAYPAL *GARMININTER 104524363397 8884427646 KS', 'Amount': 646.49, 'Category': 'PAYPAL'}
+2025-06-18 03:47:00,285 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-04', 'Description': 'PAYPAL *GARMININTER 104524363397 8884427646 KS', 'Amount': 646.49, 'Category': 'PAYPAL'}
+2025-06-18 03:47:00,285 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-06', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 2.99, 'Category': 'INTERNET'}
+2025-06-18 03:47:00,286 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-06', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 2.99, 'Category': 'INTERNET'}
+2025-06-18 03:47:00,286 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-07', 'Description': 'GEICO AUTO (800)841-3000 DC', 'Amount': 179.62, 'Category': 'AUTO'}
+2025-06-18 03:47:00,287 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-07', 'Description': 'GEICO AUTO (800)841-3000 DC', 'Amount': 179.62, 'Category': 'AUTO'}
+2025-06-18 03:47:00,287 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-07', 'Description': 'KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', 'Amount': 10.0, 'Category': 'LAUNDRY'}
+2025-06-18 03:47:00,288 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-07', 'Description': 'KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', 'Amount': 10.0, 'Category': 'LAUNDRY'}
+2025-06-18 03:47:00,288 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 10.99, 'Category': 'INTERNET'}
+2025-06-18 03:47:00,289 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 10.99, 'Category': 'INTERNET'}
+2025-06-18 03:47:00,290 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': 'AplPay CRATE & BARREL SAN JOSE CA', 'Amount': 128.73, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,290 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': 'AplPay CRATE & BARREL SAN JOSE CA', 'Amount': 128.73, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,291 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': 'AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN', 'Amount': 27.69, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,292 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-08', 'Description': 'AplPay SP FISHOUTOFWATERBOOK BERRY HILL TN', 'Amount': 27.69, 'Category': 'APPLE PAY'}
+2025-06-18 03:47:00,292 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-11', 'Description': 'HONK NORTHSTAR 00-08036347717 TRUCKEE CA', 'Amount': 20.0, 'Category': 'OTHER'}
+2025-06-18 03:47:00,293 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-11', 'Description': 'HONK NORTHSTAR 00-08036347717 TRUCKEE CA', 'Amount': 20.0, 'Category': 'OTHER'}
+2025-06-18 03:47:00,293 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-12', 'Description': 'PAYPAL *UNITEDSTATE 4029357733 DC', 'Amount': 31.05, 'Category': 'PAYPAL'}
+2025-06-18 03:47:00,294 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-12', 'Description': 'PAYPAL *UNITEDSTATE 4029357733 DC', 'Amount': 31.05, 'Category': 'PAYPAL'}
+2025-06-18 03:47:00,294 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-14', 'Description': 'KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', 'Amount': 10.0, 'Category': 'LAUNDRY'}
+2025-06-18 03:47:00,295 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-14', 'Description': 'KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL', 'Amount': 10.0, 'Category': 'LAUNDRY'}
+2025-06-18 03:47:00,295 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-14', 'Description': 'AplPay TRADER JOE S #073 000000073 CAMPBELL CA', 'Amount': 121.09, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,296 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-14', 'Description': 'AplPay TRADER JOE S #073 000000073 CAMPBELL CA', 'Amount': 121.09, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,296 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-12-14', 'Description': 'AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', 'Amount': 22.69, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,297 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-12-14', 'Description': 'AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', 'Amount': 22.69, 'Category': 'GROCERIES'}
+2025-06-18 03:47:00,302 - INFO - Inserted 34 new purchases into the database.
+2025-06-18 03:47:00,326 - INFO - Query: SELECT * FROM bank_statements
+2025-06-18 03:47:00,328 - INFO - Retrieved 34 records from the database.
+2025-06-18 03:47:00,338 - INFO - No bank name passed in query. Returning all records...
+2025-06-18 03:47:00,361 - INFO - Query: SELECT * FROM bank_statements
+2025-06-18 03:47:00,361 - INFO - Retrieved 34 records from the database.
+2025-06-18 03:47:06,426 - INFO - No bank name passed in query. Returning all records...
+2025-06-18 03:47:06,443 - INFO - Query: SELECT * FROM bank_statements
+2025-06-18 03:47:06,444 - INFO - Retrieved 34 records from the database.
+2025-06-18 03:47:06,487 - INFO - Query: SELECT * FROM bank_statements WHERE bank = %s
+2025-06-18 03:47:06,488 - INFO - Retrieved 34 records from the database.

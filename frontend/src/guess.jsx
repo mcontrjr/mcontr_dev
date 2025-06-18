@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
-import { useTheme, ModernHeader } from './components/MainComponents';
+import { useTheme, ModernHeader, Footer } from './components/MainComponents';
 import { GameInterface, GameSidebar } from './components/GuessComponents';
 import light_logo from './assets/guess-light-logo.svg';
 import dark_logo from './assets/guess-dark-logo.svg';

@@ -1,4 +1,4 @@
-import '../styles/stock.css'
+import '../../styles/stock.css'
 
 function SearchInterface({ location, setLocation, onSearch, loading, message }) {
   const handleKeyPress = (e) => {

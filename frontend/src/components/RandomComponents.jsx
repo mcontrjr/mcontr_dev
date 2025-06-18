@@ -1,4 +1,4 @@
-import '../styles/stock.css'
+import '../../styles/stock.css'
 
 // Components
 function SearchInterface({ keyword, setKeyword, onSearch, onClear, loading, message, hasSearched, hasImages }) {
