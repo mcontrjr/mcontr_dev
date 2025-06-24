@@ -61,14 +61,9 @@ function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
       href: "/random"
     },
     {
-      title: "Documentation",
-      description: "Learn how to use our tools",
-      href: "/docs"
-    },
-    {
-      title: "About",
-      description: "Learn more about our project",
-      href: "/about"
+      title: "Weather Check",
+      description: "Check weather conditions in real-time",
+      href: "/weather"
     }
   ];
 

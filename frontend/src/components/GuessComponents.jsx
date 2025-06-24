@@ -1,4 +1,6 @@
 import '../../styles/stock.css'
+import { useState, useEffect } from 'react'
+import { Line } from 'react-chartjs-2'
 
 // Keypad Component
 function GameKeypad({ guess, onKeypadPress, onClear, onBackspace, gameWon }) {
