@@ -10,7 +10,7 @@ import noPurchases from '../assets/no-purchases.svg'
 import 'chart.js/auto';
 import '../../styles/stock.css'
 
-const API_URL = "http://localhost:8000";
+const API_URL = "/api";
 
 const Header = () => (
     <>
@@ -655,7 +655,7 @@ const SupportedBanks = () => (
                         alt="American Express logo" 
                         style={{ width: '40px', height: '40px', objectFit: 'contain' }}
                     />
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>AmEx</span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>AMEX</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
                     <img 
