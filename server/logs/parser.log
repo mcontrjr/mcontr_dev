@@ -11754,3 +11754,1002 @@ End of Important Notices.
 2025-06-18 03:47:06,444 - INFO - Retrieved 34 records from the database.
 2025-06-18 03:47:06,487 - INFO - Query: SELECT * FROM bank_statements WHERE bank = %s
 2025-06-18 03:47:06,488 - INFO - Retrieved 34 records from the database.
+2025-06-24 05:49:07,877 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:49:07,941 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:49:07,942 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:49:24,693 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:49:24,736 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:49:24,737 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:49:44,966 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:49:45,008 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:49:45,009 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:50:04,712 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:50:04,729 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:50:04,730 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:50:04,825 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:50:04,842 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:50:04,843 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:51:20,150 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:51:20,166 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:51:20,167 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:52:10,225 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:52:10,246 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:52:10,246 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:52:32,343 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:52:32,360 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:52:32,360 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:52:39,554 - INFO - Query: SELECT * FROM bank_statements WHERE bank = %s
+2025-06-24 05:52:39,554 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:52:53,260 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:52:53,260 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:52:53,265 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:52:53,299 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:52:53,300 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:54:06,893 - DEBUG - Calling on_part_begin with no data
+2025-06-24 05:54:06,893 - DEBUG - Calling on_header_field with data[42:61]
+2025-06-24 05:54:06,894 - DEBUG - Calling on_header_value with data[63:122]
+2025-06-24 05:54:06,894 - DEBUG - Calling on_header_end with no data
+2025-06-24 05:54:06,894 - DEBUG - Calling on_header_field with data[124:136]
+2025-06-24 05:54:06,894 - DEBUG - Calling on_header_value with data[138:153]
+2025-06-24 05:54:06,894 - DEBUG - Calling on_header_end with no data
+2025-06-24 05:54:06,894 - DEBUG - Calling on_headers_finished with no data
+2025-06-24 05:54:06,895 - DEBUG - Calling on_part_data with data[157:9919]
+2025-06-24 05:54:06,896 - DEBUG - Calling on_part_data with data[0:16370]
+2025-06-24 05:54:06,898 - DEBUG - Calling on_part_data with data[0:6479]
+2025-06-24 05:54:06,900 - DEBUG - Calling on_part_data with data[0:2830]
+2025-06-24 05:54:06,934 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:06,938 - DEBUG - Calling on_part_data with data[0:12139]
+2025-06-24 05:54:06,938 - DEBUG - Calling on_part_data with data[0:8490]
+2025-06-24 05:54:06,940 - DEBUG - Calling on_part_data with data[0:7894]
+2025-06-24 05:54:06,940 - DEBUG - Calling on_part_data with data[0:2830]
+2025-06-24 05:54:06,948 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:06,952 - DEBUG - Calling on_part_data with data[0:9905]
+2025-06-24 05:54:06,954 - DEBUG - Calling on_part_data with data[0:13554]
+2025-06-24 05:54:06,955 - DEBUG - Calling on_part_data with data[0:6479]
+2025-06-24 05:54:06,956 - DEBUG - Calling on_part_data with data[0:11320]
+2025-06-24 05:54:06,978 - DEBUG - Calling on_part_data with data[0:1400]
+2025-06-24 05:54:06,982 - DEBUG - Calling on_part_data with data[0:10739]
+2025-06-24 05:54:06,983 - DEBUG - Calling on_part_data with data[0:9309]
+2025-06-24 05:54:06,985 - DEBUG - Calling on_part_data with data[0:9905]
+2025-06-24 05:54:06,988 - DEBUG - Calling on_part_data with data[0:7894]
+2025-06-24 05:54:06,989 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:06,990 - DEBUG - Calling on_part_data with data[0:16384]
+2025-06-24 05:54:06,993 - DEBUG - Calling on_part_data with data[0:13554]
+2025-06-24 05:54:06,995 - DEBUG - Calling on_part_data with data[0:7075]
+2025-06-24 05:54:06,998 - DEBUG - Calling on_part_data with data[0:7894]
+2025-06-24 05:54:06,999 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,004 - DEBUG - Calling on_part_data with data[0:6777]
+2025-06-24 05:54:07,005 - DEBUG - Calling on_part_data with data[0:15267]
+2025-06-24 05:54:07,011 - DEBUG - Calling on_part_data with data[0:1407]
+2025-06-24 05:54:07,015 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,018 - DEBUG - Calling on_part_data with data[0:2830]
+2025-06-24 05:54:07,020 - DEBUG - Calling on_part_data with data[0:17807]
+2025-06-24 05:54:07,021 - DEBUG - Calling on_part_data with data[0:21448]
+2025-06-24 05:54:07,024 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,028 - DEBUG - Calling on_part_data with data[0:7075]
+2025-06-24 05:54:07,028 - DEBUG - Calling on_part_data with data[0:13554]
+2025-06-24 05:54:07,030 - DEBUG - Calling on_part_data with data[0:9309]
+2025-06-24 05:54:07,031 - DEBUG - Calling on_part_data with data[0:11320]
+2025-06-24 05:54:07,032 - DEBUG - Calling on_part_data with data[0:5064]
+2025-06-24 05:54:07,033 - DEBUG - Calling on_part_data with data[0:14969]
+2025-06-24 05:54:07,035 - DEBUG - Calling on_part_data with data[0:7075]
+2025-06-24 05:54:07,036 - DEBUG - Calling on_part_data with data[0:12139]
+2025-06-24 05:54:07,037 - DEBUG - Calling on_part_data with data[0:17799]
+2025-06-24 05:54:07,038 - DEBUG - Calling on_part_data with data[0:2830]
+2025-06-24 05:54:07,039 - DEBUG - Calling on_part_data with data[0:5660]
+2025-06-24 05:54:07,039 - DEBUG - Calling on_part_data with data[0:14969]
+2025-06-24 05:54:07,060 - DEBUG - Calling on_part_data with data[0:1407]
+2025-06-24 05:54:07,065 - DEBUG - Calling on_part_data with data[0:6487]
+2025-06-24 05:54:07,066 - DEBUG - Calling on_part_data with data[0:24642]
+2025-06-24 05:54:07,066 - DEBUG - Calling on_part_data with data[0:232]
+2025-06-24 05:54:07,067 - DEBUG - Calling on_part_data with data[0:7894]
+2025-06-24 05:54:07,071 - DEBUG - Calling on_part_data with data[0:9905]
+2025-06-24 05:54:07,072 - DEBUG - Calling on_part_data with data[0:10724]
+2025-06-24 05:54:07,073 - DEBUG - Calling on_part_data with data[0:9309]
+2025-06-24 05:54:07,075 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,078 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,079 - DEBUG - Calling on_part_data with data[0:19214]
+2025-06-24 05:54:07,081 - DEBUG - Calling on_part_data with data[0:20629]
+2025-06-24 05:54:07,083 - DEBUG - Calling on_part_data with data[0:6479]
+2025-06-24 05:54:07,084 - DEBUG - Calling on_part_data with data[0:14150]
+2025-06-24 05:54:07,085 - DEBUG - Calling on_part_data with data[0:2234]
+2025-06-24 05:54:07,086 - DEBUG - Calling on_part_data with data[0:7075]
+2025-06-24 05:54:07,087 - DEBUG - Calling on_part_data with data[0:2830]
+2025-06-24 05:54:07,088 - DEBUG - Calling on_part_data with data[0:25693]
+2025-06-24 05:54:07,089 - DEBUG - Calling on_part_data with data[0:2830]
+2025-06-24 05:54:07,091 - DEBUG - Calling on_part_data with data[0:17799]
+2025-06-24 05:54:07,091 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,093 - DEBUG - Calling on_part_data with data[0:5660]
+2025-06-24 05:54:07,094 - DEBUG - Calling on_part_data with data[0:14969]
+2025-06-24 05:54:07,095 - DEBUG - Calling on_part_data with data[0:7894]
+2025-06-24 05:54:07,096 - DEBUG - Calling on_part_data with data[0:8490]
+2025-06-24 05:54:07,097 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,098 - DEBUG - Calling on_part_data with data[0:17799]
+2025-06-24 05:54:07,100 - DEBUG - Calling on_part_data with data[0:21448]
+2025-06-24 05:54:07,102 - DEBUG - Calling on_part_data with data[0:2830]
+2025-06-24 05:54:07,103 - DEBUG - Calling on_part_data with data[0:9309]
+2025-06-24 05:54:07,104 - DEBUG - Calling on_part_data with data[0:8490]
+2025-06-24 05:54:07,104 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,105 - DEBUG - Calling on_part_data with data[0:10724]
+2025-06-24 05:54:07,106 - DEBUG - Calling on_part_data with data[0:8490]
+2025-06-24 05:54:07,107 - DEBUG - Calling on_part_data with data[0:20033]
+2025-06-24 05:54:07,108 - DEBUG - Calling on_part_data with data[0:7075]
+2025-06-24 05:54:07,110 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,114 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,115 - DEBUG - Calling on_part_data with data[0:6479]
+2025-06-24 05:54:07,115 - DEBUG - Calling on_part_data with data[0:9905]
+2025-06-24 05:54:07,116 - DEBUG - Calling on_part_data with data[0:4245]
+2025-06-24 05:54:07,132 - DEBUG - Calling on_part_data with data[0:2234]
+2025-06-24 05:54:07,133 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,136 - DEBUG - Calling on_part_data with data[0:6777]
+2025-06-24 05:54:07,136 - DEBUG - Calling on_part_data with data[0:7373]
+2025-06-24 05:54:07,137 - DEBUG - Calling on_part_data with data[0:13554]
+2025-06-24 05:54:07,138 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,139 - DEBUG - Calling on_part_data with data[0:10716]
+2025-06-24 05:54:07,140 - DEBUG - Calling on_part_data with data[0:9317]
+2025-06-24 05:54:07,141 - DEBUG - Calling on_part_data with data[0:5660]
+2025-06-24 05:54:07,142 - DEBUG - Calling on_part_data with data[0:2830]
+2025-06-24 05:54:07,150 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,154 - DEBUG - Calling on_part_data with data[0:5064]
+2025-06-24 05:54:07,155 - DEBUG - Calling on_part_data with data[0:14150]
+2025-06-24 05:54:07,156 - DEBUG - Calling on_part_data with data[0:10724]
+2025-06-24 05:54:07,156 - DEBUG - Calling on_part_data with data[0:2830]
+2025-06-24 05:54:07,157 - DEBUG - Calling on_part_data with data[0:1415]
+2025-06-24 05:54:07,160 - DEBUG - Calling on_part_data with data[0:2830]
+2025-06-24 05:54:07,162 - DEBUG - Calling on_part_data with data[0:17203]
+2025-06-24 05:54:07,163 - DEBUG - Calling on_part_data with data[0:20629]
+2025-06-24 05:54:07,163 - DEBUG - Calling on_part_data with data[0:12393]
+2025-06-24 05:54:07,164 - DEBUG - Calling on_part_end with no data
+2025-06-24 05:54:07,164 - DEBUG - Calling on_end with no data
+2025-06-24 05:54:07,164 - INFO - Received 1 files: ['2024-08-15_amex.pdf']
+2025-06-24 05:54:07,165 - INFO - Processing pdf file: 2024-08-15_amex.pdf
+2025-06-24 05:54:07,167 - INFO - Opening PDF file: ./uploads/2024-08-15_amex.pdf
+2025-06-24 05:54:07,328 - DEBUG - First and Last page: Blue Cash Preferred® from American Express
+MARTIN CONTRERAS
+Closing Date 08/15/24
+Account Ending 4-21003
+Customer Care: 1-888-258-3741
+TTY: Use Relay 711
+Website: americanexpress.com
+Amount  Enclosed
+Payment Coupon
+Do not staple or use paper clips
+Pay by Computer
+americanexpress.com/pbc
+Pay by Phone
+1-800-472-9297
+Account Ending 4-21003
+Enter 15 digit account # on all payments.
+Make check payable to American Express.
+MARTIN CONTRERAS
+2268 MAYWOOD AVE
+SAN JOSE CA 95128-3446
+Payment Due Date
+09/09/24
+New Balance
+$156.05
+Minimum Payment Due
+$40.00
+See reverse side for instructions
+on how to update your address,
+phone number, or email.
+AMERICAN EXPRESS
+PO BOX 60189
+CITY OF INDUSTRY CA 91716-0189
+$ .
+0000349992891098006 000015605000004000 11 Á
+See page 2 for important information about your account.
+Please refer to the IMPORTANT NOTICES section.
+Please note, your credit limit is $14,900.00 and your cash limit is $3,000.00.
+American Express® High Yield Savings Account
+No monthly fees. No minimum opening deposit. 24/7 customer support.
+Help  meet  your  savings  goals  with  an  American  Express  High  Yield
+Savings  Account.  Terms  apply.  Member  FDIC.  Learn  more  by  visiting
+americanexpress.com/save
+New Balance
+Minimum Payment Due
+$156.05
+$40.00
+↓ Please fold on the perforation below, detach and return with your payment ↓
+New Balance $156.05
+Minimum Payment Due $40.00
+Payment Due Date 09/09/24
+Late  Payment  Warning: If  we  do  not  receive  your  Minimum  Payment  Due  by
+the  Payment  Due  Date  of 09/09/24,  you  may  have  to  pay  a  late  fee  of  up  to
+$40.00 and your APRs may be increased to the Penalty APR of 29.99%.
+Minimum Payment Warning: If you have a Non-Plan Balance and make only the
+minimum payment each period, you will pay more in interest and it will take you longer
+to pay off your Non-Plan Balance. For example:
+If you make no additional
+charges and each month
+you pay...
+You will pay off the balance
+shown on this statement in
+about...
+And you will pay an
+estimated total of...
+Only the
+Minimum Payment Due 5 months $165
+If you would like information about credit counseling services, call 1-888-733-4139.
+Reward Dollars
+as of 07/16/2024
+              261.66
+For more details about Rewards, visit
+americanexpress.com/cashbackrewards
+Account Summary
+Previous Balance
+Payments/Credits
+New Charges
+Fees
+Interest Charged
+$41.02
+-$7,049.18
++$7,067.82
++$96.39
++$0.00
+Credit Limit
+Available Credit
+$14,900.00
+$14,743.95
+Cash Advance Limit
+Available Cash
+$3,000.00
+$3,000.00
+p. 1/7
+*917160189891*
+
+2025-06-24 05:54:07,328 - INFO - Bank config determined: AMEX
+2025-06-24 05:54:07,328 - INFO - Found 8 pages in statement. Starting on page 3
+2025-06-24 05:54:07,369 - DEBUG - New page: Blue Cash Preferred® from American Express
+MARTIN CONTRERAS
+Closing Date 08/15/24 Account Ending 4-21003
+Customer Care & Billing Inquiries
+International Collect
+Cash Advance at ATMs Inquiries
+Large Print & Braille Statements
+1-888-258-3741
+1-336-393-1111
+1-800-CASH-NOW
+1-888-258-3741
+Hearing Impaired
+Online chat at americanexpress.com or use Relay dial 711 and 1-888-258-3741
+Website: americanexpress.com
+Customer Care
+& Billing Inquiries
+P.O. BOX 981535
+EL PASO, TX
+79998-1535
+Payments
+PO BOX 60189
+CITY OF INDUSTRY
+CA
+91716-0189
+Payments and Credits
+Summary
+Total
+Payments -$7,007.18
+Credits -$42.00
+Total Payments and Credits -$7,049.18
+Detail *Indicates posting date
+Payments Amount
+07/19/24* MOBILE PAYMENT - THANK YOU -$104.96
+07/22/24* MOBILE PAYMENT - THANK YOU -$3,326.85
+08/12/24* MOBILE PAYMENT - THANK YOU -$3,575.37
+Credits Amount
+07/27/24* $84 Disney Bundle Credit
+TRANSACTION PROCESSED BY AMERICAN EXPRESS
+-$7.00
+07/28/24 DELTA AIR LINES
+ATLANTA
+DELTA AIR LINES
+Ticket Number: 0064220055364
+Passenger Name: CONTRERASJR/MARTIN
+Document Type: MISC. CHARGE ORDER (MCO)/PREPAID TICKET AUTH.
+-$35.00
+New Charges
+Summary
+Total
+Total  New Charges $7,067.82
+Detail
+MARTIN CONTRERAS
+Card Ending 4-21003 Foreign
+Spend Amount
+07/15/24 FASTRAK CSC TOLLS OAKLAND CA
+415-486-8655
+$7.00
+07/16/24 PARAMOUNT+ WEST HOLLYWOO CA
+888-274-5343
+$11.99
+07/16/24 WIFIONBOARD CHICAGO IL
+INTERNET ACC
+$9.95
+07/17/24 DELTA AIR LINES ATLANTA
+DELTA AIR LINES
+Ticket Number: 00642208753686
+Passenger Name: CONTRERASJR/MARTIN
+Document Type: EXCESS BAGGAGE
+$35.00
+p. 3/7
+Continued on reverse
+2025-06-24 05:54:07,406 - DEBUG - New page: MARTIN CONTRERAS Account Ending 4-21003
+Detail Continued
+Foreign
+Spend Amount
+07/19/24 AMAZON.COM AMZN.COM/BILL WA
+MERCHANDISE
+$32.74
+07/20/24 DELTA AIR LINES ATLANTA
+DELTA AIR LINES
+Ticket Number: 00642200553643
+Passenger Name: CONTRERASJR/MARTIN
+Document Type: EXCESS BAGGAGE
+$35.00
+07/20/24 PAYPAL *JAMESALLENC 3016311414 NY
+3016311414
+$3,259.11
+07/22/24 PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA
+4089636806
+$35.50
+07/23/24 DOUBLETREE NORWALK NORWALK CA
+Arrival Date Departure Date
+07/22/24 07/26/24
+00000000
+LODGING
+$852.49
+07/24/24 DISNEYPLUS 888-905-7888 CA
+888-905-7888
+$24.99
+07/26/24 DOUBLETREE NORWALK NORWALK CA
+Arrival Date Departure Date
+07/22/24 07/26/24
+00000000
+LODGING
+$6.62
+07/26/24 DOUBLETREE NORWALK NORWALK CA
+Arrival Date Departure Date
+07/22/24 07/26/24
+00000000
+LODGING
+$16.54
+07/28/24 DOUBLETREE NORWALK NORWALK CA
+Arrival Date Departure Date
+07/28/24 08/02/24
+00000000
+LODGING
+$1,146.80
+07/29/24 NETFLIX.COM 866-579-7172 CA
+CABLE & PAY TV
+$24.97
+07/29/24 AplPay WSS030 Norwalk NORWALK CA
+844-746-7977
+$88.19
+08/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA
++15413165747
+$117.00
+08/02/24 BUDGET RENT A CAR SAN DIEGO CA
+Location Date
+Rental: SAN DIEGO CA 24/07/28
+Return: BURBANK CA 24/08/02
+Agreement Number: 781295701
+Renter Name: CONTRERAS JR,MARTIN
+$422.26
+08/03/24 BCD-WILSHIRE 0000 LOS ANGELES CA
+213-382-6677
+$51.13
+08/03/24 AplPay ARITZIA AMERICANA GLENDALE CA
+WOMEN'S CLOTHING
+$163.16
+08/03/24 AplPay NORDSTROM GLENDALE CA
+8002855800
+DEPT. STORES
+$159.85
+08/03/24 AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA
+CLOTHING
+877-263-9300
+$161.88
+08/03/24 PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY
+2126640138
+$5.99
+08/04/24 AplPay UNIQLO USA LLC NEW YORK NY
+FAMILY CLOTHING
+$32.96
+p. 4/7
+Continued on next page
+2025-06-24 05:54:07,453 - DEBUG - New page: Blue Cash Preferred® from American Express
+MARTIN CONTRERAS
+Closing Date 08/15/24 Account Ending 4-21003
+Detail Continued
+Foreign
+Spend Amount
+08/05/24 AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA
+MERCHANDISE
+$15.27
+08/05/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA
+4083715000
+$22.23
+08/05/24 Concesionaria Vuela Compa Mexico ME
+52616400
+              977.00
+Mexican Pesos
+$51.69
+08/06/24 APPLE.COM/BILL INTERNET CHARGE CA
+RECORD STORE
+$2.99
+08/07/24 APPLE.COM/BILL INTERNET CHARGE CA
+RECORD STORE
+$10.99
+08/07/24 GEICO AUTO (800)841-3000 DC
+INSURANCE
+$172.48
+08/09/24 DOUBLETREE NORWALK NORWALK CA
+Arrival Date Departure Date
+07/22/24 07/26/24
+00000000
+LODGING
+$30.00
+08/11/24 DOUBLETREE NORWALK NORWALK CA
+Arrival Date Departure Date
+07/28/24 08/02/24
+00000000
+LODGING
+$30.00
+08/12/24 PAYPAL *UNITEDSTATE 4029357733 DC
+4029357733
+$31.05
+Fees
+**Foreign Transaction Fee is 2.70% of the converted US dollar amount
+of the foreign currency charge. See Foreign Currency Charges on page 2. Amount
+08/05/24 FOREIGN TRANSACTION FEE**
+Concesionaria Vuela Compa
+$51.69
+$1.39
+08/15/24 ANNUAL MEMBERSHIP FEE $95.00
+Total Fees for this Period $96.39
+Interest Charged
+Amount
+Total Interest Charged for this Period $0.00
+About Trailing Interest
+You may see interest on your next statement even if you pay the new balance in full and on time and make no new charges. This is called
+"trailing  interest".  Trailing  interest  is  the  interest  charged  when,  for  example,  you  didn't  pay  your  previous  balance  in  full.  When  that
+happens, we charge interest from the first day of the billing period until we receive your payment in full. You can avoid paying interest
+on purchases by paying your balance in full (or if you have a Plan balance, by paying your Adjusted Balance on your billing statement) by
+the due date each month. Please see the "When we charge interest" sub-section in your Cardmember Agreement for details.
+p. 5/7
+Continued on reverse
+2025-06-24 05:54:07,472 - DEBUG - New page: MARTIN CONTRERAS Account Ending 4-21003
+2024 Fees and Interest Totals Year-to-Date
+Amount
+Total Fees in 2024 $97.05
+Total Interest in 2024 $0.00
+Interest Charge Calculation Days in Billing Period: 31
+Your Annual Percentage Rate (APR) is the annual interest rate on your account.
+Variable APRs will not exceed 29.99%.
+     Transactions Dated
+                                                                                                               From                  To
+Annual
+Percentage
+Rate
+Balance
+Subject to
+Interest Rate
+Interest
+Charge
+Purchases 07/16/2021 27.24% (v) $0.00 $0.00
+Cash Advances 07/16/2021 29.99% (v) $0.00 $0.00
+Total $0.00
+(v) Variable Rate
+p. 6/7
+2025-06-24 05:54:07,537 - DEBUG - New page: MARTIN CONTRERAS Closing Date 08/15/24 Account Ending 4-21003
+    IMPORTANT NOTICES
+EFT Error Resolution Notice
+In  Case  of  Errors  or  Questions  About  Your  Electronic  Transfers  Telephone  us  at  1-800-IPAY-AXP for Pay By
+Phone questions, at 1-800-528-2122 for Pay By Computer questions, and at 1-800-528-4800 for AutoPay. You
+may also write us at American Express, Electronic Funds Services, P.O. Box 981531, El Paso TX 79998-1531, or
+contact  online  at  www.americanexpress.com/inquirycenter  as  soon  as  you  can,  if  you  think  your  statement  or
+receipt is wrong or if you need more information about a transfer on the statement or receipt. We must hear from
+you no later than 60 days after we sent you the FIRST statement on which the error or problem appeared.
+1. Tell us your name and account number (if any).
+2. Describe  the  error  or  the  transfer  you  are  unsure  about,  and  explain  as  clearly  as  you  can  why  you
+believe it is an error or why you need more information.
+3. Tell us the dollar amount of the suspected error.
+We will investigate your complaint and will correct any error promptly. If we take more than 10 business days to
+do this, we will credit your account for the amount you think is in error, so that you will have the use of the money
+during the time it takes us to complete our investigation.
+Update to the Select U.S. Streaming Subscriptions Category
+Effective August 1, 2024, MGM+ is included in the Select U.S. Streaming Subscriptions category. For the full list
+of Select U.S. Streaming Subscriptions or for more information about rewards, please visit
+americanexpress.com/rewards-info
+Please note if your subscription is bundled with another product or service or billed by a third party (such as a
+digital platform, a cable, telecommunications, or internet provider, or a car manufacturer), your purchase may not
+be eligible.
+Corrected Car Rental Loss and Damage Insurance Phone Numbers
+The  phone  number  for  Car  Rental  Loss  and  Damage  Insurance  is  1-800-338-1670  (US)  and  1-303-273-6497
+(International). Please update your records.
+    
+p. 7/7
+End of Important Notices.
+2025-06-24 05:54:07,538 - DEBUG - New page: 
+2025-06-24 05:54:07,538 - INFO - Successfully extracted text from PDF: ./uploads/2024-08-15_amex.pdf
+2025-06-24 05:54:07,538 - INFO - Parsing extracted text...
+2025-06-24 05:54:07,539 - DEBUG - Found date: 07/19/24 in line 32: 07/19/24* MOBILE PAYMENT - THANK YOU -$104.96
+2025-06-24 05:54:07,539 - DEBUG - Extracting description from lines: ['07/19/24* MOBILE PAYMENT - THANK YOU -$104.96', '07/22/24* MOBILE PAYMENT - THANK YOU -$3,326.85'] with date: 07/19/24
+2025-06-24 05:54:07,539 - DEBUG - Description: * MOBILE PAYMENT - THANK YOU -. Lines: ['07/19/24* MOBILE PAYMENT - THANK YOU -$104.96', '07/22/24* MOBILE PAYMENT - THANK YOU -$3,326.85']. Date endpos: 45
+2025-06-24 05:54:07,553 - DEBUG - Amount Line: 07/19/24* MOBILE PAYMENT - THANK YOU -$104.96 07/22/24* MOBILE PAYMENT - THANK YOU -$3,326.85 08/12/24* MOBILE PAYMENT - THANK YOU -$3,575.37 Credits Amount 07/27/24* $84 Disney Bundle Credit
+2025-06-24 05:54:07,554 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/19/24*MOBILEPAYMENT-THANKYOU-$104.9607/22/24*MOBILEPAYMENT-THANKYOU-$3,326.8508/12/24*MOBILEPAYMENT-THANKYOU-$3,575.37CreditsAmount07/27/24*$84DisneyBundleCredit
+2025-06-24 05:54:07,554 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/19/24*MOBILEPAYMENT-THANKYOU-$104.9607/22/24*MOBILEPAYMENT-THANKYOU-$3,326.8508/12/24*MOBILEPAYMENT-THANKYOU-$3,575.37CreditsAmount07/27/24*$84DisneyBundleCredit
+2025-06-24 05:54:07,554 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/19/24*MOBILEPAYMENT-THANKYOU-$104.9607/22/24*MOBILEPAYMENT-THANKYOU-$3,326.8508/12/24*MOBILEPAYMENT-THANKYOU-$3,575.37CreditsAmount07/27/24*$84DisneyBundleCredit
+2025-06-24 05:54:07,555 - INFO - Found a purchase on 07/19/24 under OTHER for $-104.96 with description: 
+	* MOBILE PAYMENT - THANK YOU -
+
+2025-06-24 05:54:07,555 - DEBUG - Found date: 07/22/24 in line 33: 07/22/24* MOBILE PAYMENT - THANK YOU -$3,326.85
+2025-06-24 05:54:07,555 - DEBUG - Extracting description from lines: ['07/22/24* MOBILE PAYMENT - THANK YOU -$3,326.85', '08/12/24* MOBILE PAYMENT - THANK YOU -$3,575.37'] with date: 07/22/24
+2025-06-24 05:54:07,555 - DEBUG - Description: * MOBILE PAYMENT - THANK YOU -. Lines: ['07/22/24* MOBILE PAYMENT - THANK YOU -$3,326.85', '08/12/24* MOBILE PAYMENT - THANK YOU -$3,575.37']. Date endpos: 47
+2025-06-24 05:54:07,555 - DEBUG - Amount Line: 07/22/24* MOBILE PAYMENT - THANK YOU -$3,326.85 08/12/24* MOBILE PAYMENT - THANK YOU -$3,575.37 Credits Amount 07/27/24* $84 Disney Bundle Credit TRANSACTION PROCESSED BY AMERICAN EXPRESS
+2025-06-24 05:54:07,556 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/22/24*MOBILEPAYMENT-THANKYOU-$3,326.8508/12/24*MOBILEPAYMENT-THANKYOU-$3,575.37CreditsAmount07/27/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS
+2025-06-24 05:54:07,556 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/22/24*MOBILEPAYMENT-THANKYOU-$3,326.8508/12/24*MOBILEPAYMENT-THANKYOU-$3,575.37CreditsAmount07/27/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS
+2025-06-24 05:54:07,556 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/22/24*MOBILEPAYMENT-THANKYOU-$3,326.8508/12/24*MOBILEPAYMENT-THANKYOU-$3,575.37CreditsAmount07/27/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS
+2025-06-24 05:54:07,556 - INFO - Found a purchase on 07/22/24 under OTHER for $-3326.85 with description: 
+	* MOBILE PAYMENT - THANK YOU -
+
+2025-06-24 05:54:07,556 - DEBUG - Found date: 08/12/24 in line 34: 08/12/24* MOBILE PAYMENT - THANK YOU -$3,575.37
+2025-06-24 05:54:07,556 - DEBUG - Extracting description from lines: ['08/12/24* MOBILE PAYMENT - THANK YOU -$3,575.37', 'Credits Amount'] with date: 08/12/24
+2025-06-24 05:54:07,556 - DEBUG - Description: * MOBILE PAYMENT - THANK YOU -. Lines: ['08/12/24* MOBILE PAYMENT - THANK YOU -$3,575.37', 'Credits Amount']. Date endpos: 47
+2025-06-24 05:54:07,557 - DEBUG - Amount Line: 08/12/24* MOBILE PAYMENT - THANK YOU -$3,575.37 Credits Amount 07/27/24* $84 Disney Bundle Credit TRANSACTION PROCESSED BY AMERICAN EXPRESS -$7.00
+2025-06-24 05:54:07,557 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/12/24*MOBILEPAYMENT-THANKYOU-$3,575.37CreditsAmount07/27/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.00
+2025-06-24 05:54:07,557 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/12/24*MOBILEPAYMENT-THANKYOU-$3,575.37CreditsAmount07/27/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.00
+2025-06-24 05:54:07,557 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/12/24*MOBILEPAYMENT-THANKYOU-$3,575.37CreditsAmount07/27/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.00
+2025-06-24 05:54:07,557 - INFO - Found a purchase on 08/12/24 under OTHER for $-3575.37 with description: 
+	* MOBILE PAYMENT - THANK YOU -
+
+2025-06-24 05:54:07,557 - DEBUG - Found date: 07/27/24 in line 36: 07/27/24* $84 Disney Bundle Credit
+2025-06-24 05:54:07,557 - DEBUG - Extracting description from lines: ['07/27/24* $84 Disney Bundle Credit', 'TRANSACTION PROCESSED BY AMERICAN EXPRESS'] with date: 07/27/24
+2025-06-24 05:54:07,557 - DEBUG - Description: *. Lines: ['07/27/24* $84 Disney Bundle Credit', 'TRANSACTION PROCESSED BY AMERICAN EXPRESS']. Date endpos: 34
+2025-06-24 05:54:07,558 - DEBUG - Amount Line: 07/27/24* $84 Disney Bundle Credit TRANSACTION PROCESSED BY AMERICAN EXPRESS -$7.00 07/28/24 DELTA AIR LINES ATLANTA
+2025-06-24 05:54:07,558 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/27/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.0007/28/24DELTAAIRLINESATLANTA
+2025-06-24 05:54:07,558 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/27/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.0007/28/24DELTAAIRLINESATLANTA
+2025-06-24 05:54:07,558 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/27/24*$84DisneyBundleCreditTRANSACTIONPROCESSEDBYAMERICANEXPRESS-$7.0007/28/24DELTAAIRLINESATLANTA
+2025-06-24 05:54:07,558 - INFO - Found a purchase on 07/27/24 under OTHER for $-7.0 with description: 
+	*
+
+2025-06-24 05:54:07,558 - DEBUG - Found date: 07/28/24 in line 39: 07/28/24 DELTA AIR LINES
+2025-06-24 05:54:07,558 - DEBUG - Extracting description from lines: ['07/28/24 DELTA AIR LINES', 'ATLANTA'] with date: 07/28/24
+2025-06-24 05:54:07,559 - DEBUG - Description: DELTA AIR LINES. Lines: ['07/28/24 DELTA AIR LINES', 'ATLANTA']. Date endpos: 24
+2025-06-24 05:54:07,559 - DEBUG - Amount Line: 07/28/24 DELTA AIR LINES ATLANTA DELTA AIR LINES Ticket Number: 0064220055364 Passenger Name: CONTRERASJR/MARTIN
+2025-06-24 05:54:07,559 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/28/24DELTAAIRLINESATLANTADELTAAIRLINESTicketNumber:0064220055364PassengerName:CONTRERASJR/MARTIN
+2025-06-24 05:54:07,559 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/28/24DELTAAIRLINESATLANTADELTAAIRLINESTicketNumber:0064220055364PassengerName:CONTRERASJR/MARTIN
+2025-06-24 05:54:07,559 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/28/24DELTAAIRLINESATLANTADELTAAIRLINESTicketNumber:0064220055364PassengerName:CONTRERASJR/MARTIN
+2025-06-24 05:54:07,559 - DEBUG - Amount wasnt found in line: 07/28/24 DELTA AIR LINES ATLANTA DELTA AIR LINES Ticket Number: 0064220055364 Passenger Name: CONTRERASJR/MARTIN. Skipping...
+2025-06-24 05:54:07,559 - DEBUG - Found date: 07/15/24 in line 54: 07/15/24 FASTRAK CSC TOLLS OAKLAND CA
+2025-06-24 05:54:07,559 - DEBUG - Extracting description from lines: ['07/15/24 FASTRAK CSC TOLLS OAKLAND CA', '415-486-8655'] with date: 07/15/24
+2025-06-24 05:54:07,559 - DEBUG - Description: FASTRAK CSC TOLLS OAKLAND CA. Lines: ['07/15/24 FASTRAK CSC TOLLS OAKLAND CA', '415-486-8655']. Date endpos: 37
+2025-06-24 05:54:07,560 - DEBUG - Amount Line: 07/15/24 FASTRAK CSC TOLLS OAKLAND CA 415-486-8655 $7.00 07/16/24 PARAMOUNT+ WEST HOLLYWOO CA 888-274-5343
+2025-06-24 05:54:07,560 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/15/24FASTRAKCSCTOLLSOAKLANDCA415-486-8655$7.0007/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343
+2025-06-24 05:54:07,560 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/15/24FASTRAKCSCTOLLSOAKLANDCA415-486-8655$7.0007/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343
+2025-06-24 05:54:07,560 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/15/24FASTRAKCSCTOLLSOAKLANDCA415-486-8655$7.0007/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343
+2025-06-24 05:54:07,560 - INFO - Found a purchase on 07/15/24 under TRAVEL for $7.0 with description: 
+	FASTRAK CSC TOLLS OAKLAND CA
+
+2025-06-24 05:54:07,560 - DEBUG - Found date: 07/16/24 in line 57: 07/16/24 PARAMOUNT+ WEST HOLLYWOO CA
+2025-06-24 05:54:07,560 - DEBUG - Extracting description from lines: ['07/16/24 PARAMOUNT+ WEST HOLLYWOO CA', '888-274-5343'] with date: 07/16/24
+2025-06-24 05:54:07,560 - DEBUG - Description: PARAMOUNT+ WEST HOLLYWOO CA. Lines: ['07/16/24 PARAMOUNT+ WEST HOLLYWOO CA', '888-274-5343']. Date endpos: 36
+2025-06-24 05:54:07,561 - DEBUG - Amount Line: 07/16/24 PARAMOUNT+ WEST HOLLYWOO CA 888-274-5343 $11.99 07/16/24 WIFIONBOARD CHICAGO IL INTERNET ACC
+2025-06-24 05:54:07,561 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343$11.9907/16/24WIFIONBOARDCHICAGOILINTERNETACC
+2025-06-24 05:54:07,561 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343$11.9907/16/24WIFIONBOARDCHICAGOILINTERNETACC
+2025-06-24 05:54:07,561 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/16/24PARAMOUNT+WESTHOLLYWOOCA888-274-5343$11.9907/16/24WIFIONBOARDCHICAGOILINTERNETACC
+2025-06-24 05:54:07,561 - INFO - Found a purchase on 07/16/24 under STREAMING for $11.99 with description: 
+	PARAMOUNT+ WEST HOLLYWOO CA
+
+2025-06-24 05:54:07,561 - DEBUG - Found date: 07/16/24 in line 60: 07/16/24 WIFIONBOARD CHICAGO IL
+2025-06-24 05:54:07,561 - DEBUG - Extracting description from lines: ['07/16/24 WIFIONBOARD CHICAGO IL', 'INTERNET ACC'] with date: 07/16/24
+2025-06-24 05:54:07,561 - DEBUG - Description: WIFIONBOARD CHICAGO IL. Lines: ['07/16/24 WIFIONBOARD CHICAGO IL', 'INTERNET ACC']. Date endpos: 31
+2025-06-24 05:54:07,562 - DEBUG - Amount Line: 07/16/24 WIFIONBOARD CHICAGO IL INTERNET ACC $9.95 07/17/24 DELTA AIR LINES ATLANTA DELTA AIR LINES
+2025-06-24 05:54:07,562 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/16/24WIFIONBOARDCHICAGOILINTERNETACC$9.9507/17/24DELTAAIRLINESATLANTADELTAAIRLINES
+2025-06-24 05:54:07,562 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/16/24WIFIONBOARDCHICAGOILINTERNETACC$9.9507/17/24DELTAAIRLINESATLANTADELTAAIRLINES
+2025-06-24 05:54:07,562 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/16/24WIFIONBOARDCHICAGOILINTERNETACC$9.9507/17/24DELTAAIRLINESATLANTADELTAAIRLINES
+2025-06-24 05:54:07,562 - INFO - Found a purchase on 07/16/24 under OTHER for $9.95 with description: 
+	WIFIONBOARD CHICAGO IL
+
+2025-06-24 05:54:07,562 - DEBUG - Found date: 07/17/24 in line 63: 07/17/24 DELTA AIR LINES ATLANTA
+2025-06-24 05:54:07,562 - DEBUG - Extracting description from lines: ['07/17/24 DELTA AIR LINES ATLANTA', 'DELTA AIR LINES'] with date: 07/17/24
+2025-06-24 05:54:07,563 - DEBUG - Description: DELTA AIR LINES ATLANTA. Lines: ['07/17/24 DELTA AIR LINES ATLANTA', 'DELTA AIR LINES']. Date endpos: 32
+2025-06-24 05:54:07,563 - DEBUG - Amount Line: 07/17/24 DELTA AIR LINES ATLANTA DELTA AIR LINES Ticket Number: 00642208753686 Passenger Name: CONTRERASJR/MARTIN Document Type: EXCESS BAGGAGE
+2025-06-24 05:54:07,563 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/17/24DELTAAIRLINESATLANTADELTAAIRLINESTicketNumber:00642208753686PassengerName:CONTRERASJR/MARTINDocumentType:EXCESSBAGGAGE
+2025-06-24 05:54:07,563 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/17/24DELTAAIRLINESATLANTADELTAAIRLINESTicketNumber:00642208753686PassengerName:CONTRERASJR/MARTINDocumentType:EXCESSBAGGAGE
+2025-06-24 05:54:07,563 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/17/24DELTAAIRLINESATLANTADELTAAIRLINESTicketNumber:00642208753686PassengerName:CONTRERASJR/MARTINDocumentType:EXCESSBAGGAGE
+2025-06-24 05:54:07,563 - DEBUG - Amount wasnt found in line: 07/17/24 DELTA AIR LINES ATLANTA DELTA AIR LINES Ticket Number: 00642208753686 Passenger Name: CONTRERASJR/MARTIN Document Type: EXCESS BAGGAGE. Skipping...
+2025-06-24 05:54:07,563 - DEBUG - Found date: 07/19/24 in line 75: 07/19/24 AMAZON.COM AMZN.COM/BILL WA
+2025-06-24 05:54:07,563 - DEBUG - Extracting description from lines: ['07/19/24 AMAZON.COM AMZN.COM/BILL WA', 'MERCHANDISE'] with date: 07/19/24
+2025-06-24 05:54:07,563 - DEBUG - Description: AMAZON.COM AMZN.COM/BILL WA. Lines: ['07/19/24 AMAZON.COM AMZN.COM/BILL WA', 'MERCHANDISE']. Date endpos: 36
+2025-06-24 05:54:07,564 - DEBUG - Amount Line: 07/19/24 AMAZON.COM AMZN.COM/BILL WA MERCHANDISE $32.74 07/20/24 DELTA AIR LINES ATLANTA DELTA AIR LINES
+2025-06-24 05:54:07,564 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/19/24AMAZON.COMAMZN.COM/BILLWAMERCHANDISE$32.7407/20/24DELTAAIRLINESATLANTADELTAAIRLINES
+2025-06-24 05:54:07,564 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/19/24AMAZON.COMAMZN.COM/BILLWAMERCHANDISE$32.7407/20/24DELTAAIRLINESATLANTADELTAAIRLINES
+2025-06-24 05:54:07,564 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/19/24AMAZON.COMAMZN.COM/BILLWAMERCHANDISE$32.7407/20/24DELTAAIRLINESATLANTADELTAAIRLINES
+2025-06-24 05:54:07,564 - INFO - Found a purchase on 07/19/24 under AMAZON for $32.74 with description: 
+	AMAZON.COM AMZN.COM/BILL WA
+
+2025-06-24 05:54:07,564 - DEBUG - Found date: 07/20/24 in line 78: 07/20/24 DELTA AIR LINES ATLANTA
+2025-06-24 05:54:07,564 - DEBUG - Extracting description from lines: ['07/20/24 DELTA AIR LINES ATLANTA', 'DELTA AIR LINES'] with date: 07/20/24
+2025-06-24 05:54:07,564 - DEBUG - Description: DELTA AIR LINES ATLANTA. Lines: ['07/20/24 DELTA AIR LINES ATLANTA', 'DELTA AIR LINES']. Date endpos: 32
+2025-06-24 05:54:07,564 - DEBUG - Amount Line: 07/20/24 DELTA AIR LINES ATLANTA DELTA AIR LINES Ticket Number: 00642200553643 Passenger Name: CONTRERASJR/MARTIN Document Type: EXCESS BAGGAGE
+2025-06-24 05:54:07,565 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/20/24DELTAAIRLINESATLANTADELTAAIRLINESTicketNumber:00642200553643PassengerName:CONTRERASJR/MARTINDocumentType:EXCESSBAGGAGE
+2025-06-24 05:54:07,565 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/20/24DELTAAIRLINESATLANTADELTAAIRLINESTicketNumber:00642200553643PassengerName:CONTRERASJR/MARTINDocumentType:EXCESSBAGGAGE
+2025-06-24 05:54:07,565 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/20/24DELTAAIRLINESATLANTADELTAAIRLINESTicketNumber:00642200553643PassengerName:CONTRERASJR/MARTINDocumentType:EXCESSBAGGAGE
+2025-06-24 05:54:07,565 - DEBUG - Amount wasnt found in line: 07/20/24 DELTA AIR LINES ATLANTA DELTA AIR LINES Ticket Number: 00642200553643 Passenger Name: CONTRERASJR/MARTIN Document Type: EXCESS BAGGAGE. Skipping...
+2025-06-24 05:54:07,565 - DEBUG - Found date: 07/20/24 in line 84: 07/20/24 PAYPAL *JAMESALLENC 3016311414 NY
+2025-06-24 05:54:07,565 - DEBUG - Extracting description from lines: ['07/20/24 PAYPAL *JAMESALLENC 3016311414 NY', '3016311414'] with date: 07/20/24
+2025-06-24 05:54:07,565 - DEBUG - Description: PAYPAL *JAMESALLENC 3016311414 NY. Lines: ['07/20/24 PAYPAL *JAMESALLENC 3016311414 NY', '3016311414']. Date endpos: 42
+2025-06-24 05:54:07,565 - DEBUG - Amount Line: 07/20/24 PAYPAL *JAMESALLENC 3016311414 NY 3016311414 $3,259.11 07/22/24 PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA 4089636806
+2025-06-24 05:54:07,565 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/20/24PAYPAL*JAMESALLENC3016311414NY3016311414$3,259.1107/22/24PRUNEYARDCINEMASECOMM000000001CAMPBELLCA4089636806
+2025-06-24 05:54:07,566 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/20/24PAYPAL*JAMESALLENC3016311414NY3016311414$3,259.1107/22/24PRUNEYARDCINEMASECOMM000000001CAMPBELLCA4089636806
+2025-06-24 05:54:07,566 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/20/24PAYPAL*JAMESALLENC3016311414NY3016311414$3,259.1107/22/24PRUNEYARDCINEMASECOMM000000001CAMPBELLCA4089636806
+2025-06-24 05:54:07,566 - INFO - Found a purchase on 07/20/24 under PAYPAL for $3259.11 with description: 
+	PAYPAL *JAMESALLENC 3016311414 NY
+
+2025-06-24 05:54:07,566 - DEBUG - Found date: 07/22/24 in line 87: 07/22/24 PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA
+2025-06-24 05:54:07,566 - DEBUG - Extracting description from lines: ['07/22/24 PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA', '4089636806'] with date: 07/22/24
+2025-06-24 05:54:07,566 - DEBUG - Description: PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA. Lines: ['07/22/24 PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA', '4089636806']. Date endpos: 54
+2025-06-24 05:54:07,566 - DEBUG - Amount Line: 07/22/24 PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA 4089636806 $35.50 07/23/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date
+2025-06-24 05:54:07,566 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/22/24PRUNEYARDCINEMASECOMM000000001CAMPBELLCA4089636806$35.5007/23/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate
+2025-06-24 05:54:07,566 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/22/24PRUNEYARDCINEMASECOMM000000001CAMPBELLCA4089636806$35.5007/23/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate
+2025-06-24 05:54:07,567 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/22/24PRUNEYARDCINEMASECOMM000000001CAMPBELLCA4089636806$35.5007/23/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate
+2025-06-24 05:54:07,567 - INFO - Found a purchase on 07/22/24 under FOOD for $35.5 with description: 
+	PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA
+
+2025-06-24 05:54:07,567 - DEBUG - Found date: 07/23/24 in line 90: 07/23/24 DOUBLETREE NORWALK NORWALK CA
+2025-06-24 05:54:07,567 - DEBUG - Extracting description from lines: ['07/23/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date'] with date: 07/23/24
+2025-06-24 05:54:07,567 - DEBUG - Description: DOUBLETREE NORWALK NORWALK CA. Lines: ['07/23/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date']. Date endpos: 38
+2025-06-24 05:54:07,567 - DEBUG - Amount Line: 07/23/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/22/24 07/26/24 00000000 LODGING
+2025-06-24 05:54:07,567 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/23/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,567 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/23/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,568 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/23/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,568 - DEBUG - Amount wasnt found in line: 07/23/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/22/24 07/26/24 00000000 LODGING. Skipping...
+2025-06-24 05:54:07,568 - DEBUG - Found date: 07/22/24 in line 92: 07/22/24 07/26/24
+2025-06-24 05:54:07,568 - DEBUG - Extracting description from lines: ['07/22/24 07/26/24', '00000000'] with date: 07/22/24
+2025-06-24 05:54:07,568 - DEBUG - Found a date in description: 07/26/24. Skipping...
+2025-06-24 05:54:07,568 - DEBUG - Description was None. Skipping...
+2025-06-24 05:54:07,568 - DEBUG - Found date: 07/24/24 in line 96: 07/24/24 DISNEYPLUS 888-905-7888 CA
+2025-06-24 05:54:07,568 - DEBUG - Extracting description from lines: ['07/24/24 DISNEYPLUS 888-905-7888 CA', '888-905-7888'] with date: 07/24/24
+2025-06-24 05:54:07,568 - DEBUG - Description: DISNEYPLUS 888-905-7888 CA. Lines: ['07/24/24 DISNEYPLUS 888-905-7888 CA', '888-905-7888']. Date endpos: 35
+2025-06-24 05:54:07,568 - DEBUG - Amount Line: 07/24/24 DISNEYPLUS 888-905-7888 CA 888-905-7888 $24.99 07/26/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date
+2025-06-24 05:54:07,569 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/24/24DISNEYPLUS888-905-7888CA888-905-7888$24.9907/26/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate
+2025-06-24 05:54:07,569 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/24/24DISNEYPLUS888-905-7888CA888-905-7888$24.9907/26/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate
+2025-06-24 05:54:07,569 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/24/24DISNEYPLUS888-905-7888CA888-905-7888$24.9907/26/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate
+2025-06-24 05:54:07,569 - INFO - Found a purchase on 07/24/24 under STREAMING for $24.99 with description: 
+	DISNEYPLUS 888-905-7888 CA
+
+2025-06-24 05:54:07,569 - DEBUG - Found date: 07/26/24 in line 99: 07/26/24 DOUBLETREE NORWALK NORWALK CA
+2025-06-24 05:54:07,569 - DEBUG - Extracting description from lines: ['07/26/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date'] with date: 07/26/24
+2025-06-24 05:54:07,569 - DEBUG - Description: DOUBLETREE NORWALK NORWALK CA. Lines: ['07/26/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date']. Date endpos: 38
+2025-06-24 05:54:07,569 - DEBUG - Amount Line: 07/26/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/22/24 07/26/24 00000000 LODGING
+2025-06-24 05:54:07,570 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/26/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,570 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/26/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,570 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/26/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,570 - DEBUG - Amount wasnt found in line: 07/26/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/22/24 07/26/24 00000000 LODGING. Skipping...
+2025-06-24 05:54:07,570 - DEBUG - Found date: 07/22/24 in line 101: 07/22/24 07/26/24
+2025-06-24 05:54:07,570 - DEBUG - Extracting description from lines: ['07/22/24 07/26/24', '00000000'] with date: 07/22/24
+2025-06-24 05:54:07,570 - DEBUG - Found a date in description: 07/26/24. Skipping...
+2025-06-24 05:54:07,570 - DEBUG - Description was None. Skipping...
+2025-06-24 05:54:07,570 - DEBUG - Found date: 07/26/24 in line 105: 07/26/24 DOUBLETREE NORWALK NORWALK CA
+2025-06-24 05:54:07,570 - DEBUG - Extracting description from lines: ['07/26/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date'] with date: 07/26/24
+2025-06-24 05:54:07,570 - DEBUG - Description: DOUBLETREE NORWALK NORWALK CA. Lines: ['07/26/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date']. Date endpos: 38
+2025-06-24 05:54:07,571 - DEBUG - Amount Line: 07/26/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/22/24 07/26/24 00000000 LODGING
+2025-06-24 05:54:07,571 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/26/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,571 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/26/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,571 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/26/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,571 - DEBUG - Amount wasnt found in line: 07/26/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/22/24 07/26/24 00000000 LODGING. Skipping...
+2025-06-24 05:54:07,571 - DEBUG - Found date: 07/22/24 in line 107: 07/22/24 07/26/24
+2025-06-24 05:54:07,571 - DEBUG - Extracting description from lines: ['07/22/24 07/26/24', '00000000'] with date: 07/22/24
+2025-06-24 05:54:07,571 - DEBUG - Found a date in description: 07/26/24. Skipping...
+2025-06-24 05:54:07,571 - DEBUG - Description was None. Skipping...
+2025-06-24 05:54:07,571 - DEBUG - Found date: 07/28/24 in line 111: 07/28/24 DOUBLETREE NORWALK NORWALK CA
+2025-06-24 05:54:07,572 - DEBUG - Extracting description from lines: ['07/28/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date'] with date: 07/28/24
+2025-06-24 05:54:07,572 - DEBUG - Description: DOUBLETREE NORWALK NORWALK CA. Lines: ['07/28/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date']. Date endpos: 38
+2025-06-24 05:54:07,572 - DEBUG - Amount Line: 07/28/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/28/24 08/02/24 00000000 LODGING
+2025-06-24 05:54:07,572 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/28/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/28/2408/02/2400000000LODGING
+2025-06-24 05:54:07,572 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/28/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/28/2408/02/2400000000LODGING
+2025-06-24 05:54:07,572 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/28/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/28/2408/02/2400000000LODGING
+2025-06-24 05:54:07,572 - DEBUG - Amount wasnt found in line: 07/28/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/28/24 08/02/24 00000000 LODGING. Skipping...
+2025-06-24 05:54:07,572 - DEBUG - Found date: 07/28/24 in line 113: 07/28/24 08/02/24
+2025-06-24 05:54:07,572 - DEBUG - Extracting description from lines: ['07/28/24 08/02/24', '00000000'] with date: 07/28/24
+2025-06-24 05:54:07,572 - DEBUG - Found a date in description: 08/02/24. Skipping...
+2025-06-24 05:54:07,572 - DEBUG - Description was None. Skipping...
+2025-06-24 05:54:07,573 - DEBUG - Found date: 07/29/24 in line 117: 07/29/24 NETFLIX.COM 866-579-7172 CA
+2025-06-24 05:54:07,573 - DEBUG - Extracting description from lines: ['07/29/24 NETFLIX.COM 866-579-7172 CA', 'CABLE & PAY TV'] with date: 07/29/24
+2025-06-24 05:54:07,573 - DEBUG - Description: NETFLIX.COM 866-579-7172 CA. Lines: ['07/29/24 NETFLIX.COM 866-579-7172 CA', 'CABLE & PAY TV']. Date endpos: 36
+2025-06-24 05:54:07,573 - DEBUG - Amount Line: 07/29/24 NETFLIX.COM 866-579-7172 CA CABLE & PAY TV $24.97 07/29/24 AplPay WSS030 Norwalk NORWALK CA 844-746-7977
+2025-06-24 05:54:07,573 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/29/24NETFLIX.COM866-579-7172CACABLE&PAYTV$24.9707/29/24AplPayWSS030NorwalkNORWALKCA844-746-7977
+2025-06-24 05:54:07,573 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/29/24NETFLIX.COM866-579-7172CACABLE&PAYTV$24.9707/29/24AplPayWSS030NorwalkNORWALKCA844-746-7977
+2025-06-24 05:54:07,573 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/29/24NETFLIX.COM866-579-7172CACABLE&PAYTV$24.9707/29/24AplPayWSS030NorwalkNORWALKCA844-746-7977
+2025-06-24 05:54:07,573 - INFO - Found a purchase on 07/29/24 under STREAMING for $24.97 with description: 
+	NETFLIX.COM 866-579-7172 CA
+
+2025-06-24 05:54:07,574 - DEBUG - Found date: 07/29/24 in line 120: 07/29/24 AplPay WSS030 Norwalk NORWALK CA
+2025-06-24 05:54:07,574 - DEBUG - Extracting description from lines: ['07/29/24 AplPay WSS030 Norwalk NORWALK CA', '844-746-7977'] with date: 07/29/24
+2025-06-24 05:54:07,574 - DEBUG - Description: AplPay WSS030 Norwalk NORWALK CA. Lines: ['07/29/24 AplPay WSS030 Norwalk NORWALK CA', '844-746-7977']. Date endpos: 41
+2025-06-24 05:54:07,574 - DEBUG - Amount Line: 07/29/24 AplPay WSS030 Norwalk NORWALK CA 844-746-7977 $88.19 08/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA +15413165747
+2025-06-24 05:54:07,574 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 07/29/24AplPayWSS030NorwalkNORWALKCA844-746-7977$88.1908/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747
+2025-06-24 05:54:07,574 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 07/29/24AplPayWSS030NorwalkNORWALKCA844-746-7977$88.1908/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747
+2025-06-24 05:54:07,574 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 07/29/24AplPayWSS030NorwalkNORWALKCA844-746-7977$88.1908/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747
+2025-06-24 05:54:07,574 - INFO - Found a purchase on 07/29/24 under APPLE PAY for $88.19 with description: 
+	AplPay WSS030 Norwalk NORWALK CA
+
+2025-06-24 05:54:07,575 - DEBUG - Found date: 08/01/24 in line 123: 08/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA
+2025-06-24 05:54:07,575 - DEBUG - Extracting description from lines: ['08/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA', '+15413165747'] with date: 08/01/24
+2025-06-24 05:54:07,575 - DEBUG - Description: MOVEMENT SUNNYVALE SUNNYVALE CA. Lines: ['08/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA', '+15413165747']. Date endpos: 40
+2025-06-24 05:54:07,575 - DEBUG - Amount Line: 08/01/24 MOVEMENT SUNNYVALE SUNNYVALE CA +15413165747 $117.00 08/02/24 BUDGET RENT A CAR SAN DIEGO CA Location Date
+2025-06-24 05:54:07,575 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747$117.0008/02/24BUDGETRENTACARSANDIEGOCALocationDate
+2025-06-24 05:54:07,575 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747$117.0008/02/24BUDGETRENTACARSANDIEGOCALocationDate
+2025-06-24 05:54:07,575 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/01/24MOVEMENTSUNNYVALESUNNYVALECA+15413165747$117.0008/02/24BUDGETRENTACARSANDIEGOCALocationDate
+2025-06-24 05:54:07,575 - INFO - Found a purchase on 08/01/24 under GYM for $117.0 with description: 
+	MOVEMENT SUNNYVALE SUNNYVALE CA
+
+2025-06-24 05:54:07,576 - DEBUG - Found date: 08/02/24 in line 126: 08/02/24 BUDGET RENT A CAR SAN DIEGO CA
+2025-06-24 05:54:07,576 - DEBUG - Extracting description from lines: ['08/02/24 BUDGET RENT A CAR SAN DIEGO CA', 'Location Date'] with date: 08/02/24
+2025-06-24 05:54:07,576 - DEBUG - Description: BUDGET RENT A CAR SAN DIEGO CA. Lines: ['08/02/24 BUDGET RENT A CAR SAN DIEGO CA', 'Location Date']. Date endpos: 39
+2025-06-24 05:54:07,576 - DEBUG - Amount Line: 08/02/24 BUDGET RENT A CAR SAN DIEGO CA Location Date Rental: SAN DIEGO CA 24/07/28 Return: BURBANK CA 24/08/02 Agreement Number: 781295701
+2025-06-24 05:54:07,576 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/02/24BUDGETRENTACARSANDIEGOCALocationDateRental:SANDIEGOCA24/07/28Return:BURBANKCA24/08/02AgreementNumber:781295701
+2025-06-24 05:54:07,576 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/02/24BUDGETRENTACARSANDIEGOCALocationDateRental:SANDIEGOCA24/07/28Return:BURBANKCA24/08/02AgreementNumber:781295701
+2025-06-24 05:54:07,576 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/02/24BUDGETRENTACARSANDIEGOCALocationDateRental:SANDIEGOCA24/07/28Return:BURBANKCA24/08/02AgreementNumber:781295701
+2025-06-24 05:54:07,576 - DEBUG - Amount wasnt found in line: 08/02/24 BUDGET RENT A CAR SAN DIEGO CA Location Date Rental: SAN DIEGO CA 24/07/28 Return: BURBANK CA 24/08/02 Agreement Number: 781295701. Skipping...
+2025-06-24 05:54:07,576 - DEBUG - Found date: 08/03/24 in line 133: 08/03/24 BCD-WILSHIRE 0000 LOS ANGELES CA
+2025-06-24 05:54:07,576 - DEBUG - Extracting description from lines: ['08/03/24 BCD-WILSHIRE 0000 LOS ANGELES CA', '213-382-6677'] with date: 08/03/24
+2025-06-24 05:54:07,577 - DEBUG - Description: BCD-WILSHIRE 0000 LOS ANGELES CA. Lines: ['08/03/24 BCD-WILSHIRE 0000 LOS ANGELES CA', '213-382-6677']. Date endpos: 41
+2025-06-24 05:54:07,577 - DEBUG - Amount Line: 08/03/24 BCD-WILSHIRE 0000 LOS ANGELES CA 213-382-6677 $51.13 08/03/24 AplPay ARITZIA AMERICANA GLENDALE CA WOMEN'S CLOTHING
+2025-06-24 05:54:07,577 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/03/24BCD-WILSHIRE0000LOSANGELESCA213-382-6677$51.1308/03/24AplPayARITZIAAMERICANAGLENDALECAWOMEN'SCLOTHING
+2025-06-24 05:54:07,577 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/03/24BCD-WILSHIRE0000LOSANGELESCA213-382-6677$51.1308/03/24AplPayARITZIAAMERICANAGLENDALECAWOMEN'SCLOTHING
+2025-06-24 05:54:07,577 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/03/24BCD-WILSHIRE0000LOSANGELESCA213-382-6677$51.1308/03/24AplPayARITZIAAMERICANAGLENDALECAWOMEN'SCLOTHING
+2025-06-24 05:54:07,577 - INFO - Found a purchase on 08/03/24 under OTHER for $51.13 with description: 
+	BCD-WILSHIRE 0000 LOS ANGELES CA
+
+2025-06-24 05:54:07,578 - DEBUG - Found date: 08/03/24 in line 136: 08/03/24 AplPay ARITZIA AMERICANA GLENDALE CA
+2025-06-24 05:54:07,578 - DEBUG - Extracting description from lines: ['08/03/24 AplPay ARITZIA AMERICANA GLENDALE CA', "WOMEN'S CLOTHING"] with date: 08/03/24
+2025-06-24 05:54:07,578 - DEBUG - Description: AplPay ARITZIA AMERICANA GLENDALE CA. Lines: ['08/03/24 AplPay ARITZIA AMERICANA GLENDALE CA', "WOMEN'S CLOTHING"]. Date endpos: 45
+2025-06-24 05:54:07,578 - DEBUG - Amount Line: 08/03/24 AplPay ARITZIA AMERICANA GLENDALE CA WOMEN'S CLOTHING $163.16 08/03/24 AplPay NORDSTROM GLENDALE CA 8002855800
+2025-06-24 05:54:07,578 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/03/24AplPayARITZIAAMERICANAGLENDALECAWOMEN'SCLOTHING$163.1608/03/24AplPayNORDSTROMGLENDALECA8002855800
+2025-06-24 05:54:07,578 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/03/24AplPayARITZIAAMERICANAGLENDALECAWOMEN'SCLOTHING$163.1608/03/24AplPayNORDSTROMGLENDALECA8002855800
+2025-06-24 05:54:07,578 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/03/24AplPayARITZIAAMERICANAGLENDALECAWOMEN'SCLOTHING$163.1608/03/24AplPayNORDSTROMGLENDALECA8002855800
+2025-06-24 05:54:07,578 - INFO - Found a purchase on 08/03/24 under APPLE PAY for $163.16 with description: 
+	AplPay ARITZIA AMERICANA GLENDALE CA
+
+2025-06-24 05:54:07,579 - DEBUG - Found date: 08/03/24 in line 139: 08/03/24 AplPay NORDSTROM GLENDALE CA
+2025-06-24 05:54:07,579 - DEBUG - Extracting description from lines: ['08/03/24 AplPay NORDSTROM GLENDALE CA', '8002855800'] with date: 08/03/24
+2025-06-24 05:54:07,579 - DEBUG - Description: AplPay NORDSTROM GLENDALE CA. Lines: ['08/03/24 AplPay NORDSTROM GLENDALE CA', '8002855800']. Date endpos: 37
+2025-06-24 05:54:07,579 - DEBUG - Amount Line: 08/03/24 AplPay NORDSTROM GLENDALE CA 8002855800 DEPT. STORES $159.85 08/03/24 AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA
+2025-06-24 05:54:07,579 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/03/24AplPayNORDSTROMGLENDALECA8002855800DEPT.STORES$159.8508/03/24AplPayLULULEMONATHLETICAUSABTOC(877)263-9300CA
+2025-06-24 05:54:07,579 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/03/24AplPayNORDSTROMGLENDALECA8002855800DEPT.STORES$159.8508/03/24AplPayLULULEMONATHLETICAUSABTOC(877)263-9300CA
+2025-06-24 05:54:07,579 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/03/24AplPayNORDSTROMGLENDALECA8002855800DEPT.STORES$159.8508/03/24AplPayLULULEMONATHLETICAUSABTOC(877)263-9300CA
+2025-06-24 05:54:07,579 - INFO - Found a purchase on 08/03/24 under APPLE PAY for $159.85 with description: 
+	AplPay NORDSTROM GLENDALE CA
+
+2025-06-24 05:54:07,580 - DEBUG - Found date: 08/03/24 in line 143: 08/03/24 AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA
+2025-06-24 05:54:07,580 - DEBUG - Extracting description from lines: ['08/03/24 AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA', 'CLOTHING'] with date: 08/03/24
+2025-06-24 05:54:07,580 - DEBUG - Description: AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA. Lines: ['08/03/24 AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA', 'CLOTHING']. Date endpos: 63
+2025-06-24 05:54:07,580 - DEBUG - Amount Line: 08/03/24 AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA CLOTHING 877-263-9300 $161.88 08/03/24 PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY
+2025-06-24 05:54:07,580 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/03/24AplPayLULULEMONATHLETICAUSABTOC(877)263-9300CACLOTHING877-263-9300$161.8808/03/24PAYPAL*PEACOCKTVLL5DCCB2126640138NY
+2025-06-24 05:54:07,580 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/03/24AplPayLULULEMONATHLETICAUSABTOC(877)263-9300CACLOTHING877-263-9300$161.8808/03/24PAYPAL*PEACOCKTVLL5DCCB2126640138NY
+2025-06-24 05:54:07,581 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/03/24AplPayLULULEMONATHLETICAUSABTOC(877)263-9300CACLOTHING877-263-9300$161.8808/03/24PAYPAL*PEACOCKTVLL5DCCB2126640138NY
+2025-06-24 05:54:07,581 - INFO - Found a purchase on 08/03/24 under APPLE PAY for $161.88 with description: 
+	AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA
+
+2025-06-24 05:54:07,581 - DEBUG - Found date: 08/03/24 in line 147: 08/03/24 PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY
+2025-06-24 05:54:07,581 - DEBUG - Extracting description from lines: ['08/03/24 PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY', '2126640138'] with date: 08/03/24
+2025-06-24 05:54:07,581 - DEBUG - Description: PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY. Lines: ['08/03/24 PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY', '2126640138']. Date endpos: 48
+2025-06-24 05:54:07,582 - DEBUG - Amount Line: 08/03/24 PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY 2126640138 $5.99 08/04/24 AplPay UNIQLO USA LLC NEW YORK NY FAMILY CLOTHING
+2025-06-24 05:54:07,582 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/03/24PAYPAL*PEACOCKTVLL5DCCB2126640138NY2126640138$5.9908/04/24AplPayUNIQLOUSALLCNEWYORKNYFAMILYCLOTHING
+2025-06-24 05:54:07,582 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/03/24PAYPAL*PEACOCKTVLL5DCCB2126640138NY2126640138$5.9908/04/24AplPayUNIQLOUSALLCNEWYORKNYFAMILYCLOTHING
+2025-06-24 05:54:07,582 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/03/24PAYPAL*PEACOCKTVLL5DCCB2126640138NY2126640138$5.9908/04/24AplPayUNIQLOUSALLCNEWYORKNYFAMILYCLOTHING
+2025-06-24 05:54:07,582 - INFO - Found a purchase on 08/03/24 under PAYPAL for $5.99 with description: 
+	PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY
+
+2025-06-24 05:54:07,582 - DEBUG - Found date: 08/04/24 in line 150: 08/04/24 AplPay UNIQLO USA LLC NEW YORK NY
+2025-06-24 05:54:07,582 - DEBUG - Extracting description from lines: ['08/04/24 AplPay UNIQLO USA LLC NEW YORK NY', 'FAMILY CLOTHING'] with date: 08/04/24
+2025-06-24 05:54:07,583 - DEBUG - Description: AplPay UNIQLO USA LLC NEW YORK NY. Lines: ['08/04/24 AplPay UNIQLO USA LLC NEW YORK NY', 'FAMILY CLOTHING']. Date endpos: 42
+2025-06-24 05:54:07,583 - DEBUG - Amount Line: 08/04/24 AplPay UNIQLO USA LLC NEW YORK NY FAMILY CLOTHING $32.96 p. 4/7 Continued on next page
+2025-06-24 05:54:07,583 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/04/24AplPayUNIQLOUSALLCNEWYORKNYFAMILYCLOTHING$32.96p.4/7Continuedonnextpage
+2025-06-24 05:54:07,583 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/04/24AplPayUNIQLOUSALLCNEWYORKNYFAMILYCLOTHING$32.96p.4/7Continuedonnextpage
+2025-06-24 05:54:07,583 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/04/24AplPayUNIQLOUSALLCNEWYORKNYFAMILYCLOTHING$32.96p.4/7Continuedonnextpage
+2025-06-24 05:54:07,583 - INFO - Found a purchase on 08/04/24 under APPLE PAY for $32.96 with description: 
+	AplPay UNIQLO USA LLC NEW YORK NY
+
+2025-06-24 05:54:07,583 - DEBUG - Found date: 08/05/24 in line 161: 08/05/24 AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA
+2025-06-24 05:54:07,584 - DEBUG - Extracting description from lines: ['08/05/24 AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA', 'MERCHANDISE'] with date: 08/05/24
+2025-06-24 05:54:07,584 - DEBUG - Description: AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA. Lines: ['08/05/24 AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA', 'MERCHANDISE']. Date endpos: 50
+2025-06-24 05:54:07,584 - DEBUG - Amount Line: 08/05/24 AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA MERCHANDISE $15.27 08/05/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA 4083715000
+2025-06-24 05:54:07,584 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/05/24AMAZONMARKETPLACENAPAAMZN.COM/BILLWAMERCHANDISE$15.2708/05/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000
+2025-06-24 05:54:07,584 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/05/24AMAZONMARKETPLACENAPAAMZN.COM/BILLWAMERCHANDISE$15.2708/05/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000
+2025-06-24 05:54:07,584 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/05/24AMAZONMARKETPLACENAPAAMZN.COM/BILLWAMERCHANDISE$15.2708/05/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000
+2025-06-24 05:54:07,584 - INFO - Found a purchase on 08/05/24 under AMAZON for $15.27 with description: 
+	AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA
+
+2025-06-24 05:54:07,584 - DEBUG - Found date: 08/05/24 in line 164: 08/05/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA
+2025-06-24 05:54:07,585 - DEBUG - Extracting description from lines: ['08/05/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', '4083715000'] with date: 08/05/24
+2025-06-24 05:54:07,585 - DEBUG - Description: AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA. Lines: ['08/05/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', '4083715000']. Date endpos: 56
+2025-06-24 05:54:07,585 - DEBUG - Amount Line: 08/05/24 AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA 4083715000 $22.23 08/05/24 Concesionaria Vuela Compa Mexico ME 52616400
+2025-06-24 05:54:07,585 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/05/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000$22.2308/05/24ConcesionariaVuelaCompaMexicoME52616400
+2025-06-24 05:54:07,585 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/05/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000$22.2308/05/24ConcesionariaVuelaCompaMexicoME52616400
+2025-06-24 05:54:07,585 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/05/24AplPayWHOLEFDSCBL10033000010033CAMPBELLCA4083715000$22.2308/05/24ConcesionariaVuelaCompaMexicoME52616400
+2025-06-24 05:54:07,585 - INFO - Found a purchase on 08/05/24 under GROCERIES for $22.23 with description: 
+	AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA
+
+2025-06-24 05:54:07,586 - DEBUG - Found date: 08/05/24 in line 167: 08/05/24 Concesionaria Vuela Compa Mexico ME
+2025-06-24 05:54:07,586 - DEBUG - Extracting description from lines: ['08/05/24 Concesionaria Vuela Compa Mexico ME', '52616400'] with date: 08/05/24
+2025-06-24 05:54:07,586 - DEBUG - Description: Concesionaria Vuela Compa Mexico ME. Lines: ['08/05/24 Concesionaria Vuela Compa Mexico ME', '52616400']. Date endpos: 44
+2025-06-24 05:54:07,586 - DEBUG - Amount Line: 08/05/24 Concesionaria Vuela Compa Mexico ME 52616400               977.00 Mexican Pesos $51.69
+2025-06-24 05:54:07,586 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/05/24ConcesionariaVuelaCompaMexicoME52616400977.00MexicanPesos$51.69
+2025-06-24 05:54:07,586 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/05/24ConcesionariaVuelaCompaMexicoME52616400977.00MexicanPesos$51.69
+2025-06-24 05:54:07,586 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/05/24ConcesionariaVuelaCompaMexicoME52616400977.00MexicanPesos$51.69
+2025-06-24 05:54:07,586 - INFO - Found a purchase on 08/05/24 under OTHER for $51.69 with description: 
+	Concesionaria Vuela Compa Mexico ME
+
+2025-06-24 05:54:07,587 - DEBUG - Found date: 08/06/24 in line 172: 08/06/24 APPLE.COM/BILL INTERNET CHARGE CA
+2025-06-24 05:54:07,587 - DEBUG - Extracting description from lines: ['08/06/24 APPLE.COM/BILL INTERNET CHARGE CA', 'RECORD STORE'] with date: 08/06/24
+2025-06-24 05:54:07,587 - DEBUG - Description: APPLE.COM/BILL INTERNET CHARGE CA. Lines: ['08/06/24 APPLE.COM/BILL INTERNET CHARGE CA', 'RECORD STORE']. Date endpos: 42
+2025-06-24 05:54:07,587 - DEBUG - Amount Line: 08/06/24 APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE $2.99 08/07/24 APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE
+2025-06-24 05:54:07,587 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/06/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$2.9908/07/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-24 05:54:07,587 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/06/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$2.9908/07/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-24 05:54:07,587 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/06/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$2.9908/07/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE
+2025-06-24 05:54:07,587 - INFO - Found a purchase on 08/06/24 under INTERNET for $2.99 with description: 
+	APPLE.COM/BILL INTERNET CHARGE CA
+
+2025-06-24 05:54:07,588 - DEBUG - Found date: 08/07/24 in line 175: 08/07/24 APPLE.COM/BILL INTERNET CHARGE CA
+2025-06-24 05:54:07,588 - DEBUG - Extracting description from lines: ['08/07/24 APPLE.COM/BILL INTERNET CHARGE CA', 'RECORD STORE'] with date: 08/07/24
+2025-06-24 05:54:07,588 - DEBUG - Description: APPLE.COM/BILL INTERNET CHARGE CA. Lines: ['08/07/24 APPLE.COM/BILL INTERNET CHARGE CA', 'RECORD STORE']. Date endpos: 42
+2025-06-24 05:54:07,588 - DEBUG - Amount Line: 08/07/24 APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE $10.99 08/07/24 GEICO AUTO (800)841-3000 DC INSURANCE
+2025-06-24 05:54:07,588 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/07/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$10.9908/07/24GEICOAUTO(800)841-3000DCINSURANCE
+2025-06-24 05:54:07,588 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/07/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$10.9908/07/24GEICOAUTO(800)841-3000DCINSURANCE
+2025-06-24 05:54:07,588 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/07/24APPLE.COM/BILLINTERNETCHARGECARECORDSTORE$10.9908/07/24GEICOAUTO(800)841-3000DCINSURANCE
+2025-06-24 05:54:07,588 - INFO - Found a purchase on 08/07/24 under INTERNET for $10.99 with description: 
+	APPLE.COM/BILL INTERNET CHARGE CA
+
+2025-06-24 05:54:07,588 - DEBUG - Found date: 08/07/24 in line 178: 08/07/24 GEICO AUTO (800)841-3000 DC
+2025-06-24 05:54:07,589 - DEBUG - Extracting description from lines: ['08/07/24 GEICO AUTO (800)841-3000 DC', 'INSURANCE'] with date: 08/07/24
+2025-06-24 05:54:07,589 - DEBUG - Description: GEICO AUTO (800)841-3000 DC. Lines: ['08/07/24 GEICO AUTO (800)841-3000 DC', 'INSURANCE']. Date endpos: 36
+2025-06-24 05:54:07,589 - DEBUG - Amount Line: 08/07/24 GEICO AUTO (800)841-3000 DC INSURANCE $172.48 08/09/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date
+2025-06-24 05:54:07,589 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/07/24GEICOAUTO(800)841-3000DCINSURANCE$172.4808/09/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate
+2025-06-24 05:54:07,589 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/07/24GEICOAUTO(800)841-3000DCINSURANCE$172.4808/09/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate
+2025-06-24 05:54:07,589 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/07/24GEICOAUTO(800)841-3000DCINSURANCE$172.4808/09/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate
+2025-06-24 05:54:07,589 - INFO - Found a purchase on 08/07/24 under AUTO for $172.48 with description: 
+	GEICO AUTO (800)841-3000 DC
+
+2025-06-24 05:54:07,590 - DEBUG - Found date: 08/09/24 in line 181: 08/09/24 DOUBLETREE NORWALK NORWALK CA
+2025-06-24 05:54:07,590 - DEBUG - Extracting description from lines: ['08/09/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date'] with date: 08/09/24
+2025-06-24 05:54:07,590 - DEBUG - Description: DOUBLETREE NORWALK NORWALK CA. Lines: ['08/09/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date']. Date endpos: 38
+2025-06-24 05:54:07,590 - DEBUG - Amount Line: 08/09/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/22/24 07/26/24 00000000 LODGING
+2025-06-24 05:54:07,590 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/09/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,590 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/09/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,590 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/09/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/22/2407/26/2400000000LODGING
+2025-06-24 05:54:07,590 - DEBUG - Amount wasnt found in line: 08/09/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/22/24 07/26/24 00000000 LODGING. Skipping...
+2025-06-24 05:54:07,590 - DEBUG - Found date: 07/22/24 in line 183: 07/22/24 07/26/24
+2025-06-24 05:54:07,591 - DEBUG - Extracting description from lines: ['07/22/24 07/26/24', '00000000'] with date: 07/22/24
+2025-06-24 05:54:07,591 - DEBUG - Found a date in description: 07/26/24. Skipping...
+2025-06-24 05:54:07,591 - DEBUG - Description was None. Skipping...
+2025-06-24 05:54:07,591 - DEBUG - Found date: 08/11/24 in line 187: 08/11/24 DOUBLETREE NORWALK NORWALK CA
+2025-06-24 05:54:07,591 - DEBUG - Extracting description from lines: ['08/11/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date'] with date: 08/11/24
+2025-06-24 05:54:07,591 - DEBUG - Description: DOUBLETREE NORWALK NORWALK CA. Lines: ['08/11/24 DOUBLETREE NORWALK NORWALK CA', 'Arrival Date Departure Date']. Date endpos: 38
+2025-06-24 05:54:07,591 - DEBUG - Amount Line: 08/11/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/28/24 08/02/24 00000000 LODGING
+2025-06-24 05:54:07,591 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/11/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/28/2408/02/2400000000LODGING
+2025-06-24 05:54:07,591 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/11/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/28/2408/02/2400000000LODGING
+2025-06-24 05:54:07,591 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/11/24DOUBLETREENORWALKNORWALKCAArrivalDateDepartureDate07/28/2408/02/2400000000LODGING
+2025-06-24 05:54:07,591 - DEBUG - Amount wasnt found in line: 08/11/24 DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date 07/28/24 08/02/24 00000000 LODGING. Skipping...
+2025-06-24 05:54:07,592 - DEBUG - Found date: 07/28/24 in line 189: 07/28/24 08/02/24
+2025-06-24 05:54:07,592 - DEBUG - Extracting description from lines: ['07/28/24 08/02/24', '00000000'] with date: 07/28/24
+2025-06-24 05:54:07,592 - DEBUG - Found a date in description: 08/02/24. Skipping...
+2025-06-24 05:54:07,592 - DEBUG - Description was None. Skipping...
+2025-06-24 05:54:07,592 - DEBUG - Found date: 08/12/24 in line 193: 08/12/24 PAYPAL *UNITEDSTATE 4029357733 DC
+2025-06-24 05:54:07,592 - DEBUG - Extracting description from lines: ['08/12/24 PAYPAL *UNITEDSTATE 4029357733 DC', '4029357733'] with date: 08/12/24
+2025-06-24 05:54:07,592 - DEBUG - Description: PAYPAL *UNITEDSTATE 4029357733 DC. Lines: ['08/12/24 PAYPAL *UNITEDSTATE 4029357733 DC', '4029357733']. Date endpos: 42
+2025-06-24 05:54:07,593 - DEBUG - Amount Line: 08/12/24 PAYPAL *UNITEDSTATE 4029357733 DC 4029357733 $31.05 Fees **Foreign Transaction Fee is 2.70% of the converted US dollar amount
+2025-06-24 05:54:07,593 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/12/24PAYPAL*UNITEDSTATE4029357733DC4029357733$31.05Fees**ForeignTransactionFeeis2.70%oftheconvertedUSdollaramount
+2025-06-24 05:54:07,593 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/12/24PAYPAL*UNITEDSTATE4029357733DC4029357733$31.05Fees**ForeignTransactionFeeis2.70%oftheconvertedUSdollaramount
+2025-06-24 05:54:07,593 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/12/24PAYPAL*UNITEDSTATE4029357733DC4029357733$31.05Fees**ForeignTransactionFeeis2.70%oftheconvertedUSdollaramount
+2025-06-24 05:54:07,593 - INFO - Found a purchase on 08/12/24 under PAYPAL for $31.05 with description: 
+	PAYPAL *UNITEDSTATE 4029357733 DC
+
+2025-06-24 05:54:07,593 - DEBUG - Found date: 08/05/24 in line 199: 08/05/24 FOREIGN TRANSACTION FEE**
+2025-06-24 05:54:07,594 - DEBUG - Extracting description from lines: ['08/05/24 FOREIGN TRANSACTION FEE**', 'Concesionaria Vuela Compa'] with date: 08/05/24
+2025-06-24 05:54:07,594 - DEBUG - Description: FOREIGN TRANSACTION FEE**. Lines: ['08/05/24 FOREIGN TRANSACTION FEE**', 'Concesionaria Vuela Compa']. Date endpos: 34
+2025-06-24 05:54:07,594 - DEBUG - Amount Line: 08/05/24 FOREIGN TRANSACTION FEE** Concesionaria Vuela Compa $51.69 $1.39 08/15/24 ANNUAL MEMBERSHIP FEE $95.00
+2025-06-24 05:54:07,594 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/05/24FOREIGNTRANSACTIONFEE**ConcesionariaVuelaCompa$51.69$1.3908/15/24ANNUALMEMBERSHIPFEE$95.00
+2025-06-24 05:54:07,594 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/05/24FOREIGNTRANSACTIONFEE**ConcesionariaVuelaCompa$51.69$1.3908/15/24ANNUALMEMBERSHIPFEE$95.00
+2025-06-24 05:54:07,594 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/05/24FOREIGNTRANSACTIONFEE**ConcesionariaVuelaCompa$51.69$1.3908/15/24ANNUALMEMBERSHIPFEE$95.00
+2025-06-24 05:54:07,595 - INFO - Found a purchase on 08/05/24 under OTHER for $51.69 with description: 
+	FOREIGN TRANSACTION FEE**
+
+2025-06-24 05:54:07,595 - DEBUG - Found date: 08/15/24 in line 203: 08/15/24 ANNUAL MEMBERSHIP FEE $95.00
+2025-06-24 05:54:07,595 - DEBUG - Extracting description from lines: ['08/15/24 ANNUAL MEMBERSHIP FEE $95.00', 'Total Fees for this Period $96.39'] with date: 08/15/24
+2025-06-24 05:54:07,595 - DEBUG - Description: ANNUAL MEMBERSHIP FEE. Lines: ['08/15/24 ANNUAL MEMBERSHIP FEE $95.00', 'Total Fees for this Period $96.39']. Date endpos: 37
+2025-06-24 05:54:07,595 - DEBUG - Amount Line: 08/15/24 ANNUAL MEMBERSHIP FEE $95.00 Total Fees for this Period $96.39 Interest Charged Amount Total Interest Charged for this Period $0.00
+2025-06-24 05:54:07,595 - DEBUG - Searching for pattern: -\$[\d,]+\.\d{2} in text: 08/15/24ANNUALMEMBERSHIPFEE$95.00TotalFeesforthisPeriod$96.39InterestChargedAmountTotalInterestChargedforthisPeriod$0.00
+2025-06-24 05:54:07,596 - DEBUG - Searching for pattern: \$-[\d,]+\.\d{2} in text: 08/15/24ANNUALMEMBERSHIPFEE$95.00TotalFeesforthisPeriod$96.39InterestChargedAmountTotalInterestChargedforthisPeriod$0.00
+2025-06-24 05:54:07,596 - DEBUG - Searching for pattern: \$[\d,]+\.\d{2} in text: 08/15/24ANNUALMEMBERSHIPFEE$95.00TotalFeesforthisPeriod$96.39InterestChargedAmountTotalInterestChargedforthisPeriod$0.00
+2025-06-24 05:54:07,596 - INFO - Found a purchase on 08/15/24 under OTHER for $95.0 with description: 
+	ANNUAL MEMBERSHIP FEE
+
+2025-06-24 05:54:07,596 - INFO - Successfully parsed purchases from text: [{'Bank': 'AMEX', 'Date': '2024-07-19', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -104.96, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-07-22', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -3326.85, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-08-12', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -3575.37, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-07-27', 'Description': '*', 'Amount': -7.0, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-07-15', 'Description': 'FASTRAK CSC TOLLS OAKLAND CA', 'Amount': 7.0, 'Category': 'TRAVEL'}, {'Bank': 'AMEX', 'Date': '2024-07-16', 'Description': 'PARAMOUNT+ WEST HOLLYWOO CA', 'Amount': 11.99, 'Category': 'STREAMING'}, {'Bank': 'AMEX', 'Date': '2024-07-16', 'Description': 'WIFIONBOARD CHICAGO IL', 'Amount': 9.95, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-07-19', 'Description': 'AMAZON.COM AMZN.COM/BILL WA', 'Amount': 32.74, 'Category': 'AMAZON'}, {'Bank': 'AMEX', 'Date': '2024-07-20', 'Description': 'PAYPAL *JAMESALLENC 3016311414 NY', 'Amount': 3259.11, 'Category': 'PAYPAL'}, {'Bank': 'AMEX', 'Date': '2024-07-22', 'Description': 'PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA', 'Amount': 35.5, 'Category': 'FOOD'}, {'Bank': 'AMEX', 'Date': '2024-07-24', 'Description': 'DISNEYPLUS 888-905-7888 CA', 'Amount': 24.99, 'Category': 'STREAMING'}, {'Bank': 'AMEX', 'Date': '2024-07-29', 'Description': 'NETFLIX.COM 866-579-7172 CA', 'Amount': 24.97, 'Category': 'STREAMING'}, {'Bank': 'AMEX', 'Date': '2024-07-29', 'Description': 'AplPay WSS030 Norwalk NORWALK CA', 'Amount': 88.19, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-08-01', 'Description': 'MOVEMENT SUNNYVALE SUNNYVALE CA', 'Amount': 117.0, 'Category': 'GYM'}, {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'BCD-WILSHIRE 0000 LOS ANGELES CA', 'Amount': 51.13, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'AplPay ARITZIA AMERICANA GLENDALE CA', 'Amount': 163.16, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'AplPay NORDSTROM GLENDALE CA', 'Amount': 159.85, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA', 'Amount': 161.88, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY', 'Amount': 5.99, 'Category': 'PAYPAL'}, {'Bank': 'AMEX', 'Date': '2024-08-04', 'Description': 'AplPay UNIQLO USA LLC NEW YORK NY', 'Amount': 32.96, 'Category': 'APPLE PAY'}, {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA', 'Amount': 15.27, 'Category': 'AMAZON'}, {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', 'Amount': 22.23, 'Category': 'GROCERIES'}, {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'Concesionaria Vuela Compa Mexico ME', 'Amount': 51.69, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-08-06', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 2.99, 'Category': 'INTERNET'}, {'Bank': 'AMEX', 'Date': '2024-08-07', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 10.99, 'Category': 'INTERNET'}, {'Bank': 'AMEX', 'Date': '2024-08-07', 'Description': 'GEICO AUTO (800)841-3000 DC', 'Amount': 172.48, 'Category': 'AUTO'}, {'Bank': 'AMEX', 'Date': '2024-08-12', 'Description': 'PAYPAL *UNITEDSTATE 4029357733 DC', 'Amount': 31.05, 'Category': 'PAYPAL'}, {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'FOREIGN TRANSACTION FEE**', 'Amount': 51.69, 'Category': 'OTHER'}, {'Bank': 'AMEX', 'Date': '2024-08-15', 'Description': 'ANNUAL MEMBERSHIP FEE', 'Amount': 95.0, 'Category': 'OTHER'}]
+2025-06-24 05:54:07,628 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:54:07,629 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:54:07,629 - DEBUG - Existing purchases in database: []
+2025-06-24 05:54:07,629 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-19', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -104.96, 'Category': 'OTHER'}
+2025-06-24 05:54:07,640 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-19', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -104.96, 'Category': 'OTHER'}
+2025-06-24 05:54:07,640 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-22', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -3326.85, 'Category': 'OTHER'}
+2025-06-24 05:54:07,641 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-22', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -3326.85, 'Category': 'OTHER'}
+2025-06-24 05:54:07,641 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-12', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -3575.37, 'Category': 'OTHER'}
+2025-06-24 05:54:07,642 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-12', 'Description': '* MOBILE PAYMENT - THANK YOU -', 'Amount': -3575.37, 'Category': 'OTHER'}
+2025-06-24 05:54:07,642 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-27', 'Description': '*', 'Amount': -7.0, 'Category': 'OTHER'}
+2025-06-24 05:54:07,643 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-27', 'Description': '*', 'Amount': -7.0, 'Category': 'OTHER'}
+2025-06-24 05:54:07,643 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-15', 'Description': 'FASTRAK CSC TOLLS OAKLAND CA', 'Amount': 7.0, 'Category': 'TRAVEL'}
+2025-06-24 05:54:07,644 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-15', 'Description': 'FASTRAK CSC TOLLS OAKLAND CA', 'Amount': 7.0, 'Category': 'TRAVEL'}
+2025-06-24 05:54:07,644 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-16', 'Description': 'PARAMOUNT+ WEST HOLLYWOO CA', 'Amount': 11.99, 'Category': 'STREAMING'}
+2025-06-24 05:54:07,645 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-16', 'Description': 'PARAMOUNT+ WEST HOLLYWOO CA', 'Amount': 11.99, 'Category': 'STREAMING'}
+2025-06-24 05:54:07,645 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-16', 'Description': 'WIFIONBOARD CHICAGO IL', 'Amount': 9.95, 'Category': 'OTHER'}
+2025-06-24 05:54:07,646 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-16', 'Description': 'WIFIONBOARD CHICAGO IL', 'Amount': 9.95, 'Category': 'OTHER'}
+2025-06-24 05:54:07,646 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-19', 'Description': 'AMAZON.COM AMZN.COM/BILL WA', 'Amount': 32.74, 'Category': 'AMAZON'}
+2025-06-24 05:54:07,647 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-19', 'Description': 'AMAZON.COM AMZN.COM/BILL WA', 'Amount': 32.74, 'Category': 'AMAZON'}
+2025-06-24 05:54:07,647 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-20', 'Description': 'PAYPAL *JAMESALLENC 3016311414 NY', 'Amount': 3259.11, 'Category': 'PAYPAL'}
+2025-06-24 05:54:07,648 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-20', 'Description': 'PAYPAL *JAMESALLENC 3016311414 NY', 'Amount': 3259.11, 'Category': 'PAYPAL'}
+2025-06-24 05:54:07,648 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-22', 'Description': 'PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA', 'Amount': 35.5, 'Category': 'FOOD'}
+2025-06-24 05:54:07,649 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-22', 'Description': 'PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA', 'Amount': 35.5, 'Category': 'FOOD'}
+2025-06-24 05:54:07,649 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-24', 'Description': 'DISNEYPLUS 888-905-7888 CA', 'Amount': 24.99, 'Category': 'STREAMING'}
+2025-06-24 05:54:07,650 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-24', 'Description': 'DISNEYPLUS 888-905-7888 CA', 'Amount': 24.99, 'Category': 'STREAMING'}
+2025-06-24 05:54:07,650 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-29', 'Description': 'NETFLIX.COM 866-579-7172 CA', 'Amount': 24.97, 'Category': 'STREAMING'}
+2025-06-24 05:54:07,651 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-29', 'Description': 'NETFLIX.COM 866-579-7172 CA', 'Amount': 24.97, 'Category': 'STREAMING'}
+2025-06-24 05:54:07,651 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-07-29', 'Description': 'AplPay WSS030 Norwalk NORWALK CA', 'Amount': 88.19, 'Category': 'APPLE PAY'}
+2025-06-24 05:54:07,652 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-07-29', 'Description': 'AplPay WSS030 Norwalk NORWALK CA', 'Amount': 88.19, 'Category': 'APPLE PAY'}
+2025-06-24 05:54:07,652 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-01', 'Description': 'MOVEMENT SUNNYVALE SUNNYVALE CA', 'Amount': 117.0, 'Category': 'GYM'}
+2025-06-24 05:54:07,653 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-01', 'Description': 'MOVEMENT SUNNYVALE SUNNYVALE CA', 'Amount': 117.0, 'Category': 'GYM'}
+2025-06-24 05:54:07,653 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'BCD-WILSHIRE 0000 LOS ANGELES CA', 'Amount': 51.13, 'Category': 'OTHER'}
+2025-06-24 05:54:07,654 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'BCD-WILSHIRE 0000 LOS ANGELES CA', 'Amount': 51.13, 'Category': 'OTHER'}
+2025-06-24 05:54:07,654 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'AplPay ARITZIA AMERICANA GLENDALE CA', 'Amount': 163.16, 'Category': 'APPLE PAY'}
+2025-06-24 05:54:07,655 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'AplPay ARITZIA AMERICANA GLENDALE CA', 'Amount': 163.16, 'Category': 'APPLE PAY'}
+2025-06-24 05:54:07,655 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'AplPay NORDSTROM GLENDALE CA', 'Amount': 159.85, 'Category': 'APPLE PAY'}
+2025-06-24 05:54:07,656 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'AplPay NORDSTROM GLENDALE CA', 'Amount': 159.85, 'Category': 'APPLE PAY'}
+2025-06-24 05:54:07,656 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA', 'Amount': 161.88, 'Category': 'APPLE PAY'}
+2025-06-24 05:54:07,657 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'AplPay LULULEMON ATHLETICA USA B TO C (877)263-9300 CA', 'Amount': 161.88, 'Category': 'APPLE PAY'}
+2025-06-24 05:54:07,657 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY', 'Amount': 5.99, 'Category': 'PAYPAL'}
+2025-06-24 05:54:07,658 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-03', 'Description': 'PAYPAL *PEACOCKTVLL 5DCCB 2126640138 NY', 'Amount': 5.99, 'Category': 'PAYPAL'}
+2025-06-24 05:54:07,658 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-04', 'Description': 'AplPay UNIQLO USA LLC NEW YORK NY', 'Amount': 32.96, 'Category': 'APPLE PAY'}
+2025-06-24 05:54:07,659 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-04', 'Description': 'AplPay UNIQLO USA LLC NEW YORK NY', 'Amount': 32.96, 'Category': 'APPLE PAY'}
+2025-06-24 05:54:07,659 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA', 'Amount': 15.27, 'Category': 'AMAZON'}
+2025-06-24 05:54:07,660 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA', 'Amount': 15.27, 'Category': 'AMAZON'}
+2025-06-24 05:54:07,660 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', 'Amount': 22.23, 'Category': 'GROCERIES'}
+2025-06-24 05:54:07,661 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA', 'Amount': 22.23, 'Category': 'GROCERIES'}
+2025-06-24 05:54:07,662 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'Concesionaria Vuela Compa Mexico ME', 'Amount': 51.69, 'Category': 'OTHER'}
+2025-06-24 05:54:07,662 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'Concesionaria Vuela Compa Mexico ME', 'Amount': 51.69, 'Category': 'OTHER'}
+2025-06-24 05:54:07,663 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-06', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 2.99, 'Category': 'INTERNET'}
+2025-06-24 05:54:07,663 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-06', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 2.99, 'Category': 'INTERNET'}
+2025-06-24 05:54:07,664 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-07', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 10.99, 'Category': 'INTERNET'}
+2025-06-24 05:54:07,664 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-07', 'Description': 'APPLE.COM/BILL INTERNET CHARGE CA', 'Amount': 10.99, 'Category': 'INTERNET'}
+2025-06-24 05:54:07,665 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-07', 'Description': 'GEICO AUTO (800)841-3000 DC', 'Amount': 172.48, 'Category': 'AUTO'}
+2025-06-24 05:54:07,666 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-07', 'Description': 'GEICO AUTO (800)841-3000 DC', 'Amount': 172.48, 'Category': 'AUTO'}
+2025-06-24 05:54:07,666 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-12', 'Description': 'PAYPAL *UNITEDSTATE 4029357733 DC', 'Amount': 31.05, 'Category': 'PAYPAL'}
+2025-06-24 05:54:07,667 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-12', 'Description': 'PAYPAL *UNITEDSTATE 4029357733 DC', 'Amount': 31.05, 'Category': 'PAYPAL'}
+2025-06-24 05:54:07,667 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'FOREIGN TRANSACTION FEE**', 'Amount': 51.69, 'Category': 'OTHER'}
+2025-06-24 05:54:07,668 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-05', 'Description': 'FOREIGN TRANSACTION FEE**', 'Amount': 51.69, 'Category': 'OTHER'}
+2025-06-24 05:54:07,669 - INFO - Purchase {'Bank': 'AMEX', 'Date': '2024-08-15', 'Description': 'ANNUAL MEMBERSHIP FEE', 'Amount': 95.0, 'Category': 'OTHER'}
+2025-06-24 05:54:07,670 - INFO - Inserted purchase: {'Bank': 'AMEX', 'Date': '2024-08-15', 'Description': 'ANNUAL MEMBERSHIP FEE', 'Amount': 95.0, 'Category': 'OTHER'}
+2025-06-24 05:54:07,672 - INFO - Inserted 29 new purchases into the database.
+2025-06-24 05:54:07,771 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:54:07,771 - INFO - Retrieved 29 records from the database.
+2025-06-24 05:54:07,777 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:54:07,793 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:54:07,794 - INFO - Retrieved 29 records from the database.
+2025-06-24 05:55:34,100 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:55:34,102 - INFO - Retrieved 29 records from the database.
+2025-06-24 05:55:34,166 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:55:34,183 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:55:34,184 - INFO - Retrieved 29 records from the database.
+2025-06-24 05:55:34,206 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:55:34,206 - INFO - Retrieved 29 records from the database.
+2025-06-24 05:55:34,211 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:55:34,228 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:55:34,228 - INFO - Retrieved 29 records from the database.
+2025-06-24 05:59:49,710 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:59:49,710 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:59:49,714 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:59:49,731 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:59:49,731 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:59:49,847 - INFO - No bank name passed in query. Returning all records...
+2025-06-24 05:59:49,864 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:59:49,864 - INFO - Retrieved 0 records from the database.
+2025-06-24 05:59:49,885 - INFO - Query: SELECT * FROM bank_statements
+2025-06-24 05:59:49,886 - INFO - Retrieved 0 records from the database.

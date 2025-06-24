@@ -6,7 +6,7 @@ import logo from './assets/finance-logo.svg';
 import light from './assets/light.svg';
 import dark from './assets/dark.svg';
 
-const API_URL = "http://localhost:8000";
+const API_URL = "/api";
 
 // Theme Hook
 function useTheme() {
@@ -99,7 +99,7 @@ const fetchRecords = async () => {
         setLoading(true);
         setError(null);
         
-        const response = await fetch(`${API_URL}/records?bank_name=${bankName}`);
+        const response = await fetch(`${API_URL}/records/?bank_name=${bankName}`);
         
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -129,7 +129,7 @@ const fetchRecords = async () => {
     
     const fetchBankNames = async () => {
         try {
-            const response = await fetch(`${API_URL}/records`);
+            const response = await fetch(`${API_URL}/records/`);
             
             if (!response.ok) {
                 throw new Error('Network response was not ok');

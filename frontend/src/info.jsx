@@ -59,7 +59,7 @@ function AltModernHeader({ theme, toggleTheme }) {
 
 export default function InfoPage() {
     const { theme, toggleTheme } = useTheme();
-    const apiUrl = 'http://localhost:8000';
+    const apiUrl = '/api';
     const [specs, setSpecs] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
