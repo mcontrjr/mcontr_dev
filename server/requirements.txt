@@ -1,0 +1,16 @@
+# Databases
+psycopg2-binary>=2.9.9
+
+# Testing
+pytest
+
+# Tools
+pypdf
+python-dotenv
+matplotlib
+psutil
+
+# API
+fastapi
+uvicorn
+python-multipart
