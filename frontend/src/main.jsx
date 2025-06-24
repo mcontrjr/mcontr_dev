@@ -12,8 +12,8 @@ export default function MainPage() {
       <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
       <main>
         <HeroSection />
-        <PlaygroundSection />
-        <ToolsSection />
+        {/* <PlaygroundSection /> */}
+        {/* <ToolsSection /> */}
       </main>
       <Footer />
     </>

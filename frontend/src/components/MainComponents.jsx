@@ -38,11 +38,6 @@ function ThemeToggle({ theme, toggleTheme }) {
 function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
   const playground = [
     {
-      title: "Weather Check",
-      description: "Check weather conditions in real-time",
-      href: "/weather"
-    },
-    {
       title: "Guessing Game",
       description: "Test your knowledge with a fun guessing game",
       href: "/guess"
@@ -50,11 +45,11 @@ function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
   ];
 
   const tools = [
-    {
-      title: "Finance Tools",
-      description: "Analyze your financial statements",
-      href: "/finance"
-    },
+    // {
+    //   title: "Finance Tools",
+    //   description: "Analyze your financial statements",
+    //   href: "/finance"
+    // },
     {
       title: "Image Generator",
       description: "Create unique images from text",
@@ -82,6 +77,7 @@ function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
 
         <div className="alt-right-section">
           <nav className="alt-nav">
+
             <div className="alt-nav-item">
               Playground
               <div className="alt-dropdown">
