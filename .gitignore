@@ -13,3 +13,4 @@ server/uploads/
 .env
 server/logs
 notes.md
+server/logs/
