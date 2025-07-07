@@ -1,0 +1,122 @@
+/* Weather Profile Card */
+.weather-profile-card {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.weather-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.weather-location-info {
+  text-align: center;
+}
+
+.weather-location-name {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.weather-location-region {
+  margin: 0.5rem 0 0 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.weather-location-time {
+  margin: 0.25rem 0 0 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.weather-icon-temp-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.weather-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.weather-icon {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.weather-condition-text {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.weather-temperature-container {
+  text-align: center;
+}
+
+.weather-temperature-main {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  line-height: 1;
+  display: flex;
+  align-items: flex-start;
+}
+
+.weather-temperature-unit {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-left: 0.25rem;
+}
+
+.weather-temperature-secondary {
+  margin: 0.5rem 0 0 0;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.weather-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.weather-stat-item {
+  text-align: center;
+}
+
+.weather-stat-title {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.weather-stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.weather-stat-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}

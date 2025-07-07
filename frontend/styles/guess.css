@@ -1,0 +1,196 @@
+/* Game specific components */
+.game-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.game-layout-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  width: 100%;
+}
+
+.game-sidebar {
+  flex: 2;
+  min-width: 500px;
+}
+
+.game-main {
+  flex: 0 0 350px;
+  min-width: 300px;
+}
+
+.game-main-centered {
+  flex: none;
+}
+
+.guess-display {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 200px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  max-width: 180px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.keypad-button {
+  background: var(--accent);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keypad-button:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.keypad-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.keypad-button-small {
+  font-size: 0.9rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.game-stats {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.game-stats p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Game Layout */
+.game-layout-active {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  min-height: 500px;
+}
+
+.game-left-panel {
+  flex: 0 0 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-right-panel {
+  flex: 0 0 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+
+.game-interface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Game Controls */
+.game-controls {
+  text-align: center;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Responsive game layout */
+@media (max-width: 1024px) {
+  .game-layout {
+    flex-direction: column;
+  }
+  
+  .game-sidebar {
+    flex: none;
+    min-width: auto;
+  }
+  
+  .game-layout-active {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .game-left-panel {
+    flex: none;
+    width: 100%;
+    order: 2;
+  }
+  
+  .game-right-panel {
+    flex: none;
+    width: 100%;
+    order: 1;
+    min-height: auto;
+    margin-bottom: 2rem;
+  }
+  
+  .game-layout-centered {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-layout-centered {
+    min-height: 300px;
+    padding: 1rem 0;
+  }
+  
+  .game-interface {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .guess-display {
+    max-width: 250px;
+  }
+  
+  .keypad {
+    max-width: 200px;
+  }
+}

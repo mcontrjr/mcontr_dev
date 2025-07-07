@@ -2,6 +2,8 @@ import '../../styles/stock.css'
 import light from '../assets/light.svg';
 import dark from '../assets/dark.svg';
 import coolImg from '../assets/man_with_dog.jpg';
+import moreLightIcon from '../assets/more_light.svg';
+import moreDarkIcon from '../assets/more_dark.svg';
 import { useState, useEffect } from 'react';
 
 
@@ -307,6 +309,38 @@ function ToolsHeroSection() {
   );
 }
 
+function ContextAccordion({ theme, children = "Content goes here" }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const moreIcon = theme === 'light' ? moreLightIcon : moreDarkIcon;
+
+  return (
+    <div className="context-accordion">
+      <button 
+        className="context-accordion-trigger"
+        onClick={toggleAccordion}
+        aria-expanded={isOpen}
+        aria-label={`${isOpen ? 'Hide' : 'Show'} page context`}
+      >
+        <img 
+          src={moreIcon} 
+          alt="Expand context" 
+          className={`context-accordion-more-icon ${isOpen ? 'open' : ''}`}
+        />
+      </button>
+      <div className={`context-accordion-content ${isOpen ? 'open' : ''}`}>
+        <div className="context-accordion-body">
+          {typeof children === 'string' ? <p>{children}</p> : children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Footer() {
     return (
         <footer className="my-footer">
@@ -320,4 +354,4 @@ function Footer() {
 
 
 
-export {useTheme, ThemeToggle, AltModernHeader, HeroSection, UnifiedCard, PlaygroundHeroSection, ToolsHeroSection, Footer}
+export {useTheme, ThemeToggle, AltModernHeader, HeroSection, UnifiedCard, PlaygroundHeroSection, ToolsHeroSection, ContextAccordion, Footer}

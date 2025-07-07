@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
+import '../styles/random.css';
 import logo from './assets/random-logo.svg';
 import { SearchInterface, TabulatedGallery } from './components/RandomComponents';
-import {useTheme, AltModernHeader, Footer} from './components/MainComponents';
+import {useTheme, AltModernHeader, ContextAccordion, Footer} from './components/MainComponents';
 
 
 // Pexels API image fetching
@@ -154,6 +155,9 @@ export default function RandomPage() {
           </div>
         </section>
       </main>
+      <ContextAccordion theme={theme}>
+        Search and discover images using keywords or browse random collections. Powered by multiple image APIs to provide diverse photo results from various sources and styles.
+      </ContextAccordion>
       <Footer />
     </>
   );

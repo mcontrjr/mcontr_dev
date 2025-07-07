@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
-import { useTheme, AltModernHeader, Footer } from './components/MainComponents';
+import '../styles/guess.css';
+import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/MainComponents';
 import { GameInterface, GameSidebar } from './components/GuessComponents';
 import light_logo from './assets/guess-light-logo.svg';
 import dark_logo from './assets/guess-dark-logo.svg';
@@ -197,6 +198,9 @@ export default function GuessPage() {
           </div>
         </section>
       </main>
+      <ContextAccordion theme={theme}>
+        A number guessing challenge where you try to guess the correct number between 1-100. Can you get it in one attempt? Track your progress and view statistics of your guessing patterns.
+      </ContextAccordion>
       <Footer />
     </>
   )

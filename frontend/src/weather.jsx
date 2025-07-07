@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
+import '../styles/weather.css';
 import error_img from './assets/rainy.svg';
-import {useTheme, AltModernHeader, Footer} from './components/MainComponents';
+import {useTheme, AltModernHeader, ContextAccordion, Footer} from './components/MainComponents';
 import { SearchInterface, WeatherProfileCard, WeatherTable } from './components/WeatherComponents';
 import logo from './assets/weather-logo.svg';
 
@@ -126,6 +127,9 @@ export default function WeatherPage() {
           </div>
         </section>
       </main>
+      <ContextAccordion theme={theme}>
+        Get current weather information for any city or zip code. View temperature, humidity, wind conditions, and other weather details with real-time data from weather APIs.
+      </ContextAccordion>
       <Footer />
     </>
   );

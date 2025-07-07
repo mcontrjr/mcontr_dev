@@ -1,64 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import 'chart.js/auto';
 import '../styles/stock.css';
+import '../styles/finance.css';
 import { FinanceTabs, SupportedBanks, UploadTab } from './components/FinanceComponents.jsx';
+import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/MainComponents';
 import logo from './assets/finance-logo.svg';
-import light from './assets/light.svg';
-import dark from './assets/dark.svg';
 
 const API_URL = "/api";
-
-// Theme Hook
-function useTheme() {
-    const [theme, setTheme] = useState(() => {
-        return localStorage.getItem('theme') || 'light';
-    });
-
-    useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-    }, [theme]);
-
-    const toggleTheme = () => {
-        setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-    };
-
-    return { theme, toggleTheme };
-}
-
-// Theme Toggle Component
-function ThemeToggle({ theme, toggleTheme }) {
-    return (
-        <button 
-            className="theme-toggle" 
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-            {theme === 'light' ? <img src={light} alt="Dark mode" /> : <img src={dark} alt="Light mode" />}
-        </button>
-    );
-}
-
-// Modern Header Component
-function AltModernHeader({ theme, toggleTheme }) {
-    return (
-        <header className="my-header">
-            <div className="my-header-content">
-                <div className="my-logo">
-                    <img src={logo} alt="finance-logo" />
-                    <div className="my-logo-text">mcontr</div>
-                </div>
-                <nav className="my-nav" style={{ gap: '0.5rem' }}>
-                    <a href="/" className="my-button">
-                        Home
-                    </a>
-                    <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-                </nav>
-            </div>
-        </header>
-    );
-}
 
 const Finance = () => {
     const { theme, toggleTheme } = useTheme();
@@ -273,7 +221,7 @@ const fetchRecords = async () => {
 
     if (error) return (
         <>
-            <AltModernHeader theme={theme} toggleTheme={toggleTheme} />
+            <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
             <div className="my-container">
                 <div style={{ textAlign: 'center' }}>
                     <div className="my-card">
@@ -295,12 +243,16 @@ const fetchRecords = async () => {
                     </div>
                 </div>
             </div>
+            <ContextAccordion theme={theme}>
+                Parse your bank statements to understand spending patterns. Upload CSV files from supported banks to view categorized expenses, track spending over time, and analyze your financial habits.
+            </ContextAccordion>
+            <Footer />
         </>
     )
 
     return (
         <>
-            <AltModernHeader theme={theme} toggleTheme={toggleTheme} />
+            <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
             <main>
                 <section className="my-section">
                     <div className="my-container">                        
@@ -366,6 +318,10 @@ const fetchRecords = async () => {
                     </div>
                 </section>
             </main>
+            <ContextAccordion theme={theme}>
+                Parse your bank statements to understand spending patterns. Upload CSV files from supported banks to view categorized expenses, track spending over time, and analyze your financial habits.
+            </ContextAccordion>
+            <Footer />
         </>
     );
 };

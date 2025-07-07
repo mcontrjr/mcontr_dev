@@ -1,60 +1,9 @@
 import { useState, useEffect } from "react";
 import error_img from './assets/error.svg';
 import logo from './assets/info-logo.svg';
-import light from './assets/light.svg';
-import dark from './assets/dark.svg';
 import '../styles/stock.css';
+import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/MainComponents';
 
-function useTheme() {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'light';
-  });
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
-  return { theme, toggleTheme };
-}
-
-// Theme Toggle Component
-function ThemeToggle({ theme, toggleTheme }) {
-  return (
-    <button 
-      className="theme-toggle" 
-      onClick={toggleTheme}
-      aria-label="Toggle theme"
-      title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-    >
-      {theme === 'light' ? <img src={light} alt="Dark mode" /> : <img src={dark} alt="Light mode" />}
-    </button>
-  );
-}
-
-// Modern Header Component
-function AltModernHeader({ theme, toggleTheme }) {
-  return (
-    <header className="my-header">
-      <div className="my-header-content">
-        <div className="my-logo">
-          <img src={logo} alt="mcontr-logo" />
-          <div className="my-logo-text">mcontr</div>
-        </div>
-        <nav className="my-nav" style={{ gap: '0.5rem' }}>
-          <a href="/" className="my-button">
-            Home
-          </a>
-          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-        </nav>
-      </div>
-    </header>
-  );
-}
 
 
 export default function InfoPage() {
@@ -87,7 +36,7 @@ export default function InfoPage() {
     // console.log(`Error state: ${error}`)
     if (loading) return (
         <>
-            <AltModernHeader theme={theme} toggleTheme={toggleTheme} />
+            <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
             <div className="my-container">
                 <div style={{ textAlign: 'center', padding: '2rem' }}>
                     <div style={{ 
@@ -102,24 +51,32 @@ export default function InfoPage() {
                     <p style={{ marginTop: '1rem', color: 'var(--text-secondary)' }}>Loading server stats...</p>
                 </div>
             </div>
+            <ContextAccordion theme={theme}>
+                View real-time system information including CPU usage, memory stats, disk space, and server platform details. Monitor server performance and resource utilization.
+            </ContextAccordion>
+            <Footer />
         </>
     )
 
     if (error) return (
         <>
-            <AltModernHeader theme={theme} toggleTheme={toggleTheme} />
+            <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
             <div className="my-container">
                 <div style={{ textAlign: 'center' }}>
                     <img src={error_img} alt="error" style={{ width: '300px', height: '300px', maxWidth: '100%' }} />
                     <p style={{ color: 'var(--text-secondary)', marginTop: '1rem' }}>{error.message || error}</p>
                 </div>
             </div>
+            <ContextAccordion theme={theme}>
+                View real-time system information including CPU usage, memory stats, disk space, and server platform details. Monitor server performance and resource utilization.
+            </ContextAccordion>
+            <Footer />
         </>
     )
 
     return (
         <>
-            <AltModernHeader theme={theme} toggleTheme={toggleTheme} />
+            <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
             <main>
                 <section className="my-section">
                     <div className="my-container">
@@ -231,6 +188,10 @@ export default function InfoPage() {
                     </div>
                 </section>
             </main>
+            <ContextAccordion theme={theme}>
+                View real-time system information including CPU usage, memory stats, disk space, and server platform details. Monitor server performance and resource utilization.
+            </ContextAccordion>
+            <Footer />
         </>
     );
 }
