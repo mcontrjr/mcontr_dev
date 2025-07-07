@@ -461,8 +461,8 @@ const TabNavigation = ({ activeTab, setActiveTab }) => (
 const MainContent = memo(({ sortedRecords, activeTab, lineData, pieData, totalAmount, requestSort }) => {
     if (sortedRecords.length === 0) {
         return (
-            <div className="text-center">
-                <div className="my-card" style={{ justifyContent: 'center', alignItems: 'center', maxWidth: '50%', margin: '0 auto' }}>
+            <div className="finance-card-container">
+                <div className="my-card finance-card-centered">
                     <div className="my-card-body">
                         <h3 style={{ color: 'var(--text-primary)' }}>No purchases for selected months</h3>
                         <img src={noPurchases} className="custom-img" alt="No purchases" style={{ maxWidth: '200px', marginTop: '1rem' }} />
@@ -473,9 +473,9 @@ const MainContent = memo(({ sortedRecords, activeTab, lineData, pieData, totalAm
     }
 
     return (
-        <div className="gallery-tab-pane active">
+        <div className="finance-card-container">
             {activeTab === 'amountOverTime' && (
-                <div className="my-card finance-chart-card">
+                <div className="my-card finance-card-chart">
                     <div className="my-card-header">
                         <h3 className="my-card-title">Weekly Purchases & Payments</h3>
                     </div>
@@ -485,7 +485,7 @@ const MainContent = memo(({ sortedRecords, activeTab, lineData, pieData, totalAm
                 </div>
             )}
             {activeTab === 'distribution' && (
-                <div className="my-card finance-chart-card">
+                <div className="my-card finance-card-chart">
                     <div className="my-card-header">
                         <h3 className="my-card-title">Spending Distribution & Metrics</h3>
                         <p style={{ color: 'var(--text-secondary)', margin: 0 }}>Purchase categories and financial overview</p>
@@ -499,7 +499,7 @@ const MainContent = memo(({ sortedRecords, activeTab, lineData, pieData, totalAm
                 </div>
             )}
             {activeTab === 'records' && (
-                <div className="my-card finance-chart-card">
+                <div className="my-card finance-card-chart">
                     <div className="my-card-body">
                         <RecordTable
                             sortedRecords={sortedRecords}
@@ -523,15 +523,17 @@ const FinanceTabs = ({ activeTab, bankName, bankNames, setBankName, setActiveTab
             <div className="finance-layout">
                 {/* Left Sidebar - Controls (20% width) */}
                 <div className="finance-sidebar">
-                    <BankSelector 
-                        bankName={bankName}
-                        bankNames={bankNames}
-                        setBankName={setBankName}
-                    />
-                    <MonthSelector
-                        selectedMonths={selectedMonths}
-                        setSelectedMonths={setSelectedMonths}
-                    />
+                    <div className="finance-card-sidebar">
+                        <BankSelector 
+                            bankName={bankName}
+                            bankNames={bankNames}
+                            setBankName={setBankName}
+                        />
+                        <MonthSelector
+                            selectedMonths={selectedMonths}
+                            setSelectedMonths={setSelectedMonths}
+                        />
+                    </div>
                 </div>
                 
                 {/* Main Content Area (80% width) */}
@@ -637,7 +639,7 @@ const UploadTab = ({uploadMessage, setUploadMessage, fetchRecords, fetchBankName
 );
 
 const SupportedBanks = () => (
-    <div className="my-card finance-supported-banks text-center">
+    <div className="my-card finance-card-centered text-center">
         <div className="my-card-header">
             <h4 className="my-card-title">Supported Banks</h4>
         </div>
