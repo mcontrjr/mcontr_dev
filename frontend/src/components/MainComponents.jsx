@@ -59,7 +59,7 @@ function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
   const tools = [
     {
       title: "Statement Parser",
-      href: "/finance"
+      href: "/parser"
     }
   ];
 
@@ -273,7 +273,7 @@ function ToolsHeroSection() {
     {
       title: "Statement Parser",
       description: "Upload your bank statements and find out where your money is going.",
-      route: "/finance",
+      route: "/parser",
       status: "available"
     }
   ];

@@ -156,7 +156,8 @@ export default function RandomPage() {
         </section>
       </main>
       <ContextAccordion theme={theme}>
-        Search and discover images using keywords or browse random collections. Powered by multiple image APIs to provide diverse photo results from various sources and styles.
+        This page to me actually started from a coworker at work (shout out Augs!) who mentioned this cool free API called LoremFlickr to generate placeholder avatars.
+        One of the images was so bizarre I had to play with it and that's how I got the image on the landing page! Try to find a cool image!
       </ContextAccordion>
       <Footer />
     </>

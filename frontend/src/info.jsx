@@ -189,7 +189,7 @@ export default function InfoPage() {
                 </section>
             </main>
             <ContextAccordion theme={theme}>
-                View real-time system information including CPU usage, memory stats, disk space, and server platform details. Monitor server performance and resource utilization.
+                I saw a server info page in a youtube video I saw and seemed like a very good idea considering the server this is hosted on is a Raspberry Pi in my living room!
             </ContextAccordion>
             <Footer />
         </>

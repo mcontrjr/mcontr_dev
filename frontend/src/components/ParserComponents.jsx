@@ -16,7 +16,7 @@ const Header = () => (
     <>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
             <h1>MyParser</h1>
-            <a href="https://github.com/mcontrjr/playground/tree/main/projects/finance" target="_blank">
+            <a href="https://github.com/mcontrjr/playground/tree/main/projects/parser" target="_blank">
                 <img src={walletLogo} className="logo react" alt="Wallet logo" />
             </a>
         </div>
@@ -31,7 +31,7 @@ const BankSelector = ({ bankName, bankNames, setBankName }) => (
         <div className="my-card-body">
             {bankNames.length === 0 ? (
                 // No banks case
-                <div className="finance-select-dialog">
+                <div className="parser-select-dialog">
                     <button
                         className="my-button"
                         style={{
@@ -49,7 +49,7 @@ const BankSelector = ({ bankName, bankNames, setBankName }) => (
                 </div>
             ) : (
                 // One or more banks case
-                <div className="finance-select-dialog">
+                <div className="parser-select-dialog">
                     {/* ALL option when more than one bank */}
                     {bankNames.length > 1 && (
                         <button
@@ -146,7 +146,7 @@ const AmountBar = ({ lineData }) => {
     const weeklyData = processWeeklyData(lineData);
 
     return (
-        <div className="finance-chart-container">
+        <div className="parser-chart-container">
             <Bar
                 data={weeklyData}
                 options={{
@@ -213,9 +213,9 @@ const MonthSelector = ({ selectedMonths, setSelectedMonths }) => (
             <h4 className="my-card-title">Select Months</h4>
         </div>
         <div className="my-card-body" style={{ textAlign: 'left', padding: '1rem' }}>
-            <div className="finance-month-grid">
+            <div className="parser-month-grid">
                 {['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'].map((month) => (
-                    <label key={month} className="finance-month-item">
+                    <label key={month} className="parser-month-item">
                         <input
                             type="checkbox"
                             value={month}
@@ -362,7 +362,7 @@ const RecordTable = ({ sortedRecords, requestSort }) => {
     );
 
     return (
-        <div className="finance-records-table">
+        <div className="parser-records-table">
             <div className="mb-3">
                 <h3 style={{ color: 'var(--text-primary)', marginBottom: '1rem' }}>All Statement Records [{filteredRecords.length}]</h3>
                 <input
@@ -461,8 +461,8 @@ const TabNavigation = ({ activeTab, setActiveTab }) => (
 const MainContent = memo(({ sortedRecords, activeTab, lineData, pieData, totalAmount, requestSort }) => {
     if (sortedRecords.length === 0) {
         return (
-            <div className="finance-card-container">
-                <div className="my-card finance-card-centered">
+            <div className="parser-card-container">
+                <div className="my-card parser-card-centered">
                     <div className="my-card-body">
                         <h3 style={{ color: 'var(--text-primary)' }}>No purchases for selected months</h3>
                         <img src={noPurchases} className="custom-img" alt="No purchases" style={{ maxWidth: '200px', marginTop: '1rem' }} />
@@ -473,9 +473,9 @@ const MainContent = memo(({ sortedRecords, activeTab, lineData, pieData, totalAm
     }
 
     return (
-        <div className="finance-card-container">
+        <div className="parser-card-container">
             {activeTab === 'amountOverTime' && (
-                <div className="my-card finance-card-chart">
+                <div className="my-card parser-card-chart">
                     <div className="my-card-header">
                         <h3 className="my-card-title">Weekly Purchases & Payments</h3>
                     </div>
@@ -485,7 +485,7 @@ const MainContent = memo(({ sortedRecords, activeTab, lineData, pieData, totalAm
                 </div>
             )}
             {activeTab === 'distribution' && (
-                <div className="my-card finance-card-chart">
+                <div className="my-card parser-card-chart">
                     <div className="my-card-header">
                         <h3 className="my-card-title">Spending Distribution & Metrics</h3>
                         <p style={{ color: 'var(--text-secondary)', margin: 0 }}>Purchase categories and financial overview</p>
@@ -499,7 +499,7 @@ const MainContent = memo(({ sortedRecords, activeTab, lineData, pieData, totalAm
                 </div>
             )}
             {activeTab === 'records' && (
-                <div className="my-card finance-card-chart">
+                <div className="my-card parser-card-chart">
                     <div className="my-card-body">
                         <RecordTable
                             sortedRecords={sortedRecords}
@@ -512,7 +512,7 @@ const MainContent = memo(({ sortedRecords, activeTab, lineData, pieData, totalAm
     );
 });
 
-const FinanceTabs = ({ activeTab, bankName, bankNames, setBankName, setActiveTab, lineData, pieData, totalAmount, sortedRecords, searchText, setSearchText, requestSort, selectedMonths, setSelectedMonths, loading }) => (
+const ParserTabs = ({ activeTab, bankName, bankNames, setBankName, setActiveTab, lineData, pieData, totalAmount, sortedRecords, searchText, setSearchText, requestSort, selectedMonths, setSelectedMonths, loading }) => (
     <div className="gallery-tabs-container">
         <TabNavigation
             activeTab={activeTab}
@@ -520,10 +520,10 @@ const FinanceTabs = ({ activeTab, bankName, bankNames, setBankName, setActiveTab
         />
         
         <div className="gallery-tab-content">
-            <div className="finance-layout">
+            <div className="parser-layout">
                 {/* Left Sidebar - Controls (20% width) */}
-                <div className="finance-sidebar">
-                    <div className="finance-card-sidebar">
+                <div className="parser-sidebar">
+                    <div className="parser-card-sidebar">
                         <BankSelector 
                             bankName={bankName}
                             bankNames={bankNames}
@@ -537,7 +537,7 @@ const FinanceTabs = ({ activeTab, bankName, bankNames, setBankName, setActiveTab
                 </div>
                 
                 {/* Main Content Area (80% width) */}
-                <div className="finance-main-content">
+                <div className="parser-main-content">
                     {loading ? (
                         <div style={{ 
                             display: 'flex', 
@@ -639,7 +639,7 @@ const UploadTab = ({uploadMessage, setUploadMessage, fetchRecords, fetchBankName
 );
 
 const SupportedBanks = () => (
-    <div className="my-card finance-card-centered text-center">
+    <div className="my-card parser-card-centered text-center">
         <div className="my-card-header">
             <h4 className="my-card-title">Supported Banks</h4>
         </div>
@@ -680,4 +680,4 @@ const SupportedBanks = () => (
     </div>
 );
 
-export { Header, BankSelector, FinanceTabs, SupportedBanks, UploadTab };
+export { Header, BankSelector, ParserTabs, SupportedBanks, UploadTab };

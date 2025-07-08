@@ -199,7 +199,7 @@ export default function GuessPage() {
         </section>
       </main>
       <ContextAccordion theme={theme}>
-        A number guessing challenge where you try to guess the correct number between 1-100. Can you get it in one attempt? Track your progress and view statistics of your guessing patterns.
+        You got to start somewhere right? It was either this or a to-do list but this was way more fun to build and iterate on. Maybe Tic-Tac-Toe is next...
       </ContextAccordion>
       <Footer />
     </>

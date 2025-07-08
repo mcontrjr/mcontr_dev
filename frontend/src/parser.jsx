@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import 'chart.js/auto';
 import '../styles/stock.css';
-import '../styles/finance.css';
-import { FinanceTabs, SupportedBanks, UploadTab } from './components/FinanceComponents.jsx';
-import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/MainComponents';
-import logo from './assets/finance-logo.svg';
+import '../styles/parser.css';
+import { ParserTabs, SupportedBanks, UploadTab } from './components/ParserComponents.jsx';
+import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/MainComponents.jsx';
+import logo from './assets/parser-logo.svg';
 
 const API_URL = "/api";
 
-const Finance = () => {
+const Parser = () => {
     const { theme, toggleTheme } = useTheme();
     const [bankName, setBankName] = useState('');
     const [bankNames, setBankNames] = useState([]);
@@ -228,7 +228,7 @@ const fetchRecords = async () => {
                         <div className="my-card-body">
                             <h3 style={{ color: 'var(--text-primary)' }}>Error Loading Data</h3>
                             <p style={{ color: 'var(--text-secondary)', marginTop: '1rem' }}>
-                                {error.message || 'Unable to connect to the finance server. Please try again.'}
+                                {error.message || 'Unable to connect to the parser server. Please try again.'}
                             </p>
                             <button 
                                 className="my-button mt-2" 
@@ -256,7 +256,7 @@ const fetchRecords = async () => {
             <main>
                 <section className="my-section">
                     <div className="my-container">                        
-                        {/* Main Finance Card */}
+                        {/* Main Parser Card */}
                         <div className="gallery-tabs-container animate-fade-in-up">
                             <div className="gallery-tabs-header">
                                 <button
@@ -280,7 +280,7 @@ const fetchRecords = async () => {
                                 {activeFunctionTab === 'analyze' && (
                                     <div className="gallery-tab-pane active">
                                         
-                                        <FinanceTabs
+                                        <ParserTabs
                                             activeTab={activeTab}
                                             bankName={bankName}
                                             bankNames={bankNames}
@@ -319,11 +319,12 @@ const fetchRecords = async () => {
                 </section>
             </main>
             <ContextAccordion theme={theme}>
-                Parse your bank statements to understand spending patterns. Upload CSV files from supported banks to view categorized expenses, track spending over time, and analyze your financial habits.
+                Believe it or not this started as a python script because why try to parse bank statements manually?
+                As someone who uses various cards for specific reasons this makes it seemsless to parse them in one place and see where my money is going.
             </ContextAccordion>
             <Footer />
         </>
     );
 };
 
-export default Finance;
+export default Parser;

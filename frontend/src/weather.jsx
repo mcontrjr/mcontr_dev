@@ -128,7 +128,8 @@ export default function WeatherPage() {
         </section>
       </main>
       <ContextAccordion theme={theme}>
-        Get current weather information for any city or zip code. View temperature, humidity, wind conditions, and other weather details with real-time data from weather APIs.
+        As I was looking for free APIs I found this interesting one with weather data.
+        What better way to practice API integration and also learn React? 
       </ContextAccordion>
       <Footer />
     </>
