@@ -45,4 +45,9 @@ window.getComputedStyle = vi.fn().mockImplementation((element) => {
 });
 
 // Mock fetch for API calls
-global.fetch = vi.fn();
+global.fetch = vi.fn().mockImplementation(() => 
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve({ records: [] }),
+  })
+);

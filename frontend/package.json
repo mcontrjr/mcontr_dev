@@ -10,7 +10,14 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:layout": "playwright test test/e2e/layout/",
+    "test:parser": "playwright test test/e2e/parser/",
+    "test:all": "npm run test && npm run test:e2e"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -31,12 +38,15 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+    "@playwright/test": "^1.53.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.6.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "@vitest/coverage-v8": "^3.2.4",
     "concurrently": "^9.1.0",
     "eslint": "^9.13.0",
     "eslint-plugin-react": "^7.37.2",
@@ -44,6 +54,7 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
     "jsdom": "^26.1.0",
+    "playwright": "^1.53.2",
     "vite": "^5.4.10",
     "vitest": "^3.2.4"
   }
