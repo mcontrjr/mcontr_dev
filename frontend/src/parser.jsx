@@ -5,7 +5,6 @@ import '../styles/parser.css';
 import { useTheme, AltModernHeader } from './components/MainComponents.jsx';
 import UploadSection from './components/UploadSection';
 import BreakdownSection from './components/BreakdownSection';
-import { SupportedBanks } from './components/ParserComponents.jsx';
 import logo from './assets/parser-logo.svg';
 
 import { useParserData } from './hooks/useParserData';
@@ -30,10 +29,16 @@ const Parser = () => {
         setSelectedMonths,
         requestSort,
         uploadFiles,
+        clearData,
+        fetchRecords,
+        fetchBankNames,
         retryFetch
     } = useParserData();
 
-    const handleUploadComplete = useCallback((data) => {
+    const handleUploadComplete = useCallback(async (data) => {
+        // Refresh data from backend
+        await Promise.all([fetchRecords(), fetchBankNames()]);
+        
         setShowBreakdown(true);
         // Scroll to breakdown section
         setTimeout(() => {
@@ -42,7 +47,17 @@ const Parser = () => {
                 breakdownSection.scrollIntoView({ behavior: 'smooth' });
             }
         }, 500);
-    }, []);
+    }, [fetchRecords, fetchBankNames]);
+
+    const handleClearData = useCallback(async () => {
+        const success = await clearData();
+        if (success) {
+            setShowBreakdown(false);
+            setUploadMessage('All data cleared successfully. Upload new statements to get started.');
+        } else {
+            setUploadMessage('Error clearing data. Please try again.');
+        }
+    }, [clearData]);
 
     if (error) return (
         <>
@@ -83,18 +98,12 @@ const Parser = () => {
         <>
             <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
             <div className="parser-container">
-                <div className="parser-header">
-                    <h1>Financial Statement Parser</h1>
-                    <p>Upload your bank statements and get instant insights into your spending patterns</p>
-                </div>
                 
                 <UploadSection 
                     onUploadComplete={handleUploadComplete}
                     uploadMessage={uploadMessage}
                     setUploadMessage={setUploadMessage}
                 />
-                
-                <SupportedBanks />
                 
                 {(showBreakdown || sortedRecords.length > 0) && (
                     <BreakdownSection
@@ -109,6 +118,7 @@ const Parser = () => {
                         totalAmount={totalAmount}
                         requestSort={requestSort}
                         loading={loading}
+                        onClearData={handleClearData}
                     />
                 )}
             </div>

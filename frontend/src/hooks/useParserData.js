@@ -104,6 +104,39 @@ export const useParserData = () => {
     }));
   }, []);
 
+  const clearData = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const response = await fetch(`${API_URL}/clear/`, {
+        method: 'POST',
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to clear data');
+      }
+      
+      // Reset all local state
+      setRecords([]);
+      setBankNames([]);
+      setBankName('');
+      setSelectedMonths(DEFAULT_SELECTED_MONTHS);
+      setSortConfig({ key: 'date', direction: SORT_DIRECTIONS.ASCENDING });
+      
+      // Refresh bank names (should be empty now)
+      await fetchBankNames();
+      
+      return true; // Success
+    } catch (error) {
+      console.error('Error clearing data:', error);
+      setError(error);
+      return false; // Failure
+    } finally {
+      setLoading(false);
+    }
+  }, [fetchBankNames]);
+
   useEffect(() => {
     fetchBankNames();
   }, [fetchBankNames]);
@@ -145,6 +178,7 @@ export const useParserData = () => {
     fetchRecords,
     fetchBankNames,
     uploadFiles,
+    clearData,
     
     // Utilities
     retryFetch: () => {

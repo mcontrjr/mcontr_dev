@@ -346,6 +346,92 @@
   transform: scale(1.1);
 }
 
+.pdf-thumbnail-retry {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(59, 130, 246, 0.95);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin-right: 0.5rem;
+}
+
+.pdf-thumbnail-retry:hover {
+  background: #3b82f6;
+  transform: scale(1.1);
+}
+
+/* Upload Status Badge */
+.upload-status-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+
+.upload-status-badge.uploading {
+  background: rgba(251, 146, 60, 0.9);
+  color: white;
+  border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+.upload-status-badge.success {
+  background: rgba(34, 197, 94, 0.9);
+  color: white;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.upload-status-badge.error {
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Status Spinner */
+.status-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Uploaded Files Grid */
+.uploaded-files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
+.uploaded-file-thumbnail {
+  width: 200px;
+  transition: transform 0.3s ease;
+}
+
+.uploaded-file-thumbnail:hover {
+  transform: translateY(-4px);
+}
+
 .pdf-thumbnail-info {
   padding: 1rem;
   border-top: 1px solid var(--border);
@@ -778,6 +864,41 @@
   transform: translateY(-2px);
 }
 
+/* Compact Supported Banks */
+.supported-banks-compact {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.supported-banks-compact .my-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.supported-banks-compact .my-card-header {
+  padding: 0 0 0.75rem 0;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.supported-banks-compact .my-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.supported-banks-compact .my-card-body {
+  padding: 0;
+}
+
 /* ===================================================================
    ANIMATIONS
    =================================================================== */
@@ -863,6 +984,21 @@
   background: rgba(34, 197, 94, 0.1);
   border-color: rgba(34, 197, 94, 0.3);
   color: #22c55e;
+}
+
+.filter-action-btn.clear-data {
+  background: rgba(220, 38, 127, 0.1);
+  border-color: rgba(220, 38, 127, 0.3);
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.filter-action-btn.clear-data:hover:not(:disabled) {
+  background: rgba(220, 38, 127, 0.2);
+  border-color: rgba(220, 38, 127, 0.5);
+  color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 127, 0.2);
 }
 
 .filters-row {
@@ -1265,6 +1401,10 @@
   .uploaded-files-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
+  
+  .uploaded-file-thumbnail {
+    width: 150px;
+  }
 
   .pdf-thumbnail-container {
     width: 150px;
@@ -1273,6 +1413,20 @@
 
   .supported-banks ul {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  .supported-banks-compact {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+  }
+  
+  .supported-banks-compact .my-card-header {
+    padding: 0 0 0.5rem 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .supported-banks-compact .my-card-title {
+    font-size: 0.9rem;
   }
 
   .records-search-input {
@@ -1339,6 +1493,14 @@
   
   .filters-actions {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .filter-action-btn {
+    min-width: auto;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
   }
   
   .filters-row {
@@ -1402,6 +1564,10 @@
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 0.75rem;
   }
+  
+  .uploaded-file-thumbnail {
+    width: 120px;
+  }
 
   .pdf-thumbnail-container {
     width: 120px;
@@ -1443,6 +1609,15 @@
   .supported-banks ul {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 0.75rem;
+  }
+  
+  .supported-banks-compact {
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+  }
+  
+  .supported-banks-compact .my-card-title {
+    font-size: 0.85rem;
   }
 
   .supported-banks li {

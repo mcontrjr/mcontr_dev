@@ -3,7 +3,7 @@ import { BankSelector, MonthSelector } from './ParserComponents';
 import { AmountBar, AmountPie, RecordTable } from './ChartComponents';
 import { CHART_DIMENSIONS } from '../constants/parserConstants';
 
-const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelectedMonths }) => {
+const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelectedMonths, onClearData }) => {
   const monthOptions = [
     { value: "01", label: "Jan" },
     { value: "02", label: "Feb" },
@@ -29,6 +29,14 @@ const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelect
 
   const clearAllMonths = () => setSelectedMonths([]);
   const selectAllMonths = () => setSelectedMonths(monthOptions.map(m => m.value));
+  
+  const handleClearData = async () => {
+    if (window.confirm('Are you sure you want to clear all uploaded data? This action cannot be undone.')) {
+      if (onClearData) {
+        await onClearData();
+      }
+    }
+  };
 
   return (
     <div className="breakdown-filters-container">
@@ -36,11 +44,18 @@ const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelect
         <h3>Filter Data</h3>
         <div className="filters-actions">
           <button 
+            className="filter-action-btn clear-data" 
+            onClick={handleClearData}
+            title="Clear all uploaded data from backend"
+          >
+            Clear Data
+          </button>
+          <button 
             className="filter-action-btn clear" 
             onClick={clearAllMonths}
             disabled={selectedMonths.length === 0}
           >
-            Clear All
+            Clear Filters
           </button>
           <button 
             className="filter-action-btn select" 
@@ -134,7 +149,8 @@ const BreakdownSection = ({
   pieData,
   totalAmount,
   requestSort,
-  loading 
+  loading,
+  onClearData
 }) => {
   const [activeCard, setActiveCard] = useState('chart');
 
@@ -175,6 +191,7 @@ const BreakdownSection = ({
         setBankName={setBankName}
         selectedMonths={selectedMonths}
         setSelectedMonths={setSelectedMonths}
+        onClearData={onClearData}
       />
 
       <div className="breakdown-content">
