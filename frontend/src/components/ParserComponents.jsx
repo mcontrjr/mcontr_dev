@@ -1,16 +1,22 @@
-/* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useState, memo, useMemo, useCallback } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
-import { memo } from 'react';
-import walletLogo from '../assets/wallet.svg'
-import amexLogo from '../assets/amex.svg'
-import citiLogo from '../assets/citi.svg'
-import discoverLogo from '../assets/discover.svg'
-import noPurchases from '../assets/no-purchases.svg'
+import walletLogo from '../assets/wallet.svg';
+import amexLogo from '../assets/amex.svg';
+import citiLogo from '../assets/citi.svg';
+import discoverLogo from '../assets/discover.svg';
+import noPurchases from '../assets/no-purchases.svg';
 import 'chart.js/auto';
-import '../../styles/stock.css'
+import '../../styles/stock.css';
 
-const API_URL = "/api";
+import { useThemeColors } from '../hooks/useThemeColors';
+import { processWeeklyData, filterRecordsBySearch } from '../utils/dataProcessing';
+import { 
+  API_URL, 
+  CHART_COLORS, 
+  CHART_DIMENSIONS, 
+  MONTHS, 
+  CHART_CONFIG 
+} from '../constants/parserConstants';
 
 const Header = () => (
     <>
@@ -24,7 +30,7 @@ const Header = () => (
 );
 
 const BankSelector = ({ bankName, bankNames, setBankName }) => (
-    <div className="my-card mb-2">
+    <div className="my-card">
         <div className="my-card-header">
             <h4 className="my-card-title">Bank Selector</h4>
         </div>
@@ -84,162 +90,121 @@ const BankSelector = ({ bankName, bankNames, setBankName }) => (
     </div>
 );
 
-const AmountBar = ({ lineData }) => {
-    const getThemeColors = () => {
-        const computedStyle = getComputedStyle(document.documentElement);
-        return {
-            primary: computedStyle.getPropertyValue('--text-primary').trim(),
-            secondary: computedStyle.getPropertyValue('--text-secondary').trim(),
-            border: computedStyle.getPropertyValue('--border').trim(),
-        };
-    };
-
-    const colors = getThemeColors();
+const AmountBar = memo(({ lineData }) => {
+    const colors = useThemeColors();
     
-    // Process data into weekly chunks
-    const processWeeklyData = (data) => {
-        const weeklyData = {};
-        const monthNames = [
-            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-        ];
-
-        data.labels.forEach((date, index) => {
-            const [year, month, day] = date.split('-');
-            const weekNum = Math.ceil(parseInt(day) / 7);
-            const monthIndex = parseInt(month, 10) - 1;
-            const monthName = monthNames[monthIndex] || month;
-            const weekKey = `${year}-${month}-W${weekNum}`;
-
-            if (!weeklyData[weekKey]) {
-            weeklyData[weekKey] = {
-                purchases: 0,
-                payments: 0,
-                label: `${monthName} Week ${weekNum}`
-            };
-            }
-
-            // Add purchases and payments
-            weeklyData[weekKey].purchases += data.datasets[0].data[index] || 0;
-            weeklyData[weekKey].payments += Math.abs(data.datasets[1].data[index] || 0);
-        });
+    const weeklyData = useMemo(() => {
+        if (!lineData?.labels?.length) return { labels: [], datasets: [] };
         
+        const processed = processWeeklyData(lineData);
         return {
-            labels: Object.values(weeklyData).map(week => week.label),
-            datasets: [
-                {
-                    label: 'Purchases',
-                    data: Object.values(weeklyData).map(week => week.purchases),
-                    backgroundColor: '#f4d35e', // Yellow from logo
-                    barPercentage: 0.8,
-                },
-                {
-                    label: 'Payments',
-                    data: Object.values(weeklyData).map(week => week.payments),
-                    backgroundColor: '#006600', // Green from logo
-                    barPercentage: 0.8,
-                }
-            ]
+            ...processed,
+            datasets: processed.datasets.map((dataset, index) => ({
+                ...dataset,
+                backgroundColor: index === 0 ? CHART_COLORS.accent : CHART_COLORS.secondary,
+                barPercentage: CHART_CONFIG.barPercentage,
+            }))
         };
-    };
+    }, [lineData]);
 
-    const weeklyData = processWeeklyData(lineData);
+    const chartOptions = useMemo(() => ({
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                grid: {
+                    color: colors.border
+                },
+                ticks: {
+                    color: colors.secondary,
+                    font: {
+                        family: CHART_CONFIG.fontFamily
+                    }
+                }
+            },
+            y: {
+                grid: {
+                    color: colors.border
+                },
+                ticks: {
+                    color: colors.secondary,
+                    callback: (value) => `$${value.toLocaleString()}`,
+                    font: {
+                        family: CHART_CONFIG.fontFamily
+                    }
+                }
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const value = context.raw;
+                        return `${context.dataset.label}: $${value.toLocaleString()}`;
+                    }
+                },
+                titleFont: {
+                    family: CHART_CONFIG.fontFamily
+                },
+                bodyFont: {
+                    family: CHART_CONFIG.fontFamily
+                }
+            },
+            legend: {
+                labels: {
+                    color: colors.primary,
+                    font: {
+                        family: CHART_CONFIG.fontFamily
+                    }
+                }
+            }
+        }
+    }), [colors]);
 
     return (
         <div className="parser-chart-container">
-            <Bar
-                data={weeklyData}
-                options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            grid: {
-                                color: colors.border
-                            },
-                            ticks: {
-                                color: colors.secondary,
-                                font: {
-                                    family: '"Roboto Mono", monospace'
-                                }
-                            }
-                        },
-                        y: {
-                            grid: {
-                                color: colors.border
-                            },
-                            ticks: {
-                                color: colors.secondary,
-                                callback: (value) => `$${value.toLocaleString()}`,
-                                font: {
-                                    family: '"Roboto Mono", monospace'
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    const value = context.raw;
-                                    return `${context.dataset.label}: $${value.toLocaleString()}`;
-                                }
-                            },
-                            titleFont: {
-                                family: '"Roboto Mono", monospace'
-                            },
-                            bodyFont: {
-                                family: '"Roboto Mono", monospace'
-                            }
-                        },
-                        legend: {
-                            labels: {
-                                color: colors.primary,
-                                font: {
-                                    family: '"Roboto Mono", monospace'
-                                }
-                            }
-                        }
-                    }
-                }}
-            />
+            <Bar data={weeklyData} options={chartOptions} />
         </div>
     );
-};
+});
 
-const MonthSelector = ({ selectedMonths, setSelectedMonths }) => (
-    <div className="my-card">
-        <div className="my-card-header">
-            <h4 className="my-card-title">Select Months</h4>
-        </div>
-        <div className="my-card-body" style={{ textAlign: 'left', padding: '1rem' }}>
-            <div className="parser-month-grid">
-                {['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'].map((month) => (
-                    <label key={month} className="parser-month-item">
-                        <input
-                            type="checkbox"
-                            value={month}
-                            name={month}
-                            checked={selectedMonths.includes(month)}
-                            onChange={({ target: { value, checked } }) => {
-                                setSelectedMonths(prev => {
-                                    const newMonths = checked 
-                                        ? [...prev, value] 
-                                        : prev.filter(month => month !== value);
-                                    return newMonths;
-                                });
-                            }}
-                            style={{ accentColor: 'var(--accent)' }}
-                        />
-                        <span style={{ fontSize: '0.8rem' }}>
-                            {new Date(0, month - 1).toLocaleString('default', { month: 'short' })}
-                        </span>
-                    </label>
-                ))}
+const MonthSelector = memo(({ selectedMonths, setSelectedMonths }) => {
+    const handleMonthChange = useCallback(({ target: { value, checked } }) => {
+        setSelectedMonths(prev => {
+            const newMonths = checked 
+                ? [...prev, value] 
+                : prev.filter(month => month !== value);
+            return newMonths;
+        });
+    }, [setSelectedMonths]);
+
+    return (
+        <div className="mb-3">
+            <div className="my-card-header">
+                <h4 className="my-card-title">Select Months</h4>
+            </div>
+            <div className="my-card-body" style={{ textAlign: 'left', padding: '1rem' }}>
+                <div className="parser-month-grid">
+                    {MONTHS.map(({ value, label }) => (
+                        <label key={value} className="parser-month-item">
+                            <input
+                                type="checkbox"
+                                value={value}
+                                name={value}
+                                checked={selectedMonths.includes(value)}
+                                onChange={handleMonthChange}
+                                style={{ accentColor: 'var(--accent)' }}
+                            />
+                            <span style={{ fontSize: '0.8rem' }}>
+                                {label}
+                            </span>
+                        </label>
+                    ))}
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+});
 
 const AmountPie = ({ pieData, totalAmount }) => {
     const getThemeColors = () => {
@@ -331,7 +296,7 @@ const AmountPie = ({ pieData, totalAmount }) => {
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem 0', borderBottom: '1px solid var(--border)' }}>
                                 <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Net Spending:</span>
-                                <span style={{ color: totalAmount.netSpending.includes('-') ? '#006600' : 'var(--text-primary)', fontWeight: '600' }}>{totalAmount.netSpending}</span>
+                                <span style={{ color: totalAmount.netSpending?.includes('-') ? CHART_COLORS.secondary : 'var(--text-primary)', fontWeight: '600' }}>{totalAmount.netSpending}</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem 0', borderBottom: '1px solid var(--border)' }}>
                                 <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Avg Purchase:</span>
@@ -354,12 +319,17 @@ const AmountPie = ({ pieData, totalAmount }) => {
     );
 };
 
-const RecordTable = ({ sortedRecords, requestSort }) => {
+const RecordTable = memo(({ sortedRecords, requestSort }) => {
     const [searchText, setSearchText] = useState('');
 
-    const filteredRecords = sortedRecords.filter(record =>
-        record.description.toLowerCase().includes(searchText.toLowerCase())
+    const filteredRecords = useMemo(() => 
+        filterRecordsBySearch(sortedRecords, searchText),
+        [sortedRecords, searchText]
     );
+
+    const handleSearchChange = useCallback((e) => {
+        setSearchText(e.target.value);
+    }, []);
 
     return (
         <div className="parser-records-table">
@@ -369,7 +339,7 @@ const RecordTable = ({ sortedRecords, requestSort }) => {
                     type="text"
                     placeholder="Search records..."
                     value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
+                    onChange={handleSearchChange}
                     style={{
                         width: '100%',
                         maxWidth: '500px',
@@ -378,13 +348,13 @@ const RecordTable = ({ sortedRecords, requestSort }) => {
                         borderRadius: '8px',
                         backgroundColor: 'var(--bg-card)',
                         color: 'var(--text-primary)',
-                        fontFamily: 'inherit',
+                        fontFamily: CHART_CONFIG.fontFamily,
                         fontSize: '1rem'
                     }}
                 />
             </div>
             
-            <div className="custom-table-container" style={{ maxHeight: '600px', overflowY: 'auto' }}>
+            <div className="custom-table-container" style={{ maxHeight: `${CHART_DIMENSIONS.tableMaxHeight}px`, overflowY: 'auto' }}>
                 <table className="custom-table">
                     <thead style={{ position: 'sticky', top: 0, backgroundColor: 'var(--bg-secondary)', zIndex: 1 }}>
                         <tr>
@@ -409,7 +379,7 @@ const RecordTable = ({ sortedRecords, requestSort }) => {
                                 <td style={{ padding: '1rem', maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis' }}>{record.description}</td>
                                 <td style={{ 
                                     padding: '1rem',
-                                    color: record.amount >= 0 ? 'var(--text-primary)' : '#006600',
+                                    color: record.amount >= 0 ? 'var(--text-primary)' : CHART_COLORS.secondary,
                                     fontWeight: '600',
                                     whiteSpace: 'nowrap'
                                 }}>
@@ -433,9 +403,9 @@ const RecordTable = ({ sortedRecords, requestSort }) => {
             </div>
         </div>
     );
-};
+});
 
-const TabNavigation = ({ activeTab, setActiveTab }) => (
+const TabNavigation = memo(({ activeTab, setActiveTab }) => (
     <div className="gallery-tabs-header">
         <button
             className={`gallery-tab ${activeTab === 'amountOverTime' ? 'active' : ''}`}
@@ -456,7 +426,7 @@ const TabNavigation = ({ activeTab, setActiveTab }) => (
             Records
         </button>
     </div>
-);
+));
 
 const MainContent = memo(({ sortedRecords, activeTab, lineData, pieData, totalAmount, requestSort }) => {
     if (sortedRecords.length === 0) {
@@ -570,7 +540,7 @@ const ParserTabs = ({ activeTab, bankName, bankNames, setBankName, setActiveTab,
     </div>
 );
 
-const UploadTab = ({uploadMessage, setUploadMessage, fetchRecords, fetchBankNames}) => (
+const UploadTab = memo(({uploadMessage, setUploadMessage, fetchRecords, fetchBankNames}) => (
     <div className="text-center">
         <div className="my-card" style={{ maxWidth: '500px', margin: '0 auto' }}>
             <div className="my-card-body">
@@ -592,34 +562,11 @@ const UploadTab = ({uploadMessage, setUploadMessage, fetchRecords, fetchBankName
                     style={{ display: 'none' }}
                     multiple
                     accept=".pdf"
-                    onChange={async (e) => {
+                    onChange={(e) => {
                         const files = e.target.files;
                         if (files.length === 0) return;
                         
-                        setUploadMessage(`Uploading ${files.length} file(s)...`);
-                        const formData = new FormData();
-                        for (let i = 0; i < files.length; i++) {
-                            formData.append('pdf_files', files[i]);
-                        }
-
-                        try {
-                            const response = await fetch(`${API_URL}/parse/`, {
-                                method: 'POST',
-                                body: formData,
-                            });
-                            
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            
-                            const data = await response.json();
-                            setUploadMessage(`Successfully uploaded ${files.length} file(s)! Switch to Analyze tab to view your data.`);
-                            // Update both records and bank names after successful upload
-                            await Promise.all([fetchRecords(), fetchBankNames()]);
-                        } catch (error) {
-                            console.error('Error uploading files:', error);
-                            setUploadMessage('Error uploading files. Please try again.');
-                        }
+                        fetchRecords(files);
                     }}
                 />
             </div>
@@ -636,9 +583,9 @@ const UploadTab = ({uploadMessage, setUploadMessage, fetchRecords, fetchBankName
             </div>
         </div>
     </div>
-);
+));
 
-const SupportedBanks = () => (
+const SupportedBanks = memo(() => (
     <div className="my-card parser-card-centered text-center">
         <div className="my-card-header">
             <h4 className="my-card-title">Supported Banks</h4>
@@ -678,6 +625,6 @@ const SupportedBanks = () => (
             </div>
         </div>
     </div>
-);
+));
 
 export { Header, BankSelector, ParserTabs, SupportedBanks, UploadTab };
