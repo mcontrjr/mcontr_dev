@@ -627,4 +627,4 @@ const SupportedBanks = memo(() => (
     </div>
 ));
 
-export { Header, BankSelector, ParserTabs, SupportedBanks, UploadTab };
+export { Header, BankSelector, MonthSelector, ParserTabs, SupportedBanks, UploadTab };
