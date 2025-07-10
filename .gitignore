@@ -14,3 +14,31 @@ server/uploads/
 server/logs
 notes.md
 server/logs/
+
+# Test coverage reports
+**/coverage/
+coverage/
+lcov.info
+
+# Test results
+junit.xml
+test-results/
+playwright-report/
+
+# Build artifacts
+**/dist/
+**/build/
+
+# Temporary files
+*.tmp
+*.temp
+**/*.timestamp-*
+
+# IDE files
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
