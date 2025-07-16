@@ -11,21 +11,59 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_DB: testdb
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    
     steps:
     - uses: actions/checkout@v4
     
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
     
-    - name: Install dependencies
+    - name: Create test environment file
+      run: |
+        echo "DB_HOST=localhost" >> .env
+        echo "DB_PORT=5432" >> .env
+        echo "DB_USER=testuser" >> .env
+        echo "DB_PASSWORD=testpass" >> .env
+        echo "DB_NAME=testdb" >> .env
+        echo "SERVER_PORT=8000" >> .env
+    
+    - name: Build server Docker image
       run: |
         cd server
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        docker build -t server-test .
+    
+    - name: Run server container
+      run: |
+        docker run -d --name server-test \
+          --network host \
+          --env-file .env \
+          -e DB_HOST=localhost \
+          server-test
+    
+    - name: Wait for server to be ready
+      run: |
+        timeout 30 bash -c 'until curl -f http://localhost:8000/health 2>/dev/null; do sleep 1; done' || echo "Server may not have health endpoint"
     
     - name: Run pytest
       run: |
-        cd server
-        python -m pytest -v
+        docker exec server-test python -m pytest -v
+    
+    - name: Clean up
+      if: always()
+      run: |
+        docker stop server-test || true
+        docker rm server-test || true
