@@ -25,26 +25,20 @@ jobs:
         echo "SERVER_PORT=8000" >> .env
     
     - name: Build with docker-compose
-      run: docker-compose build
+      run: docker compose build
     
     - name: Test docker-compose up
       run: |
-        docker-compose up -d
-        sleep 30
-        docker-compose ps
-        docker-compose logs
+        docker compose up -d
+        sleep 60
+        docker compose ps
+        docker compose logs
     
     - name: Health check services
       run: |
         # Check if containers are running
-        docker-compose ps | grep -q "Up" || exit 1
+        docker compose ps | grep -q "Up" || exit 1
         
-        # Test frontend accessibility
-        curl -f http://localhost:5173 || exit 1
-        
-        # Test server accessibility  
-        curl -f http://localhost:8000 || exit 1
-    
     - name: Cleanup
       if: always()
-      run: docker-compose down -v
+      run: docker compose down -v

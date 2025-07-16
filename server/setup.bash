@@ -12,6 +12,8 @@ setup() {
     python -m pip install --upgrade pip || { echo "Failed to upgrade pip"; exit 1; }
     pip install --no-cache-dir -r requirements.txt || { echo "Failed to install requirements"; exit 1; }
     echo "Done"
+    pytest .
+    exit 0
 }
 
 while [[ $# -gt 0 ]]; do
@@ -23,6 +25,11 @@ while [[ $# -gt 0 ]]; do
         --venv)
             setup
             shift
+            ;;
+        --test)
+            source venv/bin/activate
+            pytest -c pytest.ini
+            exit 0
             ;;
         *)
             echo "Unknown option: $1"

@@ -7,7 +7,18 @@ import {
   sortRecords
 } from '../utils/dataProcessing';
 
+// Generate or retrieve session ID
+const getSessionId = () => {
+  let sessionId = localStorage.getItem('parser_session_id');
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    localStorage.setItem('parser_session_id', sessionId);
+  }
+  return sessionId;
+};
+
 export const useParserData = () => {
+  const [sessionId] = useState(getSessionId());
   const [bankName, setBankName] = useState('');
   const [bankNames, setBankNames] = useState([]);
   const [records, setRecords] = useState([]);
@@ -18,7 +29,7 @@ export const useParserData = () => {
 
   const fetchBankNames = useCallback(async () => {
     try {
-      const response = await fetch(`${API_URL}/records/`);
+      const response = await fetch(`${API_URL}/records/?session_id=${sessionId}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch bank names');
@@ -38,7 +49,7 @@ export const useParserData = () => {
       setLoading(true);
       setError(null);
       
-      const response = await fetch(`${API_URL}/records/?bank_name=${bankName}`);
+      const response = await fetch(`${API_URL}/records/?bank_name=${bankName}&session_id=${sessionId}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch records');
@@ -63,37 +74,7 @@ export const useParserData = () => {
     } finally {
       setLoading(false);
     }
-  }, [bankName, selectedMonths]);
-
-  const uploadFiles = useCallback(async (files, onUploadMessage) => {
-    if (files.length === 0) return;
-    
-    onUploadMessage(`Uploading ${files.length} file(s)...`);
-    const formData = new FormData();
-    
-    for (let i = 0; i < files.length; i++) {
-      formData.append('pdf_files', files[i]);
-    }
-
-    try {
-      const response = await fetch(`${API_URL}/parse/`, {
-        method: 'POST',
-        body: formData,
-      });
-      
-      if (!response.ok) {
-        throw new Error('Upload failed');
-      }
-      
-      await response.json();
-      onUploadMessage(`Successfully uploaded ${files.length} file(s)! Switch to Analyze tab to view your data.`);
-      
-      await Promise.all([fetchRecords(), fetchBankNames()]);
-    } catch (error) {
-      console.error('Error uploading files:', error);
-      onUploadMessage('Error uploading files. Please try again.');
-    }
-  }, [fetchRecords, fetchBankNames]);
+  }, [bankName, selectedMonths, sessionId]);
 
   const requestSort = useCallback((key) => {
     setSortConfig(current => ({
@@ -109,8 +90,12 @@ export const useParserData = () => {
       setLoading(true);
       setError(null);
       
+      const formData = new FormData();
+      formData.append('session_id', sessionId);
+      
       const response = await fetch(`${API_URL}/clear/`, {
         method: 'POST',
+        body: formData,
       });
       
       if (!response.ok) {
@@ -135,7 +120,7 @@ export const useParserData = () => {
     } finally {
       setLoading(false);
     }
-  }, [fetchBankNames]);
+  }, [fetchBankNames, sessionId]);
 
   useEffect(() => {
     fetchBankNames();
@@ -143,7 +128,7 @@ export const useParserData = () => {
 
   useEffect(() => {
     fetchRecords();
-  }, [fetchRecords]);
+  }, [fetchRecords, sessionId]);
 
   const sortedRecords = useMemo(() => {
     return sortRecords(records, sortConfig);
@@ -177,13 +162,15 @@ export const useParserData = () => {
     requestSort,
     fetchRecords,
     fetchBankNames,
-    uploadFiles,
     clearData,
     
     // Utilities
     retryFetch: () => {
       setError(null);
       fetchRecords();
-    }
+    },
+    
+    // Session management
+    sessionId
   };
 };

@@ -28,11 +28,11 @@ const Parser = () => {
         setBankName,
         setSelectedMonths,
         requestSort,
-        uploadFiles,
         clearData,
         fetchRecords,
         fetchBankNames,
-        retryFetch
+        retryFetch,
+        sessionId
     } = useParserData();
 
     const handleUploadComplete = useCallback(async (data) => {
@@ -103,6 +103,7 @@ const Parser = () => {
                     onUploadComplete={handleUploadComplete}
                     uploadMessage={uploadMessage}
                     setUploadMessage={setUploadMessage}
+                    sessionId={sessionId}
                 />
                 
                 {(showBreakdown || sortedRecords.length > 0) && (

@@ -9,6 +9,8 @@ pypdf
 python-dotenv
 matplotlib
 psutil
+httpx
+requests
 
 # API
 fastapi

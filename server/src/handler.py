@@ -18,7 +18,7 @@ class PostgresHandler:
             'port': os.getenv('DB_PORT', '5432')
         }
     
-    def save_to_database(self, purchases: list):
+    def save_to_database(self, purchases: list, session_id: str):
         """
         Appends purchases from statements into a DB. DB is configured to only accept unique description entries.
         """
@@ -27,7 +27,7 @@ class PostgresHandler:
             conn = psycopg2.connect(**self.config)
             cur = conn.cursor()
             
-            existing_purchases = self.get_records(None).get('records', [])
+            existing_purchases = self.get_records(None, session_id).get('records', [])
             log.debug(f"Existing purchases in database: {existing_purchases}")
             inserted = 0
 
@@ -43,9 +43,9 @@ class PostgresHandler:
                     log.info(f"Purchase {purchase}")
                 try:
                     cur.execute("""
-                        INSERT INTO bank_statements (bank, date, description, amount, category) 
-                        VALUES (%s, %s, %s, %s, %s)""",
-                        (purchase['Bank'], purchase['Date'], purchase['Description'], purchase['Amount'], purchase['Category']))
+                        INSERT INTO bank_statements (bank, date, description, amount, category, session_id) 
+                        VALUES (%s, %s, %s, %s, %s, %s)""",
+                        (purchase['Bank'], purchase['Date'], purchase['Description'], purchase['Amount'], purchase['Category'], session_id))
                     log.info(f"Inserted purchase: {purchase}")
                     inserted += 1
                 except psycopg2.IntegrityError as e:
@@ -67,7 +67,7 @@ class PostgresHandler:
             if conn is not None:
                 conn.close()
                 
-    def get_records(self, bank_name: Optional[str]) -> dict:
+    def get_records(self, bank_name: Optional[str], session_id: str) -> dict:
         conn = None
         records = []
         try:
@@ -75,12 +75,14 @@ class PostgresHandler:
             conn = psycopg2.connect(**self.config)
             cur = conn.cursor()
             
-            query = "SELECT * FROM bank_statements"
+            query = "SELECT * FROM bank_statements WHERE session_id = %s"
+            params = [session_id]
+            
             if bank_name:
-                query += " WHERE bank = %s"
-                cur.execute(query, (bank_name,))
-            else:
-                cur.execute(query)
+                query += " AND bank = %s"
+                params.append(bank_name)
+            
+            cur.execute(query, params)
             log.info(f"Query: {query}")
             
             records = cur.fetchall()
@@ -97,7 +99,7 @@ class PostgresHandler:
             if conn is not None:
                 conn.close()
 
-    def clear_records(self) -> dict:
+    def clear_records(self, session_id: str) -> dict:
         """
         Clears all records from the bank_statements table.
         Returns the number of records deleted.
@@ -108,11 +110,11 @@ class PostgresHandler:
             cur = conn.cursor()
             
             # Get the count of records before deletion
-            cur.execute("SELECT COUNT(*) FROM bank_statements")
+            cur.execute("SELECT COUNT(*) FROM bank_statements WHERE session_id = %s", (session_id,))
             count_before = cur.fetchone()[0]
             
-            # Delete all records
-            cur.execute("DELETE FROM bank_statements")
+            # Delete records for this session only
+            cur.execute("DELETE FROM bank_statements WHERE session_id = %s", (session_id,))
             conn.commit()
             
             log.info(f"Cleared {count_before} records from the database.")
