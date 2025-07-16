@@ -76,40 +76,6 @@ export const useParserData = () => {
     }
   }, [bankName, selectedMonths, sessionId]);
 
-  const uploadFiles = useCallback(async (files, onUploadMessage) => {
-    if (files.length === 0) return;
-    
-    onUploadMessage(`Uploading ${files.length} file(s)...`);
-    const formData = new FormData();
-    
-    // Add session_id first
-    formData.append('session_id', sessionId);
-    
-    // Then add files
-    for (let i = 0; i < files.length; i++) {
-      formData.append('pdf_files', files[i]);
-    }
-
-    try {
-      const response = await fetch(`${API_URL}/parse/`, {
-        method: 'POST',
-        body: formData,
-      });
-      
-      if (!response.ok) {
-        throw new Error('Upload failed');
-      }
-      
-      await response.json();
-      onUploadMessage(`Successfully uploaded ${files.length} file(s)! Switch to Analyze tab to view your data.`);
-      
-      await Promise.all([fetchRecords(), fetchBankNames()]);
-    } catch (error) {
-      console.error('Error uploading files:', error);
-      onUploadMessage('Error uploading files. Please try again.');
-    }
-  }, [fetchRecords, fetchBankNames, sessionId]);
-
   const requestSort = useCallback((key) => {
     setSortConfig(current => ({
       key,
@@ -196,7 +162,6 @@ export const useParserData = () => {
     requestSort,
     fetchRecords,
     fetchBankNames,
-    uploadFiles,
     clearData,
     
     // Utilities

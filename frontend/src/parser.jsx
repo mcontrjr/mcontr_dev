@@ -28,7 +28,6 @@ const Parser = () => {
         setBankName,
         setSelectedMonths,
         requestSort,
-        uploadFiles,
         clearData,
         fetchRecords,
         fetchBankNames,
