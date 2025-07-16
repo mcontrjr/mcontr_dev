@@ -16,7 +16,7 @@ services:
     ports:
       - "${DB_PORT}:${DB_PORT}"
     networks:
-      - finance_network
+      - mcontr_network
 
   server:
     build:
@@ -35,7 +35,7 @@ services:
       - ./server:/app
       - /app/__pycache__
     networks:
-      - finance_network
+      - mcontr_network
 
   frontend:
     build:
@@ -51,13 +51,13 @@ services:
     depends_on:
       - server
     networks:
-      - finance_network
+      - mcontr_network
 
 networks:
-  finance_network:
+  mcontr_network:
     driver: bridge
 
 volumes:
   fiannce_data:
-    name: finance_data
+    name: parser_data
     external: false

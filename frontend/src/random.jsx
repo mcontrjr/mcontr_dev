@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
+import '../styles/random.css';
 import logo from './assets/random-logo.svg';
 import { SearchInterface, TabulatedGallery } from './components/RandomComponents';
-import {useTheme, AltModernHeader, Footer} from './components/MainComponents';
+import {useTheme, AltModernHeader, ContextAccordion, Footer} from './components/MainComponents';
 
 
 // Pexels API image fetching
@@ -154,6 +155,10 @@ export default function RandomPage() {
           </div>
         </section>
       </main>
+      <ContextAccordion theme={theme}>
+        This page to me actually started from a coworker at work (shout out Augs!) who mentioned this cool free API called LoremFlickr to generate placeholder avatars.
+        One of the images was so bizarre I had to play with it and that's how I got the image on the landing page! Try to find a cool image!
+      </ContextAccordion>
       <Footer />
     </>
   );

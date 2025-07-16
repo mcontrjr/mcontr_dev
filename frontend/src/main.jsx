@@ -1,5 +1,5 @@
 import logo from './assets/logo.svg';
-import {useTheme, AltModernHeader, HeroSection, PlaygroundSection, ToolsSection, Footer} from './components/MainComponents';
+import {useTheme, AltModernHeader, HeroSection, PlaygroundHeroSection, ToolsHeroSection, Footer} from './components/MainComponents';
 
 
 
@@ -12,8 +12,8 @@ export default function MainPage() {
       <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
       <main>
         <HeroSection />
-        {/* <PlaygroundSection /> */}
-        {/* <ToolsSection /> */}
+        <PlaygroundHeroSection />
+        <ToolsHeroSection />
       </main>
       <Footer />
     </>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
-import { useTheme, AltModernHeader, Footer } from './components/MainComponents';
+import '../styles/guess.css';
+import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/MainComponents';
 import { GameInterface, GameSidebar } from './components/GuessComponents';
 import light_logo from './assets/guess-light-logo.svg';
 import dark_logo from './assets/guess-dark-logo.svg';
@@ -197,6 +198,9 @@ export default function GuessPage() {
           </div>
         </section>
       </main>
+      <ContextAccordion theme={theme}>
+        You got to start somewhere right? It was either this or a to-do list but this was way more fun to build and iterate on. Maybe Tic-Tac-Toe is next...
+      </ContextAccordion>
       <Footer />
     </>
   )

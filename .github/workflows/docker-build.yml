@@ -1,0 +1,50 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Create .env file for build
+      run: |
+        echo "DB_USER=testuser" >> .env
+        echo "DB_PASSWORD=testpass" >> .env
+        echo "DB_NAME=testdb" >> .env
+        echo "DB_PORT=5432" >> .env
+        echo "SERVER_PORT=8000" >> .env
+    
+    - name: Build with docker-compose
+      run: docker-compose build
+    
+    - name: Test docker-compose up
+      run: |
+        docker-compose up -d
+        sleep 30
+        docker-compose ps
+        docker-compose logs
+    
+    - name: Health check services
+      run: |
+        # Check if containers are running
+        docker-compose ps | grep -q "Up" || exit 1
+        
+        # Test frontend accessibility
+        curl -f http://localhost:5173 || exit 1
+        
+        # Test server accessibility  
+        curl -f http://localhost:8000 || exit 1
+    
+    - name: Cleanup
+      if: always()
+      run: docker-compose down -v

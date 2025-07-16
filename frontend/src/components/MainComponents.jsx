@@ -2,6 +2,8 @@ import '../../styles/stock.css'
 import light from '../assets/light.svg';
 import dark from '../assets/dark.svg';
 import coolImg from '../assets/man_with_dog.jpg';
+import moreLightIcon from '../assets/more_light.svg';
+import moreDarkIcon from '../assets/more_dark.svg';
 import { useState, useEffect } from 'react';
 
 
@@ -36,69 +38,72 @@ function ThemeToggle({ theme, toggleTheme }) {
 }
 
 function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
-  const playground = [
+  const wasteOfTime = [
     {
       title: "Guessing Game",
-      description: "Test your knowledge with a fun guessing game",
       href: "/guess"
     }
   ];
 
-  const tools = [
-    // {
-    //   title: "Finance Tools",
-    //   description: "Analyze your financial statements",
-    //   href: "/finance"
-    // },
+  const api = [
     {
-      title: "Image Generator",
-      description: "Create unique images from text",
-      href: "/random"
+      title: "Weather Check", 
+      href: "/weather"
     },
     {
-      title: "Weather Check",
-      description: "Check weather conditions in real-time",
-      href: "/weather"
+      title: "Image Generator",
+      href: "/random"
+    }
+  ];
+
+  const tools = [
+    {
+      title: "Statement Parser",
+      href: "/parser"
     }
   ];
 
   return (
-    <header className="alt-header">
-      <div className="alt-header-content">
-        <div className="alt-header-left">
-          <a href="/" className="alt-logo">
+    <header className="simple-header">
+      <div className="simple-header-content">
+        <div className="simple-header-left">
+          <a href="/" className="simple-logo">
             {theme === 'light' ? 
               <img src={light_logo} alt="Logo" /> : 
               <img src={dark_logo} alt="Logo" />
             }
-            <span className="alt-logo-text">mcontr</span>
+            <span className="simple-logo-text">mcontr</span>
           </a>
         </div>
 
-        <div className="alt-right-section">
-          <nav className="alt-nav">
-
-            <div className="alt-nav-item">
-              Playground
-              <div className="alt-dropdown">
-                {playground.map((play, index) => (
-                  <a key={index} href={play.href} className="alt-dropdown-item">
-                    <span className="alt-dropdown-title">{play.title}</span>
-                    <span className="alt-dropdown-description">{play.description}</span>
-                  </a>
-                ))}
+        <div className="simple-header-right">
+          <nav className="simple-nav">
+            <div className="simple-nav-item">
+              <span className="simple-nav-title">Playground</span>
+              <div className="simple-dropdown">
+                <div className="simple-section">
+                  <h4>Waste of Time</h4>
+                  {wasteOfTime.map((item, index) => (
+                    <a key={index} href={item.href} className="simple-link">{item.title}</a>
+                  ))}
+                </div>
+                <div className="simple-section">
+                  <h4>API</h4>
+                  {api.map((item, index) => (
+                    <a key={index} href={item.href} className="simple-link">{item.title}</a>
+                  ))}
+                </div>
               </div>
             </div>
             
-            <div className="alt-nav-item">
-              Tools
-              <div className="alt-dropdown">
-                {tools.map((tool, index) => (
-                  <a key={index} href={tool.href} className="alt-dropdown-item">
-                    <span className="alt-dropdown-title">{tool.title}</span>
-                    <span className="alt-dropdown-description">{tool.description}</span>
-                  </a>
-                ))}
+            <div className="simple-nav-item">
+              <span className="simple-nav-title">Tools</span>
+              <div className="simple-dropdown">
+                <div className="simple-section">
+                  {tools.map((tool, index) => (
+                    <a key={index} href={tool.href} className="simple-link">{tool.title}</a>
+                  ))}
+                </div>
               </div>
             </div>
           </nav>
@@ -115,8 +120,8 @@ function HeroSection() {
       <div className="my-container">
         <p className="my-hero-subtitle animate-fade-in-up">
           What started as a quick web app is evolving into something entirely different. 
-          Built some things that are basic a** f*** and some things that are kinda useful?
-          Regardless, here is a sick a** picture of a man and his dawg
+          Built some things that are basic and some things that are kinda useful?
+          Regardless, here is a sick picture of a man and his dawg
         </p>
         <div className="text-center mt-4">
           <img src={coolImg} className="custom-img animate-fade-in-up" alt="Man with dog" />
@@ -126,14 +131,14 @@ function HeroSection() {
   );
 }
 
-function FeatureCard({ title, description, route, category = "feature" }) {
+function UnifiedCard({ title, description, route, category, status, type }) {
   const handleClick = () => {
     window.location.href = route;
   };
 
   return (
     <div 
-      className="my-card my-card-interactive feature-card animate-fade-in-up" 
+      className={`unified-card ${type}-card animate-fade-in-up`}
       onClick={handleClick}
       role="button"
       tabIndex={0}
@@ -143,15 +148,25 @@ function FeatureCard({ title, description, route, category = "feature" }) {
         }
       }}
     >
-      <div className="my-card-body">
-        <h3 className="my-card-title">{title}</h3>
+      <div className="unified-card-header">
+        <h3 className="unified-card-title">{title}</h3>
+        {status && (
+          <span className={`unified-card-status ${status}`}>
+            {status}
+          </span>
+        )}
+        {category && (
+          <span className="unified-card-category">
+            {category}
+          </span>
+        )}
+      </div>
+      <div className="unified-card-body">
         <p>{description}</p>
       </div>
-      <div className="my-card-footer">
-        <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
-          {category}
-        </span>
-        <span style={{ color: 'var(--accent)' }}>→</span>
+      <div className="unified-card-footer">
+        <span className="unified-card-type">{type}</span>
+        <span className="unified-card-arrow">→</span>
       </div>
     </div>
   );
@@ -200,7 +215,7 @@ function ToolCard({ title, description, route, status = "available" }) {
   );
 }
 
-function PlaygroundSection() {
+function PlaygroundHeroSection() {
   const features = [
     {
       title: "Guessing Game",
@@ -223,52 +238,106 @@ function PlaygroundSection() {
   ];
 
   return (
-    <section className="my-section">
+    <section className="unified-hero playground-hero">
       <div className="my-container">
-        <h2 className="my-section-title animate-fade-in-up">Playground</h2>
-        <div className="my-grid my-grid-3">
-          {features.map((feature, index) => (
-            <FeatureCard
-              key={index}
-              title={feature.title}
-              description={feature.description}
-              route={feature.route}
-              category={feature.category}
-            />
-          ))}
+        <div className="hero-content">
+          <div className="hero-text">
+            <h2 className="hero-section-title animate-fade-in-up">Playground</h2>
+            <p className="hero-section-subtitle animate-fade-in-up">
+              Interactive experiences designed to entertain and engage. 
+              From challenging games to creative tools, explore what catches your interest.
+            </p>
+          </div>
+          <div className="hero-cards">
+            <div className="unified-card-grid">
+              {features.map((feature, index) => (
+                <UnifiedCard
+                  key={index}
+                  title={feature.title}
+                  description={feature.description}
+                  route={feature.route}
+                  category={feature.category}
+                  type="playground"
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-// Tools Section
-function ToolsSection() {
+function ToolsHeroSection() {
   const tools = [
     {
       title: "Statement Parser",
       description: "Upload your bank statements and find out where your money is going.",
-      route: "/finance"
+      route: "/parser",
+      status: "available"
     }
   ];
 
   return (
-    <section className="my-section">
+    <section className="unified-hero tools-hero">
       <div className="my-container">
-        <h2 className="my-section-title animate-fade-in-up">Tools</h2>
-        <div className="my-grid my-grid-2 centered-grid">
-          {tools.map((tool, index) => (
-            <ToolCard
-              key={index}
-              title={tool.title}
-              description={tool.description}
-              route={tool.route}
-              status={tool.status}
-            />
-          ))}
+        <div className="hero-content">
+          <div className="hero-text">
+            <h2 className="hero-section-title animate-fade-in-up">Tools</h2>
+            <p className="hero-section-subtitle animate-fade-in-up">
+              Practical utilities built to solve real problems. 
+              Each tool is designed with simplicity and effectiveness in mind.
+            </p>
+          </div>
+          <div className="hero-cards">
+            <div className="unified-card-grid">
+              {tools.map((tool, index) => (
+                <UnifiedCard
+                  key={index}
+                  title={tool.title}
+                  description={tool.description}
+                  route={tool.route}
+                  status={tool.status}
+                  type="tool"
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ContextAccordion({ theme, children = "Content goes here" }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const moreIcon = theme === 'light' ? moreLightIcon : moreDarkIcon;
+
+  return (
+    <div className="context-accordion">
+      <button 
+        className="context-accordion-trigger"
+        onClick={toggleAccordion}
+        aria-expanded={isOpen}
+        aria-label={`${isOpen ? 'Hide' : 'Show'} page context`}
+      >
+        <img 
+          src={moreIcon} 
+          alt="Expand context" 
+          className={`context-accordion-more-icon ${isOpen ? 'open' : ''}`}
+        />
+      </button>
+      <div className={`context-accordion-content ${isOpen ? 'open' : ''}`}>
+        <div className="context-accordion-body">
+          {typeof children === 'string' ? <p>{children}</p> : children}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -285,4 +354,4 @@ function Footer() {
 
 
 
-export {useTheme, ThemeToggle, AltModernHeader, HeroSection, FeatureCard, ToolCard, PlaygroundSection, ToolsSection, Footer}
+export {useTheme, ThemeToggle, AltModernHeader, HeroSection, UnifiedCard, PlaygroundHeroSection, ToolsHeroSection, ContextAccordion, Footer}
