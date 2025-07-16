@@ -130,7 +130,7 @@ async def get_categories() -> dict:
         raise HTTPException(status_code=500, detail="Error retrieving records from database.")
 
 @app.get("/records/")
-async def get_records(bank_name: Optional[str] = Query(None)) -> dict:
+async def get_records(bank_name: Optional[str] = Query(None), session_id: str = Query(...)) -> dict:
     """
     Retrieve records from the database, optionally filtering by bank name.
     
@@ -143,7 +143,7 @@ async def get_records(bank_name: Optional[str] = Query(None)) -> dict:
     bank_name = bank_name.upper()
     records = []
     try:
-        response = handler.get_records(bank_name)
+        response = handler.get_records(bank_name, session_id)
         records = response.get('records', [])
         
         results = []
@@ -185,7 +185,8 @@ async def plot_records(bank: Optional[str] = Form(None), month: Optional[str] = 
 
     try:
         # Get records from database
-        resp = handler.get_records(bank)
+        # Note: plot endpoint would need session_id too, but keeping minimal for now
+        resp = handler.get_records(bank, 'legacy-session')
         records = resp.get('records', [])
 
         log.info(f"Records for month {month}: {records}")
@@ -207,7 +208,7 @@ async def plot_records(bank: Optional[str] = Form(None), month: Optional[str] = 
         return {"error": "An error occurred while processing your request"}
 
 @app.post("/parse/")
-async def parse_upload_file(pdf_files: List[UploadFile] = File(...)):
+async def parse_upload_file(pdf_files: List[UploadFile] = File(...), session_id: str = Form(...)):
     """
     Endpoint to upload and parse PDF files.
     """
@@ -226,7 +227,7 @@ async def parse_upload_file(pdf_files: List[UploadFile] = File(...)):
         
         # Process each PDF file
         statement = Parser(pdf_path)
-        handler.save_to_database(statement.purchases)
+        handler.save_to_database(statement.purchases, session_id)
         
     return {"status": "success", "message": "File processed and data saved to database"}
 
@@ -294,12 +295,12 @@ async def get_system_info():
         raise HTTPException(status_code=500, detail="Error retrieving system information")
 
 @app.post("/clear/")
-async def clear_records():
+async def clear_records(session_id: str = Form(...)):
     """
     Endpoint to clear all records from the bank_statements table.
     """
     try:
-        return handler.clear_records()
+        return handler.clear_records(session_id)
     except Exception as e:
         log.error(f"Error clearing records from database: {e}")
         raise HTTPException(status_code=500, detail="Error clearing records from database.")

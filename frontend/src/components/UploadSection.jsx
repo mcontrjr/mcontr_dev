@@ -83,7 +83,7 @@ const PDFThumbnail = ({ file, onRemove, onRetry, status = 'pending', className =
   );
 };
 
-const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage }) => {
+const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sessionId }) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -149,6 +149,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage }) =>
       
       try {
         const formData = new FormData();
+        formData.append('session_id', sessionId);
         formData.append('pdf_files', file);
 
         const response = await fetch(`${API_URL}/parse/`, {
@@ -236,6 +237,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage }) =>
     
     try {
       const formData = new FormData();
+      formData.append('session_id', sessionId);
       formData.append('pdf_files', file);
 
       const response = await fetch(`${API_URL}/parse/`, {
