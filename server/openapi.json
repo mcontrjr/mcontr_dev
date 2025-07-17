@@ -3,7 +3,7 @@
   "info": {
     "title": "Financial Statement Processing API",
     "version": "1.0.0",
-    "description": "\nA comprehensive FastAPI backend service for processing PDF bank statements, extracting financial transactions, \nand providing data visualization and analysis capabilities with session-based data isolation.\n\n## Key Features\n- Multi-bank PDF processing (American Express, Citi, Discover)\n- Session-based data isolation for multi-user support\n- Automated transaction categorization\n- Data visualization and plotting\n- System monitoring and health checks\n- Comprehensive error handling\n\n## Session Management\nSession IDs are required for all data operations to ensure complete data isolation between users. \nGenerate a UUID4 string for each user session and include it in all API calls.\n\n## Supported Banks\n- **American Express**: PDF statement processing with transaction tables\n- **Citi**: Statement PDF with transaction details and amount extraction\n- **Discover**: PDF statement processing with categorization\n\n## Authentication\nThis API currently uses session-based isolation without authentication. \nIn production, implement proper authentication and authorization.\n        ",
+    "description": "\nA comprehensive FastAPI backend service for processing PDF bank statements, extracting financial transactions, \nand providing data analysis capabilities with session-based data isolation.\n\n## Key Features\n- Multi-bank PDF processing (American Express, Citi, Discover)\n- Session-based data isolation for multi-user support\n- Automated transaction categorization\n- System monitoring and health checks\n- Comprehensive error handling\n\n## Session Management\nSession IDs are required for all data operations to ensure complete data isolation between users. \nGenerate a UUID4 string for each user session and include it in all API calls.\n\n## Supported Banks\n- **American Express**: PDF statement processing with transaction tables\n- **Citi**: Statement PDF with transaction details and amount extraction\n- **Discover**: PDF statement processing with categorization\n\n## Authentication\nThis API currently uses session-based isolation without authentication. \nIn production, implement proper authentication and authorization.\n        ",
     "contact": {
       "name": "API Support",
       "email": "support@example.com"
@@ -247,97 +247,6 @@
           },
           "500": {
             "description": "Processing or database error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/plot/": {
-      "get": {
-        "summary": "Generate Financial Data Visualization",
-        "description": "\nGenerate a PNG plot visualization of financial data for a specific month and optional bank filter.\nThe plot shows spending by category with color-coded bars and includes a legend.\n\nFeatures:\n- Monthly data filtering\n- Optional bank filtering\n- Category-based color coding\n- Automatic legend generation\n- PNG image output\n\nNote: This endpoint currently uses 'legacy-session' for backward compatibility.\nFuture versions will require session_id parameter.\n                ",
-        "operationId": "generate_plot",
-        "tags": [
-          "Visualization"
-        ],
-        "parameters": [
-          {
-            "name": "month",
-            "in": "query",
-            "required": true,
-            "description": "Month to filter data (supports various formats: YYYY-MM, MM, month name)",
-            "schema": {
-              "type": "string",
-              "pattern": "^(\\d{4}-\\d{1,2}|\\d{1,2}|[a-zA-Z]+)$",
-              "example": "2025-01"
-            }
-          },
-          {
-            "name": "bank",
-            "in": "query",
-            "required": false,
-            "description": "Filter by specific bank (case insensitive)",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AMEX",
-                "CITI",
-                "DISCOVER"
-              ],
-              "example": "AMEX"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plot generated successfully",
-            "content": {
-              "image/png": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid month format",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "No data found for the specified criteria",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error - month is required",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationError"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Plot generation error",
             "content": {
               "application/json": {
                 "schema": {
@@ -807,10 +716,6 @@
     {
       "name": "Processing",
       "description": "PDF processing and transaction extraction"
-    },
-    {
-      "name": "Visualization",
-      "description": "Data visualization and plotting"
     },
     {
       "name": "System",

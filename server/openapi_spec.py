@@ -13,13 +13,12 @@ OPENAPI_SPEC = {
         "version": "1.0.0",
         "description": """
 A comprehensive FastAPI backend service for processing PDF bank statements, extracting financial transactions, 
-and providing data visualization and analysis capabilities with session-based data isolation.
+and providing data analysis capabilities with session-based data isolation.
 
 ## Key Features
 - Multi-bank PDF processing (American Express, Citi, Discover)
 - Session-based data isolation for multi-user support
 - Automated transaction categorization
-- Data visualization and plotting
 - System monitoring and health checks
 - Comprehensive error handling
 
@@ -260,104 +259,6 @@ Processing workflow:
                     },
                     "500": {
                         "description": "Processing or database error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/plot/": {
-            "get": {
-                "summary": "Generate Financial Data Visualization",
-                "description": """
-Generate a PNG plot visualization of financial data for a specific month and optional bank filter.
-The plot shows spending by category with color-coded bars and includes a legend.
-
-Features:
-- Monthly data filtering
-- Optional bank filtering
-- Category-based color coding
-- Automatic legend generation
-- PNG image output
-
-Note: This endpoint currently uses 'legacy-session' for backward compatibility.
-Future versions will require session_id parameter.
-                """,
-                "operationId": "generate_plot",
-                "tags": ["Visualization"],
-                "parameters": [
-                    {
-                        "name": "month",
-                        "in": "query",
-                        "required": True,
-                        "description": "Month to filter data (supports various formats: YYYY-MM, MM, month name)",
-                        "schema": {
-                            "type": "string",
-                            "pattern": "^(\\d{4}-\\d{1,2}|\\d{1,2}|[a-zA-Z]+)$",
-                            "example": "2025-01"
-                        }
-                    },
-                    {
-                        "name": "bank",
-                        "in": "query",
-                        "required": False,
-                        "description": "Filter by specific bank (case insensitive)",
-                        "schema": {
-                            "type": "string",
-                            "enum": ["AMEX", "CITI", "DISCOVER"],
-                            "example": "AMEX"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Plot generated successfully",
-                        "content": {
-                            "image/png": {
-                                "schema": {
-                                    "type": "string",
-                                    "format": "binary"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid month format",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "No data found for the specified criteria",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error - month is required",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ValidationError"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Plot generation error",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -743,10 +644,6 @@ specified session will be permanently deleted.
         {
             "name": "Processing",
             "description": "PDF processing and transaction extraction"
-        },
-        {
-            "name": "Visualization",
-            "description": "Data visualization and plotting"
         },
         {
             "name": "System",

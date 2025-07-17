@@ -7,7 +7,7 @@ This script can be used to run tests in environments where pytest is not directl
 import sys
 import os
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 import importlib.util
 
 # Add the server directory to the path
@@ -126,7 +126,6 @@ def check_test_coverage():
     test_files = [
         "test_api_comprehensive.py",
         "test_database_handler.py", 
-        "test_plotting.py",
         "test_session_unit.py",
         "test_session_integration.py",
         "test_parser.py"
@@ -135,7 +134,6 @@ def check_test_coverage():
     coverage_areas = {
         "API Endpoints": ["test_api_comprehensive.py"],
         "Database Operations": ["test_database_handler.py"],
-        "Plotting & Visualization": ["test_plotting.py"],
         "Session Management": ["test_session_unit.py", "test_session_integration.py"],
         "PDF Parsing": ["test_parser.py"]
     }
