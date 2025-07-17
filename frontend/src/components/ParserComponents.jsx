@@ -5,6 +5,8 @@ import amexLogo from '../assets/amex.svg';
 import citiLogo from '../assets/citi.svg';
 import discoverLogo from '../assets/discover.svg';
 import noPurchases from '../assets/no-purchases.svg';
+import capone from '../assets/capone.svg';
+import schwab from '../assets/schwab.svg';
 import 'chart.js/auto';
 import '../../styles/stock.css';
 
@@ -586,7 +588,7 @@ const UploadTab = memo(({uploadMessage, setUploadMessage, fetchRecords, fetchBan
 ));
 
 const SupportedBanks = memo(() => (
-    <div className="my-card parser-card-centered text-center">
+    <div className="my-card-static">
         <div className="my-card-header">
             <h4 className="my-card-title">Supported Banks</h4>
         </div>
@@ -621,6 +623,22 @@ const SupportedBanks = memo(() => (
                         style={{ width: '40px', height: '40px', objectFit: 'contain' }}
                     />
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Citi</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                    <img 
+                        src={capone} 
+                        alt="Capital One logo" 
+                        style={{ width: '40px', height: '40px', objectFit: 'contain' }}
+                    />
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Capital One</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                    <img 
+                        src={schwab} 
+                        alt="Schwab logo" 
+                        style={{ width: '40px', height: '40px', objectFit: 'contain' }}
+                    />
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Schwab</span>
                 </div>
             </div>
         </div>
