@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 
 from src.handler import PostgresHandler
 from src.logger import log
-import pandas as pd
 
 load_dotenv()
 
@@ -441,6 +440,9 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--output-path', help='Path to the output file.')
     args = parser.parse_args()
 
+    # Only needed in standalone script
+    import pandas as pd
+    
     statement = Parser(args.file_path)
     df = pd.DataFrame(statement.purchases)
     output_file = f'{statement.config.bank.lower()}_statement.csv' if args.output_path is None else args.output_path
