@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import patch, MagicMock
 from datetime import datetime
-from src.parser import Parser, AmexConfig, CitiConfig, DiscoverConfig
+from src.parser import Parser, AmexConfig, CitiConfig, DiscoverConfig, CapitalOneConfig
 from unittest import TestCase
 
 
@@ -184,6 +184,68 @@ class TestDiscoverParser(TestParser):
                 'Description': "TARGET 00022814091 SAN JOSE CA",
                 'Amount': 75.53,
                 'Category': "TARGET"
+            }
+        ]
+        TestCase().assertCountEqual(purchases, expected_purchases)
+
+class TestCapitalOneParser(TestParser):
+
+    def test_parse_purchases_from_text(self):
+        with open("tests/mock_cap_one.txt", "r") as file:
+            mock_text = file.read()
+        parser = Parser("tests/dummy_path.pdf", config=CapitalOneConfig(), text=mock_text)
+        purchases = parser.parse_purchases_from_tabular()
+        print(purchases)
+
+        expected_purchases = [
+            {
+                'Bank': 'CAPITAL ONE',
+                'Date': "2025-06-10",
+                'Description': "COT*FLT844-422-6922MA",
+                'Amount': -133.8,
+                'Category': "TRAVEL"
+            },
+            {
+                'Bank': 'CAPITAL ONE',
+                'Date': "2025-06-13",
+                'Description': "CAPITAL ONE MOBILE PYMT",
+                'Amount': -400.0,
+                'Category': "PAYMENT"
+            },
+            {
+                'Bank': 'CAPITAL ONE',
+                'Date': "2025-06-02",
+                'Description': "COT*FLT627-2363070MA",
+                'Amount': 91.99,
+                'Category': "TRAVEL"
+            },
+            {
+                'Bank': 'CAPITAL ONE',
+                'Date': "2025-06-09",
+                'Description': "COT*FLT844-422-6922MA",
+                'Amount': 680.98,
+                'Category': "TRAVEL"
+            },
+            {
+                'Bank': 'CAPITAL ONE',
+                'Date': "2025-06-11",
+                'Description': "TARGET 00020883SAN JOSECA",
+                'Amount': 78.84,
+                'Category': "TARGET"
+            },
+            {
+                'Bank': 'CAPITAL ONE',
+                'Date': "2025-06-11",
+                'Description': "COSTCO WHSE #0129SANTA CLARACA",
+                'Amount': 151.71,
+                'Category': "COSTCO"
+            },
+            {
+                'Bank': 'CAPITAL ONE',
+                'Date': "2025-06-03",
+                'Description': "CAPITAL ONE MEMBER FEE",
+                'Amount': 395.00,
+                'Category': "OTHER"
             }
         ]
         TestCase().assertCountEqual(purchases, expected_purchases)

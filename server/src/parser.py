@@ -30,6 +30,10 @@ class AmexConfig(BankConfig):
     def __init__(self):
         super().__init__('AMEX', start_index=2)
         
+class SchwabConfig(BankConfig):
+    def __init__(self):
+        super().__init__('SCHWAB', start_index=2)
+        
 class CapitalOneConfig(BankConfig):
     def __init__(self):
         super().__init__('CAPITAL ONE', start_index=2, tabular_entries=True)
@@ -136,6 +140,8 @@ class Parser:
         log.debug(f"First and Last page: \n{main_pages}")
         if 'American Express' in main_pages:
             config = AmexConfig()
+        if 'Schwab' in main_pages:
+            config = SchwabConfig()
         if 'Citi' in main_pages:
             config = CitiConfig()
         if 'Discover Bank' in main_pages:
@@ -203,9 +209,11 @@ class Parser:
         
         for match in matches:
             trans_date = match[0]
-            post_date = match[1]
+            _ = match[1]
             description = match[2].strip()
             amount_str = match[3].replace(' ', '')
+            
+            description = " ".join(description.split())
             
             # Skip if this looks like a header or total line
             if 'Trans Date' in description or 'Post Date' in description or 'Description' in description or 'Amount' in description:
