@@ -16,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [2025-07-17] - PR #6
+
+**Add more banks** by @mcontrjr
+
+### Added
+- Add more banks (#6)
+
+
 ## [2025-07-17] - PR #5
 
 **Api improvements** by @mcontrjr
