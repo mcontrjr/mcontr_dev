@@ -16,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [2025-07-17] - PR #5
+
+**Api improvements** by @mcontrjr
+
+### Changed
+- Api improvements (#5)
+
+
 ## [2025-07-16] - PR #123
 
 **Add new feature for user authentication** by @testuser
