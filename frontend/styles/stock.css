@@ -268,6 +268,20 @@ a:hover {
   text-align: center;
 }
 
+.my-card-static {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
 .my-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 25px -8px rgba(210, 198, 198, 0.2);
@@ -996,6 +1010,10 @@ input[type='text']::placeholder {
   }
   
   .my-card {
+    max-width: 100%;
+  }
+
+  .my-card-static {
     max-width: 100%;
   }
 }
