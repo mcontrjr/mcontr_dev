@@ -1,0 +1,185 @@
+Schwab Bank Investor CheckingTM Account Number: 000000000000
+Summary Amount
+Beginning Balance $21,404.11
+Deposits and Credits 8,010.03
+Interest Paid 0.83
+Withdrawals and Other Debits (11,735.81)
+Other Fees 0.00
+Ending Balance $17,679.16
+Nonsufficient Funds Fees This Period Year to Date
+Total Overdraft Fees $0.00 $0.00
+Total Returned Item Fees $0.00 $0.00
+Activity
+Date
+Posted Description Debits Credits Balance
+05/31 Beginning Balance   $21,404.11
+05/31 Visa Debit Card Point of Sale Purchase
+DABS SAN JOSE, CA, US
+ $8.77   $21,395.34
+06/02 Electronic Withdrawal
+APPFOLIO, INC. F WEB PMTS 060225
+ $2.49   $21,392.85
+06/02 Electronic Withdrawal
+MAGNIFY REAL EST WEB PMTS 060225
+ $2,375.00   $19,017.85
+06/02 Electronic Withdrawal
+CITI CARD ONLINE PAYMENT 250601
+ $248.35   $18,769.50
+2025-07-17 15:15:04,838 - DEBUG - New page: Page 4 of 8
+© 2025 Charles Schwab Bank, SSB. All rights reserved. Member FDIC.
+MARTIN CONTRERAS JR
+Account Number
+000000000000
+Statement Period
+May 31, 2025 to
+June 30, 2025
+Schwab Bank Investor CheckingTM  (continued) Account Number: 000000000000
+Activity (continued)
+Date
+Posted Description Debits Credits Balance
+06/02 Electronic Withdrawal
+CITI CARD ONLINE PAYMENT 250601
+ $953.80   $17,815.70
+06/02 Electronic Withdrawal
+AMEX EPAYMENT ACH PMT 250602
+ $1,718.87   $16,096.83
+06/03 Electronic Withdrawal
+DISCOVER E-PAYMENT 250602
+ $22.28   $16,074.55
+06/03 Electronic Deposit
+F20SM4YHT5 DDA TO DDA
+ $1,100.00   $17,174.55
+06/06 Electronic Deposit
+ZEBRA TECHNOLOG DIRECT DEP 250606~ Tran: ACHDD
+ $2,962.25   $20,136.80
+06/11 Electronic Deposit
+VENMO CASHOUT 250610
+ $182.30   $20,319.10
+06/12 Electronic Withdrawal
+PGANDE WEB ONLINE JUN 25
+ $111.45   $20,207.65
+06/13 Electronic Withdrawal
+DEPT EDUCATION STUDENT LN 250612
+ $250.00   $19,957.65
+06/16 Electronic Withdrawal
+VENMO PAYMENT 250613
+ $5.50   $19,952.15
+06/16 Electronic Withdrawal
+DISCOVER E-PAYMENT 250613
+ $52.33   $19,899.82
+06/16 Electronic Withdrawal
+AMEX EPAYMENT ACH PMT 250616
+ $153.35   $19,746.47
+06/16 Electronic Withdrawal
+CAPITAL ONE MOBILE PMT
+ $400.00   $19,346.47
+2025-07-17 15:15:07,512 - DEBUG - New page: Page 5 of 8
+© 2025 Charles Schwab Bank, SSB. All rights reserved. Member FDIC.
+MARTIN CONTRERAS JR
+Account Number
+000000000000
+Statement Period
+May 31, 2025 to
+June 30, 2025
+Schwab Bank Investor CheckingTM  (continued) Account Number: 000000000000
+Activity (continued)
+Date
+Posted Description Debits Credits Balance
+06/16 Electronic Withdrawal
+CITI CARD ONLINE PAYMENT 250613
+ $854.08   $18,492.39
+06/20 Electronic Deposit
+ZEBRA TECHNOLOG DIRECT DEP 250620~ Tran: ACHDD
+ $2,962.23   $21,454.62
+06/20 ATM Withdrawal
+PAI ATM 1190 COLEMAN AV SAN JOSE, CA, US
+ $143.25   $21,311.37
+06/20 Electronic Deposit
+F20ST88DL3 DDA TO DDA
+ $800.00   $22,111.37
+06/23 Electronic Withdrawal
+COMCAST-XFINITY CABLE SVCS 250620~ Tran: ACHDW
+ $55.00   $22,056.37
+06/23 Electronic Withdrawal
+CAPITAL ONE MOBILE PMT
+ $952.31   $21,104.06
+06/26 Electronic Withdrawal
+TOYOTA ACH RTL 06252025  P110796343-26269~ Tran:
+ACHDW
+ $800.00   $20,304.06
+06/26 Visa Debit Card Point of Sale Purchase
+CSJ SMART METERS 4085353850, CA, US
+ $0.75   $20,303.31
+06/26 Electronic Withdrawal
+AMEX EPAYMENT ACH PMT 250626
+ $293.40   $20,009.91
+06/26 Electronic Withdrawal
+CITI CARD ONLINE PAYMENT 250625
+ $1,305.87   $18,704.04
+06/27 Electronic Withdrawal
+CAPITAL ONE MOBILE PMT
+ $1,008.96   $17,695.08
+2025-07-17 15:15:08,693 - DEBUG - New page: Page 6 of 8
+© 2025 Charles Schwab Bank, SSB. All rights reserved. Member FDIC.
+MARTIN CONTRERAS JR
+Account Number
+000000000000
+Statement Period
+May 31, 2025 to
+June 30, 2025
+Schwab Bank Investor CheckingTM  (continued) Account Number: 000000000000
+Activity (continued)
+Date
+Posted Description Debits Credits Balance
+06/27 Electronic Withdrawal
+VENMO PAYMENT 250626
+ $20.00   $17,675.08
+06/30 ATM Fee Rebate  $3.25   $17,678.33
+06/30 Interest Paid  $0.83   $17,679.16
+06/30 Ending Balance  $17,679.16
+Interest Earned
+Interest Earned 05/31/2025 to
+06/30/2025 31 day(s) Annual Percentage Yield Earned 0.05%
+Average Daily Balance  $19,500.59 Interest Earned this Period  $0.83
+Interest Rate as of 06/30/2025 0.05% Interest Paid Year to Date  $4.38
+IMPORTANT DEPOSIT ACCOUNT INFORMATION
+Electronic Transfers:  If you have arranged to have direct deposits made to your account at least once every 60 days from the same person or company, you can call us at the telephone number on the
+first page of this statement to find out whether or not the deposit has been made.
+In Case of Errors or Questions About Your Electronic Fund Transfers: Telephone us or write us at the phone number or the address shown on the first page of this statement as soon as you can, if you
+think your statement or receipt is wrong or if you need more information about a transfer on the statement or receipt.  We must hear from you no later than 60 days after we sent you the FIRST
+statement on which the error or problem appeared.
+1.  Tell us your name and account number (if any).
+2.  Describe the error or transfer you are unsure about.  Explain as clearly as you can why you believe there is an error or why you need more information.
+3.  Tell us the dollar amount of the suspected error.
+We will investigate your complaint and correct any error promptly.  If we take more than 10 business days to do this, we will credit your account for the amount you think is in error, so that you will have
+the use of the money during the time it takes us to complete our investigation.
+2025-07-17 15:15:08,705 - DEBUG - New page: Page 7 of 8
+© 2025 Charles Schwab Bank, SSB. All rights reserved. Member FDIC.
+MARTIN CONTRERAS JR
+Account Number
+000000000000
+Statement Period
+May 31, 2025 to
+June 30, 2025
+Schwab Bank Investor CheckingTM  (continued)                                                       Account Number:  000000000000
+IMPORTANT DEPOSIT ACCOUNT INFORMATION (continued)  
+If you are a debtor in bankruptcy or you discharged your personal liability for your loan in bankruptcy, we are providing this statement to you for informational and compliance purposes only and this
+statement is not an attempt to collect a debt against you. If you have filed a Chapter 13 bankruptcy and your bankruptcy plan requires you to send your regular monthly loan payments to the Trustee,
+you should pay the Trustee instead of us and contact your attorney or Trustee if you have questions. If you want to stop receiving or having access to your statements, write to us.
+2025-07-17 15:15:08,710 - DEBUG - New page: This page intentionally left blank.
+Page 8 of 8
+©2025  Charles Schwab Bank, SSB. All rights reserved. Member FDIC.
+MARTIN CONTRERAS JR
+Account Number
+000000000000
+Statement Period
+May 31, 2025 to
+June 30, 2025
+2025-07-17 15:15:08,711 - INFO - Successfully extracted text from PDF: ../examples/schwab_june.pdf
+2025-07-17 15:15:08,711 - DEBUG - Text: © 2025 Charles Schwab Bank, SSB. All rights reserved. Member FDIC.
+MARTIN CONTRERAS JR
+Account Number
+000000000000
+Statement Period
+May 31, 2025 to
+June 30, 2025
