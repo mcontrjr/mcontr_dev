@@ -2,7 +2,6 @@
 import os
 import argparse
 import re
-import os
 from typing import List
 from datetime import datetime
 from pypdf import PdfReader, PageObject
@@ -35,10 +34,6 @@ class CitiConfig(BankConfig):
         super().__init__('CITI', start_index=1, date_pattern=r'^\d{2}\/\d{2}', skip_date_in_desc=False)
         
         
-class DatabaseHandler:
-    def __init__(self, config: dict):
-        self.config = config
-
 # Finance Parser
 class Parser:
     keyword_to_category = {
@@ -245,7 +240,7 @@ def parse(statement_file):
     my_parser = Parser(statement_file, bank)
     
     db = PostgresHandler()
-    db.save_to_database(my_parser.purchases)
+    db.save_to_database(my_parser.purchases, 'legacy-session')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Extract purchases from PDF and export to CSV.')
