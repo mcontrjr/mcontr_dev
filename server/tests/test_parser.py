@@ -289,9 +289,9 @@ class TestCapitalOneParser(TestParser):
                 'Category': purchase.category
             })
         TestCase().assertCountEqual(purchase_dicts, expected_purchases)
-        
+
 class TestSchwabParser(TestParser):
-    
+
     def test_parse_purchases_from_text(self):
         with open("tests/mock_schwab.txt", "r") as file:
             mock_text = file.read()

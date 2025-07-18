@@ -54,17 +54,17 @@ class ParsedTransaction(BaseModel):
     description: str = Field(..., min_length=1, description="Transaction description")
     amount: float = Field(..., description="Transaction amount")
     category: TransactionCategory = Field(default=TransactionCategory.OTHER, description="Transaction category")
-    
+
     @validator('amount')
     def validate_amount(cls, v):
         if abs(v) > 1000000:  # Reasonable limit
             raise ValueError('Amount exceeds reasonable limit')
         return v
-    
+
     @validator('description')
     def validate_description(cls, v):
         return v.strip()
-    
+
     class Config:
         use_enum_values = True
 
@@ -78,7 +78,7 @@ class DatabaseTransaction(BaseModel):
     amount: float = Field(..., description="Transaction amount")
     category: TransactionCategory = Field(..., description="Transaction category")
     session_id: str = Field(..., description="Session ID for data isolation")
-    
+
     @validator('session_id')
     def validate_session_id(cls, v):
         try:
@@ -86,7 +86,7 @@ class DatabaseTransaction(BaseModel):
         except ValueError:
             raise ValueError('session_id must be a valid UUID')
         return v
-    
+
     class Config:
         use_enum_values = True
 
@@ -95,7 +95,7 @@ class DatabaseTransaction(BaseModel):
 class FileUploadRequest(BaseModel):
     """Request model for file upload."""
     session_id: str = Field(..., description="Session ID for data isolation")
-    
+
     @validator('session_id')
     def validate_session_id(cls, v):
         try:
@@ -109,13 +109,13 @@ class RecordsRequest(BaseModel):
     """Request model for getting records."""
     bank_name: Optional[str] = Field(None, description="Optional bank name filter")
     session_id: str = Field(..., description="Session ID for data isolation")
-    
+
     @validator('bank_name')
     def validate_bank_name(cls, v):
         if v is not None:
             return v.upper()
         return v
-    
+
     @validator('session_id')
     def validate_session_id(cls, v):
         try:
@@ -128,7 +128,7 @@ class RecordsRequest(BaseModel):
 class ClearRequest(BaseModel):
     """Request model for clearing records."""
     session_id: str = Field(..., description="Session ID for data isolation")
-    
+
     @validator('session_id')
     def validate_session_id(cls, v):
         try:
@@ -147,7 +147,7 @@ class TransactionRecord(BaseModel):
     description: str = Field(..., description="Transaction description")
     amount: float = Field(..., description="Transaction amount")
     category: TransactionCategory = Field(..., description="Transaction category")
-    
+
     class Config:
         use_enum_values = True
 
@@ -204,7 +204,7 @@ class BankConfiguration(BaseModel):
     skip_date_in_desc: bool = Field(True, description="Whether to skip date in description")
     tabular_entries: bool = Field(False, description="Whether entries are in tabular format")
     checking: bool = Field(False, description="Whether this is a checking account")
-    
+
     class Config:
         frozen = True  # Immutable configuration
 

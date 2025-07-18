@@ -128,7 +128,7 @@ def mock_file_operations():
     with patch('main.os.makedirs') as mock_makedirs, \
          patch('main.open') as mock_open, \
          patch('main.shutil.copyfileobj') as mock_copyfile:
-        
+
         yield {
             'makedirs': mock_makedirs,
             'open': mock_open,
@@ -172,7 +172,7 @@ def temp_upload_dir():
     with tempfile.TemporaryDirectory() as temp_dir:
         upload_dir = os.path.join(temp_dir, 'uploads')
         os.makedirs(upload_dir, exist_ok=True)
-        
+
         with patch('main.UPLOAD_DIR', upload_dir):
             yield upload_dir
 
@@ -203,10 +203,10 @@ endobj
 endobj
 xref
 0 4
-0000000000 65535 f 
-0000000009 00000 n 
-0000000074 00000 n 
-0000000120 00000 n 
+0000000000 65535 f
+0000000009 00000 n
+0000000074 00000 n
+0000000120 00000 n
 trailer
 <<
 /Size 4
@@ -255,15 +255,15 @@ def pytest_collection_modifyitems(config, items):
         # Add 'unit' marker to all tests by default
         if not any(marker.name in ['integration', 'slow'] for marker in item.iter_markers()):
             item.add_marker(pytest.mark.unit)
-        
+
         # Add 'api' marker to API tests
         if 'test_api' in item.nodeid or 'TestApi' in item.nodeid:
             item.add_marker(pytest.mark.api)
-        
+
         # Add 'parser' marker to parser tests
         if 'test_parser' in item.nodeid or 'TestParser' in item.nodeid:
             item.add_marker(pytest.mark.parser)
-        
+
         # Add 'database' marker to database tests
         if 'test_database' in item.nodeid or 'TestDatabase' in item.nodeid:
             item.add_marker(pytest.mark.database)

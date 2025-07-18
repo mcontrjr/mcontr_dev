@@ -1,5 +1,4 @@
 import psycopg2
-import os
 from typing import Optional
 from contextlib import contextmanager
 from fastapi import HTTPException
@@ -9,13 +8,13 @@ from src.models import ParsedTransaction
 from typing import List
 from src.config import DB_CONFIG
 
-## Class for a single record + objects for responses
+# Class for a single record + objects for responses
 
 
 class PostgresHandler:
     def __init__(self):
         self.config = DB_CONFIG
-    
+
     @contextmanager
     def db_connection(self, auto_commit=True):
         """Context manager for database connections with automatic cleanup."""
@@ -33,7 +32,7 @@ class PostgresHandler:
         finally:
             if conn is not None:
                 conn.close()
-    
+
     def save_to_database(self, purchases: List[ParsedTransaction], session_id: str):
         """
         Appends purchases from statements into a DB. DB is configured to only accept unique description entries.
@@ -46,17 +45,17 @@ class PostgresHandler:
 
                 for purchase in purchases:
                     if existing_purchases:
-                        if any(purchase.description == existing_purchase[3] and 
-                            purchase.amount == float(existing_purchase[4]) and 
-                            purchase.date == existing_purchase[2].date() 
-                            for existing_purchase in existing_purchases):
+                        if any(purchase.description == existing_purchase[3] and
+                               purchase.amount == float(existing_purchase[4]) and
+                               purchase.date == existing_purchase[2].date()
+                               for existing_purchase in existing_purchases):
                             log.info(f"Purchase {purchase} already exists in database. Skipping insertion.")
                             continue
                     else:
                         log.info(f"Purchase {purchase}")
                     try:
                         cur.execute("""
-                            INSERT INTO bank_statements (bank, date, description, amount, category, session_id) 
+                            INSERT INTO bank_statements (bank, date, description, amount, category, session_id)
                             VALUES (%s, %s, %s, %s, %s, %s)""",
                             (purchase.bank, purchase.date, purchase.description, purchase.amount, purchase.category, session_id))
                         log.info(f"Inserted purchase: {purchase}")
@@ -73,20 +72,20 @@ class PostgresHandler:
                 log.info(f"Inserted {inserted} new purchases into the database.")
         except Exception as e:
             log.error(f"Error saving to database: {e}")
-                
+
     def get_records(self, bank_name: Optional[str], session_id: str) -> dict:
         try:
             with self.db_connection() as (conn, cur):
                 query = "SELECT * FROM bank_statements WHERE session_id = %s"
                 params = [session_id]
-                
+
                 if bank_name:
                     query += " AND bank = %s"
                     params.append(bank_name)
-                
+
                 cur.execute(query, params)
                 log.info(f"Query: {query}")
-                
+
                 records = cur.fetchall()
                 log.info(f"Retrieved {len(records)} records from the database.")
                 resp = {
@@ -108,10 +107,10 @@ class PostgresHandler:
                 # Get the count of records before deletion
                 cur.execute("SELECT COUNT(*) FROM bank_statements WHERE session_id = %s", (session_id,))
                 count_before = cur.fetchone()[0]
-                
+
                 # Delete records for this session only
                 cur.execute("DELETE FROM bank_statements WHERE session_id = %s", (session_id,))
-                
+
                 log.info(f"Cleared {count_before} records from the database.")
                 return {
                     'message': 'Successfully cleared all records',

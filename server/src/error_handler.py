@@ -10,7 +10,7 @@ from src.config import ERROR_MESSAGES
 def handle_api_errors(error_key: str, status_code: int = 500):
     """
     Decorator to standardize error handling across API endpoints.
-    
+
     Args:
         error_key: Key from ERROR_MESSAGES to use for error detail
         status_code: HTTP status code to return (default: 500)
@@ -34,7 +34,7 @@ def handle_api_errors(error_key: str, status_code: int = 500):
 def log_and_raise_http_exception(error_key: str, exception: Exception, status_code: int = 500):
     """
     Utility function to log an error and raise a standardized HTTPException.
-    
+
     Args:
         error_key: Key from ERROR_MESSAGES to use for error detail
         exception: The original exception that occurred
