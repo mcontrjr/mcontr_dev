@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Parser from '../src/parser';
@@ -26,15 +27,25 @@ vi.mock('../src/hooks/useParserData', () => ({
 }));
 
 // Simple mock for useTheme hook
-vi.mock('../src/components/MainComponents.jsx', () => ({
+vi.mock('../src/components/UI/MainComponents.jsx', () => ({
   useTheme: () => ({
     theme: 'light',
     toggleTheme: vi.fn()
   }),
   AltModernHeader: ({ theme, toggleTheme }) => (
-    <header data-testid="header">
-      <h1>Header</h1>
-      <button onClick={toggleTheme}>Toggle {theme}</button>
+    <header className="simple-header" data-testid="header">
+      <div className="simple-header-content">
+        <div className="simple-header-left">
+          <a href="/" className="simple-logo">
+            <span className="simple-logo-text">mcontr</span>
+          </a>
+        </div>
+        <div className="simple-header-right">
+          <button onClick={toggleTheme} className="theme-toggle">
+            Toggle {theme}
+          </button>
+        </div>
+      </div>
     </header>
   )
 }));
@@ -64,21 +75,21 @@ describe('Parser Layout Tests', () => {
       render(<Parser />);
       
       expect(screen.getByTestId('header')).toBeInTheDocument();
-      expect(screen.getByText('Header')).toBeInTheDocument();
-      expect(screen.getByTestId('upload-section')).toBeInTheDocument();
+      expect(screen.getByText('mcontr')).toBeInTheDocument();
+      expect(document.querySelector('.upload-section')).toBeInTheDocument();
     });
 
     it('renders upload section with default message', () => {
       render(<Parser />);
       
-      expect(screen.getByTestId('upload-section')).toBeInTheDocument();
-      expect(screen.getByText('Upload your PDF statements to get started')).toBeInTheDocument();
+      expect(document.querySelector('.upload-section')).toBeInTheDocument();
+      expect(screen.getByText('Drop files here or click to browse')).toBeInTheDocument();
     });
 
     it('does not render breakdown section when no records', () => {
       render(<Parser />);
       
-      expect(screen.queryByTestId('breakdown-section')).not.toBeInTheDocument();
+      expect(document.querySelector('.breakdown-section')).not.toBeInTheDocument();
     });
   });
 
@@ -89,7 +100,7 @@ describe('Parser Layout Tests', () => {
       render(<Parser />);
       
       expect(screen.getByTestId('header')).toBeInTheDocument();
-      expect(screen.getByTestId('upload-section')).toBeInTheDocument();
+      expect(document.querySelector('.upload-section')).toBeInTheDocument();
       
       // Test passes by checking that the basic structure is there
       // The conditional rendering is tested in the actual component
@@ -99,7 +110,7 @@ describe('Parser Layout Tests', () => {
       render(<Parser />);
       
       expect(screen.getByTestId('header')).toBeInTheDocument();
-      expect(screen.getByTestId('upload-section')).toBeInTheDocument();
+      expect(document.querySelector('.upload-section')).toBeInTheDocument();
       
       // Verify the container structure
       const container = document.querySelector('.parser-container');
@@ -120,6 +131,7 @@ describe('Parser Layout Tests', () => {
       
       const toggleButton = screen.getByText('Toggle light');
       expect(toggleButton).toBeInTheDocument();
+      expect(toggleButton).toHaveClass('theme-toggle');
     });
   });
 });

@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 // Mock window.matchMedia for CSS media queries
 Object.defineProperty(window, 'matchMedia', {
