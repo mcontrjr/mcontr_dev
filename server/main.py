@@ -66,6 +66,7 @@ In production, implement proper authentication and authorization.
             "description": "Development server"
         }
     ],
+    root_path="/api",
     tags_metadata=[
         {
             "name": "Categories",
