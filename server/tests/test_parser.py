@@ -1,10 +1,9 @@
-import pytest
-from unittest.mock import patch, MagicMock
-from datetime import datetime
 from src.parser import Parser, AmexConfig, CitiConfig, DiscoverConfig, CapitalOneConfig, SchwabConfig
 from unittest import TestCase
 
 TestCase.maxDiff = None
+
+
 class TestParser:
 
     def test_determine_category(self):
@@ -21,7 +20,8 @@ class TestParser:
         assert Parser.extract_currency("$ 123.45") == 123.45
         assert Parser.extract_currency("$ -1,234.56") == -1234.56
         assert Parser.extract_currency("$ -4.56") == -4.56
-        assert Parser.extract_currency("No currency here") == None
+        assert Parser.extract_currency("No currency here") is None
+
 
 class TestAmexParser(TestParser):
 
@@ -83,7 +83,18 @@ class TestAmexParser(TestParser):
                 'Category': "SKI"
             }
         ]
-        TestCase().assertCountEqual(purchases, expected_purchases)
+        # Convert ParsedTransaction objects to dictionaries for comparison
+        purchase_dicts = []
+        for purchase in purchases:
+            purchase_dicts.append({
+                'Bank': purchase.bank,
+                'Date': purchase.date.strftime('%Y-%m-%d'),
+                'Description': purchase.description,
+                'Amount': purchase.amount,
+                'Category': purchase.category
+            })
+        TestCase().assertCountEqual(purchase_dicts, expected_purchases)
+
 
 class TestCitiParser(TestParser):
 
@@ -131,7 +142,18 @@ class TestCitiParser(TestParser):
                 'Category': "GAS"
             }
         ]
-        TestCase().assertCountEqual(purchases, expected_purchases)
+        # Convert ParsedTransaction objects to dictionaries for comparison
+        purchase_dicts = []
+        for purchase in purchases:
+            purchase_dicts.append({
+                'Bank': purchase.bank,
+                'Date': purchase.date.strftime('%Y-%m-%d'),
+                'Description': purchase.description,
+                'Amount': purchase.amount,
+                'Category': purchase.category
+            })
+        TestCase().assertCountEqual(purchase_dicts, expected_purchases)
+
 
 class TestDiscoverParser(TestParser):
 
@@ -186,7 +208,18 @@ class TestDiscoverParser(TestParser):
                 'Category': "TARGET"
             }
         ]
-        TestCase().assertCountEqual(purchases, expected_purchases)
+        # Convert ParsedTransaction objects to dictionaries for comparison
+        purchase_dicts = []
+        for purchase in purchases:
+            purchase_dicts.append({
+                'Bank': purchase.bank,
+                'Date': purchase.date.strftime('%Y-%m-%d'),
+                'Description': purchase.description,
+                'Amount': purchase.amount,
+                'Category': purchase.category
+            })
+        TestCase().assertCountEqual(purchase_dicts, expected_purchases)
+
 
 class TestCapitalOneParser(TestParser):
 
@@ -248,10 +281,21 @@ class TestCapitalOneParser(TestParser):
                 'Category': "OTHER"
             }
         ]
-        TestCase().assertCountEqual(purchases, expected_purchases)
-        
+        # Convert ParsedTransaction objects to dictionaries for comparison
+        purchase_dicts = []
+        for purchase in purchases:
+            purchase_dicts.append({
+                'Bank': purchase.bank,
+                'Date': purchase.date.strftime('%Y-%m-%d'),
+                'Description': purchase.description,
+                'Amount': purchase.amount,
+                'Category': purchase.category
+            })
+        TestCase().assertCountEqual(purchase_dicts, expected_purchases)
+
+
 class TestSchwabParser(TestParser):
-    
+
     def test_parse_purchases_from_text(self):
         with open("tests/mock_schwab.txt", "r") as file:
             mock_text = file.read()
@@ -455,6 +499,28 @@ class TestSchwabParser(TestParser):
                 'Description': 'Electronic Withdrawal VENMO PAYMENT 250626',
                 'Amount': 20.0,
                 'Category': 'PAYMENT'
-            }
+            },
+            {'Bank': 'SCHWAB',
+                'Date': '2025-06-30',
+                'Description': 'ATM Fee Rebate',
+                'Amount': -3.25,
+                'Category': 'OTHER'
+            },
+            {'Bank': 'SCHWAB',
+             'Date': '2025-06-30',
+             'Description': 'Interest Paid',
+             'Amount': -0.83,
+             'Category': 'OTHER'
+             }
         ]
-        TestCase().assertCountEqual(purchases, expected_purchases)
+        # Convert ParsedTransaction objects to dictionaries for comparison
+        purchase_dicts = []
+        for purchase in purchases:
+            purchase_dicts.append({
+                'Bank': purchase.bank,
+                'Date': purchase.date.strftime('%Y-%m-%d'),
+                'Description': purchase.description,
+                'Amount': purchase.amount,
+                'Category': purchase.category
+            })
+        TestCase().assertCountEqual(purchase_dicts, expected_purchases)

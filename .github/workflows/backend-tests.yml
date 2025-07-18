@@ -71,6 +71,10 @@ jobs:
       run: |
         timeout 30 bash -c 'until curl -f http://localhost:8000/system-info/ 2>/dev/null; do sleep 1; done' || echo "Server startup timeout"
     
+    - name: Run linting
+      run: |
+        docker exec server-test python -m flake8 .
+    
     - name: Run pytest
       run: |
         docker exec server-test python -m pytest -v

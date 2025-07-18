@@ -6,6 +6,9 @@ pytest
 pytest-cov
 pytest-mock
 
+# Linting
+flake8
+
 # Tools
 pypdf
 python-dotenv
@@ -18,3 +21,4 @@ requests
 fastapi
 uvicorn
 python-multipart
+pydantic
