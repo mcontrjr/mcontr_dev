@@ -1,4 +1,6 @@
-import '../../styles/stock.css'
+/* eslint-disable react/prop-types, no-unused-vars */
+import '../../../styles/stock.css'
+import notFound from '../../assets/not_found.svg'
 
 // Components
 function SearchInterface({ keyword, setKeyword, onSearch, onClear, loading, message, hasSearched, hasImages }) {

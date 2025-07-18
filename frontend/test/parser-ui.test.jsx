@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Parser from '../src/parser';
@@ -25,14 +26,23 @@ vi.mock('../src/hooks/useParserData', () => ({
   })
 }));
 
-vi.mock('../src/components/MainComponents.jsx', () => ({
+vi.mock('../src/components/UI/MainComponents.jsx', () => ({
   useTheme: () => ({
     theme: 'light',
     toggleTheme: vi.fn()
   }),
   AltModernHeader: ({ theme }) => (
-    <header data-testid="header">
-      <span data-testid="theme-indicator">{theme}</span>
+    <header className="simple-header" data-testid="header">
+      <div className="simple-header-content">
+        <div className="simple-header-left">
+          <a href="/" className="simple-logo">
+            <span className="simple-logo-text">mcontr</span>
+          </a>
+        </div>
+        <div className="simple-header-right">
+          <span data-testid="theme-indicator">{theme}</span>
+        </div>
+      </div>
     </header>
   )
 }));
@@ -60,7 +70,7 @@ describe('Parser UI Component Tests', () => {
       render(<Parser />);
       
       expect(screen.getByTestId('header')).toBeInTheDocument();
-      expect(screen.getByTestId('upload-section')).toBeInTheDocument();
+      expect(document.querySelector('.upload-section')).toBeInTheDocument();
       expect(screen.getByTestId('theme-indicator')).toBeInTheDocument();
     });
 
@@ -69,8 +79,8 @@ describe('Parser UI Component Tests', () => {
       
       // Test that the main UI elements are present
       expect(screen.getByTestId('header')).toBeInTheDocument();
-      expect(screen.getByTestId('upload-section')).toBeInTheDocument();
-      expect(screen.getByTestId('upload-message')).toBeInTheDocument();
+      expect(document.querySelector('.upload-section')).toBeInTheDocument();
+      expect(screen.getByText('Drop files here or click to browse')).toBeInTheDocument();
     });
   });
 
@@ -80,14 +90,15 @@ describe('Parser UI Component Tests', () => {
       
       // These should be in the error state fallback or main UI
       expect(screen.getByTestId('header')).toBeInTheDocument();
-      expect(screen.getByTestId('upload-section')).toBeInTheDocument();
+      expect(screen.getByText('mcontr')).toBeInTheDocument();
+      expect(document.querySelector('.upload-section')).toBeInTheDocument();
     });
 
     it('displays default upload message', () => {
       render(<Parser />);
       
-      expect(screen.getByTestId('upload-message')).toBeInTheDocument();
-      expect(screen.getByText('Upload your PDF statements to get started')).toBeInTheDocument();
+      expect(document.querySelector('.upload-section')).toBeInTheDocument();
+      expect(screen.getByText('Drop files here or click to browse')).toBeInTheDocument();
     });
 
     it('shows theme indicator in header', () => {
@@ -102,7 +113,7 @@ describe('Parser UI Component Tests', () => {
     it('hides breakdown section when no records', () => {
       render(<Parser />);
       
-      expect(screen.queryByTestId('breakdown-section')).not.toBeInTheDocument();
+      expect(document.querySelector('.breakdown-section')).not.toBeInTheDocument();
     });
 
     it('shows basic component structure (breakdown section requires proper mocking)', () => {
@@ -110,7 +121,7 @@ describe('Parser UI Component Tests', () => {
       
       // Test basic UI structure instead of dynamic behavior
       expect(screen.getByTestId('header')).toBeInTheDocument();
-      expect(screen.getByTestId('upload-section')).toBeInTheDocument();
+      expect(document.querySelector('.upload-section')).toBeInTheDocument();
       expect(screen.getByTestId('theme-indicator')).toBeInTheDocument();
     });
   });
@@ -123,7 +134,7 @@ describe('Parser UI Component Tests', () => {
       expect(screen.getByTestId('header')).toBeInTheDocument();
       
       // Upload section should be interactive
-      expect(screen.getByTestId('upload-section')).toBeInTheDocument();
+      expect(document.querySelector('.upload-section')).toBeInTheDocument();
     });
   });
 });

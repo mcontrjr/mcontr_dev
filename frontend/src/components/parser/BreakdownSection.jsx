@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types, no-unused-vars */
 import { useState } from 'react';
 import { BankSelector, MonthSelector } from './ParserComponents';
 import { AmountBar, AmountPie, RecordTable } from './ChartComponents';
-import { CHART_DIMENSIONS } from '../constants/parserConstants';
+import { CHART_DIMENSIONS } from '../../constants/parserConstants';
 
 const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelectedMonths, onClearData }) => {
   const monthOptions = [

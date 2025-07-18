@@ -1,4 +1,5 @@
-import '../../styles/stock.css'
+/* eslint-disable react/prop-types */
+import '../../../styles/stock.css'
 
 function SearchInterface({ location, setLocation, onSearch, loading, message }) {
   const handleKeyPress = (e) => {

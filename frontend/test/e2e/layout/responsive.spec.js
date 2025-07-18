@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Responsive Layout Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/parser');
+    // Wait for parser page to load
+    await page.waitForSelector('.parser-container, .upload-section', { timeout: 10000 });
   });
 
   test.describe('Desktop Layout (1920x1080)', () => {

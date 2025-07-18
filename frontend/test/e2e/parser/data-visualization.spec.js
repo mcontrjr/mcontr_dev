@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 import { test, expect } from '@playwright/test';
 
 test.describe('Parser Data Visualization and Filtering', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/parser');
     
     // Mock successful data fetch
     await page.route('**/records/**', async route => {

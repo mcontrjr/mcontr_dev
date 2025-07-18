@@ -181,8 +181,14 @@ a:hover {
   object-fit: contain;
 }
 
+@keyframes logo-rotate {
+  to {
+    transform: rotate(-45deg);
+  }
+}
+
 .my-logo img:hover {
-  transform: rotate(-45deg);
+  animation: logo-rotate 10s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .my-nav {
@@ -737,6 +743,11 @@ input[type='text']::placeholder {
   width: 32px;
   height: 32px;
   object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.simple-logo img:hover {
+  transform: rotate(-45deg);
 }
 
 .simple-logo-text {
@@ -1166,4 +1177,203 @@ input[type='text']::placeholder {
   .context-accordion-body {
     padding: 1rem;
   }
+}
+
+/* ===================================================================
+   PDF THUMBNAIL COMPONENTS - Moved from parser.css
+   =================================================================== */
+
+.pdf-thumbnail {
+  display: inline-block;
+  margin: 0.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.pdf-thumbnail:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent);
+}
+
+.pdf-thumbnail-container {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+}
+
+.pdf-thumbnail-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.pdf-icon {
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.pdf-icon-text {
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.pdf-preview-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.pdf-thumbnail-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+
+.pdf-thumbnail:hover .pdf-thumbnail-overlay {
+  opacity: 1;
+}
+
+.pdf-thumbnail-remove {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  color: #dc3545;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.pdf-thumbnail-remove:hover {
+  background: #dc3545;
+  color: white;
+  transform: scale(1.1);
+}
+
+.pdf-thumbnail-retry {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(59, 130, 246, 0.95);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin-right: 0.5rem;
+}
+
+.pdf-thumbnail-retry:hover {
+  background: #3b82f6;
+  transform: scale(1.1);
+}
+
+.pdf-thumbnail-info {
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.pdf-thumbnail-name {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.pdf-thumbnail-size {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Upload Status Badge */
+.upload-status-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.upload-status-badge.uploading {
+  background: rgba(251, 146, 60, 0.9);
+  color: white;
+  border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+.upload-status-badge.success {
+  background: rgba(34, 197, 94, 0.9);
+  color: white;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.upload-status-badge.error {
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Status Spinner */
+.status-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }

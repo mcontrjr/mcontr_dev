@@ -9,14 +9,12 @@ export default defineConfig({
     setupFiles: ['./test/setup.js'],
     css: true,
     include: ['test/**/*.test.{js,jsx}'],
-    exclude: ['test/e2e/**/*', 'test/parser-ui.test.jsx'],
+    exclude: [],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
       exclude: [
         'node_modules/',
-        'src/test/',
-        'test/e2e/',
         '**/*.config.js',
         'dist/',
       ],

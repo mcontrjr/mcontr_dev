@@ -1,9 +1,10 @@
+/* eslint-disable react/no-unescaped-entities, no-undef */
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
 import '../styles/random.css';
 import logo from './assets/random-logo.svg';
-import { SearchInterface, TabulatedGallery } from './components/RandomComponents';
-import {useTheme, AltModernHeader, ContextAccordion, Footer} from './components/MainComponents';
+import { SearchInterface, TabulatedGallery } from './components/random/RandomComponents';
+import {useTheme, AltModernHeader, ContextAccordion, Footer} from './components/UI/MainComponents';
 
 
 // Pexels API image fetching

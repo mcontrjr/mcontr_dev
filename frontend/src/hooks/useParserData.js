@@ -42,7 +42,7 @@ export const useParserData = () => {
       console.error('Error fetching bank names:', error);
       setError(error);
     }
-  }, []);
+  }, [sessionId]);
 
   const fetchRecords = useCallback(async () => {
     try {
@@ -127,8 +127,10 @@ export const useParserData = () => {
   }, [fetchBankNames]);
 
   useEffect(() => {
-    fetchRecords();
-  }, [fetchRecords, sessionId]);
+    if (bankNames.length > 0) {
+      fetchRecords();
+    }
+  }, [bankName, selectedMonths, sessionId]);
 
   const sortedRecords = useMemo(() => {
     return sortRecords(records, sortConfig);

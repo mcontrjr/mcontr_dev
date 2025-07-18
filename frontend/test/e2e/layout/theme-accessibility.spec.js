@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Theme and Accessibility Layout Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/parser');
+    // Wait for parser page to load
+    await page.waitForSelector('.parser-container, .upload-section', { timeout: 10000 });
   });
 
   test.describe('Dark/Light Theme Layout', () => {

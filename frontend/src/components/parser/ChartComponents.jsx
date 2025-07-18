@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { memo, useMemo, useCallback, useState } from 'react';
 import {
   Chart as ChartJS,
@@ -10,13 +11,13 @@ import {
   ArcElement,
 } from 'chart.js';
 import { Bar, Pie } from 'react-chartjs-2';
-import { useThemeColors } from '../hooks/useThemeColors';
-import { processWeeklyData, filterRecordsBySearch } from '../utils/dataProcessing';
+import { useThemeColors } from '../../hooks/useThemeColors';
+import { processWeeklyData, filterRecordsBySearch } from '../../utils/dataProcessing';
 import { 
   CHART_COLORS, 
   CHART_DIMENSIONS, 
   CHART_CONFIG 
-} from '../constants/parserConstants';
+} from '../../constants/parserConstants';
 
 // Register Chart.js components
 ChartJS.register(

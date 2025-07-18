@@ -1,14 +1,14 @@
-import React, { useState, useCallback } from 'react';
+ 
+import { useState, useCallback } from 'react';
 import 'chart.js/auto';
 import '../styles/stock.css';
 import '../styles/parser.css';
-import { useTheme, AltModernHeader } from './components/MainComponents.jsx';
-import UploadSection from './components/UploadSection';
-import BreakdownSection from './components/BreakdownSection';
+import { useTheme, AltModernHeader } from './components/UI/MainComponents.jsx';
+import UploadSection from './components/parser/UploadSection';
+import BreakdownSection from './components/parser/BreakdownSection';
 import logo from './assets/parser-logo.svg';
 
 import { useParserData } from './hooks/useParserData';
-import { TAB_NAMES } from './constants/parserConstants';
 
 const Parser = () => {
     const { theme, toggleTheme } = useTheme();
@@ -35,7 +35,7 @@ const Parser = () => {
         sessionId
     } = useParserData();
 
-    const handleUploadComplete = useCallback(async (data) => {
+    const handleUploadComplete = useCallback(async () => {
         // Refresh data from backend
         await Promise.all([fetchRecords(), fetchBankNames()]);
         
