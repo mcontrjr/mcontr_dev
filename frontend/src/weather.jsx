@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import '../styles/stock.css';
 import '../styles/weather.css';
 import error_img from './assets/rainy.svg';
-import {useTheme, AltModernHeader, ContextAccordion, Footer} from './components/MainComponents';
-import { SearchInterface, WeatherProfileCard, WeatherTable } from './components/WeatherComponents';
+import {useTheme, AltModernHeader, ContextAccordion, Footer} from './components/UI/MainComponents';
+import { SearchInterface, WeatherProfileCard, WeatherTable } from './components/weather/WeatherComponents';
 import logo from './assets/weather-logo.svg';
 
 

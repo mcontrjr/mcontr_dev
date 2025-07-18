@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import error_img from './assets/error.svg';
 import logo from './assets/info-logo.svg';
 import '../styles/stock.css';
-import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/MainComponents';
+import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/UI/MainComponents';
 
 
 

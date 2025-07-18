@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import ErrorBoundary from './components/ErrorBoundary.jsx'
+import ErrorBoundary from './components/UI/ErrorBoundary.jsx'
 import MainPage from './main.jsx'
 import InfoPage from './info.jsx'
 import GuessPage from './guess.jsx'

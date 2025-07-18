@@ -1,5 +1,5 @@
 import logo from './assets/logo.svg';
-import {useTheme, AltModernHeader, HeroSection, PlaygroundHeroSection, ToolsHeroSection, Footer} from './components/MainComponents';
+import {useTheme, AltModernHeader, HeroSection, PlaygroundHeroSection, ToolsHeroSection, Footer} from './components/UI/MainComponents';
 
 
 

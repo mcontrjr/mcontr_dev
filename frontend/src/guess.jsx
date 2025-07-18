@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
 import '../styles/guess.css';
-import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/MainComponents';
-import { GameInterface, GameSidebar } from './components/GuessComponents';
+import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/UI/MainComponents';
+import { GameInterface, GameSidebar } from './components/guess/GuessComponents';
 import light_logo from './assets/guess-light-logo.svg';
 import dark_logo from './assets/guess-dark-logo.svg';
 import {

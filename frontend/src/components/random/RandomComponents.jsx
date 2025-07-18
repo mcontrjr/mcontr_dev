@@ -1,4 +1,5 @@
-import '../../styles/stock.css'
+import '../../../styles/stock.css'
+import notFound from '../../assets/not_found.svg'
 
 // Components
 function SearchInterface({ keyword, setKeyword, onSearch, onClear, loading, message, hasSearched, hasImages }) {

@@ -1,11 +1,11 @@
-import '../../styles/stock.css'
-import light from '../assets/light.svg';
-import dark from '../assets/dark.svg';
-import coolImg from '../assets/man_with_dog.jpg';
-import moreLightIcon from '../assets/more_light.svg';
-import moreDarkIcon from '../assets/more_dark.svg';
+import '../../../styles/stock.css'
+import light from '../../assets/light.svg';
+import dark from '../../assets/dark.svg';
+import coolImg from '../../assets/man_with_dog.jpg';
+import moreLightIcon from '../../assets/more_light.svg';
+import moreDarkIcon from '../../assets/more_dark.svg';
 import { useState, useEffect, memo, useMemo, useCallback } from 'react';
-import Card from './UI/Card.jsx';
+import Card from './Card.jsx';
 
 
 function useTheme() {
@@ -135,20 +135,6 @@ const UnifiedCard = memo(({ title, description, route, category, status, type })
   );
 });
 
-const ToolCard = memo(({ title, description, route, status = "available" }) => {
-  return (
-    <div className="my-card my-card-interactive animate-fade-in-up">
-      <Card 
-        title={title}
-        description={description}
-        route={route}
-        category="Tools"
-        status={status}
-        type="tool"
-      />
-    </div>
-  );
-});
 
 function PlaygroundHeroSection() {
   const features = [
