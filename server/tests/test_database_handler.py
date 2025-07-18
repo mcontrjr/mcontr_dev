@@ -29,21 +29,24 @@ def mock_connection():
 @pytest.fixture
 def sample_purchases():
     """Sample purchase data for testing."""
+    from src.models import ParsedTransaction, BankType, TransactionCategory
+    from datetime import date
+    
     return [
-        {
-            'Bank': 'AMEX',
-            'Date': '2025-01-01',
-            'Description': 'STARBUCKS COFFEE',
-            'Amount': -15.50,
-            'Category': 'FOOD'
-        },
-        {
-            'Bank': 'CITI',
-            'Date': '2025-01-02',
-            'Description': 'SHELL GAS STATION',
-            'Amount': -45.00,
-            'Category': 'GAS'
-        }
+        ParsedTransaction(
+            bank=BankType.AMEX,
+            date=date(2025, 1, 1),
+            description='STARBUCKS COFFEE',
+            amount=-15.50,
+            category=TransactionCategory.FOOD
+        ),
+        ParsedTransaction(
+            bank=BankType.CITI,
+            date=date(2025, 1, 2),
+            description='SHELL GAS STATION',
+            amount=-45.00,
+            category=TransactionCategory.GAS
+        )
     ]
 
 

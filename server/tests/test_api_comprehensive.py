@@ -84,10 +84,12 @@ class TestCategoriesEndpoint:
         assert isinstance(data, dict)
         
         # Check that expected categories exist (based on actual parser categories)
+        assert 'categories' in data
+        categories = data['categories']
         expected_categories = ['FOOD', 'GAS', 'TRAVEL', 'AMAZON', 'STREAMING']
         for category in expected_categories:
-            assert category in data
-            assert isinstance(data[category], list)
+            assert category in categories
+            assert isinstance(categories[category], list)
     
     def test_categories_response_format(self, client):
         """Test that categories response has correct format."""
@@ -95,7 +97,9 @@ class TestCategoriesEndpoint:
         data = response.json()
         
         # Each category should have a list of keywords
-        for category, keywords in data.items():
+        assert 'categories' in data
+        categories = data['categories']
+        for category, keywords in categories.items():
             assert isinstance(keywords, list)
             assert len(keywords) > 0
             for keyword in keywords:

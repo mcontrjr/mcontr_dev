@@ -14,6 +14,10 @@ from src.logger import log
 from src.handler import PostgresHandler
 from src.config import CORS_ORIGINS, CORS_METHODS, MAX_FILE_SIZE, ALLOWED_FILE_TYPES, UPLOAD_DIRECTORY, API_VERSION, API_TITLE
 from src.error_handler import handle_api_errors
+from src.models import (
+    APIInfoResponse, CategoriesResponse, RecordsResponse, ParseResponse, 
+    SystemInfoResponse, ClearResponse, TransactionRecord, BankType, TransactionCategory
+)
 
 app = FastAPI()
 app.add_middleware(
@@ -26,14 +30,14 @@ app.add_middleware(
 handler = PostgresHandler()
 
 
-@app.get("/")
+@app.get("/", response_model=APIInfoResponse)
 async def root():
     """Root endpoint with API information."""
-    return {
-        "message": API_TITLE,
-        "version": API_VERSION,
-        "status": "running",
-        "endpoints": {
+    return APIInfoResponse(
+        message=API_TITLE,
+        version=API_VERSION,
+        status="running",
+        endpoints={
             "categories": "/categories/",
             "records": "/records/",
             "parse": "/parse/",
@@ -41,32 +45,33 @@ async def root():
             "clear": "/clear/",
             "docs": "/docs"
         }
-    }
+    )
 
 
-@app.get("/categories/")
+@app.get("/categories/", response_model=CategoriesResponse)
 @handle_api_errors("CATEGORIES_RETRIEVAL")
-async def get_categories() -> dict:
+async def get_categories():
     """
     Retrieve categories from parser. The categories contain keyword strings that map back to it
     so if any keywords are found in the description we can defer the category.
 
     ex: {
-    'GAS': {'GAS', 'CHEVRON', 'SHELL'}
+    'GAS': ['GAS', 'CHEVRON', 'SHELL']
     ...
     }
     :return: hashmap of categories and keywords
     """
     categories = Parser.keyword_to_category
-    return categories
+    return CategoriesResponse(categories=categories)
 
-@app.get("/records/")
+@app.get("/records/", response_model=RecordsResponse)
 @handle_api_errors("RECORDS_RETRIEVAL")
-async def get_records(bank_name: Optional[str] = Query(None), session_id: str = Query(...)) -> dict:
+async def get_records(bank_name: Optional[str] = Query(None), session_id: str = Query(...)):
     """
     Retrieve records from the database, optionally filtering by bank name.
     
     :param bank_name: Optional; filter results by the bank name.
+    :param session_id: Session ID for data isolation.
     :return: List of records matching the criteria.
     """
     if bank_name is None:
@@ -77,23 +82,20 @@ async def get_records(bank_name: Optional[str] = Query(None), session_id: str = 
     response = handler.get_records(bank_name, session_id)
     records = response.get('records', [])
     
-    results = []
+    typed_records = []
     for record in records:
-        results.append({
-            'id': record[0],
-            'bank': record[1],
-            'date': record[2],
-            'description': record[3],
-            'amount': record[4],
-            'category': record[5]
-        })
-    resp = {
-        'records': results,
-        'count': len(results)
-    }
-    return resp
+        typed_records.append(TransactionRecord(
+            id=record[0],
+            bank=record[1],
+            date=record[2],
+            description=record[3],
+            amount=record[4],
+            category=record[5]
+        ))
+    
+    return RecordsResponse(records=typed_records, count=len(typed_records))
 
-@app.post("/parse/")
+@app.post("/parse/", response_model=ParseResponse)
 @handle_api_errors("FILE_PROCESSING")
 async def parse_upload_file(pdf_files: List[UploadFile] = File(...), session_id: str = Form(...)):
     """
@@ -118,6 +120,7 @@ async def parse_upload_file(pdf_files: List[UploadFile] = File(...), session_id:
     # Save the uploaded file
     os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
     
+    total_transactions = 0
     for pdf_file in pdf_files:
         log.info(f"Processing pdf file: {pdf_file.filename}")
         
@@ -129,10 +132,15 @@ async def parse_upload_file(pdf_files: List[UploadFile] = File(...), session_id:
         # Process each PDF file
         statement = Parser(pdf_path)
         handler.save_to_database(statement.purchases, session_id)
+        total_transactions += len(statement.purchases)
         
-    return {"status": "success", "message": "File processed and data saved to database"}
+    return ParseResponse(
+        status="success", 
+        message="File processed and data saved to database",
+        transactions_processed=total_transactions
+    )
 
-@app.get("/system-info/")
+@app.get("/system-info/", response_model=SystemInfoResponse)
 @handle_api_errors("SYSTEM_INFO")
 async def get_system_info():
     """
@@ -182,19 +190,23 @@ async def get_system_info():
         "percent": (disk.used / disk.total) * 100
     }
     
-    return {
-        "cpu": cpu_info,
-        "memory": memory_info,
-        "threads": thread_info,
-        "platform": platform_info,
-        "disk": disk_info,
-        "timestamp": datetime.now().isoformat()
-    }
+    return SystemInfoResponse(
+        cpu=cpu_info,
+        memory=memory_info,
+        threads=thread_info,
+        platform=platform_info,
+        disk=disk_info,
+        timestamp=datetime.now()
+    )
 
-@app.post("/clear/")
+@app.post("/clear/", response_model=ClearResponse)
 @handle_api_errors("RECORDS_CLEARING")
 async def clear_records(session_id: str = Form(...)):
     """
     Endpoint to clear all records from the bank_statements table.
     """
-    return handler.clear_records(session_id)
+    result = handler.clear_records(session_id)
+    return ClearResponse(
+        message=result.get('message', 'Successfully cleared records'),
+        records_deleted=result.get('records_deleted', 0)
+    )

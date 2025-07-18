@@ -18,3 +18,4 @@ requests
 fastapi
 uvicorn
 python-multipart
+pydantic

@@ -224,14 +224,17 @@ class TestPostgresHandlerSessionIsolation:
         
         # Mock get_records to return empty results
         with patch.object(handler, 'get_records', return_value={'records': []}):
+            from src.models import ParsedTransaction, BankType, TransactionCategory
+            from datetime import date
+            
             purchases = [
-                {
-                    'Bank': 'TEST',
-                    'Date': '2025-01-01',
-                    'Description': 'Test Transaction',
-                    'Amount': 100.00,
-                    'Category': 'TEST'
-                }
+                ParsedTransaction(
+                    bank=BankType.AMEX,  # Using valid enum value
+                    date=date(2025, 1, 1),
+                    description='Test Transaction',
+                    amount=100.00,
+                    category=TransactionCategory.OTHER  # Using valid enum value
+                )
             ]
             
             handler.save_to_database(purchases, session_id)

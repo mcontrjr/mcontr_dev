@@ -11,6 +11,8 @@ from dotenv import load_dotenv
 from src.handler import PostgresHandler
 from src.logger import log
 from src.config import CATEGORY_KEYWORDS
+from src.models import ParsedTransaction, BankConfiguration, BankType, TransactionCategory
+from datetime import datetime, date
 
 load_dotenv()
 
@@ -62,12 +64,12 @@ class Parser:
             self.purchases = self.parse_purchases_from_text()
 
     @staticmethod
-    def determine_category(description: str):
+    def determine_category(description: str) -> TransactionCategory:
         description = description.upper()
         for category, keywords in Parser.keyword_to_category.items():
             if any(keyword in description for keyword in keywords):
-                return category
-        return 'OTHER'
+                return TransactionCategory(category)
+        return TransactionCategory.OTHER
     
     @staticmethod
     def convert_to_sql_date(date_str: str) -> str:
@@ -206,18 +208,19 @@ class Parser:
         """Clean and normalize tabular description."""
         return " ".join(description.strip().split())
     
-    def _create_tabular_transaction(self, date_str: str, description: str, amount: float) -> dict:
-        """Create a transaction dictionary for tabular format."""
+    def _create_tabular_transaction(self, date_str: str, description: str, amount: float) -> ParsedTransaction:
+        """Create a transaction object for tabular format."""
         category = Parser.determine_category(description)
-        return {
-            'Bank': 'CAPITAL ONE',
-            'Date': date_str,
-            'Description': description,
-            'Amount': amount,
-            'Category': category
-        }
+        transaction_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        return ParsedTransaction(
+            bank=BankType.CAPITAL_ONE,
+            date=transaction_date,
+            description=description,
+            amount=amount,
+            category=category
+        )
     
-    def parse_purchases_from_tabular(self) -> List[dict]:
+    def parse_purchases_from_tabular(self) -> List[ParsedTransaction]:
         """
         Extracts transactions from tabular PDF text format.
         For example, Capital One uses a tabular format where transactions are not on separate lines.
@@ -257,7 +260,7 @@ class Parser:
             transaction = self._create_tabular_transaction(sql_date, description, amount)
             purchases.append(transaction)
             
-            log.info(f"Found Capital One transaction on {trans_date} under {transaction['Category']} for ${amount} with description: {description}")
+            log.info(f"Found Capital One transaction on {trans_date} under {transaction.category} for ${amount} with description: {description}")
         
         return purchases
 
@@ -351,7 +354,7 @@ class Parser:
         
         return None, j, None
     
-    def parse_transactions_from_checkings(self) -> List[dict]:
+    def parse_transactions_from_checkings(self) -> List[ParsedTransaction]:
         """
         Parses transactions from checking account statements.
         Handles both debits and credits, marking credits as negative amounts.
@@ -392,13 +395,15 @@ class Parser:
                     transaction_type = "debit" if amount > 0 else "credit"
                     log.info(f"Found {transaction_type} transaction on {date_str} under {category} for ${amount} with description: {description}")
                     
-                    transactions.append({
-                        'Bank': self.config.bank,
-                        'Date': sql_date,
-                        'Description': description,
-                        'Amount': amount,
-                        'Category': category
-                    })
+                    transaction_date = datetime.strptime(sql_date, "%Y-%m-%d").date()
+                    transaction = ParsedTransaction(
+                        bank=BankType(self.config.bank),
+                        date=transaction_date,
+                        description=description,
+                        amount=amount,
+                        category=category
+                    )
+                    transactions.append(transaction)
                     
                     i = next_index
                 else:
@@ -420,19 +425,20 @@ class Parser:
         log.debug(f"Amount Line: {amount_line}")
         return self.extract_currency(amount_line)
     
-    def _create_purchase_transaction(self, date_str: str, description: str, amount: float) -> dict:
-        """Create a purchase transaction dictionary."""
+    def _create_purchase_transaction(self, date_str: str, description: str, amount: float) -> ParsedTransaction:
+        """Create a purchase transaction object."""
         sql_date = self.convert_to_sql_date(date_str)
         category = self.determine_category(description)
-        return {
-            'Bank': self.config.bank,
-            'Date': sql_date,
-            'Description': description,
-            'Amount': amount,
-            'Category': category
-        }
+        transaction_date = datetime.strptime(sql_date, "%Y-%m-%d").date()
+        return ParsedTransaction(
+            bank=BankType(self.config.bank),
+            date=transaction_date,
+            description=description,
+            amount=amount,
+            category=category
+        )
     
-    def _process_purchase_line(self, lines: List[str], line_index: int, date_match: re.Match) -> dict:
+    def _process_purchase_line(self, lines: List[str], line_index: int, date_match: re.Match) -> ParsedTransaction:
         """Process a single line that contains a purchase date."""
         if not self._has_sufficient_lines(line_index, lines):
             log.warning("Not enough lines to parse description and amount for date: %s", lines[line_index])
@@ -456,10 +462,10 @@ class Parser:
         date_str = date_match.group()
         transaction = self._create_purchase_transaction(date_str, description, amount)
         
-        log.info(f"Found a purchase on {date_str} under {transaction['Category']} for ${amount} with description: \n\t{description}\n")
+        log.info(f"Found a purchase on {date_str} under {transaction.category} for ${amount} with description: \n\t{description}\n")
         return transaction
     
-    def parse_purchases_from_text(self) -> List[dict]:
+    def parse_purchases_from_text(self) -> List[ParsedTransaction]:
         """
         Parses purchases from extracted text.
 

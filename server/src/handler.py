@@ -5,6 +5,8 @@ from contextlib import contextmanager
 from fastapi import HTTPException
 
 from src.logger import log
+from src.models import ParsedTransaction
+from typing import List
 from src.config import DB_CONFIG
 
 ## Class for a single record + objects for responses
@@ -32,7 +34,7 @@ class PostgresHandler:
             if conn is not None:
                 conn.close()
     
-    def save_to_database(self, purchases: list, session_id: str):
+    def save_to_database(self, purchases: List[ParsedTransaction], session_id: str):
         """
         Appends purchases from statements into a DB. DB is configured to only accept unique description entries.
         """
@@ -44,9 +46,9 @@ class PostgresHandler:
 
                 for purchase in purchases:
                     if existing_purchases:
-                        if any(purchase['Description'] == existing_purchase[3] and 
-                            purchase['Amount'] == float(existing_purchase[4]) and 
-                            purchase['Date'] == existing_purchase[2].strftime('%Y-%m-%d') 
+                        if any(purchase.description == existing_purchase[3] and 
+                            purchase.amount == float(existing_purchase[4]) and 
+                            purchase.date == existing_purchase[2].date() 
                             for existing_purchase in existing_purchases):
                             log.info(f"Purchase {purchase} already exists in database. Skipping insertion.")
                             continue
@@ -56,7 +58,7 @@ class PostgresHandler:
                         cur.execute("""
                             INSERT INTO bank_statements (bank, date, description, amount, category, session_id) 
                             VALUES (%s, %s, %s, %s, %s, %s)""",
-                            (purchase['Bank'], purchase['Date'], purchase['Description'], purchase['Amount'], purchase['Category'], session_id))
+                            (purchase.bank, purchase.date, purchase.description, purchase.amount, purchase.category, session_id))
                         log.info(f"Inserted purchase: {purchase}")
                         inserted += 1
                     except psycopg2.IntegrityError as e:

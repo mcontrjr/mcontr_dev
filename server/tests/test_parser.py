@@ -83,7 +83,17 @@ class TestAmexParser(TestParser):
                 'Category': "SKI"
             }
         ]
-        TestCase().assertCountEqual(purchases, expected_purchases)
+        # Convert ParsedTransaction objects to dictionaries for comparison
+        purchase_dicts = []
+        for purchase in purchases:
+            purchase_dicts.append({
+                'Bank': purchase.bank,
+                'Date': purchase.date.strftime('%Y-%m-%d'),
+                'Description': purchase.description,
+                'Amount': purchase.amount,
+                'Category': purchase.category
+            })
+        TestCase().assertCountEqual(purchase_dicts, expected_purchases)
 
 class TestCitiParser(TestParser):
 
@@ -131,7 +141,17 @@ class TestCitiParser(TestParser):
                 'Category': "GAS"
             }
         ]
-        TestCase().assertCountEqual(purchases, expected_purchases)
+        # Convert ParsedTransaction objects to dictionaries for comparison
+        purchase_dicts = []
+        for purchase in purchases:
+            purchase_dicts.append({
+                'Bank': purchase.bank,
+                'Date': purchase.date.strftime('%Y-%m-%d'),
+                'Description': purchase.description,
+                'Amount': purchase.amount,
+                'Category': purchase.category
+            })
+        TestCase().assertCountEqual(purchase_dicts, expected_purchases)
 
 class TestDiscoverParser(TestParser):
 
@@ -186,7 +206,17 @@ class TestDiscoverParser(TestParser):
                 'Category': "TARGET"
             }
         ]
-        TestCase().assertCountEqual(purchases, expected_purchases)
+        # Convert ParsedTransaction objects to dictionaries for comparison
+        purchase_dicts = []
+        for purchase in purchases:
+            purchase_dicts.append({
+                'Bank': purchase.bank,
+                'Date': purchase.date.strftime('%Y-%m-%d'),
+                'Description': purchase.description,
+                'Amount': purchase.amount,
+                'Category': purchase.category
+            })
+        TestCase().assertCountEqual(purchase_dicts, expected_purchases)
 
 class TestCapitalOneParser(TestParser):
 
@@ -248,7 +278,17 @@ class TestCapitalOneParser(TestParser):
                 'Category': "OTHER"
             }
         ]
-        TestCase().assertCountEqual(purchases, expected_purchases)
+        # Convert ParsedTransaction objects to dictionaries for comparison
+        purchase_dicts = []
+        for purchase in purchases:
+            purchase_dicts.append({
+                'Bank': purchase.bank,
+                'Date': purchase.date.strftime('%Y-%m-%d'),
+                'Description': purchase.description,
+                'Amount': purchase.amount,
+                'Category': purchase.category
+            })
+        TestCase().assertCountEqual(purchase_dicts, expected_purchases)
         
 class TestSchwabParser(TestParser):
     
@@ -469,4 +509,14 @@ class TestSchwabParser(TestParser):
                 'Category': 'OTHER'
             }
         ]
-        TestCase().assertCountEqual(purchases, expected_purchases)
+        # Convert ParsedTransaction objects to dictionaries for comparison
+        purchase_dicts = []
+        for purchase in purchases:
+            purchase_dicts.append({
+                'Bank': purchase.bank,
+                'Date': purchase.date.strftime('%Y-%m-%d'),
+                'Description': purchase.description,
+                'Amount': purchase.amount,
+                'Category': purchase.category
+            })
+        TestCase().assertCountEqual(purchase_dicts, expected_purchases)
