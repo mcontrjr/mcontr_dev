@@ -1,6 +1,22 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 
 export const useThemeColors = () => {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(currentTheme);
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme', 'class']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return useMemo(() => {
     const computedStyle = getComputedStyle(document.documentElement);
     return {
@@ -12,5 +28,5 @@ export const useThemeColors = () => {
       accent: computedStyle.getPropertyValue('--accent').trim(),
       accentHover: computedStyle.getPropertyValue('--accent-hover').trim(),
     };
-  }, []);
+  }, [theme]);
 };

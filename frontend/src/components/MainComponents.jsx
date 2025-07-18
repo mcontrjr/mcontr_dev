@@ -4,7 +4,8 @@ import dark from '../assets/dark.svg';
 import coolImg from '../assets/man_with_dog.jpg';
 import moreLightIcon from '../assets/more_light.svg';
 import moreDarkIcon from '../assets/more_dark.svg';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo, useMemo, useCallback } from 'react';
+import Card from './UI/Card.jsx';
 
 
 function useTheme() {
@@ -24,7 +25,7 @@ function useTheme() {
   return { theme, toggleTheme };
 }
 
-function ThemeToggle({ theme, toggleTheme }) {
+const ThemeToggle = memo(({ theme, toggleTheme }) => {
   return (
     <button 
       className="theme-toggle" 
@@ -35,33 +36,21 @@ function ThemeToggle({ theme, toggleTheme }) {
       {theme === 'light' ? <img src={light} alt="Dark mode" /> : <img src={dark} alt="Light mode" />}
     </button>
   );
-}
+});
 
-function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
-  const wasteOfTime = [
-    {
-      title: "Guessing Game",
-      href: "/guess"
-    }
-  ];
-
-  const api = [
-    {
-      title: "Weather Check", 
-      href: "/weather"
-    },
-    {
-      title: "Image Generator",
-      href: "/random"
-    }
-  ];
-
-  const tools = [
-    {
-      title: "Statement Parser",
-      href: "/parser"
-    }
-  ];
+const AltModernHeader = memo(({ theme, toggleTheme, light_logo, dark_logo }) => {
+  const navigationItems = useMemo(() => ({
+    playground: [
+      { title: "Guessing Game", href: "/guess" }
+    ],
+    api: [
+      { title: "Weather Check", href: "/weather" },
+      { title: "Image Generator", href: "/random" }
+    ],
+    tools: [
+      { title: "Statement Parser", href: "/parser" }
+    ]
+  }), []);
 
   return (
     <header className="simple-header">
@@ -83,13 +72,13 @@ function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
               <div className="simple-dropdown">
                 <div className="simple-section">
                   <h4>Waste of Time</h4>
-                  {wasteOfTime.map((item, index) => (
+                  {navigationItems.playground.map((item, index) => (
                     <a key={index} href={item.href} className="simple-link">{item.title}</a>
                   ))}
                 </div>
                 <div className="simple-section">
                   <h4>API</h4>
-                  {api.map((item, index) => (
+                  {navigationItems.api.map((item, index) => (
                     <a key={index} href={item.href} className="simple-link">{item.title}</a>
                   ))}
                 </div>
@@ -100,7 +89,7 @@ function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
               <span className="simple-nav-title">Tools</span>
               <div className="simple-dropdown">
                 <div className="simple-section">
-                  {tools.map((tool, index) => (
+                  {navigationItems.tools.map((tool, index) => (
                     <a key={index} href={tool.href} className="simple-link">{tool.title}</a>
                   ))}
                 </div>
@@ -112,9 +101,9 @@ function AltModernHeader({ theme, toggleTheme, light_logo, dark_logo }) {
       </div>
     </header>
   );
-}
+});
 
-function HeroSection() {
+const HeroSection = memo(() => {
   return (
     <section className="my-hero">
       <div className="my-container">
@@ -129,91 +118,37 @@ function HeroSection() {
       </div>
     </section>
   );
-}
+});
 
-function UnifiedCard({ title, description, route, category, status, type }) {
-  const handleClick = () => {
-    window.location.href = route;
-  };
-
+const UnifiedCard = memo(({ title, description, route, category, status, type }) => {
   return (
-    <div 
-      className={`unified-card ${type}-card animate-fade-in-up`}
-      onClick={handleClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          handleClick();
-        }
-      }}
-    >
-      <div className="unified-card-header">
-        <h3 className="unified-card-title">{title}</h3>
-        {status && (
-          <span className={`unified-card-status ${status}`}>
-            {status}
-          </span>
-        )}
-        {category && (
-          <span className="unified-card-category">
-            {category}
-          </span>
-        )}
-      </div>
-      <div className="unified-card-body">
-        <p>{description}</p>
-      </div>
-      <div className="unified-card-footer">
-        <span className="unified-card-type">{type}</span>
-        <span className="unified-card-arrow">→</span>
-      </div>
+    <div className={`${type}-card animate-fade-in-up`}>
+      <Card 
+        title={title}
+        description={description}
+        route={route}
+        category={category}
+        status={status}
+        type={type}
+      />
     </div>
   );
-}
+});
 
-function ToolCard({ title, description, route, status = "available" }) {
-  const handleClick = () => {
-    window.location.href = route;
-  };
-
+const ToolCard = memo(({ title, description, route, status = "available" }) => {
   return (
-    <div 
-      className="my-card my-card-interactive animate-fade-in-up" 
-      onClick={handleClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          handleClick();
-        }
-      }}
-    >
-      <div className="my-card-header">
-        <div>
-          <h3 className="my-card-title">{title}</h3>
-          <span 
-            className="text-sm" 
-            style={{ 
-              color: status === 'available' ? 'var(--accent)' : 'var(--text-muted)' 
-            }}
-          >
-            {status}
-          </span>
-        </div>
-      </div>
-      <div className="my-card-body">
-        <p>{description}</p>
-      </div>
-      <div className="my-card-footer">
-        <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
-          Tool
-        </span>
-        <span style={{ color: 'var(--accent)' }}>→</span>
-      </div>
+    <div className="my-card my-card-interactive animate-fade-in-up">
+      <Card 
+        title={title}
+        description={description}
+        route={route}
+        category="Tools"
+        status={status}
+        type="tool"
+      />
     </div>
   );
-}
+});
 
 function PlaygroundHeroSection() {
   const features = [

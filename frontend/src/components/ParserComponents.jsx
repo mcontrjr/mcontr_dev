@@ -208,20 +208,10 @@ const MonthSelector = memo(({ selectedMonths, setSelectedMonths }) => {
     );
 });
 
-const AmountPie = ({ pieData, totalAmount }) => {
-    const getThemeColors = () => {
-        const computedStyle = getComputedStyle(document.documentElement);
-        return {
-            primary: computedStyle.getPropertyValue('--text-primary').trim(),
-            secondary: computedStyle.getPropertyValue('--text-secondary').trim(),
-            border: computedStyle.getPropertyValue('--border').trim(),
-        };
-    };
+const AmountPie = memo(({ pieData, totalAmount }) => {
+    const colors = useThemeColors();
 
-    const colors = getThemeColors();
-
-    // Create a custom dataset with logo colors
-    const customPieData = {
+    const customPieData = useMemo(() => ({
         ...pieData,
         datasets: [{
             ...pieData.datasets[0],
@@ -229,17 +219,15 @@ const AmountPie = ({ pieData, totalAmount }) => {
                 '#0d3b66', // Navy blue from logo
                 '#006600', // Green from logo
                 '#f4d35e', // Yellow from logo
-                // Generate additional colors by adjusting opacity of the main colors
                 'rgba(50, 124, 194, 0.8)',   // Navy with 80% opacity
                 'rgba(4, 210, 4, 0.8)',     // Green with 80% opacity
                 'rgba(243, 210, 89, 0.8)',  // Yellow with 80% opacity
                 'rgba(87, 243, 241, 0.6)',   // Navy with 60% opacity
                 'rgba(245, 234, 40, 0.6)',     // Green with 60% opacity
                 'rgba(191, 35, 4, 0.6)',  // Yellow with 60% opacity
-                // Add more variations if needed
             ]
         }]
-    };
+    }), [pieData]);
 
     return (
         <div style={{ display: 'flex', gap: '2rem', height: '500px' }}>
@@ -319,7 +307,7 @@ const AmountPie = ({ pieData, totalAmount }) => {
 
         </div>
     );
-};
+});
 
 const RecordTable = memo(({ sortedRecords, requestSort }) => {
     const [searchText, setSearchText] = useState('');
