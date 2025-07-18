@@ -62,14 +62,14 @@ class TestSessionIsolation:
         }
 
         # Clear session 1
-        response_1 = client.post(f"/clear/", data={'session_id': session_ids['session_1']})
+        response_1 = client.post("/clear/", data={'session_id': session_ids['session_1']})
         assert response_1.status_code == 200
         data_1 = response_1.json()
         assert data_1['message'] == 'Successfully cleared all records'
         assert data_1['records_deleted'] == 0
 
         # Clear session 2
-        response_2 = client.post(f"/clear/", data={'session_id': session_ids['session_2']})
+        response_2 = client.post("/clear/", data={'session_id': session_ids['session_2']})
         assert response_2.status_code == 200
         data_2 = response_2.json()
         assert data_2['message'] == 'Successfully cleared all records'

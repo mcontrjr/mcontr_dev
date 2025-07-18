@@ -280,4 +280,3 @@ async def clear_records(session_id: str = Form(...)):
         message=result.get('message', 'Successfully cleared records'),
         records_deleted=result.get('records_deleted', 0)
     )
-

@@ -57,7 +57,7 @@ class PostgresHandler:
                         cur.execute("""
                             INSERT INTO bank_statements (bank, date, description, amount, category, session_id)
                             VALUES (%s, %s, %s, %s, %s, %s)""",
-                            (purchase.bank, purchase.date, purchase.description, purchase.amount, purchase.category, session_id))
+                                    (purchase.bank, purchase.date, purchase.description, purchase.amount, purchase.category, session_id))
                         log.info(f"Inserted purchase: {purchase}")
                         inserted += 1
                     except psycopg2.IntegrityError as e:

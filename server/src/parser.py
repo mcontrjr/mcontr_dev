@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import os
 import argparse
 import re
 from typing import List
@@ -8,17 +7,17 @@ from pypdf import PdfReader, PageObject
 from pypdf.errors import PdfReadError
 from dotenv import load_dotenv
 
-from src.handler import PostgresHandler
 from src.logger import log
 from src.config import CATEGORY_KEYWORDS
-from src.models import ParsedTransaction, BankConfiguration, BankType, TransactionCategory
-from datetime import datetime, date
+from src.models import ParsedTransaction, BankType, TransactionCategory
 
 load_dotenv()
 
 # Bank Configurations
+
+
 class BankConfig():
-    def __init__(self, bank: str, start_index: int = 0, date_pattern: str = r'^\d{2}\/\d{2}\/\d{2}', skip_date_in_desc: bool = True, tabular_entries: bool = False, checking = False):
+    def __init__(self, bank: str, start_index: int = 0, date_pattern: str = r'^\d{2}\/\d{2}\/\d{2}', skip_date_in_desc: bool = True, tabular_entries: bool = False, checking: bool = False):
         self.bank = bank
         self.start_index = start_index
         self.date_pattern = date_pattern
@@ -26,21 +25,26 @@ class BankConfig():
         self.tabular_entries = tabular_entries
         self.checking = checking
 
+
 class DiscoverConfig(BankConfig):
     def __init__(self):
         super().__init__('DISCOVER', skip_date_in_desc=False)
+
 
 class AmexConfig(BankConfig):
     def __init__(self):
         super().__init__('AMEX', start_index=2)
 
+
 class SchwabConfig(BankConfig):
     def __init__(self):
         super().__init__('SCHWAB', start_index=2, checking=True)
 
+
 class CapitalOneConfig(BankConfig):
     def __init__(self):
         super().__init__('CAPITAL ONE', start_index=2, tabular_entries=True)
+
 
 class CitiConfig(BankConfig):
     def __init__(self):
@@ -165,9 +169,9 @@ class Parser:
             log.error(f"Error extracting text from PDF: {e}")
             raise e
 
-    def extract_description(self, lines: List[str], date: re.Match) -> str:
-        log.debug(f"Extracting description from lines: {lines} with date: {date.group()}")
-        description = " ".join(lines)[date.end():date.endpos].strip()
+    def extract_description(self, lines: List[str], date_match: re.Match) -> str:
+        log.debug(f"Extracting description from lines: {lines} with date: {date_match.group()}")
+        description = " ".join(lines)[date_match.end():date_match.endpos].strip()
         description = " ".join(description.split())
         dollar_match = re.search(r'\$', description)
         description = description[:dollar_match.start()].strip() if dollar_match else description
@@ -421,7 +425,7 @@ class Parser:
 
     def _extract_amount_from_lines(self, lines: List[str], start_index: int) -> float:
         """Extract amount from a group of lines starting at given index."""
-        amount_line = " ".join([line for line in lines[start_index:start_index+5]])
+        amount_line = " ".join([line for line in lines[start_index:start_index + 5]])
         log.debug(f"Amount Line: {amount_line}")
         return self.extract_currency(amount_line)
 
@@ -445,9 +449,9 @@ class Parser:
             return None
 
         # Extract description
-        description = self.extract_description(lines[line_index:line_index+2], date_match)
+        description = self.extract_description(lines[line_index:line_index + 2], date_match)
         if description is None:
-            log.debug(f"Description was None. Skipping...")
+            log.debug("Description was None. Skipping...")
             return None
 
         log.debug(f"Description: {description}. Lines: {lines[line_index:line_index+2]}. Date endpos: {date_match.endpos}")
@@ -488,7 +492,6 @@ class Parser:
         except Exception as e:
             log.error(f"Error parsing purchases from text: {e}")
             raise
-
 
 
 if __name__ == "__main__":

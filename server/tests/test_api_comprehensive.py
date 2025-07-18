@@ -5,15 +5,10 @@ Tests all endpoints, error conditions, edge cases, and session isolation.
 
 import pytest
 import uuid
-import json
-import io
 from unittest.mock import patch, MagicMock, mock_open
 from fastapi.testclient import TestClient
-from fastapi import UploadFile
 
 from main import app
-from src.handler import PostgresHandler
-from src.parser import Parser
 
 
 @pytest.fixture

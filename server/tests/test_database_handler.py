@@ -331,7 +331,7 @@ class TestPostgresHandlerInitialization:
         # Try to establish connection
         try:
             handler.get_records("", "test-session")
-        except:
+        except Exception:
             pass  # Connection will fail in test, but we just want to check parameters
 
         # Verify connection was attempted
