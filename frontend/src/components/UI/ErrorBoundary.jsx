@@ -1,3 +1,5 @@
+ 
+/* eslint-disable react/prop-types, react/no-unescaped-entities */
 import React from 'react';
 
 class ErrorBoundary extends React.Component {

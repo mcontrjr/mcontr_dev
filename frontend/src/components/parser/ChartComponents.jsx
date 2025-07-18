@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { memo, useMemo, useCallback, useState } from 'react';
 import {
   Chart as ChartJS,

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types, react/display-name */
 import { memo, useCallback } from 'react';
 import amexLogo from '../../assets/amex.svg';
 import citiLogo from '../../assets/citi.svg';

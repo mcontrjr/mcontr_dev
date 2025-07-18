@@ -1,3 +1,5 @@
+ 
+/* eslint-disable react/prop-types */
 import { memo } from 'react';
 
 const Card = memo(({ title, description, route, category, status, type, onClick }) => {

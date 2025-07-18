@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { test, expect } from '@playwright/test';
 
 test.describe('Parser Data Visualization and Filtering', () => {

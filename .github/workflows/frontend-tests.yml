@@ -26,9 +26,9 @@ jobs:
       run: npm install --frozen-lockfile
       working-directory: frontend
     
-    # - name: Run ESLint
-    #   run: npm run lint
-    #   working-directory: frontend
+    - name: Run ESLint
+      run: npm run lint
+      working-directory: frontend
     
     - name: Run unit tests (excluding parser-ui.test)
       run: npm run test:coverage

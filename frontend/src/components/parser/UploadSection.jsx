@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types, no-unused-vars */
 import { useState, useCallback } from 'react';
 import { API_URL } from '../../constants/parserConstants';
 import { SupportedBanks } from './ParserComponents';

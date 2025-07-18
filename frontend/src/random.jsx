@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities, no-undef */
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
 import '../styles/random.css';

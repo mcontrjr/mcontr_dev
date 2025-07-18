@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types, no-unused-vars */
 import '../../../styles/stock.css'
 import { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2'

@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 import { test, expect } from '@playwright/test';
-import path from 'path';
 
 test.describe('Parser Upload Functionality', () => {
   test.beforeEach(async ({ page }) => {

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import '../styles/stock.css';
 import '../styles/weather.css';

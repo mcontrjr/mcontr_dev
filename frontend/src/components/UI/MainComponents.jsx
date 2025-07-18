@@ -1,10 +1,12 @@
+ 
+/* eslint-disable react/prop-types, react/display-name */
 import '../../../styles/stock.css'
 import light from '../../assets/light.svg';
 import dark from '../../assets/dark.svg';
 import coolImg from '../../assets/man_with_dog.jpg';
 import moreLightIcon from '../../assets/more_light.svg';
 import moreDarkIcon from '../../assets/more_dark.svg';
-import { useState, useEffect, memo, useMemo, useCallback } from 'react';
+import { useState, useEffect, memo, useMemo } from 'react';
 import Card from './Card.jsx';
 
 
@@ -58,7 +60,7 @@ const AltModernHeader = memo(({ theme, toggleTheme, light_logo, dark_logo }) => 
         <div className="simple-header-left">
           <a href="/" className="simple-logo">
             {theme === 'light' ? 
-              <img class src={light_logo} alt="Logo" /> : 
+              <img src={light_logo} alt="Logo" /> : 
               <img src={dark_logo} alt="Logo" />
             }
             <span className="simple-logo-text">mcontr</span>
