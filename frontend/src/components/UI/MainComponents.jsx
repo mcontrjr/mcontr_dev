@@ -58,7 +58,7 @@ const AltModernHeader = memo(({ theme, toggleTheme, light_logo, dark_logo }) => 
         <div className="simple-header-left">
           <a href="/" className="simple-logo">
             {theme === 'light' ? 
-              <img src={light_logo} alt="Logo" /> : 
+              <img class src={light_logo} alt="Logo" /> : 
               <img src={dark_logo} alt="Logo" />
             }
             <span className="simple-logo-text">mcontr</span>

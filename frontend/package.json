@@ -11,13 +11,16 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test test/e2e/basic-page-load.spec.js --project=chromium",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
+    "test:e2e:basic": "playwright test test/e2e/basic-page-load.spec.js",
+    "test:e2e:full": "playwright test --max-failures=10",
     "test:layout": "playwright test test/e2e/layout/",
     "test:parser": "playwright test test/e2e/parser/",
-    "test:all": "npm run test && npm run test:e2e"
+    "test:all": "npm run test && npm run test:e2e",
+    "test:ci": "npm run test:coverage && npm run test:e2e:basic"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

@@ -181,8 +181,14 @@ a:hover {
   object-fit: contain;
 }
 
+@keyframes logo-rotate {
+  to {
+    transform: rotate(-45deg);
+  }
+}
+
 .my-logo img:hover {
-  transform: rotate(-45deg);
+  animation: logo-rotate 10s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .my-nav {
@@ -737,6 +743,11 @@ input[type='text']::placeholder {
   width: 32px;
   height: 32px;
   object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.simple-logo img:hover {
+  transform: rotate(-45deg);
 }
 
 .simple-logo-text {
