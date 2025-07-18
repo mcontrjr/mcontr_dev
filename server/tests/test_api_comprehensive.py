@@ -551,7 +551,7 @@ class TestHealthAndDiagnostics:
         assert spec["info"]["license"]["name"] == "MIT License"
 
         # Test servers configuration
-        assert len(spec["servers"]) == 3 # includes root_path /api
+        assert len(spec["servers"]) == 3  # includes root_path /api
         server_urls = [server["url"] for server in spec["servers"]]
         assert "https://mcontr.dev/api" in server_urls
         assert "http://localhost:8000" in server_urls
