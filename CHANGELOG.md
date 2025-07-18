@@ -16,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [2025-07-18] - PR #8
+
+**Sc server analysis** by @mcontrjr
+
+### Changed
+- Sc server analysis (#8)
+
+
 ## [2025-07-18] - PR #7
 
 **Sc frontend analysis** by @mcontrjr
