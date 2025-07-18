@@ -455,6 +455,18 @@ class TestSchwabParser(TestParser):
                 'Description': 'Electronic Withdrawal VENMO PAYMENT 250626',
                 'Amount': 20.0,
                 'Category': 'PAYMENT'
+            },
+            {   'Bank': 'SCHWAB',
+                'Date': '2025-06-30',
+                'Description': 'ATM Fee Rebate',
+                'Amount': -3.25,
+                'Category': 'OTHER'
+            },
+            {   'Bank': 'SCHWAB',
+                'Date': '2025-06-30',
+                'Description': 'Interest Paid',
+                'Amount': -0.83,
+                'Category': 'OTHER'
             }
         ]
         TestCase().assertCountEqual(purchases, expected_purchases)

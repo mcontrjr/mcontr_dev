@@ -286,22 +286,16 @@ class TestParseEndpoint:
     
     def test_parse_invalid_file_type(self, client, session_id, mock_parser):
         """Test parse endpoint with invalid file type."""
-        # The endpoint doesn't validate file types, it tries to parse them
-        # So we mock the parser to raise an error
-        mock_parser.side_effect = Exception("Invalid PDF format")
-        
+        # The endpoint now validates file types before processing
         files = {"pdf_files": ("test.txt", b"not a pdf", "text/plain")}
         data = {"session_id": session_id}
         
-        with patch('main.os.makedirs'), \
-             patch('main.open'), \
-             patch('main.shutil.copyfileobj'):
-            
-            response = client.post("/parse/", files=files, data=data)
-            assert response.status_code == 500
-            
-            response_data = response.json()
-            assert 'detail' in response_data
+        response = client.post("/parse/", files=files, data=data)
+        assert response.status_code == 400
+        
+        response_data = response.json()
+        assert 'detail' in response_data
+        assert 'must be a PDF file' in response_data['detail']
     
     def test_parse_parser_error(self, client, session_id, mock_parser, sample_pdf_content):
         """Test parse endpoint with parser error."""
