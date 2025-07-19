@@ -57,14 +57,17 @@
   border-radius: 12px;
   box-shadow: var(--shadow);
   padding: 0.75rem 1.25rem;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.75rem;
   font-size: 0.95rem;
   font-family: "Roboto Mono", monospace;
   min-width: 0;
-  max-width: 320px;
+  max-width: 90%;
+  width: auto;
   transition: box-shadow 0.2s;
+  word-break: break-all;
+  white-space: pre-line;
 }
 
 .parser-session-editor .copy-btn {

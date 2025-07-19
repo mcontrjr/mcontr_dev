@@ -1,7 +1,14 @@
-import { useState } from 'react';
-// Floating Session Editor (Session ID display + copy)
-const SessionEditor = ({ sessionId }) => {
+import { useState, useEffect } from 'react';
+// Floating Session Editor (Session ID display + copy + edit)
+const SessionEditor = ({ sessionId, onSessionIdChange }) => {
     const [copied, setCopied] = useState(false);
+    const [editing, setEditing] = useState(false);
+    const [inputValue, setInputValue] = useState(sessionId);
+
+    // Keep inputValue in sync if sessionId changes externally
+    useEffect(() => {
+        setInputValue(sessionId);
+    }, [sessionId]);
 
     const handleCopy = async () => {
         try {
@@ -13,10 +20,62 @@ const SessionEditor = ({ sessionId }) => {
         }
     };
 
+    const handleEdit = () => {
+        setEditing(true);
+    };
+
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+    };
+
+    const handleInputBlur = () => {
+        if (inputValue && inputValue !== sessionId) {
+            onSessionIdChange(inputValue.trim());
+        }
+        setEditing(false);
+    };
+
+    const handleInputKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.target.blur();
+        } else if (e.key === 'Escape') {
+            setInputValue(sessionId);
+            setEditing(false);
+        }
+    };
+
     return (
         <div className="parser-session-editor" title="Session ID">
             <span style={{ fontWeight: 500 }}>Session:</span>
-            <span style={{ fontFamily: 'monospace', fontSize: '0.93em', userSelect: 'all' }}>{sessionId}</span>
+            {editing ? (
+                <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur}
+                    onKeyDown={handleInputKeyDown}
+                    style={{
+                        fontFamily: 'monospace',
+                        fontSize: '0.93em',
+                        width: '10em',
+                        border: '1px solid var(--border)',
+                        borderRadius: '4px',
+                        padding: '0.2em 0.4em',
+                        background: 'var(--bg-card)',
+                        color: 'var(--text-primary)',
+                        outline: 'none',
+                    }}
+                    autoFocus
+                />
+            ) : (
+                <span
+                    style={{ fontFamily: 'monospace', fontSize: '0.93em', userSelect: 'all', cursor: 'pointer' }}
+                    onClick={handleEdit}
+                    title="Click to edit session ID"
+                >
+                    {sessionId}
+                </span>
+            )}
             {copied ? (
                 <span className="copied">Copied!</span>
             ) : (

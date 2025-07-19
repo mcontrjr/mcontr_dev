@@ -33,7 +33,8 @@ const Parser = () => {
         fetchRecords,
         fetchBankNames,
         retryFetch,
-        sessionId
+        sessionId,
+        updateSessionId,
     } = useParserData();
 
     const handleUploadComplete = useCallback(async () => {
@@ -99,7 +100,7 @@ const Parser = () => {
         <>
             <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
             <div className="my-section" style={{ position: 'relative' }}>
-                <SessionEditor sessionId={sessionId} />
+                <SessionEditor sessionId={sessionId} onSessionIdChange={updateSessionId} />
 
                 <UploadSection
                     onUploadComplete={handleUploadComplete}
