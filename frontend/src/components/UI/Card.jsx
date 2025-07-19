@@ -1,8 +1,8 @@
- 
+
 /* eslint-disable react/prop-types */
 import { memo } from 'react';
 
-const Card = memo(({ title, description, route, category, status, type, onClick }) => {
+const Card = memo(({ title, description, route, category, onClick }) => {
   const handleClick = () => {
     if (onClick) {
       onClick();
@@ -33,18 +33,10 @@ const Card = memo(({ title, description, route, category, status, type, onClick 
           <span className={`badge badge-${category?.toLowerCase()}`}>
             {category}
           </span>
-          {status && (
-            <span className={`badge badge-${status.toLowerCase()}`}>
-              {status}
-            </span>
-          )}
         </div>
       </div>
       <div className="card-body">
         <p className="card-description">{description}</p>
-      </div>
-      <div className="card-footer">
-        <span className="card-type">{type}</span>
       </div>
     </div>
   );

@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types, no-unused-vars */
-import { useState } from 'react';
-import { BankSelector, MonthSelector } from './ParserComponents';
 import { AmountBar, AmountPie, RecordTable } from './ChartComponents';
 import { CHART_DIMENSIONS } from '../../constants/parserConstants';
 
@@ -21,8 +19,8 @@ const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelect
   ];
 
   const toggleMonth = (month) => {
-    setSelectedMonths(prev => 
-      prev.includes(month) 
+    setSelectedMonths(prev =>
+      prev.includes(month)
         ? prev.filter(m => m !== month)
         : [...prev, month]
     );
@@ -30,7 +28,7 @@ const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelect
 
   const clearAllMonths = () => setSelectedMonths([]);
   const selectAllMonths = () => setSelectedMonths(monthOptions.map(m => m.value));
-  
+
   const handleClearData = async () => {
     if (window.confirm('Are you sure you want to clear all uploaded data? This action cannot be undone.')) {
       if (onClearData) {
@@ -42,24 +40,24 @@ const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelect
   return (
     <div className="breakdown-filters-container">
       <div className="filters-header">
-        <h3>Filter Data</h3>
+        <h3>Filters</h3>
         <div className="filters-actions">
-          <button 
-            className="filter-action-btn clear-data" 
+          <button
+            className="filter-action-btn clear-data"
             onClick={handleClearData}
             title="Clear all uploaded data from backend"
           >
             Clear Data
           </button>
-          <button 
-            className="filter-action-btn clear" 
+          <button
+            className="filter-action-btn clear"
             onClick={clearAllMonths}
             disabled={selectedMonths.length === 0}
           >
             Clear Filters
           </button>
-          <button 
-            className="filter-action-btn select" 
+          <button
+            className="filter-action-btn select"
             onClick={selectAllMonths}
             disabled={selectedMonths.length === 12}
           >
@@ -73,15 +71,15 @@ const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelect
           <div className="filter-header">
             <label htmlFor="bank-select" className="filter-label">
               <span className="filter-icon">[Bank]</span>
-              Bank Selection
+              Bank Selector
             </label>
             <span className="filter-hint">
               {bankName || "All banks"}
             </span>
           </div>
-          <select 
+          <select
             id="bank-select"
-            value={bankName} 
+            value={bankName}
             onChange={(e) => setBankName(e.target.value)}
             className="enhanced-select"
           >
@@ -96,10 +94,10 @@ const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelect
           <div className="filter-header">
             <label className="filter-label">
               <span className="filter-icon">[Time]</span>
-              Month Selection
+              Month Selector
             </label>
             <span className="filter-hint">
-              {selectedMonths.length === 0 ? "No months selected" : 
+              {selectedMonths.length === 0 ? "No months selected" :
                selectedMonths.length === 12 ? "All months" :
                `${selectedMonths.length} month${selectedMonths.length > 1 ? 's' : ''} selected`}
             </span>
@@ -128,7 +126,7 @@ const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelect
           <span className="stat-item">
             <span className="stat-label">Period:</span>
             <span className="stat-value">
-              {selectedMonths.length === 0 ? "No filter" : 
+              {selectedMonths.length === 0 ? "No filter" :
                selectedMonths.length === 12 ? "Full year" :
                `${selectedMonths.length} months`}
             </span>
@@ -139,11 +137,11 @@ const FilterRow = ({ bankName, bankNames, setBankName, selectedMonths, setSelect
   );
 };
 
-const BreakdownSection = ({ 
-  bankName, 
-  bankNames, 
-  setBankName, 
-  selectedMonths, 
+const BreakdownSection = ({
+  bankName,
+  bankNames,
+  setBankName,
+  selectedMonths,
   setSelectedMonths,
   sortedRecords,
   lineData,
@@ -153,7 +151,6 @@ const BreakdownSection = ({
   loading,
   onClearData
 }) => {
-  const [activeCard, setActiveCard] = useState('chart');
 
   if (loading) {
     return (
@@ -182,11 +179,10 @@ const BreakdownSection = ({
   return (
     <section className="breakdown-section">
       <div className="breakdown-header">
-        <h2>Financial Breakdown</h2>
-        <p>Analyze your spending patterns and transaction history</p>
+        <h2>Statement Analysis</h2>
       </div>
 
-      <FilterRow 
+      <FilterRow
         bankName={bankName}
         bankNames={bankNames}
         setBankName={setBankName}
@@ -198,8 +194,8 @@ const BreakdownSection = ({
       <div className="breakdown-content">
         <div className="breakdown-card">
           <div className="breakdown-card-header">
-            <h3>Weekly Purchases & Payments</h3>
-            <p>Track your spending and payment patterns over time</p>
+            <h3>Weekly Buckets</h3>
+            <p>See which weeks you were good and which ones you were not so good</p>
           </div>
           <div className="breakdown-card-body" style={{ height: `${CHART_DIMENSIONS.defaultHeight}px` }}>
             <AmountBar lineData={lineData} />
@@ -208,8 +204,8 @@ const BreakdownSection = ({
 
         <div className="breakdown-card">
           <div className="breakdown-card-header">
-            <h3>Spending Distribution & Metrics</h3>
-            <p>Understand where your money goes and key financial insights</p>
+            <h3>Distribution & Metrics</h3>
+            <p>For those who like pie and metrics</p>
           </div>
           <div className="breakdown-card-body">
             <AmountPie pieData={pieData} totalAmount={totalAmount} />
@@ -218,11 +214,11 @@ const BreakdownSection = ({
 
         <div className="breakdown-card">
           <div className="breakdown-card-header">
-            <h3>Transaction Records</h3>
-            <p>Detailed view of all your transactions</p>
+            <h3>Parsed Records</h3>
+            <p>Everyone likes a good scrollable sorting table</p>
           </div>
           <div className="breakdown-card-body">
-            <RecordTable 
+            <RecordTable
               sortedRecords={sortedRecords}
               requestSort={requestSort}
             />

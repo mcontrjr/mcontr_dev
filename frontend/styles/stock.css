@@ -393,11 +393,11 @@ a:hover {
 }
 
 .unified-hero.playground-hero {
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background: linear-gradient(0deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
 }
 
 .unified-hero.tools-hero {
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  background: linear-gradient(0deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
 }
 
 .hero-content {

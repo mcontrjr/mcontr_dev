@@ -99,7 +99,7 @@ const Parser = () => {
     return (
         <>
             <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
-            <div className="my-section" style={{ position: 'relative' }}>
+            <div className="parser-container" style={{ position: 'relative' }}>
                 <SessionEditor sessionId={sessionId} onSessionIdChange={updateSessionId} />
 
                 <UploadSection

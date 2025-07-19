@@ -13,10 +13,10 @@ import {
 import { Bar, Pie } from 'react-chartjs-2';
 import { useThemeColors } from '../../hooks/useThemeColors';
 import { processWeeklyData, filterRecordsBySearch } from '../../utils/dataProcessing';
-import { 
-  CHART_COLORS, 
-  CHART_DIMENSIONS, 
-  CHART_CONFIG 
+import {
+  CHART_COLORS,
+  CHART_DIMENSIONS,
+  CHART_CONFIG
 } from '../../constants/parserConstants';
 
 // Register Chart.js components
@@ -33,10 +33,10 @@ ChartJS.register(
 // Re-export AmountBar component with optimizations
 export const AmountBar = memo(({ lineData }) => {
   const colors = useThemeColors();
-  
+
   const weeklyData = useMemo(() => {
     if (!lineData?.labels?.length) return { labels: [], datasets: [] };
-    
+
     const processed = processWeeklyData(lineData);
     return {
       ...processed,
@@ -117,7 +117,7 @@ export const AmountPie = memo(({ pieData, totalAmount }) => {
 
   const customPieData = useMemo(() => {
     if (!pieData?.datasets?.length) return { labels: [], datasets: [] };
-    
+
     return {
       ...pieData,
       datasets: [{
@@ -168,7 +168,7 @@ export const AmountPie = memo(({ pieData, totalAmount }) => {
       <div style={{ flex: '1', minWidth: '400px' }}>
         <Pie data={customPieData} options={chartOptions} />
       </div>
-      
+
       <div style={{ flex: '0 0 300px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <div className="metrics-card">
           <div className="metrics-card-header">
@@ -218,7 +218,7 @@ export const RecordTable = memo(({ sortedRecords, requestSort }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
 
-  const filteredRecords = useMemo(() => 
+  const filteredRecords = useMemo(() =>
     filterRecordsBySearch(sortedRecords || [], searchText),
     [sortedRecords, searchText]
   );
@@ -261,7 +261,7 @@ export const RecordTable = memo(({ sortedRecords, requestSort }) => {
   const getPageNumbers = () => {
     const pages = [];
     const maxVisiblePages = 5;
-    
+
     if (totalPages <= maxVisiblePages) {
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
@@ -302,8 +302,8 @@ export const RecordTable = memo(({ sortedRecords, requestSort }) => {
           </span>
         </div>
         <div className="table-controls">
-          <select 
-            value={recordsPerPage} 
+          <select
+            value={recordsPerPage}
             onChange={handleRecordsPerPageChange}
             className="records-per-page-select"
           >
@@ -321,7 +321,7 @@ export const RecordTable = memo(({ sortedRecords, requestSort }) => {
           />
         </div>
       </div>
-      
+
       <div className="records-table-wrapper">
         <table className="records-table">
           <thead>
@@ -359,7 +359,7 @@ export const RecordTable = memo(({ sortedRecords, requestSort }) => {
             ))}
           </tbody>
         </table>
-        
+
         {filteredRecords.length === 0 && (
           <div className="no-records">
             <p>No transactions found.</p>
@@ -376,14 +376,14 @@ export const RecordTable = memo(({ sortedRecords, requestSort }) => {
             Showing {startIndex + 1}-{Math.min(endIndex, filteredRecords.length)} of {filteredRecords.length}
           </div>
           <div className="pagination-controls">
-            <button 
+            <button
               className="pagination-btn"
               onClick={goToPrevPage}
               disabled={currentPage === 1}
             >
               ← Prev
             </button>
-            
+
             {getPageNumbers().map((page, index) => (
               <span key={index}>
                 {page === '...' ? (
@@ -398,8 +398,8 @@ export const RecordTable = memo(({ sortedRecords, requestSort }) => {
                 )}
               </span>
             ))}
-            
-            <button 
+
+            <button
               className="pagination-btn"
               onClick={goToNextPage}
               disabled={currentPage === totalPages}

@@ -14,7 +14,7 @@
   max-width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
-  padding-top: 10%;
+  padding-top: 7.5%;
 }
 
 .parser-header {
@@ -802,6 +802,7 @@
 }
 
 .filter-action-btn {
+  font-family: "Roboto Mono", monospace;
   padding: 0.5rem 1rem;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -891,6 +892,7 @@
 }
 
 .enhanced-select {
+  font-family: "Roboto Mono", monospace;
   padding: 0.75rem 1rem;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -920,6 +922,7 @@
 }
 
 .month-chip {
+  font-family: "Roboto Mono", monospace;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -1119,6 +1122,7 @@
 }
 
 .records-per-page-select {
+  font-family: "Roboto Mono", monospace;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: 6px;

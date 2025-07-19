@@ -1,4 +1,4 @@
- 
+
 /* eslint-disable react/prop-types, react/display-name */
 import '../../../styles/stock.css'
 import light from '../../assets/light.svg';
@@ -29,8 +29,8 @@ function useTheme() {
 
 const ThemeToggle = memo(({ theme, toggleTheme }) => {
   return (
-    <button 
-      className="theme-toggle" 
+    <button
+      className="theme-toggle"
       onClick={toggleTheme}
       aria-label="Toggle theme"
       title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
@@ -59,8 +59,8 @@ const AltModernHeader = memo(({ theme, toggleTheme, light_logo, dark_logo }) => 
       <div className="simple-header-content">
         <div className="simple-header-left">
           <a href="/" className="simple-logo">
-            {theme === 'light' ? 
-              <img src={light_logo} alt="Logo" /> : 
+            {theme === 'light' ?
+              <img src={light_logo} alt="Logo" /> :
               <img src={dark_logo} alt="Logo" />
             }
             <span className="simple-logo-text">mcontr</span>
@@ -86,7 +86,7 @@ const AltModernHeader = memo(({ theme, toggleTheme, light_logo, dark_logo }) => 
                 </div>
               </div>
             </div>
-            
+
             <div className="simple-nav-item">
               <span className="simple-nav-title">Tools</span>
               <div className="simple-dropdown">
@@ -110,7 +110,7 @@ const HeroSection = memo(() => {
     <section className="my-hero">
       <div className="my-container">
         <p className="my-hero-subtitle animate-fade-in-up">
-          What started as a quick web app is evolving into something entirely different. 
+          What started as a quick web app is evolving into something entirely different.
           Built some things that are basic and some things that are kinda useful?
           Regardless, here is a sick picture of a man and his dawg
         </p>
@@ -122,16 +122,14 @@ const HeroSection = memo(() => {
   );
 });
 
-const UnifiedCard = memo(({ title, description, route, category, status, type }) => {
+const UnifiedCard = memo(({ title, description, route, category, type }) => {
   return (
     <div className={`${type}-card animate-fade-in-up`}>
-      <Card 
+      <Card
         title={title}
         description={description}
         route={route}
         category={category}
-        status={status}
-        type={type}
       />
     </div>
   );
@@ -148,15 +146,15 @@ function PlaygroundHeroSection() {
     },
     {
       title: "Weather Check",
-      description: "Check weather with any zip code or city name.",
+      description: "Use WeatherAPI with any zip code or city name to see weather!",
       route: "/weather",
-      category: "Utility"
+      category: "API"
     },
     {
-      title: "Image Generator",
-      description: "Get random images from a single word!",
+      title: "Image Query",
+      description: "Use free image APIs to query some images from keywords.",
       route: "/random",
-      category: "Creative"
+      category: "API"
     }
   ];
 
@@ -167,8 +165,8 @@ function PlaygroundHeroSection() {
           <div className="hero-text">
             <h2 className="hero-section-title animate-fade-in-up">Playground</h2>
             <p className="hero-section-subtitle animate-fade-in-up">
-              Interactive experiences designed to entertain and engage. 
-              From challenging games to creative tools, explore what catches your interest.
+              These are the output of my long (in progress) battle with web development.
+              Not the most useful but were super crucial to get to where I am today (not very far)!
             </p>
           </div>
           <div className="hero-cards">
@@ -194,10 +192,9 @@ function PlaygroundHeroSection() {
 function ToolsHeroSection() {
   const tools = [
     {
-      title: "Statement Parser",
-      description: "Upload your bank statements and find out where your money is going.",
-      route: "/parser",
-      status: "available"
+      title: "Bank Statement Parser",
+      description: "Where is your money going?",
+      route: "/parser"
     }
   ];
 
@@ -208,8 +205,7 @@ function ToolsHeroSection() {
           <div className="hero-text">
             <h2 className="hero-section-title animate-fade-in-up">Tools</h2>
             <p className="hero-section-subtitle animate-fade-in-up">
-              Practical utilities built to solve real problems. 
-              Each tool is designed with simplicity and effectiveness in mind.
+              Utilities to solve my real world problems that may also be your real world problems.
             </p>
           </div>
           <div className="hero-cards">
@@ -220,7 +216,6 @@ function ToolsHeroSection() {
                   title={tool.title}
                   description={tool.description}
                   route={tool.route}
-                  status={tool.status}
                   type="tool"
                 />
               ))}
@@ -243,15 +238,15 @@ function ContextAccordion({ theme, children = "Content goes here" }) {
 
   return (
     <div className="context-accordion">
-      <button 
+      <button
         className="context-accordion-trigger"
         onClick={toggleAccordion}
         aria-expanded={isOpen}
         aria-label={`${isOpen ? 'Hide' : 'Show'} page context`}
       >
-        <img 
-          src={moreIcon} 
-          alt="Expand context" 
+        <img
+          src={moreIcon}
+          alt="Expand context"
           className={`context-accordion-more-icon ${isOpen ? 'open' : ''}`}
         />
       </button>
