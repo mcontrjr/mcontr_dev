@@ -132,6 +132,7 @@ a:hover {
 
 .my-section {
   margin-bottom: 4rem;
+  padding-top: 5%; /* Adjusted for fixed header */
 }
 
 .my-section-title {
@@ -712,8 +713,10 @@ input[type='text']::placeholder {
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
   padding: 1rem 0;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 100;
   backdrop-filter: blur(8px);
 }
@@ -843,41 +846,41 @@ input[type='text']::placeholder {
   .simple-header-content {
     padding: 0 0.75rem;
   }
-  
+
   .simple-nav {
     gap: 0.75rem;
   }
-  
+
   .simple-nav-title {
     font-size: 0.8125rem;
     padding: 0.25rem 0.375rem;
   }
-  
+
   .simple-dropdown {
     width: 200px;
     padding: 0.75rem;
     top: calc(100% + 0.5rem);
   }
-  
+
   .simple-nav-item:first-child .simple-dropdown {
     left: -75px;
     top: calc(100% + 0.5rem);
   }
-  
+
   .simple-nav-item:last-child .simple-dropdown {
     right: -10px;
     top: calc(100% + 0.5rem);
   }
-  
+
   .simple-logo-text {
     font-size: 1rem;
   }
-  
+
   .simple-logo img {
     width: 28px;
     height: 28px;
   }
-  
+
 }
 
 /* Responsive Design */
@@ -887,16 +890,16 @@ input[type='text']::placeholder {
     gap: 3rem;
     min-height: auto;
   }
-  
-  
+
+
   .hero-text {
     text-align: center;
   }
-  
+
   .hero-section-title {
     font-size: 2.5rem;
   }
-  
+
 }
 
 @media (max-width: 768px) {
@@ -906,75 +909,75 @@ input[type='text']::placeholder {
     width: 100%;
     margin: 0;
   }
-  
+
   .my-header-content {
     max-width: 100%;
     margin: 0;
     padding: 0 1rem;
   }
-  
+
   .my-hero-title {
     font-size: 2.5rem;
   }
-  
+
   .my-section-title {
     font-size: 2rem;
   }
-  
+
   .hero-section-title {
     font-size: 2rem;
   }
-  
+
   .unified-hero {
     padding: 2rem 0;
   }
-  
+
   .hero-content {
     gap: 2rem;
   }
-  
+
   .hero-cards {
     width: 100%;
     max-width: 100%;
   }
-  
-  
+
+
   .my-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
     justify-items: center;
   }
-  
+
   .my-header-content {
     flex-direction: column;
     gap: 1rem;
     justify-content: center;
   }
-  
+
   .simple-header-content {
     padding: 0 1rem;
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .simple-header-left {
     flex: 1;
   }
-  
+
   .simple-header-right {
     flex: none;
     gap: 1rem;
   }
-  
+
   .simple-nav {
     gap: 1rem;
   }
-  
+
   .simple-nav-title {
     font-size: 0.875rem;
     padding: 0.375rem 0.5rem;
   }
-  
+
   .simple-dropdown {
     position: absolute;
     top: calc(100% + 0.5rem);
@@ -984,42 +987,42 @@ input[type='text']::placeholder {
     right: auto;
     z-index: 1000;
   }
-  
+
   .simple-nav-item:first-child .simple-dropdown {
     left: -50px;
     transform: none;
     top: calc(100% + 0.5rem);
   }
-  
+
   .simple-nav-item:last-child .simple-dropdown {
     right: -20px;
     left: auto;
     transform: none;
     top: calc(100% + 0.5rem);
   }
-  
+
   .simple-section {
     margin-bottom: 0.75rem;
   }
-  
+
   .simple-section h4 {
     font-size: 0.8125rem;
     margin-bottom: 0.375rem;
   }
-  
+
   .simple-link {
     font-size: 0.8125rem;
     padding: 0.1875rem 0;
   }
-  
+
   .simple-logo-text {
     font-size: 1.125rem;
   }
-  
+
   input[type='text'] {
     min-width: 100%;
   }
-  
+
   .my-card {
     max-width: 100%;
   }
@@ -1164,16 +1167,16 @@ input[type='text']::placeholder {
   .context-accordion {
     margin: 0;
   }
-  
+
   .context-accordion-trigger {
     padding: 1rem;
   }
-  
+
   .context-accordion-more-icon {
     width: 20px;
     height: 20px;
   }
-  
+
   .context-accordion-body {
     padding: 1rem;
   }

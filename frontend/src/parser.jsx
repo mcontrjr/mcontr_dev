@@ -1,4 +1,4 @@
- 
+
 import { useState, useCallback } from 'react';
 import 'chart.js/auto';
 import '../styles/stock.css';
@@ -14,7 +14,7 @@ const Parser = () => {
     const { theme, toggleTheme } = useTheme();
     const [uploadMessage, setUploadMessage] = useState('Upload your PDF statements to get started');
     const [showBreakdown, setShowBreakdown] = useState(false);
-    
+
     const {
         bankName,
         bankNames,
@@ -38,7 +38,7 @@ const Parser = () => {
     const handleUploadComplete = useCallback(async () => {
         // Refresh data from backend
         await Promise.all([fetchRecords(), fetchBankNames()]);
-        
+
         setShowBreakdown(true);
         // Scroll to breakdown section
         setTimeout(() => {
@@ -67,13 +67,13 @@ const Parser = () => {
                     <h1>Financial Statement Parser</h1>
                     <p>Upload your bank statements and get instant insights into your spending patterns</p>
                 </div>
-                
+
                 <div className="breakdown-section">
                     <div className="breakdown-empty">
                         <div className="empty-icon">[Error]</div>
                         <h3>Error Loading Data</h3>
                         <p>{error.message || 'Unable to connect to the parser server. Please try again.'}</p>
-                        <button 
+                        <button
                             onClick={retryFetch}
                             style={{
                                 padding: '0.75rem 1.5rem',
@@ -97,15 +97,15 @@ const Parser = () => {
     return (
         <>
             <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
-            <div className="parser-container">
-                
-                <UploadSection 
+            <div className="my-section">
+
+                <UploadSection
                     onUploadComplete={handleUploadComplete}
                     uploadMessage={uploadMessage}
                     setUploadMessage={setUploadMessage}
                     sessionId={sessionId}
                 />
-                
+
                 {(showBreakdown || sortedRecords.length > 0) && (
                     <BreakdownSection
                         bankName={bankName}
