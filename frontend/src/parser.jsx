@@ -7,6 +7,7 @@ import { useTheme, AltModernHeader } from './components/UI/MainComponents.jsx';
 import UploadSection from './components/parser/UploadSection';
 import BreakdownSection from './components/parser/BreakdownSection';
 import logo from './assets/parser-logo.svg';
+import { SessionEditor } from './components/parser/ParserComponents.jsx';
 
 import { useParserData } from './hooks/useParserData';
 
@@ -97,7 +98,8 @@ const Parser = () => {
     return (
         <>
             <AltModernHeader theme={theme} toggleTheme={toggleTheme} light_logo={logo} dark_logo={logo} />
-            <div className="my-section">
+            <div className="my-section" style={{ position: 'relative' }}>
+                <SessionEditor sessionId={sessionId} />
 
                 <UploadSection
                     onUploadComplete={handleUploadComplete}
