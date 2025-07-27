@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types, react/display-name */
 // Floating Session Editor (Session ID display + copy + edit)
 const SessionEditor = ({ sessionId, onSessionIdChange }) => {
     const [copied, setCopied] = useState(false);
@@ -15,7 +16,8 @@ const SessionEditor = ({ sessionId, onSessionIdChange }) => {
             await navigator.clipboard.writeText(sessionId);
             setCopied(true);
             setTimeout(() => setCopied(false), 1200);
-        } catch (e) {
+        } catch (error) {
+            console.error('Failed to copy session ID:', error);
             setCopied(false);
         }
     };
@@ -86,7 +88,6 @@ const SessionEditor = ({ sessionId, onSessionIdChange }) => {
         </div>
     );
 };
-/* eslint-disable react/prop-types, react/display-name */
 import { memo, useCallback } from 'react';
 import amexLogo from '../../assets/amex.svg';
 import citiLogo from '../../assets/citi.svg';
