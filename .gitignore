@@ -1,7 +1,7 @@
 .vscode/
 **/node_modules
 notes.md
-**/package-lock.json
+frontend/package-lock.json
 logs/
 # ignore venv
 **venv/
