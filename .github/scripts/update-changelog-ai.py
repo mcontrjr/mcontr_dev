@@ -68,7 +68,7 @@ def parse_args():
     parser.add_argument('--pr-author', required=True, help='PR author')
     parser.add_argument('--base-sha', required=True, help='Base commit SHA')
     parser.add_argument('--head-sha', required=True, help='Head commit SHA')
-    parser.add_argument('--ollama-model', default='llama3.2:1b', help='Ollama model to use')
+    parser.add_argument('--ollama-model', default='codellama:7b-code', help='Ollama model to use')
     parser.add_argument('--ollama-url', default='http://localhost:11434', help='Ollama API URL')
     parser.add_argument('--no-ai', action='store_true', help='Skip AI analysis, use basic categorization only')
     return parser.parse_args()
