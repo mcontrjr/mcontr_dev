@@ -1,4 +1,4 @@
-name: Update Changelog
+name: Update Changelog with AI Analysis
 
 on:
   pull_request:
@@ -26,6 +26,25 @@ jobs:
       with:
         python-version: '3.9'
     
+    - name: Install Python dependencies
+      run: |
+        pip install requests aiohttp
+    
+    - name: Setup Ollama
+      run: |
+        # Install Ollama
+        curl -fsSL https://ollama.com/install.sh | sh
+        
+        # Start Ollama service in background
+        ollama serve &
+        sleep 10
+        
+        # Pull a lightweight model for code analysis
+        ollama pull codellama:7b-code
+        
+        # Verify Ollama is running
+        curl -s http://localhost:11434/api/tags || (echo "Ollama failed to start" && exit 1)
+    
     - name: Get PR information
       id: pr-info
       run: |
@@ -36,16 +55,18 @@ jobs:
         echo "HEAD_SHA=${{ github.event.pull_request.head.sha }}" >> $GITHUB_OUTPUT
     
     - name: Make script executable
-      run: chmod +x .github/scripts/update-changelog.py
+      run: chmod +x .github/scripts/update-changelog-ai.py
     
-    - name: Update changelog
+    - name: Update changelog with AI analysis
       run: |
-        python .github/scripts/update-changelog.py \
+        python .github/scripts/update-changelog-ai.py \
           --pr-number "${{ steps.pr-info.outputs.PR_NUMBER }}" \
           --pr-title "${{ steps.pr-info.outputs.PR_TITLE }}" \
           --pr-author "${{ steps.pr-info.outputs.PR_AUTHOR }}" \
           --base-sha "${{ steps.pr-info.outputs.BASE_SHA }}" \
-          --head-sha "${{ steps.pr-info.outputs.HEAD_SHA }}"
+          --head-sha "${{ steps.pr-info.outputs.HEAD_SHA }}" \
+          --ollama-model "codellama:7b-code" \
+          --ollama-url "http://localhost:11434"
     
     - name: Commit changelog changes
       run: |
@@ -54,8 +75,14 @@ jobs:
         
         if [[ $(git status --porcelain) ]]; then
           git add CHANGELOG.md
-          git commit -m "chore: update changelog for PR #${{ steps.pr-info.outputs.PR_NUMBER }}"
+          git commit -m "chore: update changelog for PR #${{ steps.pr-info.outputs.PR_NUMBER }} (AI-generated)"
           git push
         else
-          echo "No changes to commit"
+          echo "No changelog changes to commit"
         fi
+    
+    - name: Cleanup
+      if: always()
+      run: |
+        # Stop Ollama service
+        pkill -f ollama || true
