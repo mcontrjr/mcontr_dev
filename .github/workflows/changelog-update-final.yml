@@ -1,0 +1,171 @@
+name: Update Changelog with AI Analysis (Performance Optimized)
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+env:
+  # Configuration options
+  USE_NODEJS_VERSION: true  # Set to false for ultra-lightweight shell version
+  ENABLE_OLLAMA_FALLBACK: true  # Set to false to skip local models entirely
+  GITHUB_API_TIMEOUT: 30  # Seconds for GitHub Models API
+  OLLAMA_TIMEOUT: 30      # Seconds for Ollama models
+
+jobs:
+  update-changelog:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5  # Hard limit for entire job
+
+    permissions:
+      contents: write
+      pull-requests: read
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    # Node.js setup (only if using Node.js version)
+    - name: Setup Node.js
+      if: env.USE_NODEJS_VERSION == 'true'
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: '.github/scripts/package-lock.json'
+
+    - name: Install Node.js dependencies
+      if: env.USE_NODEJS_VERSION == 'true'
+      run: |
+        cd .github/scripts
+        npm ci --production --no-audit --no-fund
+
+    # Lightweight Ollama setup (only if enabled)
+    - name: Setup ultra-lightweight Ollama
+      id: ollama-setup
+      if: env.ENABLE_OLLAMA_FALLBACK == 'true'
+      continue-on-error: true
+      timeout-minutes: 2
+      run: |
+        echo "Setting up Ollama with ultra-lightweight models..."
+
+        # Install Ollama with timeout
+        timeout 60s bash -c 'curl -fsSL https://ollama.com/install.sh | sh' || {
+          echo "ollama_available=false" >> $GITHUB_OUTPUT
+          exit 0
+        }
+
+        # Start Ollama service
+        timeout 30s ollama serve &
+        sleep 3
+
+        # Try to pull the most lightweight models available
+        # Priority: smallest models first, with aggressive timeouts
+        for model in "phi3:mini" "gemma2:2b"; do
+          echo "Attempting to pull $model..."
+          if timeout 90s ollama pull "$model" 2>/dev/null; then
+            echo "Successfully pulled $model"
+            echo "ollama_available=true" >> $GITHUB_OUTPUT
+            echo "ollama_model=$model" >> $GITHUB_OUTPUT
+            break
+          else
+            echo "Failed to pull $model, trying next..."
+          fi
+        done
+
+        # Verify at least one model is available
+        if ! ollama list 2>/dev/null | grep -E "(phi3|gemma2|tinyllama)"; then
+          echo "No models available"
+          echo "ollama_available=false" >> $GITHUB_OUTPUT
+        fi
+
+        # Test API responsiveness
+        if ! timeout 5s curl -s http://localhost:11434/api/tags >/dev/null; then
+          echo "Ollama API not responsive"
+          echo "ollama_available=false" >> $GITHUB_OUTPUT
+        fi
+
+    # Main changelog generation
+    - name: Generate changelog with AI analysis
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        PR_TITLE: ${{ github.event.pull_request.title }}
+        PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        OLLAMA_AVAILABLE: ${{ steps.ollama-setup.outputs.ollama_available || 'false' }}
+        OLLAMA_MODEL: ${{ steps.ollama-setup.outputs.ollama_model || 'phi3:mini' }}
+      timeout-minutes: 3
+      run: |
+        cd .github/scripts
+
+        # Make scripts executable
+        chmod +x update-changelog-ai.js update-changelog-minimal.sh
+
+        echo "🚀 Starting optimized changelog generation..."
+        echo "📊 Configuration:"
+        echo "  - Node.js version: $USE_NODEJS_VERSION"
+        echo "  - Ollama fallback: $ENABLE_OLLAMA_FALLBACK"
+        echo "  - Ollama available: $OLLAMA_AVAILABLE"
+        echo "  - PR #$PR_NUMBER: '$PR_TITLE' by @$PR_AUTHOR"
+
+        # Choose execution method based on configuration
+        if [[ "$USE_NODEJS_VERSION" == "true" ]]; then
+          echo "🟢 Using Node.js optimized version..."
+          node update-changelog-ai.js
+        else
+          echo "🟡 Using ultra-lightweight shell version..."
+          ./update-changelog-minimal.sh
+        fi
+
+        echo "✅ Changelog generation completed"
+
+    # Commit changes with minimal overhead
+    - name: Commit changelog changes
+      run: |
+        # Configure git with minimal operations
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+        # Check for changes and commit atomically
+        if git diff --quiet CHANGELOG.md; then
+          echo "ℹ️ No changelog changes to commit"
+        else
+          echo "📝 Committing changelog changes..."
+          git add CHANGELOG.md
+          git commit -m "chore: update changelog for PR #${{ github.event.pull_request.number }} (AI-optimized)"
+          git push
+          echo "✅ Changelog changes committed and pushed"
+        fi
+
+    # Cleanup (always runs, even on failure)
+    - name: Cleanup resources
+      if: always()
+      run: |
+        echo "🧹 Cleaning up resources..."
+
+        # Stop Ollama processes
+        pkill -f ollama || true
+
+        # Clean npm cache if Node.js was used
+        if [[ "$USE_NODEJS_VERSION" == "true" ]]; then
+          npm cache clean --force 2>/dev/null || true
+        fi
+
+        echo "✅ Cleanup completed"
+
+    # Performance summary
+    - name: Performance Summary
+      if: always()
+      run: |
+        echo "📈 Performance Summary:"
+        echo "  - Job Duration: ${{ job.duration || 'N/A' }}"
+        echo "  - Node.js Used: $USE_NODEJS_VERSION"
+        echo "  - Ollama Used: ${{ steps.ollama-setup.outputs.ollama_available || 'false' }}"
+        echo "  - Model Used: ${{ steps.ollama-setup.outputs.ollama_model || 'GitHub API or rule-based' }}"
