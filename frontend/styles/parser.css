@@ -14,6 +14,7 @@
   max-width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
+  padding-top: 7.5%;
 }
 
 .parser-header {
@@ -42,6 +43,59 @@
   color: var(--text-secondary);
   margin: 0;
   font-weight: 400;
+}
+
+/* Session Editor Floating Menu */
+.parser-session-editor {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 200;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 0.75rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  font-family: "Roboto Mono", monospace;
+  min-width: 0;
+  max-width: 90%;
+  width: auto;
+  transition: box-shadow 0.2s;
+  word-break: break-all;
+  white-space: pre-line;
+}
+
+.parser-session-editor .copy-btn {
+  background: var(--accent);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.95rem;
+  font-family: "Roboto Mono", monospace;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  font-weight: 500;
+}
+
+.parser-session-editor .copy-btn:hover {
+  background: var(--accent-hover);
+}
+
+.parser-session-editor .copied {
+  color: #10b981;
+  font-weight: 600;
+  margin-left: 0.5em;
+  font-size: 0.92rem;
+  font-family: "Roboto Mono", monospace;
 }
 
 /* ===================================================================
@@ -748,6 +802,7 @@
 }
 
 .filter-action-btn {
+  font-family: "Roboto Mono", monospace;
   padding: 0.5rem 1rem;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -837,6 +892,7 @@
 }
 
 .enhanced-select {
+  font-family: "Roboto Mono", monospace;
   padding: 0.75rem 1rem;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -866,6 +922,7 @@
 }
 
 .month-chip {
+  font-family: "Roboto Mono", monospace;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -1065,6 +1122,7 @@
 }
 
 .records-per-page-select {
+  font-family: "Roboto Mono", monospace;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -1164,26 +1222,26 @@
   .breakdown-filters-container {
     padding: 1rem;
   }
-  
+
   .filters-row {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .months-grid {
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   }
-  
+
   .summary-stats {
     gap: 1rem;
   }
-  
+
   .table-controls {
     flex-direction: column;
     gap: 0.75rem;
     align-items: stretch;
   }
-  
+
   .records-search-input.compact {
     width: 100%;
   }
@@ -1196,7 +1254,7 @@
   .uploaded-files-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
-  
+
   .uploaded-file-thumbnail {
     width: 150px;
   }
@@ -1209,17 +1267,17 @@
   .supported-banks ul {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
-  
+
   .supported-banks-compact {
     margin-top: 1rem;
     padding-top: 0.75rem;
   }
-  
+
   .supported-banks-compact .my-card-header {
     padding: 0 0 0.5rem 0;
     margin-bottom: 0.5rem;
   }
-  
+
   .supported-banks-compact .my-card-title {
     font-size: 0.9rem;
   }
@@ -1279,61 +1337,61 @@
   .breakdown-filters-container {
     padding: 1rem;
   }
-  
+
   .filters-header {
     flex-direction: column;
     gap: 1rem;
     align-items: stretch;
   }
-  
+
   .filters-actions {
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  
+
   .filter-action-btn {
     min-width: auto;
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
   }
-  
+
   .filters-row {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .months-grid {
     grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
     gap: 0.4rem;
   }
-  
+
   .month-chip {
     padding: 0.4rem 0.5rem;
     font-size: 0.8rem;
   }
-  
+
   .summary-stats {
     flex-direction: column;
     gap: 0.75rem;
   }
-  
+
   .table-controls {
     flex-direction: column;
     gap: 0.75rem;
     align-items: stretch;
   }
-  
+
   .records-per-page-select {
     width: 100%;
   }
-  
+
   .pagination-container {
     flex-direction: column;
     gap: 1rem;
     align-items: stretch;
   }
-  
+
   .pagination-controls {
     justify-content: center;
   }
@@ -1359,7 +1417,7 @@
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 0.75rem;
   }
-  
+
   .uploaded-file-thumbnail {
     width: 120px;
   }
@@ -1405,12 +1463,12 @@
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 0.75rem;
   }
-  
+
   .supported-banks-compact {
     margin-top: 0.75rem;
     padding-top: 0.5rem;
   }
-  
+
   .supported-banks-compact .my-card-title {
     font-size: 0.85rem;
   }

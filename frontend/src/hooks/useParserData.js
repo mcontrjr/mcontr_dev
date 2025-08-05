@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { API_URL, DEFAULT_SELECTED_MONTHS, SORT_DIRECTIONS } from '../constants/parserConstants';
-import { 
-  processChartData, 
-  processPieChartData, 
+import {
+  processChartData,
+  processPieChartData,
   calculateFinancialMetrics,
   sortRecords
 } from '../utils/dataProcessing';
@@ -18,7 +18,13 @@ const getSessionId = () => {
 };
 
 export const useParserData = () => {
-  const [sessionId] = useState(getSessionId());
+  const [sessionId, setSessionId] = useState(getSessionId());
+  // Allow updating sessionId from UI (and localStorage)
+  const updateSessionId = (newSessionId) => {
+    if (!newSessionId) return;
+    setSessionId(newSessionId);
+    localStorage.setItem('parser_session_id', newSessionId);
+  };
   const [bankName, setBankName] = useState('');
   const [bankNames, setBankNames] = useState([]);
   const [records, setRecords] = useState([]);
@@ -30,11 +36,11 @@ export const useParserData = () => {
   const fetchBankNames = useCallback(async () => {
     try {
       const response = await fetch(`${API_URL}/records/?session_id=${sessionId}`);
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch bank names');
       }
-      
+
       const data = await response.json();
       const fetchedBankNames = [...new Set(data.records.map(record => record.bank))];
       setBankNames(fetchedBankNames);
@@ -48,13 +54,13 @@ export const useParserData = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const response = await fetch(`${API_URL}/records/?bank_name=${bankName}&session_id=${sessionId}`);
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch records');
       }
-      
+
       const data = await response.json();
       let fetchedRecords = data.records.map(record => ({
         ...record,
@@ -62,7 +68,7 @@ export const useParserData = () => {
       }));
 
       if (selectedMonths.length > 0) {
-        fetchedRecords = fetchedRecords.filter(record => 
+        fetchedRecords = fetchedRecords.filter(record =>
           selectedMonths.includes(record.date.split('-')[1])
         );
       }
@@ -89,29 +95,29 @@ export const useParserData = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const formData = new FormData();
       formData.append('session_id', sessionId);
-      
+
       const response = await fetch(`${API_URL}/clear/`, {
         method: 'POST',
         body: formData,
       });
-      
+
       if (!response.ok) {
         throw new Error('Failed to clear data');
       }
-      
+
       // Reset all local state
       setRecords([]);
       setBankNames([]);
       setBankName('');
       setSelectedMonths(DEFAULT_SELECTED_MONTHS);
       setSortConfig({ key: 'date', direction: SORT_DIRECTIONS.ASCENDING });
-      
+
       // Refresh bank names (should be empty now)
       await fetchBankNames();
-      
+
       return true; // Success
     } catch (error) {
       console.error('Error clearing data:', error);
@@ -127,9 +133,7 @@ export const useParserData = () => {
   }, [fetchBankNames]);
 
   useEffect(() => {
-    if (bankNames.length > 0) {
-      fetchRecords();
-    }
+    fetchRecords();
   }, [bankName, selectedMonths, sessionId]);
 
   const sortedRecords = useMemo(() => {
@@ -144,7 +148,7 @@ export const useParserData = () => {
     const totalAmount = calculateFinancialMetrics(processedRecords);
 
     return { lineData, pieData, totalAmount };
-  }, [records, selectedMonths]);
+  }, [records, selectedMonths, sessionId]);
 
   return {
     // State
@@ -157,7 +161,7 @@ export const useParserData = () => {
     loading,
     error,
     ...chartData,
-    
+
     // Actions
     setBankName,
     setSelectedMonths,
@@ -165,14 +169,15 @@ export const useParserData = () => {
     fetchRecords,
     fetchBankNames,
     clearData,
-    
+
     // Utilities
     retryFetch: () => {
       setError(null);
       fetchRecords();
     },
-    
+
     // Session management
-    sessionId
+    sessionId,
+    updateSessionId,
   };
 };

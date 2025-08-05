@@ -44,10 +44,10 @@ const PDFThumbnail = ({ file, onRemove, onRetry, status = 'pending', className =
             <span>Not Available</span>
           </div>
         </div>
-        
+
         <div className="pdf-thumbnail-overlay">
           {status === 'error' && onRetry && (
-            <button 
+            <button
               className="pdf-thumbnail-retry"
               onClick={onRetry}
               title="Retry upload"
@@ -55,7 +55,7 @@ const PDFThumbnail = ({ file, onRemove, onRetry, status = 'pending', className =
               ↻
             </button>
           )}
-          <button 
+          <button
             className="pdf-thumbnail-remove"
             onClick={onRemove}
             title="Remove file"
@@ -71,7 +71,7 @@ const PDFThumbnail = ({ file, onRemove, onRetry, status = 'pending', className =
           </div>
         )}
       </div>
-      
+
       <div className="pdf-thumbnail-info">
         <span className="pdf-thumbnail-name" title={fileName}>
           {fileName.length > 20 ? `${fileName.substring(0, 17)}...` : fileName}
@@ -104,7 +104,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
     // Add files to uploaded files list
     setUploadedFiles(prev => {
       const newFiles = [...prev, ...pdfFiles];
-      
+
       // Initialize file statuses for new files only
       const newStatuses = {};
       pdfFiles.forEach((file, index) => {
@@ -112,10 +112,10 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
         newStatuses[fileKey] = 'pending'; // Start with pending instead of ready
       });
       setFileStatuses(prevStatuses => ({ ...prevStatuses, ...newStatuses }));
-      
+
       return newFiles;
     });
-    
+
     // Start upload process
     await uploadFiles(pdfFiles);
   }, []);
@@ -124,11 +124,11 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
     setUploading(true);
     setUploadProgress(0);
     setUploadMessage(`Uploading ${files.length} file(s)...`);
-    
+
     let successCount = 0;
     let errorCount = 0;
     const totalFiles = files.length;
-    
+
     // Set all files to uploading status first
     setUploadedFiles(currentFiles => {
       const uploadingStatuses = {};
@@ -144,10 +144,10 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const fileIndex = i;
-      
+
       // Update progress message for current file
       setUploadMessage(`Uploading ${file.name} (${i + 1} of ${totalFiles})...`);
-      
+
       try {
         const formData = new FormData();
         formData.append('session_id', sessionId);
@@ -157,25 +157,25 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
           method: 'POST',
           body: formData,
         });
-        
+
         if (!response.ok) {
           throw new Error(`Upload failed for ${file.name}`);
         }
-        
+
         const data = await response.json();
         successCount++;
-        
+
         // Update individual file status to success
         setUploadedFiles(currentFiles => {
           const fileKey = `${file.name}-${currentFiles.length - files.length + fileIndex}`;
           setFileStatuses(prev => ({ ...prev, [fileKey]: 'success' }));
           return currentFiles;
         });
-        
+
       } catch (error) {
         console.error(`Error uploading ${file.name}:`, error);
         errorCount++;
-        
+
         // Update individual file status to error
         setUploadedFiles(currentFiles => {
           const fileKey = `${file.name}-${currentFiles.length - files.length + fileIndex}`;
@@ -183,12 +183,12 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
           return currentFiles;
         });
       }
-      
+
       // Update progress
       const progress = Math.round(((i + 1) / totalFiles) * 100);
       setUploadProgress(progress);
     }
-    
+
     // Final status message
     if (successCount === totalFiles) {
       setUploadMessage(`Successfully uploaded all ${totalFiles} file(s)! Scroll down to view your data.`);
@@ -205,7 +205,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
     } else {
       setUploadMessage(`Failed to upload any files. Please check your files and try again.`);
     }
-    
+
     setUploading(false);
     setTimeout(() => setUploadProgress(0), 3000);
   };
@@ -214,14 +214,14 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
     setUploadedFiles(prev => {
       const fileToRemove = prev[indexToRemove];
       const fileKey = `${fileToRemove.name}-${indexToRemove}`;
-      
+
       // Clean up file status
       setFileStatuses(prevStatuses => {
         const newStatuses = { ...prevStatuses };
         delete newStatuses[fileKey];
         return newStatuses;
       });
-      
+
       return prev.filter((_, index) => index !== indexToRemove);
     });
   }, []);
@@ -229,13 +229,13 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
   const retryFile = useCallback(async (fileIndex) => {
     const file = uploadedFiles[fileIndex];
     if (!file) return;
-    
+
     const fileKey = `${file.name}-${fileIndex}`;
-    
+
     // Set file status to uploading
     setFileStatuses(prev => ({ ...prev, [fileKey]: 'uploading' }));
     setUploadMessage(`Retrying upload for ${file.name}...`);
-    
+
     try {
       const formData = new FormData();
       formData.append('session_id', sessionId);
@@ -245,22 +245,22 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
         method: 'POST',
         body: formData,
       });
-      
+
       if (!response.ok) {
         throw new Error(`Retry failed for ${file.name}`);
       }
-      
+
       const data = await response.json();
-      
+
       // Update file status to success
       setFileStatuses(prev => ({ ...prev, [fileKey]: 'success' }));
       setUploadMessage(`Successfully retried upload for ${file.name}!`);
-      
+
       // Refresh data if this was a successful retry
       if (onUploadComplete) {
         onUploadComplete(data);
       }
-      
+
     } catch (error) {
       console.error(`Error retrying ${file.name}:`, error);
       setFileStatuses(prev => ({ ...prev, [fileKey]: 'error' }));
@@ -280,7 +280,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     const files = Array.from(e.dataTransfer.files);
     const event = { target: { files } };
     handleFileSelect(event);
@@ -289,10 +289,10 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
   return (
     <section className="upload-section compact">
       <div className="upload-section-header compact">
-        <h2>Upload Statements</h2>
+        <h2>Upload Center</h2>
       </div>
 
-      <div 
+      <div
         className={`upload-dropzone compact ${uploading ? 'uploading' : ''}`}
         onClick={handleDropZoneClick}
         onDragOver={handleDragOver}
@@ -307,7 +307,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
           onChange={handleFileSelect}
           disabled={uploading}
         />
-        
+
         <div className="upload-dropzone-content">
           {uploading ? (
             <>
@@ -321,11 +321,11 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
             </>
           )}
         </div>
-        
+
         {uploading && uploadProgress > 0 && (
           <div className="upload-progress">
             <div className="upload-progress-bar">
-              <div 
+              <div
                 className="upload-progress-fill"
                 style={{ width: `${uploadProgress}%` }}
               ></div>
@@ -340,7 +340,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
         <div className="uploaded-files-section compact">
           <div className="uploaded-files-header">
             <span className="files-count">{uploadedFiles.length} file(s) selected</span>
-            <button 
+            <button
               className="clear-files-btn"
               onClick={() => {
                 setUploadedFiles([]);
@@ -355,7 +355,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
             {uploadedFiles.map((file, index) => {
               const fileKey = `${file.name}-${index}`;
               const status = fileStatuses[fileKey] || 'pending';
-              
+
               return (
                 <PDFThumbnail
                   key={fileKey}

@@ -1,4 +1,93 @@
+import { useState, useEffect } from 'react';
 /* eslint-disable react/prop-types, react/display-name */
+// Floating Session Editor (Session ID display + copy + edit)
+const SessionEditor = ({ sessionId, onSessionIdChange }) => {
+    const [copied, setCopied] = useState(false);
+    const [editing, setEditing] = useState(false);
+    const [inputValue, setInputValue] = useState(sessionId);
+
+    // Keep inputValue in sync if sessionId changes externally
+    useEffect(() => {
+        setInputValue(sessionId);
+    }, [sessionId]);
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(sessionId);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1200);
+        } catch (error) {
+            console.error('Failed to copy session ID:', error);
+            setCopied(false);
+        }
+    };
+
+    const handleEdit = () => {
+        setEditing(true);
+    };
+
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+    };
+
+    const handleInputBlur = () => {
+        if (inputValue && inputValue !== sessionId) {
+            onSessionIdChange(inputValue.trim());
+        }
+        setEditing(false);
+    };
+
+    const handleInputKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.target.blur();
+        } else if (e.key === 'Escape') {
+            setInputValue(sessionId);
+            setEditing(false);
+        }
+    };
+
+    return (
+        <div className="parser-session-editor" title="Session ID">
+            <span style={{ fontWeight: 500 }}>Session:</span>
+            {editing ? (
+                <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur}
+                    onKeyDown={handleInputKeyDown}
+                    style={{
+                        fontFamily: 'monospace',
+                        fontSize: '0.93em',
+                        width: '10em',
+                        border: '1px solid var(--border)',
+                        borderRadius: '4px',
+                        padding: '0.2em 0.4em',
+                        background: 'var(--bg-card)',
+                        color: 'var(--text-primary)',
+                        outline: 'none',
+                    }}
+                    autoFocus
+                />
+            ) : (
+                <span
+                    style={{ fontFamily: 'monospace', fontSize: '0.93em', userSelect: 'all', cursor: 'pointer' }}
+                    onClick={handleEdit}
+                    title="Click to edit session ID"
+                >
+                    {sessionId}
+                </span>
+            )}
+            {copied ? (
+                <span className="copied">Copied!</span>
+            ) : (
+                <button className="copy-btn" onClick={handleCopy} aria-label="Copy session ID">
+                    Copy
+                </button>
+            )}
+        </div>
+    );
+};
 import { memo, useCallback } from 'react';
 import amexLogo from '../../assets/amex.svg';
 import citiLogo from '../../assets/citi.svg';
@@ -49,7 +138,7 @@ const BankSelector = ({ bankName, bankNames, setBankName }) => (
                             <span>ALL</span>
                         </button>
                     )}
-                    
+
                     {/* Individual bank options */}
                     {bankNames.map((name) => (
                         <button
@@ -74,8 +163,8 @@ const BankSelector = ({ bankName, bankNames, setBankName }) => (
 const MonthSelector = memo(({ selectedMonths, setSelectedMonths }) => {
     const handleMonthChange = useCallback(({ target: { value, checked } }) => {
         setSelectedMonths(prev => {
-            const newMonths = checked 
-                ? [...prev, value] 
+            const newMonths = checked
+                ? [...prev, value]
                 : prev.filter(month => month !== value);
             return newMonths;
         });
@@ -118,49 +207,49 @@ const SupportedBanks = memo(() => (
             <h4 className="my-card-title">Supported Banks</h4>
         </div>
         <div className="my-card-body">
-            <div style={{ 
-                display: 'flex', 
-                justifyContent: 'center', 
-                alignItems: 'center', 
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
                 gap: '1.5rem',
                 flexWrap: 'wrap'
             }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                    <img 
-                        src={amexLogo} 
-                        alt="American Express logo" 
+                    <img
+                        src={amexLogo}
+                        alt="American Express logo"
                         style={{ width: '40px', height: '40px', objectFit: 'contain' }}
                     />
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>AMEX</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                    <img 
-                        src={discoverLogo} 
-                        alt="Discover logo" 
+                    <img
+                        src={discoverLogo}
+                        alt="Discover logo"
                         style={{ width: '40px', height: '40px', objectFit: 'contain' }}
                     />
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Discover</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                    <img 
-                        src={citiLogo} 
-                        alt="Citi Bank logo" 
+                    <img
+                        src={citiLogo}
+                        alt="Citi Bank logo"
                         style={{ width: '40px', height: '40px', objectFit: 'contain' }}
                     />
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Citi</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                    <img 
-                        src={capone} 
-                        alt="Capital One logo" 
+                    <img
+                        src={capone}
+                        alt="Capital One logo"
                         style={{ width: '40px', height: '40px', objectFit: 'contain' }}
                     />
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Capital One</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                    <img 
-                        src={schwab} 
-                        alt="Schwab logo" 
+                    <img
+                        src={schwab}
+                        alt="Schwab logo"
                         style={{ width: '40px', height: '40px', objectFit: 'contain' }}
                     />
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Schwab</span>
@@ -170,4 +259,4 @@ const SupportedBanks = memo(() => (
     </div>
 ));
 
-export { BankSelector, MonthSelector, SupportedBanks };
+export { BankSelector, MonthSelector, SupportedBanks, SessionEditor };

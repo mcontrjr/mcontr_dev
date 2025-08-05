@@ -97,10 +97,10 @@ describe('Mobile Layout Tests', () => {
 
     it('renders mobile-optimized layout', () => {
       render(<Parser />);
-      
+
       expect(screen.getByTestId('header')).toBeInTheDocument();
       expect(document.querySelector('.upload-section')).toBeInTheDocument();
-      
+
       // Check for mobile-specific classes
       expect(screen.getByTestId('header')).toHaveClass('mobile-header');
       expect(document.querySelector('.upload-section')).toHaveClass('upload-section');
@@ -108,18 +108,18 @@ describe('Mobile Layout Tests', () => {
 
     it('displays mobile-appropriate content', () => {
       render(<Parser />);
-      
+
       // Header should be compact
       expect(screen.getByText('mcontr')).toBeInTheDocument();
-      
+
       // Upload section should be simplified
-      expect(screen.getByText('Upload Statements')).toBeInTheDocument();
+      expect(screen.getByText('Upload Center')).toBeInTheDocument();
       expect(screen.getByText('Drop files here or click to browse')).toBeInTheDocument();
     });
 
     it('handles mobile layout structure', () => {
       render(<Parser />);
-      
+
       // Test mobile layout classes and structure
       expect(screen.getByTestId('header')).toBeInTheDocument();
       expect(screen.getByTestId('header')).toHaveClass('mobile-header');
@@ -134,17 +134,17 @@ describe('Mobile Layout Tests', () => {
 
     it('renders desktop layout', () => {
       render(<Parser />);
-      
+
       expect(screen.getByTestId('header')).toBeInTheDocument();
       expect(document.querySelector('.upload-section')).toBeInTheDocument();
-      
+
       // Should still have the classes (they're in the mocks)
       expect(screen.getByTestId('header')).toHaveClass('mobile-header');
     });
 
     it('displays full desktop content', () => {
       render(<Parser />);
-      
+
       expect(screen.getByText('mcontr')).toBeInTheDocument();
       expect(screen.getByText('Drop files here or click to browse')).toBeInTheDocument();
     });
@@ -153,14 +153,14 @@ describe('Mobile Layout Tests', () => {
   describe('Responsive Behavior', () => {
     it('adapts to different screen sizes', () => {
       const { container } = render(<Parser />);
-      
+
       // Check for responsive container
       expect(container.querySelector('.parser-container')).toBeInTheDocument();
     });
 
     it('maintains functionality across viewports', () => {
       render(<Parser />);
-      
+
       // Core functionality should be present regardless of viewport
       expect(screen.getByTestId('header')).toBeInTheDocument();
       expect(document.querySelector('.upload-section')).toBeInTheDocument();
@@ -170,7 +170,7 @@ describe('Mobile Layout Tests', () => {
   describe('Touch-friendly Elements', () => {
     it('renders touch-appropriate UI elements', () => {
       render(<Parser />);
-      
+
       // Elements should be rendered and accessible
       expect(screen.getByTestId('header')).toBeInTheDocument();
       expect(document.querySelector('.upload-section')).toBeInTheDocument();
