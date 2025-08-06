@@ -8,7 +8,6 @@ logs/
 backups/
 # ignore Python cache files
 __pycache__/
-server/uploads/
 **/.env
 .env
 server/logs
@@ -19,6 +18,7 @@ server/logs/
 **/coverage/
 coverage/
 lcov.info
+.pytest_cache/
 
 # Test results
 junit.xml

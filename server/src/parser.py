@@ -170,11 +170,14 @@ class Parser:
             raise e
 
     def extract_description(self, lines: List[str], date_match: re.Match) -> str:
-        log.debug(f"Extracting description from lines: {lines} with date: {date_match.group()}")
-        description = " ".join(lines)[date_match.end():date_match.endpos].strip()
+        log.debug(f"Extracting description from lines: {lines} with date: {date_match.group()} starting from {date_match.end()}")
+        description = " ".join(lines)[date_match.end():]
+        log.debug(f"description after join: {description}")
         description = " ".join(description.split())
         dollar_match = re.search(r'\$', description)
+        log.debug(f"description before extract: {description}")
         description = description[:dollar_match.start()].strip() if dollar_match else description
+        log.debug(f"description: {description}")
         # Skip if description contains a date, common in only some statements
         if self.config.skip_date_in_desc and re.search(self.config.date_pattern, description):
             log.debug(f"Found a date in description: {description}. Skipping...")
@@ -216,6 +219,7 @@ class Parser:
         """Create a transaction object for tabular format."""
         category = Parser.determine_category(description)
         transaction_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        log.debug("Creating transaction with date: %s, description: %s, amount: %s, category: %s", transaction_date, description, amount, category)
         return ParsedTransaction(
             bank=BankType.CAPITAL_ONE,
             date=transaction_date,
@@ -434,6 +438,7 @@ class Parser:
         sql_date = self.convert_to_sql_date(date_str)
         category = self.determine_category(description)
         transaction_date = datetime.strptime(sql_date, "%Y-%m-%d").date()
+        log.debug("Creating transaction with date: %s, description: %s, amount: %s, category: %s", transaction_date, description, amount, category)
         return ParsedTransaction(
             bank=BankType(self.config.bank),
             date=transaction_date,
@@ -450,11 +455,11 @@ class Parser:
 
         # Extract description
         description = self.extract_description(lines[line_index:line_index + 2], date_match)
-        if description is None:
+        if description is None or description.strip() == "":
             log.debug("Description was None. Skipping...")
             return None
 
-        log.debug(f"Description: {description}. Lines: {lines[line_index:line_index+2]}. Date endpos: {date_match.endpos}")
+        log.debug(f"Description: {description}. Lines: {lines[line_index:line_index+4]}. Date endpos: {date_match.endpos}")
 
         # Extract amount
         amount = self._extract_amount_from_lines(lines, line_index)

@@ -36,49 +36,49 @@ class TestAmexParser(TestParser):
             {
                 'Bank': 'AMEX',
                 'Date': "2024-07-22",
-                'Description': "PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA",
+                'Description': "PRUNEYARD CINEMAS ECOMM 000000001 CAMPBELL CA 4089636806",
                 'Amount': 35.50,
                 'Category': "FOOD"
             },
             {
                 'Bank': 'AMEX',
                 'Date': "2024-07-23",
-                'Description': "DOUBLETREE NORWALK NORWALK CA",
+                'Description': "DOUBLETREE NORWALK NORWALK CA Arrival Date Departure Date",
                 'Amount': 852.49,
                 'Category': "TRAVEL"
             },
             {
                 'Bank': 'AMEX',
                 'Date': "2024-12-16",
-                'Description': "PARAMOUNT+ WEST HOLLYWOO CA",
+                'Description': "PARAMOUNT+ WEST HOLLYWOO CA 888-274-5343",
                 'Amount': 12.99,
                 'Category': "STREAMING"
             },
             {
                 'Bank': 'AMEX',
                 'Date': "2024-12-20",
-                'Description': "AplPay STEVENS CREEK TOYOTA SAN JOSE CA",
+                'Description': "AplPay STEVENS CREEK TOYOTA SAN JOSE CA +18338354662",
                 'Amount': 139.99,
                 'Category': "AUTO"
             },
             {
                 'Bank': 'AMEX',
                 'Date': "2024-12-20",
-                'Description': "FASTRAK CSC TOLLS OAKLAND CA",
+                'Description': "FASTRAK CSC TOLLS OAKLAND CA 415-486-8655",
                 'Amount': 7.00,
                 'Category': "TRAVEL"
             },
             {
                 'Bank': 'AMEX',
                 'Date': "2024-12-21",
-                'Description': "AMAZON GROCE*Z99KX7LU1 AMZN.COM/BILL WA",
+                'Description': "AMAZON GROCE*Z99KX7LU1 AMZN.COM/BILL WA MERCHANDISE",
                 'Amount': 31.70,
                 'Category': "AMAZON"
             },
             {
                 'Bank': 'AMEX',
                 'Date': "2024-12-22",
-                'Description': "SNOW.COM/VAIL RESORTS SKI 888-838-0495 CO",
+                'Description': "SNOW.COM/VAIL RESORTS SKI 888-838-0495 CO 888-838-0495",
                 'Amount': 173.00,
                 'Category': "SKI"
             }
@@ -116,7 +116,7 @@ class TestCitiParser(TestParser):
             {
                 'Bank': 'CITI',
                 'Date': "2025-01-25",
-                'Description': "SLICE*KINGKONGNYPIZZA",
+                'Description': "SLICE*KINGKONGNYPIZZA SLICELIFE.COMNY",
                 'Amount': 35.08,
                 'Category': "FOOD"
             },
@@ -140,6 +140,13 @@ class TestCitiParser(TestParser):
                 'Description': "COSTCO GAS #0129 SANTA CLARA CA",
                 'Amount': 42.26,
                 'Category': "GAS"
+            },
+            {
+                'Bank': 'CITI',
+                'Date': "2025-06-19",
+                'Description': "HALAL GYRO EXPRESS KEBAB SAN JOSE CA",
+                'Amount': 13.11,
+                'Category': "FOOD"
             }
         ]
         # Convert ParsedTransaction objects to dictionaries for comparison
@@ -168,7 +175,7 @@ class TestDiscoverParser(TestParser):
             {
                 'Bank': 'DISCOVER',
                 'Date': "2025-02-24",
-                'Description': "JACK IN THE BOX 0533 OAKLAND CA",
+                'Description': "JACK IN THE BOX 0533 OAKLAND CA 02499P",
                 'Amount': 13.32,
                 'Category': "FOOD"
             },
@@ -189,7 +196,7 @@ class TestDiscoverParser(TestParser):
             {
                 'Bank': 'DISCOVER',
                 'Date': "2025-02-13",
-                'Description': "SAFEWAY #1476 SAN JOSE CA",
+                'Description': "SAFEWAY #1476 SAN JOSE CA APPLE PAY ENDING IN 6807",
                 'Amount': 43.45,
                 'Category': "FOOD"
             },
