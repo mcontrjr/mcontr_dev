@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import '../styles/stock.css';
 import '../styles/weather.css';
 import error_img from './assets/rainy.svg';
@@ -65,19 +65,7 @@ export default function WeatherPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Add keyboard event listener for Enter key
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      if (e.key === 'Enter' && !loading && location.trim()) {
-        handleSearch();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [location, loading]);
-
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     if (!location.trim()) return;
     
     setLoading(true);
@@ -97,7 +85,19 @@ export default function WeatherPage() {
     
     setLoading(false);
     setLocation('');
-  };
+  }, [location]);
+
+  // Add keyboard event listener for Enter key
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter' && !loading && location.trim()) {
+        handleSearch();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [location, loading, handleSearch]);
 
   return (
     <>

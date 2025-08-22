@@ -1,4 +1,3 @@
- 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
@@ -9,6 +8,7 @@ import GuessPage from './guess.jsx'
 import RandomPage from './random.jsx'
 import WeatherPage from './weather.jsx'
 import ParserPage from './parser.jsx'
+import CssLibrary from './css-library.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -22,6 +22,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='/random' element={<ErrorBoundary><RandomPage /></ErrorBoundary>}/>
           <Route path='/weather' element={<ErrorBoundary><WeatherPage /></ErrorBoundary>}/>
           <Route path='/parser' element={<ErrorBoundary><ParserPage /></ErrorBoundary>}/>
+          <Route path='/css-library' element={<ErrorBoundary><CssLibrary /></ErrorBoundary>}/>
         </Routes>
       </Router>
     </ErrorBoundary>

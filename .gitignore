@@ -33,7 +33,7 @@ playwright-report/
 *.tmp
 *.temp
 **/*.timestamp-*
-
+server/uploads/
 # IDE files
 .idea/
 *.swp

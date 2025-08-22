@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types, no-unused-vars */
+/* eslint-disable react/prop-types */
 import { AmountBar, AmountPie, RecordTable } from './ChartComponents';
 import { CHART_DIMENSIONS } from '../../constants/parserConstants';
 

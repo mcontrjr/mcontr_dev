@@ -90,37 +90,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
   const [uploadProgress, setUploadProgress] = useState(0);
   const [fileStatuses, setFileStatuses] = useState({});
 
-  const handleFileSelect = useCallback(async (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length === 0) return;
-
-    // Validate PDF files
-    const pdfFiles = files.filter(file => file.type === 'application/pdf');
-    if (pdfFiles.length !== files.length) {
-      setUploadMessage('Please select only PDF files.');
-      return;
-    }
-
-    // Add files to uploaded files list
-    setUploadedFiles(prev => {
-      const newFiles = [...prev, ...pdfFiles];
-
-      // Initialize file statuses for new files only
-      const newStatuses = {};
-      pdfFiles.forEach((file, index) => {
-        const fileKey = `${file.name}-${prev.length + index}`;
-        newStatuses[fileKey] = 'pending'; // Start with pending instead of ready
-      });
-      setFileStatuses(prevStatuses => ({ ...prevStatuses, ...newStatuses }));
-
-      return newFiles;
-    });
-
-    // Start upload process
-    await uploadFiles(pdfFiles);
-  }, []);
-
-  const uploadFiles = async (files) => {
+  const uploadFiles = useCallback(async (files) => {
     setUploading(true);
     setUploadProgress(0);
     setUploadMessage(`Uploading ${files.length} file(s)...`);
@@ -208,7 +178,37 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
 
     setUploading(false);
     setTimeout(() => setUploadProgress(0), 3000);
-  };
+  }, [sessionId, setUploadMessage, onUploadComplete]);
+
+  const handleFileSelect = useCallback(async (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
+
+    // Validate PDF files
+    const pdfFiles = files.filter(file => file.type === 'application/pdf');
+    if (pdfFiles.length !== files.length) {
+      setUploadMessage('Please select only PDF files.');
+      return;
+    }
+
+    // Add files to uploaded files list
+    setUploadedFiles(prev => {
+      const newFiles = [...prev, ...pdfFiles];
+
+      // Initialize file statuses for new files only
+      const newStatuses = {};
+      pdfFiles.forEach((file, index) => {
+        const fileKey = `${file.name}-${prev.length + index}`;
+        newStatuses[fileKey] = 'pending'; // Start with pending instead of ready
+      });
+      setFileStatuses(prevStatuses => ({ ...prevStatuses, ...newStatuses }));
+
+      return newFiles;
+    });
+
+    // Start upload process
+    await uploadFiles(pdfFiles);
+  }, [setUploadMessage, uploadFiles]);
 
   const removeFile = useCallback((indexToRemove) => {
     setUploadedFiles(prev => {
@@ -266,7 +266,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
       setFileStatuses(prev => ({ ...prev, [fileKey]: 'error' }));
       setUploadMessage(`Retry failed for ${file.name}. Please try again.`);
     }
-  }, [uploadedFiles, onUploadComplete]);
+  }, [uploadedFiles, onUploadComplete, sessionId, setUploadMessage]);
 
   const handleDropZoneClick = () => {
     document.getElementById('fileInput').click();

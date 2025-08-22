@@ -4,6 +4,10 @@ export const useThemeColors = () => {
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
+    // Set initial theme
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    setTheme(currentTheme);
+
     const observer = new MutationObserver(() => {
       const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
       setTheme(currentTheme);

@@ -1,5 +1,4 @@
- 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import '../styles/stock.css';
 import '../styles/guess.css';
 import { useTheme, AltModernHeader, ContextAccordion, Footer } from './components/UI/MainComponents';
@@ -47,32 +46,32 @@ export default function GuessPage() {
 
   console.log('Target:', randomNum);
 
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      if (e.key === 'Enter' && !gameWon && guess && Number(guess) >= 1 && Number(guess) <= 100) {
-        submitGuess();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [guess, gameWon]);
-
-  const handleKeypadPress = (digit) => {
-    if (guess.length < 3) {
-      setGuess(prev => prev + digit);
+  const concludingMessage = useCallback((attemptNum) => {
+    if (attemptNum === 1) {
+      setMessage('Damn I\'m pretty sure you cheated but good job!')
+    } else if (attemptNum < 5) {
+      setMessage(`Less than 5 is super solid!`);
+    } else if (attemptNum < 10) {
+      setMessage(`Not great but you finally got it!`);
     }
-  };
+    else {
+      setMessage(`You should keep playing for the practice!`);
+    }
+  }, []);
 
-  const handleClear = () => {
-    setGuess('');
-  };
+  const compareGuess = useCallback((guess, attemptNum) => {
+    if (guess === randomNum) {
+      setGameWon(true);
+      setGameHistory(prev => [...prev, { round: currentRound, attempts: attemptNum, target: randomNum }]);
+      concludingMessage(attemptNum);
+    } else if (guess < randomNum) {
+      setMessage(`Too low! Your guess: ${guess}. Try higher!`);
+    } else {
+      setMessage(`Too high! Your guess: ${guess}. Try lower!`);
+    }
+  }, [randomNum, currentRound, concludingMessage]);
 
-  const handleBackspace = () => {
-    setGuess(prev => prev.slice(0, -1));
-  };
-
-  const submitGuess = () => {
+  const submitGuess = useCallback(() => {
     if (!guess || guess === '') return;
     
     const guessNum = Number(guess);
@@ -96,32 +95,32 @@ export default function GuessPage() {
     setSessionAttempts(prev => [...prev, newAttemptData]);
     compareGuess(guessNum, newAttempt);
     setGuess('');
-  }
+  }, [guess, attempts, randomNum, compareGuess]);
 
-  const concludingMessage = (attemptNum) => {
-    if (attemptNum === 1) {
-      setMessage('Damn I\'m pretty sure you cheated but good job!')
-    } else if (attemptNum < 5) {
-      setMessage(`Less than 5 is super solid!`);
-    } else if (attemptNum < 10) {
-      setMessage(`Not great but you finally got it!`);
-    }
-    else {
-      setMessage(`You should keep playing for the practice!`);
-    }
-  }
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter' && !gameWon && guess && Number(guess) >= 1 && Number(guess) <= 100) {
+        submitGuess();
+      }
+    };
 
-  const compareGuess = (guess, attemptNum) => {
-    if (guess === randomNum) {
-      setGameWon(true);
-      setGameHistory(prev => [...prev, { round: currentRound, attempts: attemptNum, target: randomNum }]);
-      concludingMessage(attemptNum);
-    } else if (guess < randomNum) {
-      setMessage(`Too low! Your guess: ${guess}. Try higher!`);
-    } else {
-      setMessage(`Too high! Your guess: ${guess}. Try lower!`);
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [guess, gameWon, submitGuess]);
+
+  const handleKeypadPress = (digit) => {
+    if (guess.length < 3) {
+      setGuess(prev => prev + digit);
     }
-  }
+  };
+
+  const handleClear = () => {
+    setGuess('');
+  };
+
+  const handleBackspace = () => {
+    setGuess(prev => prev.slice(0, -1));
+  };
 
   const resetGame = () => {
     setGuess('');

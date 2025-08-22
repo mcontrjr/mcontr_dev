@@ -134,7 +134,7 @@ export const useParserData = () => {
 
   useEffect(() => {
     fetchRecords();
-  }, [bankName, selectedMonths, sessionId]);
+  }, [fetchRecords]);
 
   const sortedRecords = useMemo(() => {
     return sortRecords(records, sortConfig);
@@ -148,7 +148,7 @@ export const useParserData = () => {
     const totalAmount = calculateFinancialMetrics(processedRecords);
 
     return { lineData, pieData, totalAmount };
-  }, [records, selectedMonths, sessionId]);
+  }, [records, selectedMonths]);
 
   return {
     // State

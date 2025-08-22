@@ -1,5 +1,5 @@
-/* eslint-disable react/no-unescaped-entities, no-undef */
-import { useState, useEffect } from 'react';
+/* eslint-disable react/no-unescaped-entities */
+import { useState, useEffect, useCallback } from 'react';
 import '../styles/stock.css';
 import '../styles/random.css';
 import logo from './assets/random-logo.svg';
@@ -65,15 +65,7 @@ export default function RandomPage() {
   const [currentPage, setCurrentPage] = useState({ pexels: 1, picsum: 1 });
   const [activeTab, setActiveTab] = useState('pexels');
 
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      if (e.key === 'Enter' && !loading) handleSearch();
-    };
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [keyword, loading]);
-
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     setLoading({ pexels: true, picsum: true, flickr: true });
     setHasSearched(true);
     
@@ -107,12 +99,19 @@ export default function RandomPage() {
     
     setMessage(searchKeyword === '' ? 'Here are some photos for you!' : `Found photos for "${searchKeyword}"`);
     setLoading({ pexels: false, picsum: false, flickr: false });
-  };
+  }, [keyword, lastSearchedKeyword, currentPage]);
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter' && !loading) handleSearch();
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [loading, handleSearch]);
 
   const handleClear = () => {
     setPexelsImages([]);
     setPicsumImages([]);
-    setFlickrImages([]);
     setKeyword('');
     setMessage('Enter a keyword to discover amazing photos!');
     setHasSearched(false);
@@ -164,4 +163,3 @@ export default function RandomPage() {
     </>
   );
 }
-
