@@ -1,0 +1,711 @@
+/* Enhanced CSS Showcase Styles */
+.enhanced-css-showcase {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Roboto Mono', monospace;
+  
+  /* Improved base spacing system using 8px grid */
+  --spacing-xs: 0.5rem;  /* 8px */
+  --spacing-sm: 1rem;    /* 16px */
+  --spacing-md: 1.5rem;  /* 24px */
+  --spacing-lg: 2rem;    /* 32px */
+  --spacing-xl: 3rem;    /* 48px */
+  --spacing-2xl: 4rem;   /* 64px */
+  
+  /* Container constraints for better readability */
+  --content-max-width: 1400px;
+  --card-max-width: 450px;
+}
+
+/* Header */
+.showcase-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  text-align: center;
+  
+  /* Better visual hierarchy */
+  margin-bottom: var(--spacing-xl);
+}
+
+.header-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 var(--spacing-sm) 0; /* Remove default margins, use consistent spacing */
+  color: var(--text-primary);
+  line-height: 1.2; /* Better line height for readability */
+}
+
+.header-content p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-xl) 0; /* Consistent spacing */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto; /* Center and constrain width for readability */
+  line-height: 1.5;
+}
+
+/* Search and Filter */
+.search-filter {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 600px;
+  margin: 0 auto;
+  
+  /* Better spacing from surrounding elements */
+  padding: var(--spacing-md) 0;
+}
+
+.search-input-container {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #007acc;
+  box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+}
+
+.category-filter {
+  min-width: 200px;
+}
+
+.category-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.category-select:focus {
+  border-color: #007acc;
+  box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+}
+
+/* Showcase Content */
+.showcase-content {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  
+  /* Better breathing room */
+  margin-bottom: var(--spacing-2xl);
+}
+
+/* Category Section */
+.category-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+/* Last section doesn't need bottom margin */
+.category-section:last-child {
+  margin-bottom: 0;
+}
+
+.category-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 var(--spacing-xl) 0; /* Reset margins for consistency */
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: var(--spacing-sm);
+  display: inline-block;
+  
+  /* Better spacing from content above */
+  margin-top: var(--spacing-lg);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-max-width), 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-lg);
+  
+  /* Better alignment and spacing */
+  justify-items: center;
+  padding: var(--spacing-md) 0;
+}
+
+/* Enhanced Showcase Card */
+.enhanced-showcase-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  
+  /* Consistent card sizing and spacing */
+  max-width: var(--card-max-width);
+  width: 100%;
+  margin-bottom: var(--spacing-md); /* Fallback spacing */
+}
+
+.enhanced-showcase-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Header */
+.card-header {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  
+  /* Improved spacing and layout */
+  min-height: 80px; /* Consistent header height */
+}
+
+.class-info {
+  flex: 1;
+}
+
+.class-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 var(--spacing-xs) 0; /* Consistent spacing */
+  color: #007acc;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: color 0.2s ease;
+  line-height: 1.3; /* Better line height */
+}
+
+.class-name:hover {
+  color: #005a9e;
+}
+
+.copy-feedback {
+  position: absolute;
+  top: -2rem;
+  left: 0;
+  background: #007acc;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  animation: fade-in-out 2s ease-in-out;
+}
+
+@keyframes fade-in-out {
+  0%, 100% { opacity: 0; transform: translateY(5px); }
+  20%, 80% { opacity: 1; transform: translateY(0); }
+}
+
+.class-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4; /* Improved readability */
+  max-width: 250px; /* Prevent overly long descriptions from breaking layout */
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  background: var(--accent);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+  min-width: 48px;
+  text-align: center;
+}
+
+.action-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+/* Card Preview */
+.card-preview {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border);
+  
+  /* Better visual separation */
+  background: var(--bg-primary);
+}
+
+.preview-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 var(--spacing-md) 0; /* Consistent spacing */
+}
+
+.preview-container {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: var(--spacing-lg);
+  min-height: 120px; /* Slightly taller for better proportions */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+  /* Better visual distinction */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Preview Grid Items */
+.preview-grid-item {
+  background: var(--accent);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin: 0.25rem;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.preview-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-actions span {
+  background: var(--accent);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* Card CSS Section */
+.card-css {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border);
+  
+  /* Improved background for code sections */
+  background: var(--bg-secondary);
+}
+
+/* Card API Section */
+.card-api {
+  padding: var(--spacing-md);
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border);
+  
+  /* Better visual separation */
+  margin-top: var(--spacing-xs);
+}
+
+/* API Table */
+.api-table-container {
+  font-size: 0.9rem;
+}
+
+.api-table-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.api-section {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Last API section doesn't need bottom margin */
+.api-section:last-child {
+  margin-bottom: 0;
+}
+
+.api-section-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--spacing-xs);
+}
+
+.api-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--spacing-md);
+}
+
+.api-table th,
+.api-table td {
+  padding: var(--spacing-sm);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.api-table th {
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--accent);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.api-table td {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.api-table code {
+  background: var(--accent);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  color: #007acc;
+}
+
+/* API Badges */
+.api-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.api-badge {
+  background: var(--accent);
+  color: var(--text-primary);
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+
+.pseudo-badge {
+  background: #e3f2fd;
+  color: #1976d2;
+  border-color: #bbdefb;
+}
+
+.dep-badge {
+  background: #f3e5f5;
+  color: #7b1fa2;
+  border-color: #ce93d8;
+}
+
+[data-theme="dark"] .pseudo-badge {
+  background: #1a237e;
+  color: #90caf9;
+  border-color: #3949ab;
+}
+
+[data-theme="dark"] .dep-badge {
+  background: #4a148c;
+  color: #ce93d8;
+  border-color: #8e24aa;
+}
+
+/* Selector List */
+.selector-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.selector-code {
+  background: var(--accent);
+  padding: var(--spacing-sm);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  font-family: inherit;
+  font-size: 0.8rem;
+  color: #007acc;
+  
+  /* Better spacing and readability */
+  line-height: 1.4;
+  word-break: break-all; /* Prevent long selectors from overflowing */
+}
+
+/* Terminal Modal (Full-screen overlay) */
+.terminal-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.terminal-modal .terminal-editor {
+  max-width: 1200px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* Adjust spacing variables for mobile */
+  .enhanced-css-showcase {
+    --spacing-lg: 1rem;    /* Reduce large spacing on mobile */
+    --spacing-xl: 2rem;    /* Reduce extra large spacing */
+    --spacing-2xl: 2.5rem; /* Reduce 2x large spacing */
+  }
+  
+  .showcase-header {
+    padding: var(--spacing-xl) var(--spacing-sm);
+  }
+  
+  .header-content h1 {
+    font-size: 2rem;
+  }
+  
+  .search-filter {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
+  .search-input-container,
+  .category-filter {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .showcase-content {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
+  .category-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-sm) 0;
+  }
+  
+  .enhanced-showcase-card {
+    margin: 0;
+    max-width: none; /* Allow full width on mobile */
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    min-height: auto; /* Remove fixed height on mobile */
+  }
+  
+  .class-description {
+    max-width: none; /* Allow full width on mobile */
+  }
+  
+  .card-actions {
+    align-self: stretch;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .action-btn {
+    flex: 1;
+    text-align: center;
+    margin: 0 var(--spacing-xs);
+  }
+  
+  .preview-container {
+    padding: var(--spacing-md);
+    min-height: 100px; /* Reduce height on mobile */
+  }
+  
+  .api-table {
+    font-size: 0.8rem;
+  }
+  
+  .api-table th,
+  .api-table td {
+    padding: var(--spacing-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjust spacing for very small screens */
+  .enhanced-css-showcase {
+    --spacing-sm: 0.75rem;  /* Slightly reduce small spacing */
+    --spacing-md: 1rem;     /* Reduce medium spacing */
+    --spacing-lg: 1rem;     /* Keep large same as medium */
+  }
+  
+  .showcase-header {
+    padding: var(--spacing-lg) var(--spacing-xs);
+  }
+  
+  .header-content h1 {
+    font-size: 1.75rem; /* Further reduce title size */
+  }
+  
+  .showcase-content {
+    padding: var(--spacing-md) var(--spacing-xs);
+  }
+  
+  .search-filter {
+    padding: var(--spacing-md) var(--spacing-xs);
+  }
+  
+  .category-grid {
+    gap: var(--spacing-md);
+  }
+  
+  .card-header {
+    padding: var(--spacing-sm);
+  }
+  
+  .card-preview,
+  .card-css,
+  .card-api {
+    padding: var(--spacing-sm);
+  }
+  
+  .preview-container {
+    padding: var(--spacing-sm);
+    min-height: 80px; /* Further reduce on very small screens */
+  }
+  
+  .terminal-modal {
+    padding: var(--spacing-xs);
+  }
+  
+  /* Improve action button layout on very small screens */
+  .action-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.75rem;
+    margin: 0 2px; /* Minimal margin between buttons */
+  }
+}
+
+/* Animation for card appearance */
+.enhanced-showcase-card {
+  animation: card-appear 0.5s ease-out;
+}
+
+@keyframes card-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading state */
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: var(--text-secondary);
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: var(--text-secondary);
+  
+  /* Better spacing and visual hierarchy */
+  margin: var(--spacing-xl) auto;
+  max-width: 400px;
+}
+
+.empty-state h3 {
+  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .enhanced-showcase-card {
+    border: 2px solid var(--text-primary);
+  }
+  
+  .action-btn {
+    border: 2px solid var(--text-primary);
+  }
+  
+  .api-table th {
+    border: 2px solid var(--text-primary);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-showcase-card,
+  .action-btn,
+  .class-name,
+  .search-input,
+  .category-select {
+    transition: none;
+  }
+  
+  .enhanced-showcase-card:hover {
+    transform: none;
+  }
+  
+  .action-btn:hover {
+    transform: none;
+  }
+  
+  .card-appear,
+  .fade-in-out {
+    animation: none;
+  }
+}

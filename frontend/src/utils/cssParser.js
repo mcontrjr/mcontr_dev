@@ -1,243 +1,619 @@
-// CSS Class Parser and Categorizer
-// This utility extracts CSS classes from files and categorizes them
-
-export const CSS_CATEGORIES = {
-  inputs: {
-    title: 'Inputs & Controls',
-    description: 'Buttons, forms, toggles, and interactive elements',
-    keywords: ['button', 'btn', 'input', 'form', 'toggle', 'switch', 'control', 'field', 'select', 'checkbox', 'radio']
-  },
-  layout: {
-    title: 'Layout & Grid', 
-    description: 'Containers, grids, flexbox layouts',
-    keywords: ['container', 'grid', 'flex', 'layout', 'row', 'col', 'wrap', 'center', 'align', 'justify']
-  },
-  cards: {
-    title: 'Cards & Surfaces',
-    description: 'Card designs, panels, surfaces', 
-    keywords: ['card', 'panel', 'surface', 'box', 'item', 'tile', 'modal', 'dialog', 'popover']
-  },
-  typography: {
-    title: 'Typography & Text',
-    description: 'Headers, text styles, font variants',
-    keywords: ['text', 'font', 'title', 'header', 'heading', 'label', 'caption', 'subtitle']
-  },
-  navigation: {
-    title: 'Navigation & Headers', 
-    description: 'Navigation bars, headers, menu items',
-    keywords: ['nav', 'menu', 'header', 'breadcrumb', 'tab', 'link', 'brand', 'logo']
-  },
-  animations: {
-    title: 'Animations & Effects',
-    description: 'Transitions, animations, hover effects',
-    keywords: ['animate', 'animation', 'transition', 'fade', 'slide', 'bounce', 'spin', 'hover', 'effect']
-  },
-  utilities: {
-    title: 'Utilities & Helpers',
-    description: 'Helper classes, utilities, modifiers',
-    keywords: ['util', 'helper', 'margin', 'padding', 'display', 'position', 'size', 'color', 'bg', 'border']
+/**
+ * Advanced CSS Parser for extracting class definitions and creating documentation
+ * Parses CSS text to extract actual CSS rules and create interactive documentation
+ */
+class CSSParser {
+  constructor(cssText = '') {
+    this.cssText = cssText;
+    this.parsedRules = new Map();
+    this.categories = new Map();
+    this.dependencies = new Map();
+    this.isLoading = false;
+    this.loadCSS();
   }
-};
 
-export const CSS_FILES = {
-  stock: {
-    title: 'Stock.css',
-    description: 'Global styles, theme variables, common components',
-    path: '../styles/stock.css'
-  },
-  parser: {
-    title: 'Parser.css',
-    description: 'Financial parser specific styles', 
-    path: '../styles/parser.css'
-  },
-  guess: {
-    title: 'Guess.css',
-    description: 'Guessing game specific styles',
-    path: '../styles/guess.css'
-  },
-  weather: {
-    title: 'Weather.css', 
-    description: 'Weather dashboard styles',
-    path: '../styles/weather.css'
-  },
-  random: {
-    title: 'Random.css',
-    description: 'Image search page styles',
-    path: '../styles/random.css'
-  }
-};
-
-// Parse CSS content to extract class names
-export const parseCSSClasses = (cssContent) => {
-  const classes = [];
-  
-  // Regex to match CSS class selectors
-  const classRegex = /\.([a-zA-Z][a-zA-Z0-9_-]*)/g;
-  let match;
-  
-  while ((match = classRegex.exec(cssContent)) !== null) {
-    const className = match[1];
+  /**
+   * Load CSS from the stock.css file
+   */
+  async loadCSS() {
+    if (this.cssText) return; // Already have CSS text
     
-    // Skip pseudo-classes and states
-    if (!className.includes(':') && !className.includes('(')) {
-      classes.push({
-        name: className,
-        type: categorizeClass(className),
-        fullMatch: match[0]
-      });
+    this.isLoading = true;
+    try {
+      // Fetch the CSS file content
+      const response = await fetch('/styles/stock.css');
+      const cssText = await response.text();
+      this.cssText = cssText;
+      this.parse();
+    } catch (error) {
+      console.warn('Could not load stock.css, using fallback data', error);
+      this.loadFallbackData();
+    } finally {
+      this.isLoading = false;
     }
   }
-  
-  // Remove duplicates
-  const uniqueClasses = classes.filter((cls, index, self) => 
-    index === self.findIndex(c => c.name === cls.name)
-  );
-  
-  return uniqueClasses;
-};
 
-// Categorize a class name based on keywords
-export const categorizeClass = (className) => {
-  const lowerName = className.toLowerCase();
-  
-  for (const [category, config] of Object.entries(CSS_CATEGORIES)) {
-    if (config.keywords.some(keyword => lowerName.includes(keyword))) {
-      return category;
+  /**
+   * Load fallback data when CSS file can't be loaded
+   */
+  loadFallbackData() {
+    // Enhanced fallback data with clean formatting and comprehensive examples
+    this.cssText = `/* Layout Components */
+.my-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.my-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  justify-items: center;
+}
+
+.centered-grid {
+  justify-content: center;
+}
+
+/* Button Components */
+.my-button {
+  background: var(--accent);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.my-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-btn {
+  background: var(--accent);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+/* Card Components */
+.my-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  max-width: 400px;
+  text-align: center;
+}
+
+.my-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.2);
+}
+
+.enhanced-showcase-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  animation: card-appear 0.5s ease-out;
+}
+
+/* Typography */
+.class-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #007acc;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.class-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Controls */
+.theme-toggle {
+  background: var(--accent);
+  border-radius: 8px;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-input {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #007acc;
+  box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+}
+
+/* Hero Sections */
+.my-hero {
+  padding: 4rem 0;
+  text-align: center;
+  background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+}
+
+.showcase-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+/* Terminal Components */
+.terminal-editor {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Monaco', 'Menlo', monospace;
+  animation: terminal-appear 0.3s ease-out;
+}
+
+.terminal-btn {
+  background: transparent;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.terminal-btn:hover {
+  background: #3a3a3a;
+  color: #fff;
+}
+
+/* Animations */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes terminal-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Utilities */
+.text-center { text-align: center; }
+.mb-2 { margin-bottom: 1rem; }
+.mt-3 { margin-top: 1.5rem; }`;
+    this.parse();
+  }
+
+  /**
+   * Parse CSS text and extract class rules
+   */
+  parse() {
+    if (!this.cssText) return;
+    
+    // Remove comments and normalize
+    const cleanCSS = this.cssText
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    // Extract CSS rules
+    const ruleRegex = /([^{}]+)\{([^{}]*)\}/g;
+    let match;
+
+    while ((match = ruleRegex.exec(cleanCSS)) !== null) {
+      const selector = match[1].trim();
+      const declarations = match[2].trim();
+      
+      // Focus on class selectors
+      if (selector.includes('.')) {
+        this.parseRule(selector, declarations);
+      }
     }
-  }
-  
-  return 'utilities'; // Default category
-};
 
-// Sample parsed data for immediate use (since we can't dynamically import CSS files)
-export const PARSED_CSS_CLASSES = {
-  stock: {
-    inputs: [
-      { name: 'theme-toggle', description: 'Theme switcher button' },
-      { name: 'my-button', description: 'Primary button style' },
-      { name: 'button-primary', description: 'Primary action button' },
-      { name: 'button-secondary', description: 'Secondary action button' },
-    ],
-    layout: [
-      { name: 'my-container', description: 'Main content container' },
-      { name: 'my-section', description: 'Page section wrapper' },
-      { name: 'my-grid', description: 'Basic grid layout' },
-      { name: 'my-grid-2', description: '2-column grid' },
-      { name: 'my-grid-3', description: '3-column grid' },
-      { name: 'centered-grid', description: 'Centered grid layout' },
-      { name: 'flex-center', description: 'Flexbox center alignment' },
-    ],
-    cards: [
-      { name: 'my-card', description: 'Basic card component' },
-      { name: 'card-elevated', description: 'Card with elevation shadow' },
-      { name: 'card-outlined', description: 'Card with border outline' },
-    ],
-    typography: [
-      { name: 'my-section-title', description: 'Section heading style' },
-      { name: 'my-header', description: 'Page header style' },
-      { name: 'text-center', description: 'Center-aligned text' },
-      { name: 'text-primary', description: 'Primary text color' },
-      { name: 'text-secondary', description: 'Secondary text color' },
-      { name: 'text-muted', description: 'Muted text color' },
-    ],
-    navigation: [
-      { name: 'my-nav', description: 'Navigation bar' },
-      { name: 'my-logo', description: 'Logo container' },
-      { name: 'nav-item', description: 'Navigation item' },
-      { name: 'my-header-content', description: 'Header content wrapper' },
-    ],
-    animations: [
-      { name: 'animate-fade-in-up', description: 'Fade in from bottom animation' },
-      { name: 'loading-spinner', description: 'Loading spinner animation' },
-      { name: 'hover-lift', description: 'Hover lift effect' },
-    ]
-  },
-  parser: {
-    inputs: [
-      { name: 'upload-dropzone', description: 'File upload drop area' },
-      { name: 'file-input', description: 'File input styling' },
-      { name: 'clear-files-btn', description: 'Clear files button' },
-      { name: 'parser-session-editor', description: 'Session editor input' },
-    ],
-    layout: [
-      { name: 'parser-container', description: 'Parser main container' },
-      { name: 'breakdown-section', description: 'Data breakdown section' },
-      { name: 'upload-section', description: 'File upload section' },
-      { name: 'parser-grid', description: 'Parser specific grid' },
-    ],
-    cards: [
-      { name: 'pdf-thumbnail', description: 'PDF file thumbnail card' },
-      { name: 'breakdown-card', description: 'Data breakdown card' },
-      { name: 'upload-card', description: 'Upload status card' },
-    ],
-    utilities: [
-      { name: 'compact', description: 'Compact spacing modifier' },
-      { name: 'uploading', description: 'Upload state modifier' },
-      { name: 'success', description: 'Success state' },
-      { name: 'error', description: 'Error state' },
-    ]
-  },
-  guess: {
-    inputs: [
-      { name: 'game-button', description: 'Game action button' },
-      { name: 'keypad-button', description: 'Number keypad button' },
-      { name: 'clear-button', description: 'Clear input button' },
-    ],
-    layout: [
-      { name: 'game-layout-active', description: 'Active game layout' },
-      { name: 'game-layout-centered', description: 'Centered game layout' },
-      { name: 'game-left-panel', description: 'Game sidebar panel' },
-      { name: 'game-right-panel', description: 'Game main panel' },
-    ],
-    cards: [
-      { name: 'game-card', description: 'Game interface card' },
-      { name: 'score-card', description: 'Score display card' },
-      { name: 'history-card', description: 'Game history card' },
-    ]
-  },
-  weather: {
-    cards: [
-      { name: 'weather-card', description: 'Weather data display card' },
-      { name: 'weather-profile-card', description: 'Weather profile card' },
-      { name: 'weather-table', description: 'Weather data table' },
-    ],
-    inputs: [
-      { name: 'weather-search', description: 'Weather location search' },
-      { name: 'search-button', description: 'Search action button' },
-    ]
-  },
-  random: {
-    cards: [
-      { name: 'image-gallery', description: 'Image gallery container' },
-      { name: 'image-card', description: 'Individual image card' },
-      { name: 'gallery-tab', description: 'Gallery tab selector' },
-    ],
-    layout: [
-      { name: 'gallery-grid', description: 'Image gallery grid' },
-      { name: 'tabulated-gallery', description: 'Tabbed gallery layout' },
-    ]
+    this.categorizeRules();
   }
-};
 
-// Get classes by category across all files
-export const getClassesByCategory = (category) => {
-  const classes = [];
-  
-  Object.entries(PARSED_CSS_CLASSES).forEach(([file, fileClasses]) => {
-    if (fileClasses[category]) {
-      fileClasses[category].forEach(cls => {
-        classes.push({
-          ...cls,
-          file: file
+  /**
+   * Parse individual CSS rule
+   */
+  parseRule(selector, declarations) {
+    const classNames = this.extractClassNames(selector);
+    
+    classNames.forEach(className => {
+      if (!this.parsedRules.has(className)) {
+        this.parsedRules.set(className, {
+          selectors: [],
+          declarations: [],
+          properties: new Set(),
+          pseudoClasses: new Set(),
+          variants: new Set()
         });
-      });
-    }
-  });
-  
-  return classes;
-};
+      }
 
-// Get all classes from a specific file
-export const getClassesByFile = (fileName) => {
-  return PARSED_CSS_CLASSES[fileName] || {};
-};
+      const rule = this.parsedRules.get(className);
+      rule.selectors.push(selector);
+      
+      // Parse declarations
+      const props = this.parseDeclarations(declarations);
+      rule.declarations.push({ selector, properties: props });
+      
+      // Track properties and pseudo-classes
+      props.forEach(prop => rule.properties.add(prop.property));
+      this.extractPseudoClasses(selector).forEach(pseudo => rule.pseudoClasses.add(pseudo));
+      this.extractVariants(className).forEach(variant => rule.variants.add(variant));
+    });
+  }
+
+  /**
+   * Extract class names from selector
+   */
+  extractClassNames(selector) {
+    const classRegex = /\.([a-zA-Z][\w-]*)/g;
+    const classes = [];
+    let match;
+
+    while ((match = classRegex.exec(selector)) !== null) {
+      classes.push(match[1]);
+    }
+
+    return classes;
+  }
+
+  /**
+   * Parse CSS declarations into structured format
+   */
+  parseDeclarations(declarations) {
+    return declarations
+      .split(';')
+      .filter(decl => decl.trim())
+      .map(decl => {
+        const [property, value] = decl.split(':').map(s => s ? s.trim() : '');
+        // Only return valid property-value pairs
+        if (property && value) {
+          return { property, value };
+        }
+        // Return property with empty value if value is missing
+        return { property: property || '', value: value || '' };
+      })
+      .filter(({ property }) => property); // Remove entries with empty properties
+  }
+
+  /**
+   * Extract pseudo-classes from selector
+   */
+  extractPseudoClasses(selector) {
+    const pseudoRegex = /:([a-zA-Z-]+)/g;
+    const pseudos = [];
+    let match;
+
+    while ((match = pseudoRegex.exec(selector)) !== null) {
+      pseudos.push(match[1]);
+    }
+
+    return pseudos;
+  }
+
+  /**
+   * Extract variants from class name (e.g., my-button-primary)
+   */
+  extractVariants(className) {
+    const variants = [];
+    
+    // Common variant patterns
+    if (className.includes('-')) {
+      const parts = className.split('-');
+      if (parts.length > 2) {
+        variants.push(parts.slice(-1)[0]); // Last part as variant
+      }
+    }
+
+    return variants;
+  }
+
+  /**
+   * Categorize CSS rules based on patterns and usage - Enhanced categorization
+   */
+  categorizeRules() {
+    const categories = {
+      'Layout & Grid': /^(my-container|my-section|my-grid|.*grid|.*layout|.*flex|.*wrap|centered-grid|showcase-content|category-grid)/,
+      'Buttons & Controls': /^(my-button|.*button|.*btn|theme-toggle|.*control|action-btn)/,
+      'Cards & Surfaces': /^(my-card|unified-card|.*card|.*surface|.*panel|enhanced-showcase-card|stat-card)/,
+      'Navigation & Headers': /^(my-header|my-nav|simple-header|.*nav|.*menu|.*header|showcase-header)/,
+      'Hero Sections': /^(my-hero|unified-hero|hero-.*|stats-overview)/,
+      'Interactive & States': /^(.*hover|.*active|.*focus|.*interactive|.*accordion|.*dropdown)/,
+      'Animations & Effects': /^(animate-|.*animation|.*transition|.*fade|.*slide|.*spinner|.*rotate|card-appear|terminal-appear)/,
+      'Typography & Text': /^(.*title|.*subtitle|.*text|.*font|.*heading|class-name|class-description|stat-number|stat-label)/,
+      'Forms & Tables': /^(custom-table|.*table|.*form|.*input|.*field|search-input|category-select|api-table)/,
+      'Media & Images': /^(custom-img|.*img|.*media|.*image|pdf-.*)/,
+      'Terminal & Editor': /^(terminal-.*|preview-.*|css-info|error-icon)/,
+      'API Documentation': /^(api-.*|selector-.*)/,
+      'Utilities & Spacing': /^(mb-|mt-|.*spacing|.*margin|.*padding|text-.*|info-.*|empty-state)/
+    };
+
+    this.parsedRules.forEach((rule, className) => {
+      let assigned = false;
+      
+      for (const [categoryName, pattern] of Object.entries(categories)) {
+        if (pattern.test(className)) {
+          if (!this.categories.has(categoryName)) {
+            this.categories.set(categoryName, new Set());
+          }
+          this.categories.get(categoryName).add(className);
+          assigned = true;
+          break;
+        }
+      }
+
+      // Default category for unmatched rules
+      if (!assigned) {
+        if (!this.categories.has('Other Components')) {
+          this.categories.set('Other Components', new Set());
+        }
+        this.categories.get('Other Components').add(className);
+      }
+    });
+  }
+
+  /**
+   * Generate complete CSS code for a class with cleanup
+   */
+  getCSSCode(className) {
+    const rule = this.parsedRules.get(className);
+    if (!rule) return null;
+
+    let css = '';
+    
+    // Group by base selector and variants
+    const groupedDeclarations = new Map();
+    
+    rule.declarations.forEach(({ selector, properties }) => {
+      if (!groupedDeclarations.has(selector)) {
+        groupedDeclarations.set(selector, []);
+      }
+      groupedDeclarations.get(selector).push(...properties);
+    });
+
+    // Generate CSS output with better formatting
+    groupedDeclarations.forEach((properties, selector) => {
+      css += `${selector} {\n`;
+      properties.forEach(({ property, value }) => {
+        css += `  ${property}: ${value};\n`;
+      });
+      css += '}\n\n';
+    });
+
+    // Clean up the CSS output
+    const cleanCSS = css
+      .replace(/\\n/g, '\n') // Replace escaped newlines
+      .replace(/\n\s*\n/g, '\n') // Remove excessive blank lines
+      .trim();
+
+    return cleanCSS;
+  }
+
+  /**
+   * Get comprehensive information about a CSS class
+   */
+  getClassInfo(className) {
+    const rule = this.parsedRules.get(className);
+    if (!rule) return null;
+
+    return {
+      className,
+      css: this.getCSSCode(className),
+      properties: Array.from(rule.properties),
+      pseudoClasses: Array.from(rule.pseudoClasses),
+      variants: Array.from(rule.variants),
+      selectors: rule.selectors,
+      usage: this.inferUsage(className, rule),
+      dependencies: this.getDependencies(className)
+    };
+  }
+
+  /**
+   * Infer usage description from class name and properties
+   */
+  inferUsage(className, rule) {
+    const properties = Array.from(rule.properties);
+    
+    // Layout components
+    if (properties.includes('display') && properties.includes('grid')) {
+      return 'Grid container for responsive layouts';
+    }
+    
+    if (properties.includes('display') && properties.includes('flex')) {
+      return 'Flexible container for aligned content';
+    }
+
+    // Interactive components
+    if (rule.pseudoClasses.has('hover')) {
+      return 'Interactive component with hover effects';
+    }
+
+    // Animation components
+    if (properties.includes('animation') || properties.includes('transform')) {
+      return 'Animated component with motion effects';
+    }
+
+    // Button components
+    if (className.includes('button') || className.includes('btn')) {
+      return 'Interactive button for user actions';
+    }
+
+    // Card components
+    if (className.includes('card')) {
+      return 'Content container with structured layout';
+    }
+
+    return 'CSS component for styling elements';
+  }
+
+  /**
+   * Get dependencies for a class (other classes it references)
+   */
+  getDependencies(className) {
+    const rule = this.parsedRules.get(className);
+    if (!rule) return [];
+
+    const dependencies = new Set();
+    
+    rule.declarations.forEach(({ properties }) => {
+      properties.forEach(({ value }) => {
+        // Ensure value exists and is a string before calling match
+        if (!value || typeof value !== 'string') return;
+        
+        // Look for CSS custom properties (variables)
+        const varMatches = value.match(/var\(([^)]+)\)/g);
+        if (varMatches) {
+          varMatches.forEach(match => {
+            const varNameMatch = match.match(/var\(([^)]+)\)/);
+            if (varNameMatch && varNameMatch[1]) {
+              dependencies.add(varNameMatch[1]);
+            }
+          });
+        }
+      });
+    });
+
+    return Array.from(dependencies);
+  }
+
+  /**
+   * Get all categories with their classes
+   */
+  getCategories() {
+    const result = {};
+    this.categories.forEach((classes, categoryName) => {
+      result[categoryName] = Array.from(classes);
+    });
+    return result;
+  }
+
+  /**
+   * Search classes by pattern
+   */
+  searchClasses(pattern) {
+    const regex = new RegExp(pattern, 'i');
+    const results = [];
+    
+    this.parsedRules.forEach((rule, className) => {
+      if (regex.test(className)) {
+        results.push(this.getClassInfo(className));
+      }
+    });
+
+    return results;
+  }
+
+  /**
+   * Get class statistics
+   */
+  getStatistics() {
+    return {
+      totalClasses: this.parsedRules.size,
+      totalCategories: this.categories.size,
+      classesWithHover: Array.from(this.parsedRules.values()).filter(rule => rule.pseudoClasses.has('hover')).length,
+      animatedClasses: Array.from(this.parsedRules.values()).filter(rule => rule.properties.has('animation') || rule.properties.has('transform')).length
+    };
+  }
+}
+
+// Create global parser instance
+let globalParser = null;
+
+/**
+ * Get or create the global CSS parser instance
+ */
+export function getCSSParser() {
+  if (!globalParser) {
+    globalParser = new CSSParser();
+  }
+  return globalParser;
+}
+
+/**
+ * Helper function to get formatted CSS for a class
+ */
+export function getFormattedCSS(className) {
+  const parser = getCSSParser();
+  return parser.getCSSCode(className);
+}
+
+/**
+ * Helper function to get complete class information
+ */
+export function getClassInfo(className) {
+  const parser = getCSSParser();
+  return parser.getClassInfo(className);
+}
+
+/**
+ * Helper function to get all categories
+ */
+export function getCategories() {
+  const parser = getCSSParser();
+  return parser.getCategories();
+}
+
+export default CSSParser;

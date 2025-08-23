@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap');
 
-/* CSS Custom Properties for Theme Support */
+/* ===================================================================
+   CSS LIBRARY STOCK STYLES - Organized by Category
+   Enhanced for better parsing and documentation
+   =================================================================== */
+
+/* ===================================================================
+   THEME SYSTEM - CSS Custom Properties
+   =================================================================== */
 :root {
   /* Light theme colors */
   --bg-primary-light: #f0f5f9;
@@ -55,7 +62,9 @@
   --accent-hover: var(--accent-hover-dark);
 }
 
-/* Base styles */
+/* ===================================================================
+   BASE STYLES - Global Reset and Typography
+   =================================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -93,7 +102,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Typography */
+/* ===================================================================
+   TYPOGRAPHY - Headings, Text, and Font Styles
+   =================================================================== */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
   font-weight: 500;
@@ -123,7 +134,9 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Layout Components */
+/* ===================================================================
+   LAYOUT COMPONENTS - Containers, Sections, Grids
+   =================================================================== */
 .my-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -143,7 +156,9 @@ a:hover {
   color: var(--text-primary);
 }
 
-/* Header Styles */
+/* ===================================================================
+   NAVIGATION & HEADERS - Header Styles and Navigation
+   =================================================================== */
 .my-header {
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
@@ -215,6 +230,10 @@ a:hover {
   align-items: center;
 }
 
+/* ===================================================================
+   BUTTONS & CONTROLS - Interactive Elements
+   =================================================================== */
+
 /* Theme Toggle Button */
 .theme-toggle {
   background: var(--accent);
@@ -236,7 +255,9 @@ a:hover {
   transform: translateY(-1px);
 }
 
-/* Card Grid System */
+/* ===================================================================
+   CARD GRID SYSTEM - Grid Layouts and Responsive Design
+   =================================================================== */
 .my-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -261,6 +282,10 @@ a:hover {
   max-width: 500px;
   margin: 0 auto;
 }
+
+/* ===================================================================
+   CARDS & SURFACES - Card Components and Surface Elements
+   =================================================================== */
 
 /* Modern Card Component */
 .my-card {
@@ -360,6 +385,10 @@ a:hover {
 .feature-card {
   text-align: center;
 }
+
+/* ===================================================================
+   HERO SECTIONS - Landing and Feature Sections
+   =================================================================== */
 
 /* Hero Section */
 .my-hero {
@@ -581,7 +610,9 @@ a:hover {
   transform: translateX(4px);
 }
 
-/* Button Styles */
+/* ===================================================================
+   BUTTON STYLES - Various Button Types
+   =================================================================== */
 .my-button {
   background: var(--accent);
   color: var(--text-primary);
@@ -600,6 +631,10 @@ a:hover {
   gap: 0.5rem;
 }
 
+/* ===================================================================
+   MEDIA & IMAGES - Image Components and Media Elements
+   =================================================================== */
+
 /* Image Styles */
 .custom-img {
   width: 100%;
@@ -615,6 +650,10 @@ a:hover {
 .custom-img:hover {
   transform: scale(1.05);
 }
+
+/* ===================================================================
+   FORMS & TABLES - Input Fields and Data Tables
+   =================================================================== */
 
 /* Input Styles */
 input[type='text'] {
@@ -682,7 +721,9 @@ input[type='text']::placeholder {
   background-color: var(--bg-secondary);
 }
 
-/* Footer */
+/* ===================================================================
+   FOOTER COMPONENTS
+   =================================================================== */
 .my-footer {
   text-align: center;
   padding: 1rem 0;
@@ -1034,7 +1075,9 @@ input[type='text']::placeholder {
   }
 }
 
-/* Animation Utilities */
+/* ===================================================================
+   ANIMATIONS & EFFECTS - Keyframes and Animation Classes
+   =================================================================== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -1068,7 +1111,9 @@ input[type='text']::placeholder {
   animation: fadeInUp 0.6s ease-out;
 }
 
-/* Utility Classes */
+/* ===================================================================
+   UTILITIES & SPACING - Helper Classes
+   =================================================================== */
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
