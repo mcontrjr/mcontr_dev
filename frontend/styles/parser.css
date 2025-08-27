@@ -439,6 +439,46 @@
   margin-bottom: 1rem;
 }
 
+/* Black Spinner for Chart Loading States */
+.black-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 200px;
+}
+
+.black-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top: 3px solid #000000;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.breakdown-spinner-black {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top: 3px solid #000000;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 1rem;
+}
+
+/* Dark theme adjustments for black spinner */
+[data-theme="dark"] .black-spinner {
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid #ffffff;
+}
+
+[data-theme="dark"] .breakdown-spinner-black {
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid #ffffff;
+}
+
 .empty-icon {
   font-size: 3rem;
   color: var(--text-secondary);
@@ -978,6 +1018,81 @@
   padding: 0.25rem 0.5rem;
   background: var(--bg-secondary);
   border-radius: 4px;
+}
+
+.stat-value.warning {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Improved month chip states */
+.month-chip.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.month-chip.disabled:hover {
+  transform: none;
+  border-color: var(--border);
+  background: var(--bg-secondary);
+}
+
+/* Optimized chart container styles */
+.weekly-buckets-container,
+.distribution-container,
+.records-table-container {
+  transition: none; /* Remove transitions on chart containers for better performance */
+}
+
+/* Separated filter section */
+.parser-data-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.filters-and-data-separator {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 1rem 0;
+}
+
+/* Global loading overlay for data processing */
+.global-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.global-loading-content {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  min-width: 200px;
+}
+
+.global-loading-content p {
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 500;
 }
 
 /* Compact upload dropzone styling */
