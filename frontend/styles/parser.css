@@ -1698,13 +1698,284 @@
   outline-offset: 2px;
 }
 
+/* ===================================================================
+   TABBED BREAKDOWN SECTION STYLES
+   =================================================================== */
+
+/* Tab navigation */
+.tab-navigation {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  box-shadow: var(--shadow);
+}
+
+.tab-list {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.tab-button:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.tab-button.active {
+  background: var(--accent);
+  color: var(--text-primary);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.tab-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.tab-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tab content container */
+.tab-content-container {
+  min-height: 400px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content {
+  width: 100%;
+}
+
+/* Overview tab specific styles */
+.overview-tab {
+  padding: 0;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.overview-metrics-card,
+.overview-recent-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.overview-metrics-card .breakdown-card-header,
+.overview-recent-card .breakdown-card-header {
+  margin-bottom: 1.5rem;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.metric-item.large {
+  grid-column: span 1;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.metric-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: "Roboto Mono", monospace;
+}
+
+.metric-value.primary {
+  color: var(--text-primary);
+}
+
+.metric-value.positive {
+  color: #10b981;
+}
+
+.metric-value.negative {
+  color: #ef4444;
+}
+
+.recent-transactions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.recent-transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  gap: 1rem;
+}
+
+.transaction-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.transaction-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.transaction-desc {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transaction-amount {
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: "Roboto Mono", monospace;
+  flex-shrink: 0;
+}
+
+.transaction-amount.positive {
+  color: #ef4444;
+}
+
+.transaction-amount.negative {
+  color: #10b981;
+}
+
+.no-transactions {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+/* Time series specific styles */
+.timeseries-container .chart-no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+}
+
+/* Animation for tab transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design for tabs */
+@media (max-width: 768px) {
+  .tab-list {
+    justify-content: stretch;
+  }
+  
+  .tab-button {
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .tab-label {
+    display: none;
+  }
+
+  .tab-icon {
+    font-size: 1.3rem;
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .tab-button {
+    padding: 0.5rem;
+  }
+}
+
 /* High contrast mode */
 @media (prefers-contrast: high) {
   .upload-section,
   .breakdown-section,
   .supported-banks,
   .breakdown-card,
-  .metrics-card {
+  .metrics-card,
+  .tab-navigation,
+  .overview-metrics-card,
+  .overview-recent-card {
     border: 2px solid var(--text-primary);
   }
 
@@ -1715,5 +1986,9 @@
   .upload-dropzone:hover,
   .upload-dropzone.dragover {
     border: 2px solid var(--text-secondary);
+  }
+
+  .tab-button.active {
+    border: 2px solid var(--text-primary);
   }
 }

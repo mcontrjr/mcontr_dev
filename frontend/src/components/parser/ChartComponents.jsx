@@ -164,48 +164,8 @@ export const AmountPie = memo(({ pieData, totalAmount }) => {
   }), [colors]);
 
   return (
-    <div style={{ display: 'flex', gap: '2rem', height: `${CHART_DIMENSIONS.defaultHeight}px` }}>
-      <div style={{ flex: '1', minWidth: '400px' }}>
-        <Pie data={customPieData} options={chartOptions} />
-      </div>
-
-      <div style={{ flex: '0 0 300px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <div className="metrics-card">
-          <div className="metrics-card-header">
-            <h4>Financial Summary</h4>
-          </div>
-          <div className="metrics-card-body">
-            <div className="metrics-list">
-              <div className="metric-item">
-                <span className="metric-label">Total Purchases:</span>
-                <span className="metric-value">{totalAmount?.totalPurchases || '$0.00'}</span>
-              </div>
-              <div className="metric-item">
-                <span className="metric-label">Total Payments:</span>
-                <span className="metric-value">{totalAmount?.totalPayments || '$0.00'}</span>
-              </div>
-              <div className="metric-item">
-                <span className="metric-label">Net Spending:</span>
-                <span className={`metric-value ${totalAmount?.netSpending?.includes('-') ? 'positive' : ''}`}>
-                  {totalAmount?.netSpending || '$0.00'}
-                </span>
-              </div>
-              <div className="metric-item">
-                <span className="metric-label">Avg Purchase:</span>
-                <span className="metric-value">{totalAmount?.avgPurchase || '$0.00'}</span>
-              </div>
-              <div className="metric-item">
-                <span className="metric-label">Purchases:</span>
-                <span className="metric-value">{totalAmount?.purchaseCount || 0}</span>
-              </div>
-              <div className="metric-item">
-                <span className="metric-label">Total Transactions:</span>
-                <span className="metric-value">{totalAmount?.transactionCount || 0}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="chart-container" style={{ height: `${CHART_DIMENSIONS.defaultHeight}px` }}>
+      <Pie data={customPieData} options={chartOptions} />
     </div>
   );
 });

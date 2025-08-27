@@ -4,7 +4,7 @@ import '../styles/stock.css';
 import '../styles/parser.css';
 import { useTheme, AltModernHeader } from './components/UI/MainComponents.jsx';
 import UploadSection from './components/parser/UploadSection';
-import OptimizedBreakdownSection from './components/parser/OptimizedBreakdownSection';
+import TabbedBreakdownSection from './components/parser/TabbedBreakdownSection';
 import logo from './assets/parser-logo.svg';
 import { SessionEditor } from './components/parser/ParserComponents.jsx';
 
@@ -112,7 +112,7 @@ const OptimizedParser = () => {
                 />
 
                 {(showBreakdown || allRecords.length > 0) && (
-                    <OptimizedBreakdownSection
+                    <TabbedBreakdownSection
                         bankName={bankName}
                         bankNames={bankNames}
                         setBankName={setBankName}
