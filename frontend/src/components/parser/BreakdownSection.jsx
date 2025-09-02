@@ -205,7 +205,7 @@ const BreakdownSection = ({
         <div className="breakdown-card">
           <div className="breakdown-card-header">
             <h3>Distribution & Metrics</h3>
-            <p>For those who like pie and metrics</p>
+            <p>For those who like pie</p>
           </div>
           <div className="breakdown-card-body">
             <AmountPie pieData={pieData} totalAmount={totalAmount} />

@@ -815,8 +815,7 @@
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+  padding: 1rem;
   box-shadow: var(--shadow);
 }
 
@@ -1052,13 +1051,6 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-}
-
-.filters-and-data-separator {
-  border: none;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 1rem 0;
 }
 
 /* Global loading overlay for data processing */
@@ -1752,6 +1744,8 @@
 .tab-icon {
   font-size: 1.1rem;
   flex-shrink: 0;
+  width: 1.2rem;
+  text-align: center;
 }
 
 .tab-label {
@@ -1934,7 +1928,7 @@
   .tab-list {
     justify-content: stretch;
   }
-  
+
   .tab-button {
     flex: 1;
     justify-content: center;
@@ -1946,9 +1940,6 @@
     display: none;
   }
 
-  .tab-icon {
-    font-size: 1.3rem;
-  }
 
   .overview-grid {
     grid-template-columns: 1fr;

@@ -12,11 +12,11 @@ const BlackSpinner = memo(() => (
 BlackSpinner.displayName = 'BlackSpinner';
 
 // Memoized chart container that only re-renders when chart data changes
-const ChartContainer = memo(({ 
-  title, 
-  description, 
-  children, 
-  loading, 
+const ChartContainer = memo(({
+  title,
+  description,
+  children,
+  loading,
   height = CHART_DIMENSIONS.defaultHeight,
   className = ''
 }) => (
@@ -76,7 +76,7 @@ export const DistributionChart = memo(({ pieData, totalAmount, loading }) => {
   return (
     <ChartContainer
       title="Distribution & Metrics"
-      description="For those who like pie and metrics"
+      description="For those who like pie"
       loading={chartLoading}
       height={CHART_DIMENSIONS.defaultHeight}
       className="distribution-container"

@@ -4,28 +4,32 @@ import FilterSection from './FilterSection';
 import { DistributionChart, RecordsTable } from './ChartContainers';
 import TimeSeriesAccumulatedChart from './TimeSeriesAccumulatedChart';
 import { CHART_DIMENSIONS } from '../../constants/parserConstants';
+import record_icon from '../../assets/docs.svg';
+import pie_icon from '../../assets/pie.svg';
+import bar_icon from '../../assets/bar.svg';
+import insight_icon from '../../assets/insight.svg';
 
 // Tab configuration
 const TABS = {
-  OVERVIEW: {
-    id: 'overview',
-    label: 'Overview',
-    icon: '📊'
+  INSIGHT: {
+    id: 'insight',
+    label: 'Insight',
+    icon: insight_icon
   },
   TIME_SERIES: {
     id: 'timeseries',
     label: 'Time Series',
-    icon: '📈'
+    icon: bar_icon
   },
   DISTRIBUTION: {
     id: 'distribution',
     label: 'Distribution',
-    icon: '🥧'
+    icon: pie_icon
   },
   RECORDS: {
     id: 'records',
     label: 'Records',
-    icon: '📋'
+    icon: record_icon
   }
 };
 
@@ -69,7 +73,7 @@ const TabNavigation = memo(({ activeTab, onTabChange, tabs }) => (
           onClick={() => onTabChange(tab.id)}
           type="button"
         >
-          <span className="tab-icon">{tab.icon}</span>
+          <img src={tab.icon} alt={`${tab.label} icon`} className="tab-icon" />
           <span className="tab-label">{tab.label}</span>
         </button>
       ))}
@@ -226,7 +230,7 @@ const TabbedBreakdownSection = memo(({
   loadingStates,
   onClearData
 }) => {
-  const [activeTab, setActiveTab] = useState(TABS.OVERVIEW.id);
+  const [activeTab, setActiveTab] = useState(TABS.INSIGHT.id);
 
   const handleTabChange = useCallback((tabId) => {
     setActiveTab(tabId);
@@ -258,7 +262,7 @@ const TabbedBreakdownSection = memo(({
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case TABS.OVERVIEW.id:
+      case TABS.INSIGHT.id:
         return (
           <OverviewTab
             lineData={lineData}
@@ -311,14 +315,10 @@ const TabbedBreakdownSection = memo(({
         loading={loadingStates?.bankNames || false}
       />
 
-      {/* Separator between filters and data */}
-      <hr className="filters-and-data-separator" />
-
       {/* Tabbed Data Display Section */}
       <section className="breakdown-section tabbed">
         <div className="breakdown-header">
-          <h2>Statement Analysis</h2>
-          <p>Your financial data visualization and analysis</p>
+          <h2>Parser Analysis</h2>
         </div>
 
         <TabNavigation
