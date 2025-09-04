@@ -8,7 +8,7 @@ import InfoPage from './info.jsx'
 import GuessPage from './guess.jsx'
 import RandomPage from './random.jsx'
 import WeatherPage from './weather.jsx'
-import OptimizedParser from './OptimizedParser.jsx'
+import Parser from './parser.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -21,7 +21,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='/guess' element={<ErrorBoundary><GuessPage /></ErrorBoundary>}/>
           <Route path='/random' element={<ErrorBoundary><RandomPage /></ErrorBoundary>}/>
           <Route path='/weather' element={<ErrorBoundary><WeatherPage /></ErrorBoundary>}/>
-          <Route path='/parser' element={<ErrorBoundary><OptimizedParser /></ErrorBoundary>}/>
+          <Route path='/parser' element={<ErrorBoundary><Parser /></ErrorBoundary>}/>
         </Routes>
       </Router>
     </ErrorBoundary>

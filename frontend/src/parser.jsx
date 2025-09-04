@@ -3,14 +3,14 @@ import 'chart.js/auto';
 import '../styles/stock.css';
 import '../styles/parser.css';
 import { useTheme, AltModernHeader } from './components/UI/MainComponents.jsx';
-import UploadSection from './components/parser/UploadSection';
-import TabbedBreakdownSection from './components/parser/TabbedBreakdownSection';
+import UploadSection from './components/parser/UploadSection.jsx';
+import TabbedBreakdownSection from './components/parser/TabbedBreakdownSection.jsx';
 import logo from './assets/parser-logo.svg';
 import { SessionEditor } from './components/parser/ParserComponents.jsx';
 
-import { useOptimizedParserData } from './hooks/useOptimizedParserData';
+import { useParserData } from './hooks/useParserData.js';
 
-const OptimizedParser = () => {
+const Parser = () => {
     const { theme, toggleTheme } = useTheme();
     const [uploadMessage, setUploadMessage] = useState('Upload your PDF statements to get started');
     const [showBreakdown, setShowBreakdown] = useState(false);
@@ -37,7 +37,7 @@ const OptimizedParser = () => {
         retryFetch,
         sessionId,
         updateSessionId,
-    } = useOptimizedParserData();
+    } = useParserData();
 
     const handleUploadComplete = useCallback(async () => {
         // Refresh data from backend
@@ -144,4 +144,4 @@ const OptimizedParser = () => {
     );
 };
 
-export default OptimizedParser;
+export default Parser;
