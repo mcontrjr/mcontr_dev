@@ -28,7 +28,7 @@ const processTimeSeriesData = (lineData) => {
   if (!lineData?.labels?.length) return { labels: [], datasets: [] };
 
   // Get only purchase data (filter out payments)
-  const purchaseData = lineData.datasets?.find(dataset => 
+  const purchaseData = lineData.datasets?.find(dataset =>
     dataset.label === 'Purchases' || dataset.purchases
   )?.data || [];
 
@@ -147,8 +147,7 @@ const TimeSeriesAccumulatedChart = memo(({ lineData }) => {
           },
           label: function(context) {
             const value = context.raw;
-            const rawDataPoint = chartData.rawData?.[context.dataIndex];
-            
+
             if (context.datasetIndex === 0) {
               // Daily purchases (first dataset now)
               return `Daily Purchase: $${value.toLocaleString()}`;

@@ -83,13 +83,7 @@ const TabNavigation = memo(({ activeTab, onTabChange, tabs }) => (
 TabNavigation.displayName = 'TabNavigation';
 
 // Overview tab content
-const OverviewTab = memo(({
-  lineData,
-  pieData,
-  totalAmount,
-  sortedRecords,
-  loadingStates
-}) => {
+const OverviewTab = memo(({ totalAmount, sortedRecords }) => {
   // Get top 5 largest purchases from filtered records (negative amounts are purchases)
   const largestPurchases = sortedRecords?.filter(record => record.amount > 0)
     .sort((a, b) => b.amount - a.amount) // Sort by amount descending (largest first)
@@ -265,11 +259,8 @@ const TabbedBreakdownSection = memo(({
       case TABS.INSIGHT.id:
         return (
           <OverviewTab
-            lineData={lineData}
-            pieData={pieData}
             totalAmount={totalAmount}
             sortedRecords={sortedRecords}
-            loadingStates={loadingStates}
           />
         );
       case TABS.TIME_SERIES.id:

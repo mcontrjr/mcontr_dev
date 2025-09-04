@@ -112,7 +112,7 @@ export const AmountBar = memo(({ lineData }) => {
 AmountBar.displayName = 'AmountBar';
 
 // Re-export AmountPie component with optimizations
-export const AmountPie = memo(({ pieData, totalAmount }) => {
+export const AmountPie = memo(({ pieData }) => {
   const colors = useThemeColors();
 
   const customPieData = useMemo(() => {

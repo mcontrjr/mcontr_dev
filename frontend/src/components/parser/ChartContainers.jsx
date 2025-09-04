@@ -81,7 +81,7 @@ export const DistributionChart = memo(({ pieData, totalAmount, loading }) => {
       height={CHART_DIMENSIONS.defaultHeight}
       className="distribution-container"
     >
-      <AmountPie pieData={pieData} totalAmount={totalAmount} />
+      <AmountPie pieData={pieData} />
     </ChartContainer>
   );
 });
