@@ -1,15 +1,14 @@
-
 import { useState, useCallback } from 'react';
 import 'chart.js/auto';
 import '../styles/stock.css';
 import '../styles/parser.css';
 import { useTheme, AltModernHeader } from './components/UI/MainComponents.jsx';
-import UploadSection from './components/parser/UploadSection';
-import BreakdownSection from './components/parser/BreakdownSection';
+import UploadSection from './components/parser/UploadSection.jsx';
+import TabbedBreakdownSection from './components/parser/TabbedBreakdownSection.jsx';
 import logo from './assets/parser-logo.svg';
 import { SessionEditor } from './components/parser/ParserComponents.jsx';
 
-import { useParserData } from './hooks/useParserData';
+import { useParserData } from './hooks/useParserData.js';
 
 const Parser = () => {
     const { theme, toggleTheme } = useTheme();
@@ -20,8 +19,11 @@ const Parser = () => {
         bankName,
         bankNames,
         sortedRecords,
+        allRecords,
         selectedMonths,
         loading,
+        loadingStates,
+        isLoading,
         error,
         lineData,
         pieData,
@@ -42,11 +44,11 @@ const Parser = () => {
         await Promise.all([fetchRecords(), fetchBankNames()]);
 
         setShowBreakdown(true);
-        // Scroll to breakdown section
+        // Scroll to breakdown section with better timing
         setTimeout(() => {
-            const breakdownSection = document.querySelector('.breakdown-section');
+            const breakdownSection = document.querySelector('.parser-data-section');
             if (breakdownSection) {
-                breakdownSection.scrollIntoView({ behavior: 'smooth' });
+                breakdownSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }, 500);
     }, [fetchRecords, fetchBankNames]);
@@ -109,21 +111,33 @@ const Parser = () => {
                     sessionId={sessionId}
                 />
 
-                {(showBreakdown || sortedRecords.length > 0) && (
-                    <BreakdownSection
+                {(showBreakdown || allRecords.length > 0) && (
+                    <TabbedBreakdownSection
                         bankName={bankName}
                         bankNames={bankNames}
                         setBankName={setBankName}
                         selectedMonths={selectedMonths}
                         setSelectedMonths={setSelectedMonths}
                         sortedRecords={sortedRecords}
+                        allRecords={allRecords}
                         lineData={lineData}
                         pieData={pieData}
                         totalAmount={totalAmount}
                         requestSort={requestSort}
                         loading={loading}
+                        loadingStates={loadingStates}
                         onClearData={handleClearData}
                     />
+                )}
+
+                {/* Loading overlay for when data is processing */}
+                {isLoading && sortedRecords.length > 0 && (
+                    <div className="global-loading-overlay">
+                        <div className="global-loading-content">
+                            <div className="black-spinner"></div>
+                            <p>Processing data...</p>
+                        </div>
+                    </div>
                 )}
             </div>
         </>

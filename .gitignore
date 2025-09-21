@@ -4,13 +4,16 @@ notes.md
 frontend/package-lock.json
 logs/
 # ignore venv
-**venv/
-backups/
+**/venv/
+**/backups/
+**/claudedocs
+**/.claude
 # ignore Python cache files
 __pycache__/
 **/.env
 .env
 server/logs
+server/uploads
 notes.md
 server/logs/
 

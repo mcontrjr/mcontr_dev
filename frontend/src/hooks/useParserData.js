@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { API_URL, DEFAULT_SELECTED_MONTHS, SORT_DIRECTIONS } from '../constants/parserConstants';
+import { API_URL, SORT_DIRECTIONS } from '../constants/parserConstants';
 import {
   processChartData,
   processPieChartData,
@@ -19,22 +19,42 @@ const getSessionId = () => {
 
 export const useParserData = () => {
   const [sessionId, setSessionId] = useState(getSessionId());
-  // Allow updating sessionId from UI (and localStorage)
-  const updateSessionId = (newSessionId) => {
-    if (!newSessionId) return;
-    setSessionId(newSessionId);
-    localStorage.setItem('parser_session_id', newSessionId);
-  };
   const [bankName, setBankName] = useState('');
   const [bankNames, setBankNames] = useState([]);
   const [records, setRecords] = useState([]);
-  const [selectedMonths, setSelectedMonths] = useState(DEFAULT_SELECTED_MONTHS);
+  const [selectedMonths, setSelectedMonths] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: SORT_DIRECTIONS.ASCENDING });
-  const [loading, setLoading] = useState(false);
+
+  // Granular loading states
+  const [loadingStates, setLoadingStates] = useState({
+    bankNames: false,
+    records: false,
+    charts: false,
+    clearing: false
+  });
   const [error, setError] = useState(null);
+
+  // Cache for processed data to avoid recalculation
+  const [dataCache, setDataCache] = useState({
+    chartData: null,
+    cacheKey: null
+  });
+
+  // Update sessionId helper
+  const updateSessionId = useCallback((newSessionId) => {
+    if (!newSessionId) return;
+    setSessionId(newSessionId);
+    localStorage.setItem('parser_session_id', newSessionId);
+  }, []);
+
+  // Update loading state helper
+  const updateLoadingState = useCallback((key, value) => {
+    setLoadingStates(prev => ({ ...prev, [key]: value }));
+  }, []);
 
   const fetchBankNames = useCallback(async () => {
     try {
+      updateLoadingState('bankNames', true);
       const response = await fetch(`${API_URL}/records/?session_id=${sessionId}`);
 
       if (!response.ok) {
@@ -47,12 +67,14 @@ export const useParserData = () => {
     } catch (error) {
       console.error('Error fetching bank names:', error);
       setError(error);
+    } finally {
+      updateLoadingState('bankNames', false);
     }
-  }, [sessionId]);
+  }, [sessionId, updateLoadingState]);
 
   const fetchRecords = useCallback(async () => {
     try {
-      setLoading(true);
+      updateLoadingState('records', true);
       setError(null);
 
       const response = await fetch(`${API_URL}/records/?bank_name=${bankName}&session_id=${sessionId}`);
@@ -62,25 +84,28 @@ export const useParserData = () => {
       }
 
       const data = await response.json();
-      let fetchedRecords = data.records.map(record => ({
+      const fetchedRecords = data.records.map(record => ({
         ...record,
         amount: parseFloat(record.amount),
       }));
 
-      if (selectedMonths.length > 0) {
-        fetchedRecords = fetchedRecords.filter(record =>
-          selectedMonths.includes(record.date.split('-')[1])
-        );
+      setRecords(fetchedRecords);
+
+      // Initialize selectedMonths with available months if not set yet
+      if (selectedMonths.length === 0 && fetchedRecords.length > 0) {
+        const availableMonths = [...new Set(fetchedRecords.map(record => record.date.split('-')[1]))];
+        setSelectedMonths(availableMonths);
       }
 
-      setRecords(fetchedRecords);
+      // Clear cache when records change
+      setDataCache({ chartData: null, cacheKey: null });
     } catch (error) {
       console.error('Error fetching records:', error);
       setError(error);
     } finally {
-      setLoading(false);
+      updateLoadingState('records', false);
     }
-  }, [bankName, selectedMonths, sessionId]);
+  }, [bankName, sessionId, selectedMonths, updateLoadingState]);
 
   const requestSort = useCallback((key) => {
     setSortConfig(current => ({
@@ -93,7 +118,7 @@ export const useParserData = () => {
 
   const clearData = useCallback(async () => {
     try {
-      setLoading(true);
+      updateLoadingState('clearing', true);
       setError(null);
 
       const formData = new FormData();
@@ -112,8 +137,9 @@ export const useParserData = () => {
       setRecords([]);
       setBankNames([]);
       setBankName('');
-      setSelectedMonths(DEFAULT_SELECTED_MONTHS);
+      setSelectedMonths([]);
       setSortConfig({ key: 'date', direction: SORT_DIRECTIONS.ASCENDING });
+      setDataCache({ chartData: null, cacheKey: null });
 
       // Refresh bank names (should be empty now)
       await fetchBankNames();
@@ -124,9 +150,9 @@ export const useParserData = () => {
       setError(error);
       return false; // Failure
     } finally {
-      setLoading(false);
+      updateLoadingState('clearing', false);
     }
-  }, [fetchBankNames, sessionId]);
+  }, [fetchBankNames, sessionId, updateLoadingState]);
 
   useEffect(() => {
     fetchBankNames();
@@ -134,31 +160,88 @@ export const useParserData = () => {
 
   useEffect(() => {
     fetchRecords();
-  }, [bankName, selectedMonths, sessionId]);
+  }, [bankName, sessionId]);
+
+  // Optimized filtered records with caching
+  const filteredRecords = useMemo(() => {
+    // Always filter by selectedMonths if any are specified
+    // If no months selected, show all records (this prevents lockout)
+    if (selectedMonths.length === 0) return records;
+
+    return records.filter(record =>
+      selectedMonths.includes(record.date.split('-')[1])
+    );
+  }, [records, selectedMonths]);
 
   const sortedRecords = useMemo(() => {
-    return sortRecords(records, sortConfig);
-  }, [records, sortConfig]);
+    return sortRecords(filteredRecords, sortConfig);
+  }, [filteredRecords, sortConfig]);
 
+  // Optimized chart data with caching
   const chartData = useMemo(() => {
-    if (records.length === 0) return { lineData: {}, pieData: {}, totalAmount: {} };
+    if (filteredRecords.length === 0) {
+      return { lineData: {}, pieData: {}, totalAmount: {} };
+    }
 
-    const { lineData, sortedRecords: processedRecords } = processChartData(records, selectedMonths);
-    const pieData = processPieChartData(processedRecords);
-    const totalAmount = calculateFinancialMetrics(processedRecords);
+    // Generate cache key based on relevant data
+    const cacheKey = JSON.stringify({
+      recordsLength: filteredRecords.length,
+      recordsChecksum: filteredRecords.reduce((sum, r) => sum + r.amount, 0),
+      selectedMonths: selectedMonths.sort(),
+      bankName
+    });
 
-    return { lineData, pieData, totalAmount };
-  }, [records, selectedMonths, sessionId]);
+    // Return cached data if available and valid
+    if (dataCache.cacheKey === cacheKey && dataCache.chartData) {
+      return dataCache.chartData;
+    }
+
+    // Process new chart data
+    updateLoadingState('charts', true);
+
+    // Use setTimeout to allow UI to update with loading state
+    setTimeout(() => {
+      try {
+        const { lineData, sortedRecords: processedRecords } = processChartData(filteredRecords, selectedMonths);
+        const pieData = processPieChartData(processedRecords);
+        const totalAmount = calculateFinancialMetrics(processedRecords);
+
+        const newChartData = { lineData, pieData, totalAmount };
+
+        // Cache the result
+        setDataCache({
+          chartData: newChartData,
+          cacheKey
+        });
+
+        updateLoadingState('charts', false);
+      } catch (error) {
+        console.error('Error processing chart data:', error);
+        updateLoadingState('charts', false);
+      }
+    }, 0);
+
+    // Return loading state data while processing
+    return dataCache.chartData || { lineData: {}, pieData: {}, totalAmount: {} };
+  }, [filteredRecords, selectedMonths, bankName, dataCache, updateLoadingState]);
+
+  // Aggregate loading state
+  const isLoading = useMemo(() => {
+    return Object.values(loadingStates).some(loading => loading);
+  }, [loadingStates]);
 
   return {
     // State
     bankName,
     bankNames,
-    records,
+    records: filteredRecords,
     sortedRecords,
+    allRecords: records, // Expose unfiltered records for filter section logic
     selectedMonths,
     sortConfig,
-    loading,
+    loading: loadingStates.records, // Main loading state for backwards compatibility
+    loadingStates, // Granular loading states
+    isLoading, // Combined loading state
     error,
     ...chartData,
 
