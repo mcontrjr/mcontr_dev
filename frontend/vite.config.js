@@ -18,6 +18,7 @@ export default defineConfig({
   },
   define: {
     'process.env.VITE_API_URL': JSON.stringify(process.env.VITE_API_URL || 'http://localhost:8000'),
+    'process.env.VITE_PARSER_MOCK': JSON.stringify(process.env.VITE_PARSER_MOCK || 'false'),
     'process.env.VITE_PEXELS_API_KEY': JSON.stringify(process.env.VITE_PEXELS_API_KEY),
     'process.env.VITE_FLICKR_API_KEY': JSON.stringify(process.env.VITE_FLICKR_API_KEY),
     'process.env.VITE_WEATHER_API_KEY': JSON.stringify(process.env.VITE_WEATHER_API_KEY),
