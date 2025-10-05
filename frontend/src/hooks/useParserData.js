@@ -146,6 +146,18 @@ export const useParserData = () => {
     }));
   }, []);
 
+  // Update record in local state when edited
+  const updateRecord = useCallback((updatedRecord) => {
+    setRecords(prevRecords =>
+      prevRecords.map(record =>
+        record.id === updatedRecord.id ? updatedRecord : record
+      )
+    );
+
+    // Clear chart cache to force regeneration with updated data
+    setDataCache({ chartData: null, cacheKey: null });
+  }, []);
+
   const clearData = useCallback(async () => {
     try {
       updateLoadingState('clearing', true);
@@ -282,6 +294,7 @@ export const useParserData = () => {
     fetchRecords,
     fetchBankNames,
     clearData,
+    updateRecord, // Add the new update function
 
     // Utilities
     retryFetch: () => {

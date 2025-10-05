@@ -23,7 +23,4 @@ export default defineConfig({
     'process.env.VITE_FLICKR_API_KEY': JSON.stringify(process.env.VITE_FLICKR_API_KEY),
     'process.env.VITE_WEATHER_API_KEY': JSON.stringify(process.env.VITE_WEATHER_API_KEY),
   },
-  optimizeDeps: {
-    include: ['pdfjs-dist'],
-  },
 })

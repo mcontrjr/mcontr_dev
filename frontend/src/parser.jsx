@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import 'chart.js/auto';
 import '../styles/stock.css';
 import '../styles/parser.css';
@@ -36,6 +36,7 @@ const Parser = () => {
         fetchBankNames,
         retryFetch,
         sessionId,
+        updateRecord,
         updateSessionId,
     } = useParserData();
 

@@ -88,7 +88,7 @@ export const DistributionChart = memo(({ pieData, totalAmount, loading }) => {
 DistributionChart.displayName = 'DistributionChart';
 
 // Records table with optimized caching
-export const RecordsTable = memo(({ sortedRecords, requestSort, loading }) => {
+export const RecordsTable = memo(({ sortedRecords, requestSort, loading, sessionId, onRecordUpdate }) => {
   const [tableLoading, setTableLoading] = useState(loading);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ export const RecordsTable = memo(({ sortedRecords, requestSort, loading }) => {
       height="auto"
       className="records-table-container"
     >
-      <RecordTable sortedRecords={sortedRecords} requestSort={requestSort} />
+      <RecordTable sortedRecords={sortedRecords} requestSort={requestSort} sessionId={sessionId} onRecordUpdate={onRecordUpdate} />
     </ChartContainer>
   );
 });
