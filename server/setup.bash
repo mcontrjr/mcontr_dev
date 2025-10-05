@@ -55,4 +55,4 @@ EOF
 fi
 
 echo "Starting server..."
-uvicorn main:app --port $PORT --reload
+uvicorn main:app --port $PORT --reload --host localhost
