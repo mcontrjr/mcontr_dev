@@ -242,7 +242,7 @@ class APIError(BaseModel):
 # Edit Record Models
 class EditRecordRequest(BaseModel):
     """Request model for editing a record."""
-    record_id: int = Field(..., description="ID of the record to edit")
+    id: int = Field(..., description="ID of the record to edit")
     category: Optional[TransactionCategory] = Field(None, description="New category for the record")
     description: Optional[str] = Field(None, description="New description for the record")
     amount: Optional[float] = Field(None, description="New amount for the record")

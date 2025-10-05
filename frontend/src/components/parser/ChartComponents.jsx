@@ -175,270 +175,119 @@ AmountPie.displayName = 'AmountPie';
 
 // Re-export RecordTable component with pagination
 
-// Category Dropdown Component - Enhanced Mobile-First Experience
-const CategoryDropdown = memo(({ record, availableCategories, sessionId, onCategoryUpdate }) => {
+// Category Dropdown Component - Simplified accessible dropdown
+const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, onCategoryUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [ripples, setRipples] = useState([]);
-  const [focusedIndex, setFocusedIndex] = useState(-1);
-
-  const dropdownRef = useRef(null);
-  const menuRef = useRef(null);
+  const containerRef = useRef(null);
   const searchInputRef = useRef(null);
-  const optionsRef = useRef([]);
 
-  // Filter categories based on search query
   const filteredCategories = useMemo(() => {
-    if (!searchQuery.trim()) return availableCategories;
-    const query = searchQuery.toLowerCase();
-    return availableCategories.filter(cat =>
-      cat.toLowerCase().includes(query)
-    );
+    const list = Array.isArray(availableCategories) ? availableCategories : [];
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return list;
+    return list.filter(c => c?.toLowerCase().includes(q));
   }, [availableCategories, searchQuery]);
 
-  // Show search only if there are many categories
-  const showSearch = availableCategories.length > 8;
+  const close = useCallback(() => {
+    setIsOpen(false);
+    setSearchQuery('');
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onDocClick = (e) => {
+      if (containerRef.current && !containerRef.current.contains(e.target)) close();
+    };
+    const onKey = (e) => { if (e.key === 'Escape') close(); };
+    document.addEventListener('mousedown', onDocClick);
+    document.addEventListener('keydown', onKey);
+    const t = setTimeout(() => searchInputRef.current?.focus(), 50);
+    return () => {
+      document.removeEventListener('mousedown', onDocClick);
+      document.removeEventListener('keydown', onKey);
+      clearTimeout(t);
+    };
+  }, [isOpen, close]);
 
   const handleCategoryChange = useCallback(async (newCategory) => {
-    if (newCategory === record.category) {
-      setIsOpen(false);
-      setSearchQuery('');
+    if (!newCategory || newCategory === record.category) {
+      close();
       return;
     }
-
     setIsUpdating(true);
     try {
       const response = await fetch(`${API_URL}/edit_record/`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          record_id: record.id,
+          id: record.id,
           category: newCategory,
-          session_id: sessionId
+          session_id: sessionId,
         }),
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to update category');
-      }
-
+      if (!response.ok) throw new Error('Failed to update category');
       const result = await response.json();
-
       if (result.success && result.updated_record) {
         onCategoryUpdate(result.updated_record);
-        setIsOpen(false);
-        setSearchQuery('');
+        close();
       } else {
         throw new Error(result.message || 'Update failed');
       }
-    } catch (error) {
-      console.error('Error updating category:', error);
+    } catch (err) {
+      console.error('Error updating category:', err);
     } finally {
       setIsUpdating(false);
     }
-  }, [record, sessionId, onCategoryUpdate]);
-
-  // Ripple effect on touch/click
-  const createRipple = useCallback((event, element) => {
-    const rect = element.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = event.clientX - rect.left - size / 2;
-    const y = event.clientY - rect.top - size / 2;
-
-    const ripple = { x, y, size, id: Date.now() };
-    setRipples(prev => [...prev, ripple]);
-
-    setTimeout(() => {
-      setRipples(prev => prev.filter(r => r.id !== ripple.id));
-    }, 600);
-  }, []);
-
-  const toggleDropdown = useCallback((event) => {
-    if (event.currentTarget) {
-      createRipple(event, event.currentTarget);
-    }
-    setIsOpen(prev => !prev);
-    setFocusedIndex(-1);
-    if (!isOpen) {
-      setSearchQuery('');
-    }
-  }, [isOpen, createRipple]);
-
-  const handleClickOutside = useCallback((e) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-      setIsOpen(false);
-      setSearchQuery('');
-      setFocusedIndex(-1);
-    }
-  }, []);
-
-  const handleEscape = useCallback((e) => {
-    if (e.key === 'Escape' && isOpen) {
-      setIsOpen(false);
-      setSearchQuery('');
-      setFocusedIndex(-1);
-      dropdownRef.current?.querySelector('.category-badge')?.focus();
-    }
-  }, [isOpen]);
-
-  // Keyboard navigation
-  const handleKeyDown = useCallback((e) => {
-    if (!isOpen) return;
-
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        setFocusedIndex(prev =>
-          prev < filteredCategories.length - 1 ? prev + 1 : prev
-        );
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        setFocusedIndex(prev => prev > 0 ? prev - 1 : prev);
-        break;
-      case 'Enter':
-        e.preventDefault();
-        if (focusedIndex >= 0 && filteredCategories[focusedIndex]) {
-          handleCategoryChange(filteredCategories[focusedIndex]);
-        }
-        break;
-      case 'Home':
-        e.preventDefault();
-        setFocusedIndex(0);
-        break;
-      case 'End':
-        e.preventDefault();
-        setFocusedIndex(filteredCategories.length - 1);
-        break;
-    }
-  }, [isOpen, focusedIndex, filteredCategories, handleCategoryChange]);
-
-  // Scroll focused option into view
-  useEffect(() => {
-    if (focusedIndex >= 0 && optionsRef.current[focusedIndex]) {
-      optionsRef.current[focusedIndex].scrollIntoView({
-        block: 'nearest',
-        behavior: 'smooth'
-      });
-    }
-  }, [focusedIndex]);
-
-  // Focus management
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleEscape);
-      document.addEventListener('keydown', handleKeyDown);
-
-      // Auto-focus search input if available
-      if (showSearch && searchInputRef.current) {
-        setTimeout(() => searchInputRef.current?.focus(), 100);
-      }
-
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-        document.removeEventListener('keydown', handleEscape);
-        document.removeEventListener('keydown', handleKeyDown);
-      };
-    }
-  }, [isOpen, handleClickOutside, handleEscape, handleKeyDown, showSearch]);
-
-  const handleOptionClick = useCallback((category, event) => {
-    if (event.currentTarget) {
-      createRipple(event, event.currentTarget);
-    }
-    setTimeout(() => handleCategoryChange(category), 150);
-  }, [handleCategoryChange, createRipple]);
+  }, [record, sessionId, onCategoryUpdate, close]);
 
   return (
-    <div
-      className="category-dropdown-container"
-      ref={dropdownRef}
-      onKeyDown={handleKeyDown}
-    >
+    <div className="category-dropdown-container" ref={containerRef} style={{ position: 'relative', zIndex: 1000 }}>
       <button
         className={`category-badge ${isUpdating ? 'updating' : ''} ${isOpen ? 'active' : ''}`}
-        onClick={toggleDropdown}
+        onClick={() => setIsOpen(v => !v)}
         disabled={isUpdating}
         type="button"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-label={`Change category from ${record.category}`}
       >
-        {isUpdating ? (
-          <span className="category-spinner" aria-label="Updating">⟳</span>
-        ) : (
-          record.category
-        )}
+        {isUpdating ? (<span className="category-spinner" aria-label="Updating">⟳</span>) : record.category}
         <span className={`dropdown-arrow ${isOpen ? 'open' : ''}`} aria-hidden="true">▼</span>
-
-        {ripples.map(ripple => (
-          <span
-            key={ripple.id}
-            className="ripple"
-            style={{
-              left: ripple.x,
-              top: ripple.y,
-              width: ripple.size,
-              height: ripple.size
-            }}
-          />
-        ))}
       </button>
 
       {isOpen && (
         <div
           className="category-dropdown-menu"
-          ref={menuRef}
           role="listbox"
           aria-label="Category options"
+          style={{ position: 'absolute', top: 'calc(100% + 6px)', left: 0, zIndex: 10000 }}
         >
-          {showSearch && (
-            <div className="category-search">
-              <input
-                ref={searchInputRef}
-                type="text"
-                className="category-search-input"
-                placeholder="Search categories..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                aria-label="Search categories"
-              />
-            </div>
-          )}
+          <div className="category-search">
+            <input
+              ref={searchInputRef}
+              type="text"
+              className="category-search-input"
+              placeholder="Search categories..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search categories"
+            />
+          </div>
 
           <div className="category-options">
             {filteredCategories.length > 0 ? (
-              filteredCategories.map((category, index) => (
+              filteredCategories.map((category) => (
                 <button
                   key={category}
-                  ref={el => optionsRef.current[index] = el}
-                  className={`category-option ${category === record.category ? 'current' : ''} ${focusedIndex === index ? 'focused' : ''}`}
-                  onClick={(e) => handleOptionClick(category, e)}
+                  className={`category-option ${category === record.category ? 'current' : ''}`}
+                  onClick={() => handleCategoryChange(category)}
                   type="button"
                   role="option"
                   aria-selected={category === record.category}
-                  tabIndex={focusedIndex === index ? 0 : -1}
                 >
                   <span className="category-option-text">{category}</span>
-                  {category === record.category && (
-                    <span className="category-check" aria-hidden="true">✓</span>
-                  )}
-                  {ripples.map(ripple => (
-                    <span
-                      key={ripple.id}
-                      className="ripple"
-                      style={{
-                        left: ripple.x,
-                        top: ripple.y,
-                        width: ripple.size,
-                        height: ripple.size
-                      }}
-                    />
-                  ))}
                 </button>
               ))
             ) : (

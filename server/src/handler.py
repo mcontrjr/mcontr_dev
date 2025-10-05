@@ -120,12 +120,12 @@ class PostgresHandler:
             log.error(f"Error clearing records from database: {e}")
             raise HTTPException(status_code=500, detail="Error clearing records from database.")
 
-    def update_record(self, record_id: int, updates: dict, session_id: str) -> bool:
+    def update_record(self, id: int, updates: dict, session_id: str) -> bool:
         """
         Updates a record in the database.
-        
-        :param record_id: The ID of the record to update
-        :param updates: Dictionary of fields to update (e.g., {'category': 'FOOD'})  
+
+        :param id: The ID of the record to update
+        :param updates: Dictionary of fields to update (e.g., {'category': 'FOOD'})
         :param session_id: Session ID for data isolation
         :return: True if update was successful, False otherwise
         """
@@ -134,33 +134,33 @@ class PostgresHandler:
                 # Build the UPDATE query dynamically
                 set_clauses = []
                 values = []
-                
+
                 for field, value in updates.items():
                     # Only allow updating certain fields for security
                     if field in ['category', 'description', 'amount']:
                         set_clauses.append(f"{field} = %s")
                         values.append(value)
-                
+
                 if not set_clauses:
                     log.warning("No valid fields to update")
                     return False
-                
+
                 # Add the WHERE conditions
-                values.extend([record_id, session_id])
-                
+                values.extend([id, session_id])
+
                 query = f"UPDATE bank_statements SET {', '.join(set_clauses)} WHERE id = %s AND session_id = %s"
-                
+
                 log.info(f"Executing update query: {query} with values: {values}")
                 cur.execute(query, values)
-                
+
                 # Check if any rows were affected
                 if cur.rowcount == 0:
-                    log.warning(f"No record found with id {record_id} for session {session_id}")
+                    log.warning(f"No record found with id {id} for session {session_id}")
                     return False
-                
-                log.info(f"Successfully updated record {record_id}")
+
+                log.info(f"Successfully updated record {id}")
                 return True
-                
+
         except Exception as e:
-            log.error(f"Error updating record {record_id}: {e}")
+            log.error(f"Error updating record {id}: {e}")
             raise HTTPException(status_code=500, detail=f"Error updating record: {e}")

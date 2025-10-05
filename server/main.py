@@ -275,8 +275,8 @@ async def get_system_info():
 async def edit_record(request: EditRecordRequest):
     """
     Edit a record's fields such as category, description, or amount.
-    
-    :param request: EditRecordRequest containing record_id, updates, and session_id
+
+    :param request: EditRecordRequest containing id, updates, and session_id
     :return: EditRecordResponse with success status and updated record
     """
     # Prepare updates dictionary with only non-None fields
@@ -287,25 +287,25 @@ async def edit_record(request: EditRecordRequest):
         updates['description'] = request.description
     if request.amount is not None:
         updates['amount'] = request.amount
-    
+
     if not updates:
         return EditRecordResponse(
             success=False,
             message="No fields provided to update"
         )
-    
+
     # Update the record
-    success = handler.update_record(request.record_id, updates, request.session_id)
-    
+    success = handler.update_record(request.id, updates, request.session_id)
+
     if success:
         # Fetch the updated record to return it
         records_response = handler.get_records(None, request.session_id)
         records = records_response.get('records', [])
-        
+
         # Find the updated record
         updated_record = None
         for record in records:
-            if record[0] == request.record_id:
+            if record[0] == request.id:
                 updated_record = TransactionRecord(
                     id=record[0],
                     bank=record[1],
@@ -315,7 +315,7 @@ async def edit_record(request: EditRecordRequest):
                     category=record[5]
                 )
                 break
-        
+
         return EditRecordResponse(
             success=True,
             message="Record updated successfully",
