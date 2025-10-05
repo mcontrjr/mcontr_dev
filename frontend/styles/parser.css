@@ -585,6 +585,10 @@
   display: inline-block;
 }
 
+.category-dropdown-container.open {
+  z-index: 1000;
+}
+
 .category-badge.active {
   outline: none;
   border-color: var(--text-primary);

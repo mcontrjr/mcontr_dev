@@ -114,6 +114,8 @@ const Parser = () => {
 
                 {(showBreakdown || allRecords.length > 0) && (
                     <TabbedBreakdownSection
+                        sessionId={sessionId}
+                        updateRecord={updateRecord}
                         bankName={bankName}
                         bankNames={bankNames}
                         setBankName={setBankName}

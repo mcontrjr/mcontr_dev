@@ -211,11 +211,12 @@ const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, on
     };
   }, [isOpen, close]);
 
-  const handleCategoryChange = useCallback(async (newCategory) => {
+  const handleCategoryChange = useCallback(async (newCategory, sessionId) => {
     if (!newCategory || newCategory === record.category) {
       close();
       return;
     }
+    console.log('Changing category to:', newCategory, 'for session:', sessionId);
     setIsUpdating(true);
     try {
       const response = await fetch(`${API_URL}/edit_record/`, {
@@ -243,7 +244,7 @@ const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, on
   }, [record, sessionId, onCategoryUpdate, close]);
 
   return (
-    <div className="category-dropdown-container" ref={containerRef} style={{ position: 'relative', zIndex: 1000 }}>
+<div className={`category-dropdown-container ${isOpen ? 'open' : ''}`} ref={containerRef}>
       <button
         className={`category-badge ${isUpdating ? 'updating' : ''} ${isOpen ? 'active' : ''}`}
         onClick={() => setIsOpen(v => !v)}
@@ -282,7 +283,7 @@ const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, on
                 <button
                   key={category}
                   className={`category-option ${category === record.category ? 'current' : ''}`}
-                  onClick={() => handleCategoryChange(category)}
+                  onClick={() => handleCategoryChange(category, sessionId)}
                   type="button"
                   role="option"
                   aria-selected={category === record.category}
