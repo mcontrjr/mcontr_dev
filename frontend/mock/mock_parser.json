@@ -1,0 +1,1013 @@
+{
+  "records": [
+    {
+      "id": 1,
+      "bank": "CAPITAL ONE",
+      "date": "2025-08-24",
+      "description": "CAPITAL ONE MOBILE PYMT",
+      "amount": -666.89,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 2,
+      "bank": "CAPITAL ONE",
+      "date": "2025-09-13",
+      "description": "CAPITAL ONE MOBILE PYMT",
+      "amount": -915.99,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 3,
+      "bank": "CAPITAL ONE",
+      "date": "2025-09-16",
+      "description": "SONIC.NET707-522-1000CA",
+      "amount": 54.99,
+      "category": "OTHER"
+    },
+    {
+      "id": 4,
+      "bank": "CAPITAL ONE",
+      "date": "2025-08-20",
+      "description": "SOUTHWES 5262379496062800-435-9792TX",
+      "amount": 223.96,
+      "category": "OTHER"
+    },
+    {
+      "id": 5,
+      "bank": "CAPITAL ONE",
+      "date": "2025-08-25",
+      "description": "ANTHROPOLOGIE 00436180-02822200CA",
+      "amount": 300.06,
+      "category": "OTHER"
+    },
+    {
+      "id": 6,
+      "bank": "CAPITAL ONE",
+      "date": "2025-08-25",
+      "description": "BATH AND BODY WORKS 5016SANTA CLARACA",
+      "amount": 17.28,
+      "category": "OTHER"
+    },
+    {
+      "id": 7,
+      "bank": "CAPITAL ONE",
+      "date": "2025-08-25",
+      "description": "LULULEMON WESTFIELDSANTA CLARACA",
+      "amount": 70,
+      "category": "OTHER"
+    },
+    {
+      "id": 8,
+      "bank": "CAPITAL ONE",
+      "date": "2025-08-25",
+      "description": "SEPHORA VALLEY FAIRSANTA CLARACA",
+      "amount": 71.1,
+      "category": "OTHER"
+    },
+    {
+      "id": 9,
+      "bank": "CAPITAL ONE",
+      "date": "2025-08-29",
+      "description": "TST*NOLA - PALO ALTO650-328-2722CA",
+      "amount": 106.56,
+      "category": "OTHER"
+    },
+    {
+      "id": 10,
+      "bank": "CAPITAL ONE",
+      "date": "2025-08-30",
+      "description": "SP CRAP EYEWEAR .COMCRAPEYEWEAR.CCA",
+      "amount": 183.75,
+      "category": "OTHER"
+    },
+    {
+      "id": 11,
+      "bank": "CAPITAL ONE",
+      "date": "2025-09-08",
+      "description": "MICHAELS STORES 6713SAN JOSECA",
+      "amount": 76.48,
+      "category": "OTHER"
+    },
+    {
+      "id": 12,
+      "bank": "CAPITAL ONE",
+      "date": "2025-09-14",
+      "description": "MLB*SF GIANTS I800-352-0212CA",
+      "amount": 198,
+      "category": "OTHER"
+    },
+    {
+      "id": 13,
+      "bank": "CITI",
+      "date": "2025-08-24",
+      "description": "ONLINE PAYMENT, THANK YOU",
+      "amount": -149.57,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 14,
+      "bank": "CITI",
+      "date": "2025-09-13",
+      "description": "ONLINE PAYMENT, THANK YOU",
+      "amount": -756.44,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 15,
+      "bank": "CITI",
+      "date": "2025-08-20",
+      "description": "LYFT *RIDE TUE 7AM LYFT.COM CA",
+      "amount": 11.65,
+      "category": "TRAVEL"
+    },
+    {
+      "id": 16,
+      "bank": "CITI",
+      "date": "2025-08-21",
+      "description": "TST*THE GOOD SALAD 408-564-4548 CA",
+      "amount": 42.2,
+      "category": "FOOD"
+    },
+    {
+      "id": 17,
+      "bank": "CITI",
+      "date": "2025-08-24",
+      "description": "UBER *TRIP HELP.UBER.COMCA",
+      "amount": 11.96,
+      "category": "TRAVEL"
+    },
+    {
+      "id": 18,
+      "bank": "CITI",
+      "date": "2025-08-24",
+      "description": "UBER *TRIP HELP.UBER.COMCA",
+      "amount": 12.95,
+      "category": "TRAVEL"
+    },
+    {
+      "id": 19,
+      "bank": "CITI",
+      "date": "2025-08-24",
+      "description": "UBER *TRIP HELP.UBER.COMCA",
+      "amount": 10.95,
+      "category": "TRAVEL"
+    },
+    {
+      "id": 20,
+      "bank": "CITI",
+      "date": "2025-08-24",
+      "description": "UBER *TRIP HELP.UBER.COMCA",
+      "amount": 12.99,
+      "category": "TRAVEL"
+    },
+    {
+      "id": 21,
+      "bank": "CITI",
+      "date": "2025-08-24",
+      "description": "LA VICTORIA SANTA CLA 408-9302772 CA",
+      "amount": 19.58,
+      "category": "FOOD"
+    },
+    {
+      "id": 22,
+      "bank": "CITI",
+      "date": "2025-08-24",
+      "description": "COSTCO GAS #0129 SANTA CLARA CA",
+      "amount": 31.44,
+      "category": "GAS"
+    },
+    {
+      "id": 23,
+      "bank": "CITI",
+      "date": "2025-08-26",
+      "description": "CHIPOTLE MEX GR ONLINE TEAM-BANKING@CA",
+      "amount": 25.48,
+      "category": "FOOD"
+    },
+    {
+      "id": 24,
+      "bank": "CITI",
+      "date": "2025-08-29",
+      "description": "SQ *SANTA CLARA gosq.com CA",
+      "amount": 36.56,
+      "category": "OTHER"
+    },
+    {
+      "id": 25,
+      "bank": "CITI",
+      "date": "2025-08-29",
+      "description": "COSTCO GAS #0129 SANTA CLARA CA",
+      "amount": 43.71,
+      "category": "GAS"
+    },
+    {
+      "id": 26,
+      "bank": "CITI",
+      "date": "2025-08-31",
+      "description": "PTI*HMB KAYAK CO HMBKAYAK.COM CA",
+      "amount": 63.6,
+      "category": "ACTIVITIES"
+    },
+    {
+      "id": 27,
+      "bank": "CITI",
+      "date": "2025-08-31",
+      "description": "RUBIS TAMALES INC GILROY CA",
+      "amount": 14.15,
+      "category": "OTHER"
+    },
+    {
+      "id": 28,
+      "bank": "CITI",
+      "date": "2025-08-31",
+      "description": "SQ *ADORABLE FARMERS MARKSan Jose CA",
+      "amount": 12.36,
+      "category": "OTHER"
+    },
+    {
+      "id": 29,
+      "bank": "CITI",
+      "date": "2025-08-31",
+      "description": "SQ *MARINKO'S DESSERTS San Jose CA",
+      "amount": 27,
+      "category": "OTHER"
+    },
+    {
+      "id": 30,
+      "bank": "CITI",
+      "date": "2025-08-31",
+      "description": "SQ *LAMAS PERUVIAN TRUCK Manteca CA",
+      "amount": 42.46,
+      "category": "OTHER"
+    },
+    {
+      "id": 31,
+      "bank": "CITI",
+      "date": "2025-09-01",
+      "description": "LA SUPERIOR PALETERIA LLSANJOSE CA",
+      "amount": 36.64,
+      "category": "FOOD"
+    },
+    {
+      "id": 32,
+      "bank": "CITI",
+      "date": "2025-09-01",
+      "description": "EDNA RAY CHINESE FOOD SAN JOSE CA",
+      "amount": 49,
+      "category": "FOOD"
+    },
+    {
+      "id": 33,
+      "bank": "CITI",
+      "date": "2025-09-01",
+      "description": "KRISPY KREME #7630 SAN JOSE CA",
+      "amount": 19.99,
+      "category": "OTHER"
+    },
+    {
+      "id": 34,
+      "bank": "CITI",
+      "date": "2025-09-02",
+      "description": "DAVESHOTCHICKEN DAVESHOTCHICKCA",
+      "amount": 11.99,
+      "category": "FOOD"
+    },
+    {
+      "id": 35,
+      "bank": "CITI",
+      "date": "2025-09-03",
+      "description": "DOMINO'S 7984 408-287-3755 CA",
+      "amount": 27.59,
+      "category": "FOOD"
+    },
+    {
+      "id": 36,
+      "bank": "CITI",
+      "date": "2025-09-07",
+      "description": "LA SUPERIOR PALETERIA LLSANJOSE CA",
+      "amount": 18.32,
+      "category": "FOOD"
+    },
+    {
+      "id": 37,
+      "bank": "CITI",
+      "date": "2025-09-07",
+      "description": "YARD HOUSE ZK 0108330 SAN JOSE CA",
+      "amount": 49.67,
+      "category": "FOOD"
+    },
+    {
+      "id": 38,
+      "bank": "CITI",
+      "date": "2025-09-07",
+      "description": "SQ *FENELLAS BERRIES LLC San Jose CA",
+      "amount": 6,
+      "category": "FOOD"
+    },
+    {
+      "id": 39,
+      "bank": "CITI",
+      "date": "2025-09-07",
+      "description": "SQ *WINTERS FRUIT TREE San Jose CA",
+      "amount": 12,
+      "category": "FOOD"
+    },
+    {
+      "id": 40,
+      "bank": "CITI",
+      "date": "2025-09-07",
+      "description": "SQ *SUNRISE NURSERY San Leandro CA",
+      "amount": 18,
+      "category": "OTHER"
+    },
+    {
+      "id": 41,
+      "bank": "CITI",
+      "date": "2025-09-07",
+      "description": "VV DELICIOUS CREPE INC SAN JOSE CA",
+      "amount": 15.45,
+      "category": "FOOD"
+    },
+    {
+      "id": 42,
+      "bank": "CITI",
+      "date": "2025-09-08",
+      "description": "SAFEWAY #1990 SANTA CLARA CA",
+      "amount": 12.28,
+      "category": "FOOD"
+    },
+    {
+      "id": 43,
+      "bank": "CITI",
+      "date": "2025-09-08",
+      "description": "COSTCO GAS #0129 SANTA CLARA CA",
+      "amount": 38.53,
+      "category": "GAS"
+    },
+    {
+      "id": 44,
+      "bank": "CITI",
+      "date": "2025-09-08",
+      "description": "COSTCO WHSE #0129 SANTA CLARA CA",
+      "amount": 75.79,
+      "category": "COSTCO"
+    },
+    {
+      "id": 45,
+      "bank": "CITI",
+      "date": "2025-09-13",
+      "description": "TST*FORMOSA West HollywooCA",
+      "amount": 90.83,
+      "category": "OTHER"
+    },
+    {
+      "id": 46,
+      "bank": "CITI",
+      "date": "2025-09-13",
+      "description": "TST*GREAT WHITE MELROSE Los Angeles CA",
+      "amount": 146.16,
+      "category": "FOOD"
+    },
+    {
+      "id": 47,
+      "bank": "CITI",
+      "date": "2025-09-14",
+      "description": "ARMK ORACLE PARK F&B 415-9722000 CA",
+      "amount": 14.18,
+      "category": "OTHER"
+    },
+    {
+      "id": 48,
+      "bank": "CITI",
+      "date": "2025-09-14",
+      "description": "ARMK ORACLE PARK F&B 415-9722000 CA",
+      "amount": 16.84,
+      "category": "OTHER"
+    },
+    {
+      "id": 49,
+      "bank": "CITI",
+      "date": "2025-09-14",
+      "description": "IN-N-OUT SAN JOSE 2 SAN JOSE CA",
+      "amount": 24.23,
+      "category": "OTHER"
+    },
+    {
+      "id": 50,
+      "bank": "CITI",
+      "date": "2025-09-16",
+      "description": "CHIPOTLE MEX GR ONLINE TEAM-BANKING@CA",
+      "amount": 40.05,
+      "category": "FOOD"
+    },
+    {
+      "id": 51,
+      "bank": "AMEX",
+      "date": "2025-08-16",
+      "description": "* MARTIN CONTRERAS MOBILE PAYMENT - THANK YOU -",
+      "amount": -1789.97,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 52,
+      "bank": "AMEX",
+      "date": "2025-09-11",
+      "description": "* MARTIN CONTRERAS MOBILE PAYMENT - THANK YOU -",
+      "amount": -1372.88,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 53,
+      "bank": "AMEX",
+      "date": "2025-08-24",
+      "description": "MARTIN CONTRERAS",
+      "amount": -10,
+      "category": "OTHER"
+    },
+    {
+      "id": 54,
+      "bank": "AMEX",
+      "date": "2025-09-07",
+      "description": "* MARTIN CONTRERAS YOUR CASH REWARD/REFUND IS AMERICAN EXPRESS CASH REBATE TRANSACTION",
+      "amount": -500,
+      "category": "OTHER"
+    },
+    {
+      "id": 55,
+      "bank": "AMEX",
+      "date": "2025-08-19",
+      "description": "Bianca Y Ramirez AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA",
+      "amount": -72.72,
+      "category": "AMAZON"
+    },
+    {
+      "id": 56,
+      "bank": "AMEX",
+      "date": "2025-08-15",
+      "description": "PAYPAL *PEACOCKTVLL 81EC6 2126640138 NY 2126640138",
+      "amount": 13.99,
+      "category": "PAYPAL"
+    },
+    {
+      "id": 57,
+      "bank": "AMEX",
+      "date": "2025-08-16",
+      "description": "PARAMOUNT+ WEST HOLLYWOO CA 888-274-5343",
+      "amount": 12.99,
+      "category": "STREAMING"
+    },
+    {
+      "id": 58,
+      "bank": "AMEX",
+      "date": "2025-08-17",
+      "description": "KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL 5618105936",
+      "amount": 10,
+      "category": "LAUNDRY"
+    },
+    {
+      "id": 59,
+      "bank": "AMEX",
+      "date": "2025-08-18",
+      "description": "PAYPAL *PYPL PAYIN4 8882211161 CA 8882211161",
+      "amount": 37.37,
+      "category": "PAYPAL"
+    },
+    {
+      "id": 60,
+      "bank": "AMEX",
+      "date": "2025-08-19",
+      "description": "AplPay SAFEWAY SANTA CLARA CA 800-898-4027",
+      "amount": 12.09,
+      "category": "FOOD"
+    },
+    {
+      "id": 61,
+      "bank": "AMEX",
+      "date": "2025-08-22",
+      "description": "ANTHROPIC SAN FRANCISCO CA +14152360599",
+      "amount": 5,
+      "category": "OTHER"
+    },
+    {
+      "id": 62,
+      "bank": "AMEX",
+      "date": "2025-08-24",
+      "description": "BAY AREA FOOT CARE 00-08040462247 SAN FRANCISCO CA DOCTOR & PHYSICIAN",
+      "amount": 40,
+      "category": "OTHER"
+    },
+    {
+      "id": 63,
+      "bank": "AMEX",
+      "date": "2025-08-24",
+      "description": "DISNEYPLUS 888-905-7888 CA 888-905-7888",
+      "amount": 26.99,
+      "category": "STREAMING"
+    },
+    {
+      "id": 64,
+      "bank": "AMEX",
+      "date": "2025-08-26",
+      "description": "ANTHROPIC SAN FRANCISCO CA +14152360599",
+      "amount": 5,
+      "category": "OTHER"
+    },
+    {
+      "id": 65,
+      "bank": "AMEX",
+      "date": "2025-08-29",
+      "description": "NETFLIX.COM 866-579-7172 CA NETFLIX.COM",
+      "amount": 27.18,
+      "category": "STREAMING"
+    },
+    {
+      "id": 66,
+      "bank": "AMEX",
+      "date": "2025-08-30",
+      "description": "AplPay WHOLEFDS CBL 10033 000010033 CAMPBELL CA 4083715000",
+      "amount": 20.65,
+      "category": "GROCERIES"
+    },
+    {
+      "id": 67,
+      "bank": "AMEX",
+      "date": "2025-09-01",
+      "description": "APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE",
+      "amount": 16.99,
+      "category": "INTERNET"
+    },
+    {
+      "id": 68,
+      "bank": "AMEX",
+      "date": "2025-09-01",
+      "description": "CA DMV FEE 00-08034814965 KNOXVILLE TN GOVERNMENT SERVICE",
+      "amount": 9.59,
+      "category": "OTHER"
+    },
+    {
+      "id": 69,
+      "bank": "AMEX",
+      "date": "2025-09-01",
+      "description": "STATE OF CALIF DMV INT SC 00-080152915 SACRAMENTO CA 800-7770133",
+      "amount": 492,
+      "category": "OTHER"
+    },
+    {
+      "id": 70,
+      "bank": "AMEX",
+      "date": "2025-09-02",
+      "description": "MOVEMENT SUNNYVALE SUNNYVALE CA +15413165747",
+      "amount": 10,
+      "category": "GYM"
+    },
+    {
+      "id": 71,
+      "bank": "AMEX",
+      "date": "2025-09-03",
+      "description": "SPOTIFY P3A2E5F4F0 685603 NEW YORK NY SUPPORT@SPOTIFY.COM",
+      "amount": 11.99,
+      "category": "OTHER"
+    },
+    {
+      "id": 72,
+      "bank": "AMEX",
+      "date": "2025-09-03",
+      "description": "PAYPAL *PYPL PAYIN4 8882211161 CA 8882211161",
+      "amount": 37.37,
+      "category": "PAYPAL"
+    },
+    {
+      "id": 73,
+      "bank": "AMEX",
+      "date": "2025-09-05",
+      "description": "MSI INSURANCE BEDFORD 537644 TAMPA FL CONTACTUS@MSIMGA.COM",
+      "amount": 23.5,
+      "category": "OTHER"
+    },
+    {
+      "id": 74,
+      "bank": "AMEX",
+      "date": "2025-09-06",
+      "description": "APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE",
+      "amount": 2.99,
+      "category": "INTERNET"
+    },
+    {
+      "id": 75,
+      "bank": "AMEX",
+      "date": "2025-09-06",
+      "description": "WARP PRO SUBSCRIPTION NEW YORK NY +16462418920",
+      "amount": 18,
+      "category": "OTHER"
+    },
+    {
+      "id": 76,
+      "bank": "AMEX",
+      "date": "2025-09-07",
+      "description": "GEICO AUTO (800)841-3000 DC INSURANCE",
+      "amount": 179.23,
+      "category": "AUTO"
+    },
+    {
+      "id": 77,
+      "bank": "AMEX",
+      "date": "2025-09-09",
+      "description": "APPLE.COM/BILL INTERNET CHARGE CA RECORD STORE",
+      "amount": 9.99,
+      "category": "INTERNET"
+    },
+    {
+      "id": 78,
+      "bank": "AMEX",
+      "date": "2025-09-12",
+      "description": "PAYPAL *UNITEDSTATE 4029357733 DC 4029357733",
+      "amount": 31.05,
+      "category": "PAYPAL"
+    },
+    {
+      "id": 79,
+      "bank": "AMEX",
+      "date": "2025-09-12",
+      "description": "VAIL SKI PASS & RC VAIL CO 888-838-0495",
+      "amount": 422,
+      "category": "ACTIVITIES"
+    },
+    {
+      "id": 80,
+      "bank": "AMEX",
+      "date": "2025-09-14",
+      "description": "KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL 5618105936",
+      "amount": 10,
+      "category": "LAUNDRY"
+    },
+    {
+      "id": 81,
+      "bank": "AMEX",
+      "date": "2025-08-16",
+      "description": "AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA MERCHANDISE",
+      "amount": 29.52,
+      "category": "AMAZON"
+    },
+    {
+      "id": 82,
+      "bank": "AMEX",
+      "date": "2025-08-17",
+      "description": "AplPay BT*DD *DOORDASH CRUMBL SAN FRANCISCO CA 8559731040",
+      "amount": 29.17,
+      "category": "FOOD"
+    },
+    {
+      "id": 83,
+      "bank": "AMEX",
+      "date": "2025-08-18",
+      "description": "AplPay CHEVRON 0376181/CHEVRON SUNNYVALE CA SERVICE STN",
+      "amount": 59.13,
+      "category": "GAS"
+    },
+    {
+      "id": 84,
+      "bank": "AMEX",
+      "date": "2025-08-18",
+      "description": "AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA MERCHANDISE",
+      "amount": 8.51,
+      "category": "AMAZON"
+    },
+    {
+      "id": 85,
+      "bank": "AMEX",
+      "date": "2025-08-23",
+      "description": "AMAZON MARKETPLACE NA PA AMZN.COM/BILL WA MERCHANDISE",
+      "amount": 18.58,
+      "category": "AMAZON"
+    },
+    {
+      "id": 86,
+      "bank": "AMEX",
+      "date": "2025-08-24",
+      "description": "SPROUTS FARMERS MKT #463 0000000009459 SAN JOSE CA 9999999999",
+      "amount": 87.19,
+      "category": "GROCERIES"
+    },
+    {
+      "id": 87,
+      "bank": "AMEX",
+      "date": "2025-08-24",
+      "description": "TRADER JOE S #212 000000212 SAN JOSE CA 6265993700",
+      "amount": 163.35,
+      "category": "GROCERIES"
+    },
+    {
+      "id": 88,
+      "bank": "AMEX",
+      "date": "2025-08-24",
+      "description": "WHOLE FOODS CBL 10033 866-216-1072 DE GROCERY",
+      "amount": 6.59,
+      "category": "OTHER"
+    },
+    {
+      "id": 89,
+      "bank": "AMEX",
+      "date": "2025-08-31",
+      "description": "AplPay BT*DD *DOORDASH SHAKESHAC SAN FRANCISCO CA 8559731040",
+      "amount": 44.92,
+      "category": "FOOD"
+    },
+    {
+      "id": 90,
+      "bank": "AMEX",
+      "date": "2025-09-01",
+      "description": "WHOLE FOODS STN 10362 866-216-1072 DE GROCERY",
+      "amount": 36.71,
+      "category": "OTHER"
+    },
+    {
+      "id": 91,
+      "bank": "AMEX",
+      "date": "2025-09-06",
+      "description": "AplPay BT*DD *DOORDASH NAANCURRY SAN FRANCISCO CA 8559731040",
+      "amount": 47.39,
+      "category": "FOOD"
+    },
+    {
+      "id": 92,
+      "bank": "AMEX",
+      "date": "2025-09-06",
+      "description": "AplPay TARGET 020883 09100020883 SAN JOSE CA 612-3044357",
+      "amount": 96.04,
+      "category": "TARGET"
+    },
+    {
+      "id": 93,
+      "bank": "AMEX",
+      "date": "2025-09-08",
+      "description": "AplPay SPROUTS FARMERS MKT #463 0000000009 SAN JOSE CA 9999999999",
+      "amount": 95.44,
+      "category": "GROCERIES"
+    },
+    {
+      "id": 94,
+      "bank": "AMEX",
+      "date": "2025-09-09",
+      "description": "KIOSOFT TECHNOLOGIES LLC 6500000127033 BOYNTON BEACH FL 5618105936",
+      "amount": 20,
+      "category": "LAUNDRY"
+    },
+    {
+      "id": 95,
+      "bank": "SCHWAB",
+      "date": "2025-09-02",
+      "description": "Electronic Withdrawal APPFOLIO, INC. F WEB PMTS 090225",
+      "amount": 2.49,
+      "category": "RENT"
+    },
+    {
+      "id": 96,
+      "bank": "SCHWAB",
+      "date": "2025-09-02",
+      "description": "Electronic Withdrawal MAGNIFY REAL EST WEB PMTS 090225",
+      "amount": 2375,
+      "category": "RENT"
+    },
+    {
+      "id": 97,
+      "bank": "SCHWAB",
+      "date": "2025-09-04",
+      "description": "ATM Withdrawal PAI ATM 1570 WEST SAN C SAN JOSE, CA, US",
+      "amount": 63.99,
+      "category": "ATM"
+    },
+    {
+      "id": 98,
+      "bank": "SCHWAB",
+      "date": "2025-09-08",
+      "description": "Electronic Withdrawal VENMO PAYMENT 250907",
+      "amount": 5,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 99,
+      "bank": "SCHWAB",
+      "date": "2025-09-08",
+      "description": "Electronic Withdrawal DISCOVER E-PAYMENT 250907",
+      "amount": 9.99,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 100,
+      "bank": "SCHWAB",
+      "date": "2025-09-12",
+      "description": "Electronic Deposit ZEBRA TECHNOLOG PAYROLL 250912~ Tran: ACHDD",
+      "amount": -3200.89,
+      "category": "DEPOSIT"
+    },
+    {
+      "id": 101,
+      "bank": "SCHWAB",
+      "date": "2025-09-12",
+      "description": "Electronic Withdrawal VENMO PAYMENT 250911",
+      "amount": 14.85,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 102,
+      "bank": "SCHWAB",
+      "date": "2025-09-12",
+      "description": "Electronic Withdrawal PGANDE WEB ONLINE SEP 25",
+      "amount": 186.6,
+      "category": "UTILITIES"
+    },
+    {
+      "id": 103,
+      "bank": "SCHWAB",
+      "date": "2025-09-12",
+      "description": "Electronic Withdrawal AMEX EPAYMENT ACH PMT 250912",
+      "amount": 1372.88,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 104,
+      "bank": "SCHWAB",
+      "date": "2025-09-15",
+      "description": "Electronic Withdrawal VENMO PAYMENT 250912",
+      "amount": 42.76,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 105,
+      "bank": "SCHWAB",
+      "date": "2025-09-15",
+      "description": "Electronic Withdrawal DEPT EDUCATION STUDENT LN 250912",
+      "amount": 250,
+      "category": "LOANS"
+    },
+    {
+      "id": 106,
+      "bank": "SCHWAB",
+      "date": "2025-09-15",
+      "description": "Electronic Withdrawal CAPITAL ONE CRCARDPMT 250913",
+      "amount": 442.93,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 107,
+      "bank": "SCHWAB",
+      "date": "2025-09-15",
+      "description": "Electronic Withdrawal CITI CARD ONLINE PAYMENT 250914",
+      "amount": 756.44,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 108,
+      "bank": "SCHWAB",
+      "date": "2025-09-15",
+      "description": "Electronic Withdrawal CAPITAL ONE MOBILE PMT",
+      "amount": 915.99,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 109,
+      "bank": "SCHWAB",
+      "date": "2025-09-16",
+      "description": "Visa Debit Card Point of Sale Purchase ARMK ORACLE PARK EMS SAN FRANCISCO, CA, US",
+      "amount": 19.35,
+      "category": "OTHER"
+    },
+    {
+      "id": 110,
+      "bank": "SCHWAB",
+      "date": "2025-09-18",
+      "description": "Visa Debit Card Point of Sale Purchase CLASSIC CAR WASH - DEL 408-3772525, CA, US",
+      "amount": 29.99,
+      "category": "OTHER"
+    },
+    {
+      "id": 111,
+      "bank": "SCHWAB",
+      "date": "2025-09-20",
+      "description": "Visa Debit Card Point of Sale Purchase ST JOSEPH CATHEDRAL BAS SAN JOSE, CA, US",
+      "amount": 300,
+      "category": "OTHER"
+    },
+    {
+      "id": 112,
+      "bank": "SCHWAB",
+      "date": "2025-09-22",
+      "description": "Electronic Deposit VENMO CASHOUT 250920",
+      "amount": -300.11,
+      "category": "DEPOSIT"
+    },
+    {
+      "id": 113,
+      "bank": "SCHWAB",
+      "date": "2025-09-22",
+      "description": "Electronic Withdrawal VENMO PAYMENT 250920",
+      "amount": 13,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 114,
+      "bank": "SCHWAB",
+      "date": "2025-09-22",
+      "description": "Electronic Withdrawal COMCAST-XFINITY CABLE SVCS 250920",
+      "amount": 39.66,
+      "category": "INTERNET"
+    },
+    {
+      "id": 115,
+      "bank": "SCHWAB",
+      "date": "2025-09-22",
+      "description": "Electronic Withdrawal CITI CARD ONLINE PAYMENT 250921",
+      "amount": 332.29,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 116,
+      "bank": "SCHWAB",
+      "date": "2025-09-22",
+      "description": "Electronic Withdrawal AMEX EPAYMENT ACH PMT 250922",
+      "amount": 731.23,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 117,
+      "bank": "SCHWAB",
+      "date": "2025-09-22",
+      "description": "Electronic Withdrawal DISCOVER E-PAYMENT 250920",
+      "amount": 49.45,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 118,
+      "bank": "SCHWAB",
+      "date": "2025-09-23",
+      "description": "Visa Debit Card Point of Sale Purchase EXTREME EXPRESS CAR WAS SAN JOSE, CA, US",
+      "amount": 17,
+      "category": "OTHER"
+    },
+    {
+      "id": 119,
+      "bank": "SCHWAB",
+      "date": "2025-09-24",
+      "description": "Electronic Withdrawal VENMO PAYMENT 250923",
+      "amount": 8,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 120,
+      "bank": "SCHWAB",
+      "date": "2025-09-26",
+      "description": "Electronic Deposit ZEBRA TECHNOLOG PAYROLL 250926~ Tran: ACHDD",
+      "amount": -3200.89,
+      "category": "DEPOSIT"
+    },
+    {
+      "id": 121,
+      "bank": "SCHWAB",
+      "date": "2025-09-26",
+      "description": "Electronic Withdrawal TOYOTA ACH RTL 09252025 P122438984-26269~ Tran: ACHDW",
+      "amount": 800,
+      "category": "LOANS"
+    },
+    {
+      "id": 122,
+      "bank": "SCHWAB",
+      "date": "2025-09-26",
+      "description": "Electronic Withdrawal VENMO PAYMENT 250925",
+      "amount": 15.13,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 123,
+      "bank": "SCHWAB",
+      "date": "2025-09-26",
+      "description": "Electronic Withdrawal VENMO PAYMENT 250925",
+      "amount": 17.71,
+      "category": "PAYMENT"
+    },
+    {
+      "id": 124,
+      "bank": "SCHWAB",
+      "date": "2025-09-27",
+      "description": "ATM Withdrawal PAI ATM 1190 COLEMAN AV SAN JOSE, CA, US",
+      "amount": 143.5,
+      "category": "ATM"
+    },
+    {
+      "id": 125,
+      "bank": "SCHWAB",
+      "date": "2025-09-30",
+      "description": "ATM Fee Rebate",
+      "amount": -7.49,
+      "category": "OTHER"
+    },
+    {
+      "id": 126,
+      "bank": "SCHWAB",
+      "date": "2025-09-30",
+      "description": "Interest Paid",
+      "amount": -0.73,
+      "category": "OTHER"
+    }
+  ],
+  "count": 126
+}
