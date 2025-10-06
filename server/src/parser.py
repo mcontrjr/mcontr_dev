@@ -459,7 +459,7 @@ class Parser:
             log.debug("Description was None. Skipping...")
             return None
 
-        log.debug(f"Description: {description}. Lines: {lines[line_index:line_index+4]}. Date endpos: {date_match.endpos}")
+        log.debug(f"Description: {description}. Lines: {lines[line_index:line_index + 4]}. Date endpos: {date_match.endpos}")
 
         # Extract amount
         amount = self._extract_amount_from_lines(lines, line_index)

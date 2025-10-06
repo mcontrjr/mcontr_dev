@@ -175,7 +175,7 @@ async def parse_upload_file(pdf_files: List[UploadFile] = File(...), session_id:
     for pdf_file in pdf_files:
         # Check file size
         if pdf_file.size and pdf_file.size > MAX_FILE_SIZE:
-            raise HTTPException(status_code=413, detail=f"File {pdf_file.filename} exceeds maximum size of {MAX_FILE_SIZE // (1024*1024)}MB")
+            raise HTTPException(status_code=413, detail=f"File {pdf_file.filename} exceeds maximum size of {MAX_FILE_SIZE // (1024 * 1024)}MB")
 
         # Check file type
         if pdf_file.content_type not in ALLOWED_FILE_TYPES:
@@ -269,7 +269,6 @@ async def get_system_info():
     )
 
 
-
 @app.put("/edit_record/", response_model=EditRecordResponse, tags=["Records"])
 @handle_api_errors("RECORDS_UPDATE")
 async def edit_record(request: EditRecordRequest):
@@ -326,6 +325,7 @@ async def edit_record(request: EditRecordRequest):
             success=False,
             message="Failed to update record. Record may not exist or belong to this session."
         )
+
 
 @app.post("/clear/", response_model=ClearResponse, tags=["Records"])
 @handle_api_errors("RECORDS_CLEARING")
