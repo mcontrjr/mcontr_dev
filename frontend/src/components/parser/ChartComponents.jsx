@@ -175,13 +175,15 @@ AmountPie.displayName = 'AmountPie';
 
 // Re-export RecordTable component with pagination
 
-// Category Dropdown Component - Simplified accessible dropdown
+// Category Dropdown Component - Smart positioning to avoid thead
 const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, onCategoryUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [dropdownPosition, setDropdownPosition] = useState('bottom');
   const containerRef = useRef(null);
   const searchInputRef = useRef(null);
+  const menuRef = useRef(null);
 
   const filteredCategories = useMemo(() => {
     const list = Array.isArray(availableCategories) ? availableCategories : [];
@@ -194,6 +196,36 @@ const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, on
     setIsOpen(false);
     setSearchQuery('');
   }, []);
+
+  // Detect if dropdown would overlap thead, adjust position
+  useEffect(() => {
+    if (!isOpen || !containerRef.current) return;
+    
+    const checkPosition = () => {
+      const container = containerRef.current;
+      if (!container) return;
+      
+      const rect = container.getBoundingClientRect();
+      const table = container.closest('.records-table');
+      const thead = table?.querySelector('thead');
+      
+      if (thead) {
+        const theadRect = thead.getBoundingClientRect();
+        const theadBottom = theadRect.bottom;
+        const dropdownTop = rect.top - 280; // estimated menu height
+        
+        // If dropdown would overlap thead, position below instead
+        if (dropdownTop < theadBottom) {
+          setDropdownPosition('bottom');
+        } else {
+          setDropdownPosition('top');
+        }
+      }
+    };
+    
+    // Check position after menu renders
+    setTimeout(checkPosition, 0);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -211,12 +243,11 @@ const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, on
     };
   }, [isOpen, close]);
 
-  const handleCategoryChange = useCallback(async (newCategory, sessionId) => {
+  const handleCategoryChange = useCallback(async (newCategory) => {
     if (!newCategory || newCategory === record.category) {
       close();
       return;
     }
-    console.log('Changing category to:', newCategory, 'for session:', sessionId);
     setIsUpdating(true);
     try {
       const response = await fetch(`${API_URL}/edit_record/`, {
@@ -243,8 +274,18 @@ const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, on
     }
   }, [record, sessionId, onCategoryUpdate, close]);
 
+  const menuStyle = {
+    position: 'absolute',
+    left: 0,
+    zIndex: 10000,
+    ...(dropdownPosition === 'top' 
+      ? { bottom: 'calc(100% + 6px)' }
+      : { top: 'calc(100% + 6px)' }
+    )
+  };
+
   return (
-<div className={`category-dropdown-container ${isOpen ? 'open' : ''}`} ref={containerRef}>
+    <div className={`category-dropdown-container ${isOpen ? 'open' : ''}`} ref={containerRef}>
       <button
         className={`category-badge ${isUpdating ? 'updating' : ''} ${isOpen ? 'active' : ''}`}
         onClick={() => setIsOpen(v => !v)}
@@ -260,10 +301,11 @@ const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, on
 
       {isOpen && (
         <div
+          ref={menuRef}
           className="category-dropdown-menu"
           role="listbox"
           aria-label="Category options"
-          style={{ position: 'absolute', top: 'calc(100% + 6px)', left: 0, zIndex: 10000 }}
+          style={menuStyle}
         >
           <div className="category-search">
             <input
@@ -283,7 +325,7 @@ const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, on
                 <button
                   key={category}
                   className={`category-option ${category === record.category ? 'current' : ''}`}
-                  onClick={() => handleCategoryChange(category, sessionId)}
+                  onClick={() => handleCategoryChange(category)}
                   type="button"
                   role="option"
                   aria-selected={category === record.category}
