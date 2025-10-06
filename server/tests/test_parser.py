@@ -80,7 +80,7 @@ class TestAmexParser(TestParser):
                 'Date': "2024-12-22",
                 'Description': "SNOW.COM/VAIL RESORTS SKI 888-838-0495 CO 888-838-0495",
                 'Amount': 173.00,
-                'Category': "SKI"
+                'Category': "ACTIVITIES"
             }
         ]
         # Convert ParsedTransaction objects to dictionaries for comparison

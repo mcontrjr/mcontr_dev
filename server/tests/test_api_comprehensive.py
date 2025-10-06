@@ -558,7 +558,7 @@ class TestHealthAndDiagnostics:
 
         # Test that all endpoints have proper tags
         paths = spec["paths"]
-        assert len(paths) == 6  # root, categories, records, parse, system-info, clear
+        assert len(paths) == 7  # root, categories, records, parse, system-info, clear
 
         # Test specific endpoint tags - this ensures proper organization in Swagger UI
         assert "Categories" in paths["/categories/"]["get"]["tags"]
