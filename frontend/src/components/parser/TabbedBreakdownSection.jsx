@@ -197,9 +197,11 @@ const DistributionTab = memo(({ pieData, totalAmount, loadingStates }) => (
 DistributionTab.displayName = 'DistributionTab';
 
 // Records tab content
-const RecordsTab = memo(({ sortedRecords, requestSort, loadingStates }) => (
+const RecordsTab = memo(({ sortedRecords, requestSort, loadingStates, sessionId, onRecordUpdate }) => (
   <div className="tab-content records-tab">
     <RecordsTable
+      sessionId={sessionId}
+      onRecordUpdate={onRecordUpdate}
       sortedRecords={sortedRecords}
       requestSort={requestSort}
       loading={loadingStates?.records || false}
@@ -208,7 +210,7 @@ const RecordsTab = memo(({ sortedRecords, requestSort, loadingStates }) => (
 ));
 RecordsTab.displayName = 'RecordsTab';
 
-const TabbedBreakdownSection = memo(({
+const TabbedBreakdownSection = memo(({ sessionId, updateRecord,
   bankName,
   bankNames,
   setBankName,
@@ -280,7 +282,7 @@ const TabbedBreakdownSection = memo(({
         );
       case TABS.RECORDS.id:
         return (
-          <RecordsTab
+          <RecordsTab sessionId={sessionId} onRecordUpdate={updateRecord}
             sortedRecords={sortedRecords}
             requestSort={requestSort}
             loadingStates={loadingStates}

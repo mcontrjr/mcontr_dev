@@ -26,6 +26,7 @@ class TransactionCategory(str, Enum):
     TRAVEL = "TRAVEL"
     PAYPAL = "PAYPAL"
     AMAZON = "AMAZON"
+    ACTIVITIES = "ACTIVITIES"
     GROCERIES = "GROCERIES"
     TARGET = "TARGET"
     FOOD = "FOOD"
@@ -43,6 +44,7 @@ class TransactionCategory(str, Enum):
     DEPOSIT = "DEPOSIT"
     ATM = "ATM"
     UTILITIES = "UTILITIES"
+    SHOPPING = "SHOPPING"
     OTHER = "OTHER"
 
 
@@ -235,3 +237,43 @@ class APIError(BaseModel):
     detail: str = Field(..., description="Error detail message")
     error_code: Optional[str] = Field(None, description="Error code")
     timestamp: datetime = Field(default_factory=datetime.now, description="Error timestamp")
+
+
+# Edit Record Models
+class EditRecordRequest(BaseModel):
+    """Request model for editing a record."""
+    id: int = Field(..., description="ID of the record to edit")
+    category: Optional[TransactionCategory] = Field(None, description="New category for the record")
+    description: Optional[str] = Field(None, description="New description for the record")
+    amount: Optional[float] = Field(None, description="New amount for the record")
+    session_id: str = Field(..., description="Session ID for data isolation")
+
+    @validator('session_id')
+    def validate_session_id(cls, v):
+        try:
+            UUID(v)
+        except ValueError:
+            raise ValueError('session_id must be a valid UUID')
+        return v
+
+    @validator('amount')
+    def validate_amount(cls, v):
+        if v is not None and abs(v) > 1000000:  # Reasonable limit
+            raise ValueError('Amount exceeds reasonable limit')
+        return v
+
+    @validator('description')
+    def validate_description(cls, v):
+        if v is not None:
+            return v.strip()
+        return v
+
+    class Config:
+        use_enum_values = True
+
+
+class EditRecordResponse(BaseModel):
+    """Response model for edit record endpoint."""
+    success: bool = Field(..., description="Whether the edit was successful")
+    message: str = Field(..., description="Descriptive message")
+    updated_record: Optional[TransactionRecord] = Field(None, description="The updated record if successful")

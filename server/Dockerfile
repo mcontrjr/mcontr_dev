@@ -1,21 +1,26 @@
 # Use Python image
 FROM python:3.11-bullseye
 
-# Install build dependencies
-RUN pip install --no-cache-dir --upgrade pip setuptools wheel
-
+# Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libopenblas-dev \
     liblapack-dev \
+    curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 # Set working directory
 WORKDIR /app
 
-# Copy requirements and install
+# Set environment variables for uv
+ENV UV_SYSTEM_PYTHON=1
+
+# Copy requirements and install with uv
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --no-cache -r requirements.txt
 
 # Copy application files
 COPY . .

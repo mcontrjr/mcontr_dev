@@ -16,7 +16,7 @@ from src.config import CORS_ORIGINS, CORS_METHODS, MAX_FILE_SIZE, ALLOWED_FILE_T
 from src.error_handler import handle_api_errors
 from src.models import (
     APIInfoResponse, CategoriesResponse, RecordsResponse, ParseResponse,
-    SystemInfoResponse, ClearResponse, TransactionRecord
+    SystemInfoResponse, ClearResponse, TransactionRecord, EditRecordRequest, EditRecordResponse
 )
 
 app = FastAPI(
@@ -175,7 +175,7 @@ async def parse_upload_file(pdf_files: List[UploadFile] = File(...), session_id:
     for pdf_file in pdf_files:
         # Check file size
         if pdf_file.size and pdf_file.size > MAX_FILE_SIZE:
-            raise HTTPException(status_code=413, detail=f"File {pdf_file.filename} exceeds maximum size of {MAX_FILE_SIZE // (1024*1024)}MB")
+            raise HTTPException(status_code=413, detail=f"File {pdf_file.filename} exceeds maximum size of {MAX_FILE_SIZE // (1024 * 1024)}MB")
 
         # Check file type
         if pdf_file.content_type not in ALLOWED_FILE_TYPES:
@@ -267,6 +267,64 @@ async def get_system_info():
         disk=disk_info,
         timestamp=datetime.now()
     )
+
+
+@app.put("/edit_record/", response_model=EditRecordResponse, tags=["Records"])
+@handle_api_errors("RECORDS_UPDATE")
+async def edit_record(request: EditRecordRequest):
+    """
+    Edit a record's fields such as category, description, or amount.
+
+    :param request: EditRecordRequest containing id, updates, and session_id
+    :return: EditRecordResponse with success status and updated record
+    """
+    # Prepare updates dictionary with only non-None fields
+    updates = {}
+    if request.category is not None:
+        updates['category'] = request.category
+    if request.description is not None:
+        updates['description'] = request.description
+    if request.amount is not None:
+        updates['amount'] = request.amount
+
+    if not updates:
+        return EditRecordResponse(
+            success=False,
+            message="No fields provided to update"
+        )
+
+    # Update the record
+    success = handler.update_record(request.id, updates, request.session_id)
+
+    if success:
+        # Fetch the updated record to return it
+        records_response = handler.get_records(None, request.session_id)
+        records = records_response.get('records', [])
+
+        # Find the updated record
+        updated_record = None
+        for record in records:
+            if record[0] == request.id:
+                updated_record = TransactionRecord(
+                    id=record[0],
+                    bank=record[1],
+                    date=record[2],
+                    description=record[3],
+                    amount=record[4],
+                    category=record[5]
+                )
+                break
+
+        return EditRecordResponse(
+            success=True,
+            message="Record updated successfully",
+            updated_record=updated_record
+        )
+    else:
+        return EditRecordResponse(
+            success=False,
+            message="Failed to update record. Record may not exist or belong to this session."
+        )
 
 
 @app.post("/clear/", response_model=ClearResponse, tags=["Records"])

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { memo, useMemo, useCallback, useState } from 'react';
+import React, { memo, useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,7 +16,8 @@ import { processWeeklyData, filterRecordsBySearch } from '../../utils/dataProces
 import {
   CHART_COLORS,
   CHART_DIMENSIONS,
-  CHART_CONFIG
+  CHART_CONFIG,
+  API_URL
 } from '../../constants/parserConstants';
 
 // Register Chart.js components
@@ -173,10 +174,129 @@ export const AmountPie = memo(({ pieData }) => {
 AmountPie.displayName = 'AmountPie';
 
 // Re-export RecordTable component with pagination
-export const RecordTable = memo(({ sortedRecords, requestSort }) => {
+
+// Category Dropdown Component - Simple scrollable menu
+const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, onCategoryUpdate }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const containerRef = useRef(null);
+  const searchInputRef = useRef(null);
+
+  const filteredCategories = useMemo(() => {
+    const list = Array.isArray(availableCategories) ? availableCategories : [];
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return list;
+    return list.filter(c => c?.toLowerCase().includes(q));
+  }, [availableCategories, searchQuery]);
+
+  const close = useCallback(() => {
+    setIsOpen(false);
+    setSearchQuery('');
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onDocClick = (e) => {
+      if (containerRef.current && !containerRef.current.contains(e.target)) close();
+    };
+    const onKey = (e) => { if (e.key === 'Escape') close(); };
+    document.addEventListener('mousedown', onDocClick);
+    document.addEventListener('keydown', onKey);
+    const t = setTimeout(() => searchInputRef.current?.focus(), 50);
+    return () => {
+      document.removeEventListener('mousedown', onDocClick);
+      document.removeEventListener('keydown', onKey);
+      clearTimeout(t);
+    };
+  }, [isOpen, close]);
+
+  const handleCategoryChange = useCallback(async (newCategory) => {
+    if (!newCategory || newCategory === record.category) {
+      close();
+      return;
+    }
+    setIsUpdating(true);
+    try {
+      const response = await fetch(`${API_URL}/edit_record/`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: record.id,
+          category: newCategory,
+          session_id: sessionId,
+        }),
+      });
+      if (!response.ok) throw new Error('Failed to update category');
+      const result = await response.json();
+      if (result.success && result.updated_record) {
+        onCategoryUpdate(result.updated_record);
+        close();
+      } else {
+        throw new Error(result.message || 'Update failed');
+      }
+    } catch (err) {
+      console.error('Error updating category:', err);
+    } finally {
+      setIsUpdating(false);
+    }
+  }, [record, sessionId, onCategoryUpdate, close]);
+
+  return (
+    <div className={`category-dropdown-container ${isOpen ? 'open' : ''}`} ref={containerRef}>
+      <button
+        className={`category-badge ${isUpdating ? 'updating' : ''} ${isOpen ? 'active' : ''}`}
+        onClick={() => setIsOpen(v => !v)}
+        disabled={isUpdating}
+        type="button"
+      >
+        {isUpdating ? '⟳' : record.category}
+      </button>
+
+      {isOpen && (
+        <div className="category-dropdown-menu">
+          <input
+            ref={searchInputRef}
+            type="text"
+            className="category-search-input"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <div className="category-options">
+            {filteredCategories.length > 0 ? (
+              filteredCategories.map((category) => (
+                <button
+                  key={category}
+                  className={`category-option ${category === record.category ? 'current' : ''}`}
+                  onClick={() => handleCategoryChange(category)}
+                >
+                  {category}
+                </button>
+              ))
+            ) : (
+              <div className="category-no-results">No results</div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+});
+CategoryDropdown.displayName = 'CategoryDropdown';
+
+
+// Enhanced Record Table with Category Editing
+export const RecordTable = memo(({ sortedRecords, requestSort, sessionId, onRecordUpdate }) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
+
+  // Get available categories from the sorted records
+  const availableCategories = useMemo(() => {
+    const categories = [...new Set(sortedRecords?.map(record => record.category) || [])];
+    return categories.sort();
+  }, [sortedRecords]);
 
   const filteredRecords = useMemo(() =>
     filterRecordsBySearch(sortedRecords || [], searchText),
@@ -188,6 +308,14 @@ export const RecordTable = memo(({ sortedRecords, requestSort }) => {
     setSearchText(e.target.value);
     setCurrentPage(1);
   }, []);
+
+  // Handle category update from dropdown
+  const handleCategoryUpdate = useCallback((updatedRecord) => {
+    // Notify parent component to update the record in the main data
+    if (onRecordUpdate) {
+      onRecordUpdate(updatedRecord);
+    }
+  }, [onRecordUpdate]);
 
   // Pagination calculations
   const totalPages = Math.ceil(filteredRecords.length / recordsPerPage);
@@ -311,9 +439,12 @@ export const RecordTable = memo(({ sortedRecords, requestSort }) => {
                   {formatCurrency(record.amount)}
                 </td>
                 <td className="category-cell">
-                  <span className="category-badge">
-                    {record.category}
-                  </span>
+                  <CategoryDropdown
+                    record={record}
+                    availableCategories={availableCategories}
+                    sessionId={sessionId}
+                    onCategoryUpdate={handleCategoryUpdate}
+                  />
                 </td>
               </tr>
             ))}

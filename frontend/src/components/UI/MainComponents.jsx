@@ -6,7 +6,7 @@ import dark from '../../assets/dark.svg';
 import coolImg from '../../assets/man_with_dog.jpg';
 import moreLightIcon from '../../assets/more_light.svg';
 import moreDarkIcon from '../../assets/more_dark.svg';
-import { useState, useEffect, memo, useMemo } from 'react';
+import React, { useState, useEffect, memo, useMemo } from 'react';
 import Card from './Card.jsx';
 
 

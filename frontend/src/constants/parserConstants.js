@@ -1,4 +1,5 @@
 export const API_URL = "/api";
+export const PARSER_MOCK = import.meta.env.VITE_PARSER_MOCK === 'true';
 
 export const CHART_COLORS = {
   primary: '#0d3b66',

@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { API_URL, SORT_DIRECTIONS } from '../constants/parserConstants';
+import { API_URL, SORT_DIRECTIONS, PARSER_MOCK } from '../constants/parserConstants';
 import {
   processChartData,
   processPieChartData,
   calculateFinancialMetrics,
   sortRecords
 } from '../utils/dataProcessing';
+import mockData from '../../mock/mock_parser.json';
 
 // Generate or retrieve session ID
 const getSessionId = () => {
@@ -55,6 +56,14 @@ export const useParserData = () => {
   const fetchBankNames = useCallback(async () => {
     try {
       updateLoadingState('bankNames', true);
+
+      if (PARSER_MOCK) {
+        console.log('MOCK DATA MODE');
+        const fetchedBankNames = [...new Set(mockData.records.map(record => record.bank))];
+        setBankNames(fetchedBankNames);
+        return;
+      }
+
       const response = await fetch(`${API_URL}/records/?session_id=${sessionId}`);
 
       if (!response.ok) {
@@ -76,6 +85,27 @@ export const useParserData = () => {
     try {
       updateLoadingState('records', true);
       setError(null);
+
+      if (PARSER_MOCK) {
+        const filteredMockRecords = bankName
+          ? mockData.records.filter(record => record.bank === bankName)
+          : mockData.records;
+
+        const fetchedRecords = filteredMockRecords.map(record => ({
+          ...record,
+          amount: parseFloat(record.amount),
+        }));
+
+        setRecords(fetchedRecords);
+
+        if (selectedMonths.length === 0 && fetchedRecords.length > 0) {
+          const availableMonths = [...new Set(fetchedRecords.map(record => record.date.split('-')[1]))];
+          setSelectedMonths(availableMonths);
+        }
+
+        setDataCache({ chartData: null, cacheKey: null });
+        return;
+      }
 
       const response = await fetch(`${API_URL}/records/?bank_name=${bankName}&session_id=${sessionId}`);
 
@@ -114,6 +144,18 @@ export const useParserData = () => {
         ? SORT_DIRECTIONS.DESCENDING
         : SORT_DIRECTIONS.ASCENDING
     }));
+  }, []);
+
+  // Update record in local state when edited
+  const updateRecord = useCallback((updatedRecord) => {
+    setRecords(prevRecords =>
+      prevRecords.map(record =>
+        record.id === updatedRecord.id ? updatedRecord : record
+      )
+    );
+
+    // Clear chart cache to force regeneration with updated data
+    setDataCache({ chartData: null, cacheKey: null });
   }, []);
 
   const clearData = useCallback(async () => {
@@ -252,6 +294,7 @@ export const useParserData = () => {
     fetchRecords,
     fetchBankNames,
     clearData,
+    updateRecord, // Add the new update function
 
     // Utilities
     retryFetch: () => {
