@@ -1,4 +1,4 @@
-export const API_URL = "/api";
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 export const PARSER_MOCK = import.meta.env.VITE_PARSER_MOCK === 'true';
 
 export const CHART_COLORS = {
