@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { memo, useState, useCallback } from 'react';
+import { memo, useState, useCallback, useMemo } from 'react';
 import FilterSection from './FilterSection';
-import { DistributionChart, RecordsTable } from './ChartContainers';
+import { DistributionChart, RecordsTable, WeeklyBucketsChart } from './ChartContainers';
 import TimeSeriesAccumulatedChart from './TimeSeriesAccumulatedChart';
 import { CHART_DIMENSIONS } from '../../constants/parserConstants';
 import record_icon from '../../assets/docs.svg';
@@ -72,6 +72,7 @@ const TabNavigation = memo(({ activeTab, onTabChange, tabs }) => (
           className={`tab-button ${activeTab === tab.id ? 'active' : ''}`}
           onClick={() => onTabChange(tab.id)}
           type="button"
+          data-test-id={`tab-${tab.id}`}
         >
           <img src={tab.icon} alt={`${tab.label} icon`} className="tab-icon" />
           <span className="tab-label">{tab.label}</span>
@@ -83,11 +84,17 @@ const TabNavigation = memo(({ activeTab, onTabChange, tabs }) => (
 TabNavigation.displayName = 'TabNavigation';
 
 // Overview tab content
-const OverviewTab = memo(({ totalAmount, sortedRecords }) => {
-  // Get top 5 largest purchases from filtered records (negative amounts are purchases)
+const OverviewTab = memo(({ metrics, sortedRecords, monthlyIncome }) => {
+  // Get top 5 largest purchases from filtered records
   const largestPurchases = sortedRecords?.filter(record => record.amount > 0)
-    .sort((a, b) => b.amount - a.amount) // Sort by amount descending (largest first)
+    .sort((a, b) => b.amount - a.amount)
     .slice(0, 5) || [];
+
+  const totalPurchasesNum = parseFloat(metrics?.totalPurchases?.replace(/[$,]/g, '') || 0);
+  const incomeRemainder = monthlyIncome != null ? monthlyIncome - totalPurchasesNum : null;
+  const incomePercent = monthlyIncome != null && monthlyIncome > 0
+    ? ((totalPurchasesNum / monthlyIncome) * 100).toFixed(1)
+    : null;
 
   return (
     <div className="tab-content overview-tab">
@@ -99,33 +106,46 @@ const OverviewTab = memo(({ totalAmount, sortedRecords }) => {
             <p>Complete financial overview and key metrics</p>
           </div>
           <div className="metrics-grid">
-            {totalAmount && (
+            {metrics && (
               <>
                 <div className="metric-item large">
                   <span className="metric-label">Total Purchases</span>
-                  <span className="metric-value primary">{totalAmount.totalPurchases || '$0.00'}</span>
+                  <span className="metric-value primary">{metrics.totalPurchases || '$0.00'}</span>
                 </div>
                 <div className="metric-item large">
-                  <span className="metric-label">Total Payments</span>
-                  <span className="metric-value positive">{totalAmount.totalPayments || '$0.00'}</span>
+                  <span className="metric-label">Monthly Income</span>
+                  <span className="metric-value positive">
+                    {monthlyIncome != null
+                      ? monthlyIncome.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+                      : '—'}
+                  </span>
                 </div>
                 <div className="metric-item large">
-                  <span className="metric-label">Net Spending</span>
-                  <span className={`metric-value ${totalAmount.netSpending?.includes('-') ? 'positive' : 'negative'}`}>
-                    {totalAmount.netSpending || '$0.00'}
+                  <span className="metric-label">
+                    {incomeRemainder != null ? 'Income Remaining' : 'Net Spending'}
+                  </span>
+                  <span className={`metric-value ${(incomeRemainder ?? (metrics.netSpending?.includes('-') ? 1 : -1)) >= 0 ? 'positive' : 'negative'}`}>
+                    {incomeRemainder != null
+                      ? incomeRemainder.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+                      : (metrics.netSpending || '$0.00')}
+                    {incomePercent != null && (
+                      <span style={{ fontSize: '0.75em', marginLeft: '0.4em', opacity: 0.7 }}>
+                        ({incomePercent}%)
+                      </span>
+                    )}
                   </span>
                 </div>
                 <div className="metric-item">
                   <span className="metric-label">Avg Purchase</span>
-                  <span className="metric-value">{totalAmount.avgPurchase || '$0.00'}</span>
+                  <span className="metric-value">{metrics.avgPurchase || '$0.00'}</span>
                 </div>
                 <div className="metric-item">
                   <span className="metric-label">Purchase Count</span>
-                  <span className="metric-value">{totalAmount.purchaseCount || 0}</span>
+                  <span className="metric-value">{metrics.purchaseCount || 0}</span>
                 </div>
                 <div className="metric-item">
                   <span className="metric-label">Total Transactions</span>
-                  <span className="metric-value">{totalAmount.transactionCount || 0}</span>
+                  <span className="metric-value">{metrics.transactionCount || 0}</span>
                 </div>
               </>
             )}
@@ -169,8 +189,8 @@ const OverviewTab = memo(({ totalAmount, sortedRecords }) => {
 OverviewTab.displayName = 'OverviewTab';
 
 // Time Series tab content
-const TimeSeriesTab = memo(({ lineData, loadingStates }) => (
-  <div className="tab-content timeseries-tab">
+const TimeSeriesTab = memo(({ lineData, weeklyData, loadingStates }) => (
+  <div className="tab-content timeseries-tab" data-test-id="chart-timeseries">
     <ChartContainer
       title="Purchase Timeline"
       description="Chronological view of purchases with accumulated totals - dates with more activity stand out visually"
@@ -180,34 +200,108 @@ const TimeSeriesTab = memo(({ lineData, loadingStates }) => (
     >
       <TimeSeriesAccumulatedChart lineData={lineData} />
     </ChartContainer>
+    <WeeklyBucketsChart weeklyData={weeklyData} loading={loadingStates?.charts || false} />
   </div>
 ));
 TimeSeriesTab.displayName = 'TimeSeriesTab';
 
 // Distribution tab content
-const DistributionTab = memo(({ pieData, totalAmount, loadingStates }) => (
-  <div className="tab-content distribution-tab">
+const DistributionTab = memo(({ pieData, metrics, loadingStates }) => (
+  <div className="tab-content distribution-tab" data-test-id="chart-distribution">
     <DistributionChart
       pieData={pieData}
-      totalAmount={totalAmount}
+      totalAmount={metrics}
       loading={loadingStates?.charts || false}
     />
   </div>
 ));
 DistributionTab.displayName = 'DistributionTab';
 
-// Records tab content
-const RecordsTab = memo(({ sortedRecords, requestSort, loadingStates, sessionId, onRecordUpdate }) => (
-  <div className="tab-content records-tab">
-    <RecordsTable
-      sessionId={sessionId}
-      onRecordUpdate={onRecordUpdate}
-      sortedRecords={sortedRecords}
-      requestSort={requestSort}
-      loading={loadingStates?.records || false}
-    />
-  </div>
-));
+// Category filter bar — local to the Records tab only
+const CategoryFilterBar = memo(({ records, selected, onToggle, onReset }) => {
+  const categories = useMemo(() =>
+    [...new Set(records?.map(r => r.category) || [])].sort(),
+    [records]
+  );
+
+  if (categories.length === 0) return null;
+
+  const allSelected = selected === null;
+
+  return (
+    <div className="records-category-filter" role="group" aria-label="Filter by category">
+      <button
+        className={`cat-filter-chip all-chip ${allSelected ? 'active' : ''}`}
+        onClick={onReset}
+        type="button"
+      >
+        All
+      </button>
+      {categories.map(cat => {
+        const isActive = allSelected || selected?.has(cat);
+        return (
+          <button
+            key={cat}
+            className={`cat-filter-chip ${isActive ? 'active' : ''}`}
+            onClick={() => onToggle(cat)}
+            type="button"
+          >
+            {cat}
+          </button>
+        );
+      })}
+    </div>
+  );
+});
+CategoryFilterBar.displayName = 'CategoryFilterBar';
+
+// Records tab content — with local category filter
+const RecordsTab = memo(({ sortedRecords, requestSort, loadingStates, sessionId, onRecordUpdate }) => {
+  // null = no filter (show all); Set = specific categories to show
+  const [selectedCategories, setSelectedCategories] = useState(null);
+
+  const toggleCategory = useCallback((cat) => {
+    setSelectedCategories(prev => {
+      if (prev === null) {
+        // All shown → isolate to this one category
+        return new Set([cat]);
+      }
+      const next = new Set(prev);
+      if (next.has(cat)) {
+        next.delete(cat);
+        // If nothing left, reset to all
+        return next.size === 0 ? null : next;
+      }
+      next.add(cat);
+      return next;
+    });
+  }, []);
+
+  const resetFilter = useCallback(() => setSelectedCategories(null), []);
+
+  const filteredRecords = useMemo(() => {
+    if (selectedCategories === null) return sortedRecords;
+    return (sortedRecords || []).filter(r => selectedCategories.has(r.category));
+  }, [sortedRecords, selectedCategories]);
+
+  return (
+    <div className="tab-content records-tab">
+      <CategoryFilterBar
+        records={sortedRecords}
+        selected={selectedCategories}
+        onToggle={toggleCategory}
+        onReset={resetFilter}
+      />
+      <RecordsTable
+        sessionId={sessionId}
+        onRecordUpdate={onRecordUpdate}
+        sortedRecords={filteredRecords}
+        requestSort={requestSort}
+        loading={loadingStates?.records || false}
+      />
+    </div>
+  );
+});
 RecordsTab.displayName = 'RecordsTab';
 
 const TabbedBreakdownSection = memo(({ sessionId, updateRecord,
@@ -216,15 +310,22 @@ const TabbedBreakdownSection = memo(({ sessionId, updateRecord,
   setBankName,
   selectedMonths,
   setSelectedMonths,
+  availableMonths,
   sortedRecords,
   allRecords,
   lineData,
   pieData,
   totalAmount,
+  weeklyData,
   requestSort,
   loading,
   loadingStates,
-  onClearData
+  onClearData,
+  monthlyIncome,
+  categories,
+  sessionOverrides,
+  upsertCategory,
+  deleteCategory,
 }) => {
   const [activeTab, setActiveTab] = useState(TABS.INSIGHT.id);
 
@@ -261,14 +362,16 @@ const TabbedBreakdownSection = memo(({ sessionId, updateRecord,
       case TABS.INSIGHT.id:
         return (
           <OverviewTab
-            totalAmount={totalAmount}
+            metrics={totalAmount}
             sortedRecords={sortedRecords}
+            monthlyIncome={monthlyIncome}
           />
         );
       case TABS.TIME_SERIES.id:
         return (
           <TimeSeriesTab
             lineData={lineData}
+            weeklyData={weeklyData}
             loadingStates={loadingStates}
           />
         );
@@ -276,7 +379,7 @@ const TabbedBreakdownSection = memo(({ sessionId, updateRecord,
         return (
           <DistributionTab
             pieData={pieData}
-            totalAmount={totalAmount}
+            metrics={totalAmount}
             loadingStates={loadingStates}
           />
         );
@@ -294,7 +397,7 @@ const TabbedBreakdownSection = memo(({ sessionId, updateRecord,
   };
 
   return (
-    <div className="parser-data-section">
+    <div className="parser-data-section" data-test-id="breakdown-section">
       {/* Filter Section */}
       <FilterSection
         bankName={bankName}
@@ -302,10 +405,14 @@ const TabbedBreakdownSection = memo(({ sessionId, updateRecord,
         setBankName={setBankName}
         selectedMonths={selectedMonths}
         setSelectedMonths={setSelectedMonths}
+        availableMonths={availableMonths}
         sortedRecords={sortedRecords}
-        allRecords={allRecords}
         onClearData={onClearData}
         loading={loadingStates?.bankNames || false}
+        categories={categories}
+        sessionOverrides={sessionOverrides}
+        upsertCategory={upsertCategory}
+        deleteCategory={deleteCategory}
       />
 
       {/* Tabbed Data Display Section */}

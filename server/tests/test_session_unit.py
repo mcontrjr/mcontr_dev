@@ -1,8 +1,10 @@
 import pytest
 import uuid
+from datetime import date
 from unittest.mock import patch, MagicMock
 from fastapi.testclient import TestClient
 from src.handler import PostgresHandler
+from src.models import TransactionRecord, ClearResponse, ParsedTransaction, BankType, TransactionCategory
 from main import app
 
 
@@ -30,19 +32,19 @@ class TestSessionIsolation:
             yield mock
 
     def test_records_endpoint_isolation(self, client, session_ids, mock_handler):
-        """Test that /records/ endpoint returns isolated data per session."""
-        # Mock empty records for both sessions
-        mock_handler.get_records.return_value = {'records': [], 'count': 0}
+        """Test that /records/ endpoint returns isolated data per session via POST."""
+        mock_handler.get_records.return_value = []
+        mock_handler.get_income.return_value = None
 
         # Test session 1
-        response_1 = client.get(f"/records/?session_id={session_ids['session_1']}")
+        response_1 = client.post("/records/", json={"session_id": session_ids['session_1']})
         assert response_1.status_code == 200
         data_1 = response_1.json()
         assert data_1['count'] == 0
         assert data_1['records'] == []
 
         # Test session 2
-        response_2 = client.get(f"/records/?session_id={session_ids['session_2']}")
+        response_2 = client.post("/records/", json={"session_id": session_ids['session_2']})
         assert response_2.status_code == 200
         data_2 = response_2.json()
         assert data_2['count'] == 0
@@ -55,21 +57,21 @@ class TestSessionIsolation:
 
     def test_clear_endpoint_isolation(self, client, session_ids, mock_handler):
         """Test that /clear/ endpoint only clears data for the specified session."""
-        # Mock successful clear response
-        mock_handler.clear_records.return_value = {
-            'message': 'Successfully cleared all records',
-            'records_deleted': 0
-        }
+        # Mock successful clear response - handler now returns ClearResponse
+        mock_handler.clear_records.return_value = ClearResponse(
+            message='Successfully cleared all records',
+            records_deleted=0
+        )
 
         # Clear session 1
-        response_1 = client.post("/clear/", data={'session_id': session_ids['session_1']})
+        response_1 = client.post("/clear/", json={"session_id": session_ids['session_1']})
         assert response_1.status_code == 200
         data_1 = response_1.json()
         assert data_1['message'] == 'Successfully cleared all records'
         assert data_1['records_deleted'] == 0
 
         # Clear session 2
-        response_2 = client.post("/clear/", data={'session_id': session_ids['session_2']})
+        response_2 = client.post("/clear/", json={"session_id": session_ids['session_2']})
         assert response_2.status_code == 200
         data_2 = response_2.json()
         assert data_2['message'] == 'Successfully cleared all records'
@@ -134,7 +136,7 @@ class TestSessionIsolation:
 
     def test_session_id_required_for_records(self, client):
         """Test that session_id is required for /records/ endpoint."""
-        response = client.get("/records/")
+        response = client.post("/records/", json={})
         assert response.status_code == 422  # Validation error
 
     def test_session_id_required_for_clear(self, client):
@@ -178,7 +180,7 @@ class TestPostgresHandlerSessionIsolation:
 
         # Mock database response
         mock_cursor.fetchall.return_value = [
-            (1, 'TEST', '2025-01-01', 'Test Transaction', 100.00, 'TEST')
+            (1, 'AMEX', date(2025, 1, 1), 'Test Transaction', 100.00, 'OTHER')
         ]
 
         result = handler.get_records("", session_id)
@@ -213,9 +215,9 @@ class TestPostgresHandlerSessionIsolation:
         assert "WHERE session_id = %s" in delete_query
         assert mock_cursor.execute.call_args_list[1][0][1] == (session_id,)
 
-        # Verify result
-        assert result['message'] == 'Successfully cleared all records'
-        assert result['records_deleted'] == 5
+        # Verify result - now returns ClearResponse
+        assert result.message == 'Successfully cleared all records'
+        assert result.records_deleted == 5
 
     def test_save_to_database_session_isolation(self, handler, mock_connection):
         """Test that save_to_database includes session_id in INSERT statement."""
@@ -223,10 +225,7 @@ class TestPostgresHandlerSessionIsolation:
         session_id = str(uuid.uuid4())
 
         # Mock get_records to return empty results
-        with patch.object(handler, 'get_records', return_value={'records': []}):
-            from src.models import ParsedTransaction, BankType, TransactionCategory
-            from datetime import date
-
+        with patch.object(handler, 'get_records', return_value=[]):
             purchases = [
                 ParsedTransaction(
                     bank=BankType.AMEX,  # Using valid enum value

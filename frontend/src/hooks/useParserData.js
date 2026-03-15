@@ -1,12 +1,9 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { API_URL, SORT_DIRECTIONS, PARSER_MOCK } from '../constants/parserConstants';
-import {
-  processChartData,
-  processPieChartData,
-  calculateFinancialMetrics,
-  sortRecords
-} from '../utils/dataProcessing';
+import { sortRecords } from '../utils/dataProcessing';
 import mockData from '../../mock/mock_parser.json';
+
+const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
 // Generate or retrieve session ID
 const getSessionId = () => {
@@ -26,6 +23,19 @@ export const useParserData = () => {
   const [selectedMonths, setSelectedMonths] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: SORT_DIRECTIONS.ASCENDING });
 
+  // Backend-computed data
+  const [lineData, setLineData] = useState({});
+  const [pieData, setPieData] = useState({});
+  const [weeklyData, setWeeklyData] = useState({});
+  const [metrics, setMetrics] = useState({});
+  const [availableMonths, setAvailableMonths] = useState([]);
+  const [monthlyIncome, setMonthlyIncome] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
+
+  // Category management
+  const [categories, setCategories] = useState({});
+  const [sessionOverrides, setSessionOverrides] = useState({});
+
   // Granular loading states
   const [loadingStates, setLoadingStates] = useState({
     bankNames: false,
@@ -35,17 +45,27 @@ export const useParserData = () => {
   });
   const [error, setError] = useState(null);
 
-  // Cache for processed data to avoid recalculation
-  const [dataCache, setDataCache] = useState({
-    chartData: null,
-    cacheKey: null
-  });
+  // Refs for managing fetch lifecycle
+  const monthDebounceRef = useRef(null);
+  const hasInitializedMonths = useRef(false);
+  const cacheRef = useRef({});
+
+  const getCacheKey = useCallback((bank, months) =>
+    `${sessionId}:${bank}:${[...months].sort().join(',')}`,
+  [sessionId]);
+
+  const isCacheValid = useCallback((key) => {
+    const cached = cacheRef.current[key];
+    return cached && (Date.now() - cached.timestamp) < CACHE_TTL;
+  }, []);
 
   // Update sessionId helper
   const updateSessionId = useCallback((newSessionId) => {
     if (!newSessionId) return;
     setSessionId(newSessionId);
     localStorage.setItem('parser_session_id', newSessionId);
+    hasInitializedMonths.current = false;
+    cacheRef.current = {};
   }, []);
 
   // Update loading state helper
@@ -53,38 +73,31 @@ export const useParserData = () => {
     setLoadingStates(prev => ({ ...prev, [key]: value }));
   }, []);
 
-  const fetchBankNames = useCallback(async () => {
-    try {
-      updateLoadingState('bankNames', true);
-
-      if (PARSER_MOCK) {
-        console.log('MOCK DATA MODE');
-        const fetchedBankNames = [...new Set(mockData.records.map(record => record.bank))];
-        setBankNames(fetchedBankNames);
-        return;
-      }
-
-      const response = await fetch(`${API_URL}/records/?session_id=${sessionId}`);
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch bank names');
-      }
-
-      const data = await response.json();
-      const fetchedBankNames = [...new Set(data.records.map(record => record.bank))];
-      setBankNames(fetchedBankNames);
-    } catch (error) {
-      console.error('Error fetching bank names:', error);
-      setError(error);
-    } finally {
-      updateLoadingState('bankNames', false);
+  const applyData = useCallback((data) => {
+    const fetchedRecords = data.records.map(record => ({
+      ...record,
+      amount: parseFloat(record.amount),
+    }));
+    setRecords(fetchedRecords);
+    setLineData(data.charts.lineData);
+    setPieData(data.charts.pieData);
+    setWeeklyData(data.charts.weeklyData);
+    setMetrics(data.metrics);
+    setBankNames(data.availableBanks);
+    setAvailableMonths(data.availableMonths);
+    if (data.monthly_income != null) {
+      setMonthlyIncome(data.monthly_income);
     }
-  }, [sessionId, updateLoadingState]);
+    setLastUpdated(Date.now());
+  }, []);
 
-  const fetchRecords = useCallback(async () => {
+  const fetchRecords = useCallback(async (monthsOverride, forceRefresh = false) => {
     try {
       updateLoadingState('records', true);
+      updateLoadingState('charts', true);
       setError(null);
+
+      const monthsToSend = monthsOverride !== undefined ? monthsOverride : selectedMonths;
 
       if (PARSER_MOCK) {
         const filteredMockRecords = bankName
@@ -98,44 +111,58 @@ export const useParserData = () => {
 
         setRecords(fetchedRecords);
 
-        if (selectedMonths.length === 0 && fetchedRecords.length > 0) {
-          const availableMonths = [...new Set(fetchedRecords.map(record => record.date.split('-')[1]))];
-          setSelectedMonths(availableMonths);
+        if (!hasInitializedMonths.current && fetchedRecords.length > 0) {
+          const avail = [...new Set(fetchedRecords.map(record => record.date.split('-')[1]))];
+          setSelectedMonths(avail);
+          setAvailableMonths(avail);
+          hasInitializedMonths.current = true;
         }
-
-        setDataCache({ chartData: null, cacheKey: null });
         return;
       }
 
-      const response = await fetch(`${API_URL}/records/?bank_name=${bankName}&session_id=${sessionId}`);
+      const cacheKey = getCacheKey(bankName, monthsToSend);
+      if (!forceRefresh && isCacheValid(cacheKey)) {
+        applyData(cacheRef.current[cacheKey].data);
+        return;
+      }
+
+      const body = { session_id: sessionId };
+      if (bankName) body.bank_name = bankName;
+      if (monthsToSend.length > 0) body.months = monthsToSend;
+
+      const response = await fetch(`${API_URL}/records/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
 
       if (!response.ok) {
         throw new Error('Failed to fetch records');
       }
 
       const data = await response.json();
-      const fetchedRecords = data.records.map(record => ({
-        ...record,
-        amount: parseFloat(record.amount),
-      }));
 
-      setRecords(fetchedRecords);
+      cacheRef.current[cacheKey] = { data, timestamp: Date.now() };
+      applyData(data);
 
-      // Initialize selectedMonths with available months if not set yet
-      if (selectedMonths.length === 0 && fetchedRecords.length > 0) {
-        const availableMonths = [...new Set(fetchedRecords.map(record => record.date.split('-')[1]))];
-        setSelectedMonths(availableMonths);
+      // Initialize selectedMonths on first load only
+      if (!hasInitializedMonths.current && monthsToSend.length === 0 && data.availableMonths.length > 0) {
+        setSelectedMonths(data.availableMonths);
+        hasInitializedMonths.current = true;
       }
-
-      // Clear cache when records change
-      setDataCache({ chartData: null, cacheKey: null });
     } catch (error) {
       console.error('Error fetching records:', error);
       setError(error);
     } finally {
       updateLoadingState('records', false);
+      updateLoadingState('charts', false);
     }
-  }, [bankName, sessionId, selectedMonths, updateLoadingState]);
+  }, [bankName, sessionId, selectedMonths, updateLoadingState, getCacheKey, isCacheValid, applyData]);
+
+  const hardReload = useCallback(() => {
+    cacheRef.current = {};
+    fetchRecords(selectedMonths, true);
+  }, [fetchRecords, selectedMonths]);
 
   const requestSort = useCallback((key) => {
     setSortConfig(current => ({
@@ -146,29 +173,80 @@ export const useParserData = () => {
     }));
   }, []);
 
-  // Update record in local state when edited
-  const updateRecord = useCallback((updatedRecord) => {
-    setRecords(prevRecords =>
-      prevRecords.map(record =>
-        record.id === updatedRecord.id ? updatedRecord : record
-      )
-    );
+  // Update record — re-fetch from backend to get updated charts/metrics
+  const updateRecord = useCallback(() => {
+    fetchRecords(selectedMonths, true);
+  }, [fetchRecords, selectedMonths]);
 
-    // Clear chart cache to force regeneration with updated data
-    setDataCache({ chartData: null, cacheKey: null });
-  }, []);
+  const saveMonthlyIncome = useCallback(async (income) => {
+    try {
+      const response = await fetch(`${API_URL}/session/income/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: sessionId, monthly_income: income }),
+      });
+      if (!response.ok) throw new Error('Failed to save income');
+      setMonthlyIncome(income);
+      // Invalidate cache so next fetch includes income
+      cacheRef.current = {};
+    } catch (error) {
+      console.error('Error saving income:', error);
+    }
+  }, [sessionId]);
+
+  const fetchCategories = useCallback(async () => {
+    try {
+      const response = await fetch(`${API_URL}/categories/?session_id=${encodeURIComponent(sessionId)}`);
+      if (!response.ok) throw new Error('Failed to fetch categories');
+      const data = await response.json();
+      setCategories(data.categories);
+      setSessionOverrides(data.session_overrides);
+    } catch (err) {
+      console.error('Error fetching categories:', err);
+    }
+  }, [sessionId]);
+
+  const upsertCategory = useCallback(async (categoryName, keywords) => {
+    try {
+      const response = await fetch(`${API_URL}/categories/${encodeURIComponent(categoryName)}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: sessionId, keywords }),
+      });
+      if (!response.ok) throw new Error('Failed to update category');
+      await fetchCategories();
+      cacheRef.current = {};
+      await fetchRecords(selectedMonths, true);
+    } catch (err) {
+      console.error('Error upserting category:', err);
+    }
+  }, [sessionId, fetchCategories, fetchRecords, selectedMonths]);
+
+  const deleteCategory = useCallback(async (categoryName) => {
+    try {
+      const response = await fetch(`${API_URL}/categories/${encodeURIComponent(categoryName)}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: sessionId }),
+      });
+      if (!response.ok) throw new Error('Failed to delete category');
+      await fetchCategories();
+      cacheRef.current = {};
+      await fetchRecords(selectedMonths, true);
+    } catch (err) {
+      console.error('Error deleting category:', err);
+    }
+  }, [sessionId, fetchCategories, fetchRecords, selectedMonths]);
 
   const clearData = useCallback(async () => {
     try {
       updateLoadingState('clearing', true);
       setError(null);
 
-      const formData = new FormData();
-      formData.append('session_id', sessionId);
-
       const response = await fetch(`${API_URL}/clear/`, {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: sessionId }),
       });
 
       if (!response.ok) {
@@ -180,11 +258,16 @@ export const useParserData = () => {
       setBankNames([]);
       setBankName('');
       setSelectedMonths([]);
+      setAvailableMonths([]);
       setSortConfig({ key: 'date', direction: SORT_DIRECTIONS.ASCENDING });
-      setDataCache({ chartData: null, cacheKey: null });
-
-      // Refresh bank names (should be empty now)
-      await fetchBankNames();
+      setLineData({});
+      setPieData({});
+      setWeeklyData({});
+      setMetrics({});
+      setMonthlyIncome(null);
+      setLastUpdated(null);
+      hasInitializedMonths.current = false;
+      cacheRef.current = {};
 
       return true; // Success
     } catch (error) {
@@ -194,78 +277,39 @@ export const useParserData = () => {
     } finally {
       updateLoadingState('clearing', false);
     }
-  }, [fetchBankNames, sessionId, updateLoadingState]);
+  }, [sessionId, updateLoadingState]);
 
   useEffect(() => {
-    fetchBankNames();
-  }, [fetchBankNames]);
-
-  useEffect(() => {
+    hasInitializedMonths.current = false;
     fetchRecords();
+    fetchCategories();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bankName, sessionId]);
 
-  // Optimized filtered records with caching
-  const filteredRecords = useMemo(() => {
-    // Always filter by selectedMonths if any are specified
-    // If no months selected, show all records (this prevents lockout)
-    if (selectedMonths.length === 0) return records;
+  // Debounced re-fetch when selectedMonths changes — skip during initial month population
+  useEffect(() => {
+    if (availableMonths.length === 0) return;
+    // Skip if this change was the initialization itself
+    if (!hasInitializedMonths.current) return;
 
-    return records.filter(record =>
-      selectedMonths.includes(record.date.split('-')[1])
-    );
-  }, [records, selectedMonths]);
+    if (monthDebounceRef.current) {
+      clearTimeout(monthDebounceRef.current);
+    }
+    monthDebounceRef.current = setTimeout(() => {
+      fetchRecords(selectedMonths);
+    }, 300);
+
+    return () => {
+      if (monthDebounceRef.current) {
+        clearTimeout(monthDebounceRef.current);
+      }
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedMonths]);
 
   const sortedRecords = useMemo(() => {
-    return sortRecords(filteredRecords, sortConfig);
-  }, [filteredRecords, sortConfig]);
-
-  // Optimized chart data with caching
-  const chartData = useMemo(() => {
-    if (filteredRecords.length === 0) {
-      return { lineData: {}, pieData: {}, totalAmount: {} };
-    }
-
-    // Generate cache key based on relevant data
-    const cacheKey = JSON.stringify({
-      recordsLength: filteredRecords.length,
-      recordsChecksum: filteredRecords.reduce((sum, r) => sum + r.amount, 0),
-      selectedMonths: selectedMonths.sort(),
-      bankName
-    });
-
-    // Return cached data if available and valid
-    if (dataCache.cacheKey === cacheKey && dataCache.chartData) {
-      return dataCache.chartData;
-    }
-
-    // Process new chart data
-    updateLoadingState('charts', true);
-
-    // Use setTimeout to allow UI to update with loading state
-    setTimeout(() => {
-      try {
-        const { lineData, sortedRecords: processedRecords } = processChartData(filteredRecords, selectedMonths);
-        const pieData = processPieChartData(processedRecords);
-        const totalAmount = calculateFinancialMetrics(processedRecords);
-
-        const newChartData = { lineData, pieData, totalAmount };
-
-        // Cache the result
-        setDataCache({
-          chartData: newChartData,
-          cacheKey
-        });
-
-        updateLoadingState('charts', false);
-      } catch (error) {
-        console.error('Error processing chart data:', error);
-        updateLoadingState('charts', false);
-      }
-    }, 0);
-
-    // Return loading state data while processing
-    return dataCache.chartData || { lineData: {}, pieData: {}, totalAmount: {} };
-  }, [filteredRecords, selectedMonths, bankName, dataCache, updateLoadingState]);
+    return sortRecords(records, sortConfig);
+  }, [records, sortConfig]);
 
   // Aggregate loading state
   const isLoading = useMemo(() => {
@@ -276,25 +320,40 @@ export const useParserData = () => {
     // State
     bankName,
     bankNames,
-    records: filteredRecords,
+    records,
     sortedRecords,
-    allRecords: records, // Expose unfiltered records for filter section logic
+    allRecords: records,
     selectedMonths,
     sortConfig,
-    loading: loadingStates.records, // Main loading state for backwards compatibility
-    loadingStates, // Granular loading states
-    isLoading, // Combined loading state
+    loading: loadingStates.records,
+    loadingStates,
+    isLoading,
     error,
-    ...chartData,
+    lineData,
+    pieData,
+    weeklyData,
+    metrics,
+    availableMonths,
+    totalAmount: metrics, // backwards compat alias
+    monthlyIncome,
+    lastUpdated,
+
+    // Category management
+    categories,
+    sessionOverrides,
+    fetchCategories,
+    upsertCategory,
+    deleteCategory,
 
     // Actions
     setBankName,
     setSelectedMonths,
     requestSort,
     fetchRecords,
-    fetchBankNames,
     clearData,
-    updateRecord, // Add the new update function
+    updateRecord,
+    hardReload,
+    saveMonthlyIncome,
 
     // Utilities
     retryFetch: () => {

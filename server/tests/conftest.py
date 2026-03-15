@@ -6,10 +6,12 @@ import pytest
 import uuid
 import tempfile
 import os
+from datetime import date
 from unittest.mock import MagicMock, patch
 from fastapi.testclient import TestClient
 
 from main import app
+from src.models import TransactionRecord
 
 
 @pytest.fixture(scope="session")
@@ -78,6 +80,18 @@ def sample_records():
 
 
 @pytest.fixture
+def sample_transaction_records():
+    """Sample TransactionRecord objects for testing."""
+    return [
+        TransactionRecord(id=1, bank='AMEX', date=date(2025, 1, 15), description='STARBUCKS COFFEE', amount=15.50, category='FOOD'),
+        TransactionRecord(id=2, bank='CITI', date=date(2025, 1, 20), description='SHELL GAS STATION', amount=45.00, category='GAS'),
+        TransactionRecord(id=3, bank='AMEX', date=date(2025, 2, 5), description='AMAZON PURCHASE', amount=89.99, category='SHOPPING'),
+        TransactionRecord(id=4, bank='DISCOVER', date=date(2025, 3, 10), description='PAYMENT RECEIVED', amount=-500.00, category='PAYMENT'),
+        TransactionRecord(id=5, bank='AMEX', date=date(2025, 1, 25), description='COSTCO WHOLESALE', amount=125.00, category='COSTCO'),
+    ]
+
+
+@pytest.fixture
 def sample_purchases():
     """Sample purchase data from parser for testing."""
     return [
@@ -102,13 +116,17 @@ def sample_purchases():
 def mock_handler():
     """Mock the PostgresHandler to avoid actual database operations."""
     with patch('main.handler') as mock:
-        # Set up default return values
-        mock.get_records.return_value = {'records': [], 'count': 0}
-        mock.clear_records.return_value = {
-            'message': 'Successfully cleared all records',
-            'records_deleted': 0
-        }
+        # Set up default return values - handler now returns typed objects
+        mock.get_records.return_value = []
+        mock.clear_records.return_value = MagicMock(
+            message='Successfully cleared all records',
+            records_deleted=0
+        )
         mock.save_to_database.return_value = None
+        mock.get_session_categories.return_value = {}
+        mock.upsert_session_category.return_value = None
+        mock.delete_session_category.return_value = False
+        mock.recategorize_records.return_value = 0
         yield mock
 
 

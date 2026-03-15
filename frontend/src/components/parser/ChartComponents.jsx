@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { memo, useMemo, useCallback, useState, useEffect, useRef } from 'react';
+import React, { memo, useMemo, useCallback, useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,7 +17,6 @@ import {
   CHART_COLORS,
   CHART_DIMENSIONS,
   CHART_CONFIG,
-  API_URL
 } from '../../constants/parserConstants';
 
 // Register Chart.js components
@@ -32,10 +31,24 @@ ChartJS.register(
 );
 
 // Re-export AmountBar component with optimizations
-export const AmountBar = memo(({ lineData }) => {
+// Accepts weeklyData prop directly (from backend) or falls back to processing lineData
+export const AmountBar = memo(({ weeklyData: weeklyDataProp, lineData }) => {
   const colors = useThemeColors();
 
   const weeklyData = useMemo(() => {
+    // Prefer backend-provided weeklyData
+    if (weeklyDataProp?.labels?.length) {
+      return {
+        ...weeklyDataProp,
+        datasets: weeklyDataProp.datasets.map((dataset, index) => ({
+          ...dataset,
+          backgroundColor: index === 0 ? CHART_COLORS.accent : CHART_COLORS.secondary,
+          barPercentage: CHART_CONFIG.barPercentage,
+        }))
+      };
+    }
+
+    // Fallback to processing lineData (for backwards compat)
     if (!lineData?.labels?.length) return { labels: [], datasets: [] };
 
     const processed = processWeeklyData(lineData);
@@ -47,7 +60,7 @@ export const AmountBar = memo(({ lineData }) => {
         barPercentage: CHART_CONFIG.barPercentage,
       }))
     };
-  }, [lineData]);
+  }, [weeklyDataProp, lineData]);
 
   const chartOptions = useMemo(() => ({
     responsive: true,
@@ -173,130 +186,11 @@ export const AmountPie = memo(({ pieData }) => {
 
 AmountPie.displayName = 'AmountPie';
 
-// Re-export RecordTable component with pagination
-
-// Category Dropdown Component - Simple scrollable menu
-const CategoryDropdown = memo(({ record, availableCategories = [], sessionId, onCategoryUpdate }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const containerRef = useRef(null);
-  const searchInputRef = useRef(null);
-
-  const filteredCategories = useMemo(() => {
-    const list = Array.isArray(availableCategories) ? availableCategories : [];
-    const q = searchQuery.trim().toLowerCase();
-    if (!q) return list;
-    return list.filter(c => c?.toLowerCase().includes(q));
-  }, [availableCategories, searchQuery]);
-
-  const close = useCallback(() => {
-    setIsOpen(false);
-    setSearchQuery('');
-  }, []);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    const onDocClick = (e) => {
-      if (containerRef.current && !containerRef.current.contains(e.target)) close();
-    };
-    const onKey = (e) => { if (e.key === 'Escape') close(); };
-    document.addEventListener('mousedown', onDocClick);
-    document.addEventListener('keydown', onKey);
-    const t = setTimeout(() => searchInputRef.current?.focus(), 50);
-    return () => {
-      document.removeEventListener('mousedown', onDocClick);
-      document.removeEventListener('keydown', onKey);
-      clearTimeout(t);
-    };
-  }, [isOpen, close]);
-
-  const handleCategoryChange = useCallback(async (newCategory) => {
-    if (!newCategory || newCategory === record.category) {
-      close();
-      return;
-    }
-    setIsUpdating(true);
-    try {
-      const response = await fetch(`${API_URL}/edit_record/`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: record.id,
-          category: newCategory,
-          session_id: sessionId,
-        }),
-      });
-      if (!response.ok) throw new Error('Failed to update category');
-      const result = await response.json();
-      if (result.success && result.updated_record) {
-        onCategoryUpdate(result.updated_record);
-        close();
-      } else {
-        throw new Error(result.message || 'Update failed');
-      }
-    } catch (err) {
-      console.error('Error updating category:', err);
-    } finally {
-      setIsUpdating(false);
-    }
-  }, [record, sessionId, onCategoryUpdate, close]);
-
-  return (
-    <div className={`category-dropdown-container ${isOpen ? 'open' : ''}`} ref={containerRef}>
-      <button
-        className={`category-badge ${isUpdating ? 'updating' : ''} ${isOpen ? 'active' : ''}`}
-        onClick={() => setIsOpen(v => !v)}
-        disabled={isUpdating}
-        type="button"
-      >
-        {isUpdating ? '⟳' : record.category}
-      </button>
-
-      {isOpen && (
-        <div className="category-dropdown-menu">
-          <input
-            ref={searchInputRef}
-            type="text"
-            className="category-search-input"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <div className="category-options">
-            {filteredCategories.length > 0 ? (
-              filteredCategories.map((category) => (
-                <button
-                  key={category}
-                  className={`category-option ${category === record.category ? 'current' : ''}`}
-                  onClick={() => handleCategoryChange(category)}
-                >
-                  {category}
-                </button>
-              ))
-            ) : (
-              <div className="category-no-results">No results</div>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-});
-CategoryDropdown.displayName = 'CategoryDropdown';
-
-
-// Enhanced Record Table with Category Editing
-export const RecordTable = memo(({ sortedRecords, requestSort, sessionId, onRecordUpdate }) => {
+// Enhanced Record Table
+export const RecordTable = memo(({ sortedRecords, requestSort }) => {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
-
-  // Get available categories from the sorted records
-  const availableCategories = useMemo(() => {
-    const categories = [...new Set(sortedRecords?.map(record => record.category) || [])];
-    return categories.sort();
-  }, [sortedRecords]);
 
   const filteredRecords = useMemo(() =>
     filterRecordsBySearch(sortedRecords || [], searchText),
@@ -308,14 +202,6 @@ export const RecordTable = memo(({ sortedRecords, requestSort, sessionId, onReco
     setSearchText(e.target.value);
     setCurrentPage(1);
   }, []);
-
-  // Handle category update from dropdown
-  const handleCategoryUpdate = useCallback((updatedRecord) => {
-    // Notify parent component to update the record in the main data
-    if (onRecordUpdate) {
-      onRecordUpdate(updatedRecord);
-    }
-  }, [onRecordUpdate]);
 
   // Pagination calculations
   const totalPages = Math.ceil(filteredRecords.length / recordsPerPage);
@@ -381,7 +267,7 @@ export const RecordTable = memo(({ sortedRecords, requestSort, sessionId, onReco
   };
 
   return (
-    <div className="records-table-container">
+    <div className="records-table-container" data-test-id="records-table">
       <div className="records-table-header compact">
         <div className="table-title-section">
           <h4>Transactions</h4>
@@ -406,6 +292,7 @@ export const RecordTable = memo(({ sortedRecords, requestSort, sessionId, onReco
             value={searchText}
             onChange={handleSearchChange}
             className="records-search-input compact"
+            data-test-id="records-search"
           />
         </div>
       </div>
@@ -430,7 +317,7 @@ export const RecordTable = memo(({ sortedRecords, requestSort, sessionId, onReco
           </thead>
           <tbody>
             {currentRecords.map((record) => (
-              <tr key={record.id}>
+              <tr key={record.id} data-test-id={`record-row-${record.id}`}>
                 <td className="date-cell">{record.date}</td>
                 <td className="description-cell" title={record.description}>
                   {record.description}
@@ -439,12 +326,9 @@ export const RecordTable = memo(({ sortedRecords, requestSort, sessionId, onReco
                   {formatCurrency(record.amount)}
                 </td>
                 <td className="category-cell">
-                  <CategoryDropdown
-                    record={record}
-                    availableCategories={availableCategories}
-                    sessionId={sessionId}
-                    onCategoryUpdate={handleCategoryUpdate}
-                  />
+                  <span className="category-badge" data-test-id={`category-badge-${record.id}`}>
+                    {record.category}
+                  </span>
                 </td>
               </tr>
             ))}
@@ -462,7 +346,7 @@ export const RecordTable = memo(({ sortedRecords, requestSort, sessionId, onReco
       </div>
 
       {totalPages > 1 && (
-        <div className="pagination-container">
+        <div className="pagination-container" data-test-id="pagination">
           <div className="pagination-info">
             Showing {startIndex + 1}-{Math.min(endIndex, filteredRecords.length)} of {filteredRecords.length}
           </div>

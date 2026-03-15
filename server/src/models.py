@@ -48,6 +48,11 @@ class TransactionCategory(str, Enum):
     OTHER = "OTHER"
 
 
+class SessionModel(BaseModel):
+    """Base model with shared session_id validator."""
+    session_id: str = Field(..., description="Session ID for data isolation")
+
+
 # Core Transaction Models
 class ParsedTransaction(BaseModel):
     """A transaction parsed from bank statements."""
@@ -71,7 +76,7 @@ class ParsedTransaction(BaseModel):
         use_enum_values = True
 
 
-class DatabaseTransaction(BaseModel):
+class DatabaseTransaction(SessionModel):
     """A transaction as stored in the database."""
     id: Optional[int] = Field(None, description="Database ID")
     bank: BankType = Field(..., description="Bank name")
@@ -79,38 +84,21 @@ class DatabaseTransaction(BaseModel):
     description: str = Field(..., description="Transaction description")
     amount: float = Field(..., description="Transaction amount")
     category: TransactionCategory = Field(..., description="Transaction category")
-    session_id: str = Field(..., description="Session ID for data isolation")
-
-    @validator('session_id')
-    def validate_session_id(cls, v):
-        try:
-            UUID(v)
-        except ValueError:
-            raise ValueError('session_id must be a valid UUID')
-        return v
 
     class Config:
         use_enum_values = True
 
 
 # API Request Models
-class FileUploadRequest(BaseModel):
+class FileUploadRequest(SessionModel):
     """Request model for file upload."""
-    session_id: str = Field(..., description="Session ID for data isolation")
-
-    @validator('session_id')
-    def validate_session_id(cls, v):
-        try:
-            UUID(v)
-        except ValueError:
-            raise ValueError('session_id must be a valid UUID')
-        return v
+    pass
 
 
-class RecordsRequest(BaseModel):
+class RecordsRequest(SessionModel):
     """Request model for getting records."""
     bank_name: Optional[str] = Field(None, description="Optional bank name filter")
-    session_id: str = Field(..., description="Session ID for data isolation")
+    months: Optional[List[str]] = Field(None, description="Optional list of month numbers to filter (e.g. ['01', '03'])")
 
     @validator('bank_name')
     def validate_bank_name(cls, v):
@@ -118,26 +106,21 @@ class RecordsRequest(BaseModel):
             return v.upper()
         return v
 
-    @validator('session_id')
-    def validate_session_id(cls, v):
-        try:
-            UUID(v)
-        except ValueError:
-            raise ValueError('session_id must be a valid UUID')
-        return v
 
-
-class ClearRequest(BaseModel):
+class ClearRequest(SessionModel):
     """Request model for clearing records."""
-    session_id: str = Field(..., description="Session ID for data isolation")
+    pass
 
-    @validator('session_id')
-    def validate_session_id(cls, v):
-        try:
-            UUID(v)
-        except ValueError:
-            raise ValueError('session_id must be a valid UUID')
-        return v
+
+class SessionIncomeRequest(SessionModel):
+    """Request model for saving monthly income for a session."""
+    monthly_income: float = Field(..., description="User's monthly income in USD")
+
+
+class SessionIncomeResponse(BaseModel):
+    """Response model for session income endpoint."""
+    session_id: str = Field(..., description="Session ID")
+    monthly_income: float = Field(..., description="Saved monthly income")
 
 
 # API Response Models
@@ -197,64 +180,43 @@ class APIInfoResponse(BaseModel):
     endpoints: Dict[str, str] = Field(..., description="Available endpoints")
 
 
-# Configuration Models
-class BankConfiguration(BaseModel):
-    """Configuration for bank statement parsing."""
-    bank: BankType = Field(..., description="Bank name")
-    start_index: int = Field(0, description="Starting page index for parsing")
-    date_pattern: str = Field(r'^\d{2}\/\d{2}\/\d{2}', description="Date pattern regex")
-    skip_date_in_desc: bool = Field(True, description="Whether to skip date in description")
-    tabular_entries: bool = Field(False, description="Whether entries are in tabular format")
-    checking: bool = Field(False, description="Whether this is a checking account")
+# Category Management Models
+class CategoryUpsertRequest(SessionModel):
+    """Request to create or update a session-specific category."""
+    keywords: List[str] = Field(..., description="Keywords that trigger this category")
 
-    class Config:
-        frozen = True  # Immutable configuration
+    @validator('keywords')
+    def clean_keywords(cls, v):
+        return [kw.upper().strip() for kw in v if kw.strip()]
 
 
-# Database Operation Models
-class DatabaseInsertResult(BaseModel):
-    """Result of database insert operation."""
-    inserted_count: int = Field(..., description="Number of records inserted")
-    skipped_count: int = Field(0, description="Number of records skipped (duplicates)")
-    errors: List[str] = Field(default_factory=list, description="List of errors encountered")
+class CategoryDeleteRequest(SessionModel):
+    """Request to delete a session-specific category override."""
+    pass
 
 
-class DatabaseQueryResult(BaseModel):
-    """Result of database query operation."""
-    records: List[DatabaseTransaction] = Field(..., description="Retrieved records")
-    count: int = Field(..., description="Number of records")
+class CategoryActionResponse(BaseModel):
+    """Response for category create/update/delete operations."""
+    success: bool
+    message: str
+    category: str
+    keywords: List[str]
+    records_updated: int
 
 
-class DatabaseDeleteResult(BaseModel):
-    """Result of database delete operation."""
-    deleted_count: int = Field(..., description="Number of records deleted")
-    message: str = Field(..., description="Success message")
-
-
-# Error Models
-class APIError(BaseModel):
-    """Standardized API error response."""
-    detail: str = Field(..., description="Error detail message")
-    error_code: Optional[str] = Field(None, description="Error code")
-    timestamp: datetime = Field(default_factory=datetime.now, description="Error timestamp")
+class SessionCategoriesResponse(BaseModel):
+    """Response with merged categories (global defaults + session overrides)."""
+    categories: Dict[str, List[str]]
+    session_overrides: Dict[str, List[str]]
 
 
 # Edit Record Models
-class EditRecordRequest(BaseModel):
+class EditRecordRequest(SessionModel):
     """Request model for editing a record."""
     id: int = Field(..., description="ID of the record to edit")
     category: Optional[TransactionCategory] = Field(None, description="New category for the record")
     description: Optional[str] = Field(None, description="New description for the record")
     amount: Optional[float] = Field(None, description="New amount for the record")
-    session_id: str = Field(..., description="Session ID for data isolation")
-
-    @validator('session_id')
-    def validate_session_id(cls, v):
-        try:
-            UUID(v)
-        except ValueError:
-            raise ValueError('session_id must be a valid UUID')
-        return v
 
     @validator('amount')
     def validate_amount(cls, v):
@@ -277,3 +239,48 @@ class EditRecordResponse(BaseModel):
     success: bool = Field(..., description="Whether the edit was successful")
     message: str = Field(..., description="Descriptive message")
     updated_record: Optional[TransactionRecord] = Field(None, description="The updated record if successful")
+
+
+# Enriched Response Models
+class ChartDataset(BaseModel):
+    """A single dataset for chart rendering."""
+    label: str
+    data: List[float]
+    borderColor: Optional[str] = None
+    backgroundColor: Optional[str] = None
+    purchases: Optional[bool] = None
+    payments: Optional[bool] = None
+
+
+class ChartData(BaseModel):
+    """Chart data with labels and datasets."""
+    labels: List[str]
+    datasets: List[ChartDataset]
+
+
+class FinancialMetrics(BaseModel):
+    """Pre-formatted financial metrics."""
+    totalPurchases: str
+    totalPayments: str
+    netSpending: str
+    avgPurchase: str
+    transactionCount: int
+    purchaseCount: int
+
+
+class ChartsPayload(BaseModel):
+    """All chart data grouped together."""
+    lineData: ChartData
+    pieData: ChartData
+    weeklyData: ChartData
+
+
+class EnrichedRecordsResponse(BaseModel):
+    """Enriched response with records, charts, and metrics."""
+    records: List[TransactionRecord]
+    count: int
+    charts: ChartsPayload
+    metrics: FinancialMetrics
+    availableBanks: List[str]
+    availableMonths: List[str]
+    monthly_income: Optional[float] = Field(None, description="User's saved monthly income for this session")

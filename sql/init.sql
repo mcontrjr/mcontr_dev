@@ -10,3 +10,14 @@ CREATE TABLE IF NOT EXISTS bank_statements (
 
 -- Create index for better query performance
 CREATE INDEX IF NOT EXISTS idx_session_id ON bank_statements(session_id);
+
+-- Per-session category keyword overrides
+CREATE TABLE IF NOT EXISTS session_categories (
+    id SERIAL PRIMARY KEY,
+    session_id VARCHAR(36) NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    keywords JSONB NOT NULL DEFAULT '[]',
+    UNIQUE(session_id, category)
+);
+
+CREATE INDEX IF NOT EXISTS idx_session_categories ON session_categories(session_id);

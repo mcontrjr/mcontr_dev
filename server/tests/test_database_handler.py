@@ -5,6 +5,7 @@ Tests all database methods, error handling, and session isolation.
 
 import pytest
 import uuid
+from datetime import date
 from unittest.mock import patch, MagicMock
 from src.handler import PostgresHandler
 
@@ -30,7 +31,6 @@ def mock_connection():
 def sample_purchases():
     """Sample purchase data for testing."""
     from src.models import ParsedTransaction, BankType, TransactionCategory
-    from datetime import date
 
     return [
         ParsedTransaction(
@@ -56,13 +56,13 @@ class TestPostgresHandlerGetRecords:
     """Test the get_records method."""
 
     def test_get_records_with_session_id(self, handler, mock_connection, session_id):
-        """Test get_records filters by session_id."""
+        """Test get_records filters by session_id and returns TransactionRecord list."""
         mock_conn, mock_cursor = mock_connection
 
         # Mock database response
         mock_cursor.fetchall.return_value = [
-            (1, 'AMEX', '2025-01-01', 'STARBUCKS', -15.50, 'FOOD'),
-            (2, 'CITI', '2025-01-02', 'SHELL', -45.00, 'GAS')
+            (1, 'AMEX', date(2025, 1, 1), 'STARBUCKS', -15.50, 'FOOD'),
+            (2, 'CITI', date(2025, 1, 2), 'SHELL', -45.00, 'GAS')
         ]
 
         result = handler.get_records("", session_id)
@@ -75,20 +75,19 @@ class TestPostgresHandlerGetRecords:
         assert "WHERE session_id = %s" in query
         assert params == [session_id]
 
-        # Verify result structure (handler returns tuples, not dictionaries)
-        assert 'records' in result
-        assert 'count' in result
-        assert result['count'] == 2
-        assert len(result['records']) == 2
-        assert result['records'][0][1] == 'AMEX'  # bank is at index 1
-        assert result['records'][1][1] == 'CITI'  # bank is at index 1
+        # Verify result is a list of TransactionRecord
+        assert isinstance(result, list)
+        assert len(result) == 2
+        assert result[0].bank == 'AMEX'
+        assert result[1].bank == 'CITI'
+        assert result[0].id == 1
 
     def test_get_records_with_bank_filter(self, handler, mock_connection, session_id):
         """Test get_records with bank name filter."""
         mock_conn, mock_cursor = mock_connection
 
         mock_cursor.fetchall.return_value = [
-            (1, 'AMEX', '2025-01-01', 'STARBUCKS', -15.50, 'FOOD')
+            (1, 'AMEX', date(2025, 1, 1), 'STARBUCKS', -15.50, 'FOOD')
         ]
 
         result = handler.get_records("AMEX", session_id)
@@ -100,8 +99,8 @@ class TestPostgresHandlerGetRecords:
         assert "WHERE session_id = %s AND bank = %s" in query
         assert params == [session_id, "AMEX"]
 
-        assert result['count'] == 1
-        assert result['records'][0][1] == 'AMEX'  # bank is at index 1
+        assert len(result) == 1
+        assert result[0].bank == 'AMEX'
 
     def test_get_records_empty_result(self, handler, mock_connection, session_id):
         """Test get_records with no matching records."""
@@ -111,8 +110,7 @@ class TestPostgresHandlerGetRecords:
 
         result = handler.get_records("", session_id)
 
-        assert result['count'] == 0
-        assert result['records'] == []
+        assert result == []
 
     def test_get_records_database_error(self, handler, mock_connection, session_id):
         """Test get_records with database error."""
@@ -146,7 +144,7 @@ class TestPostgresHandlerClearRecords:
     """Test the clear_records method."""
 
     def test_clear_records_success(self, handler, mock_connection, session_id):
-        """Test successful record clearing."""
+        """Test successful record clearing returns ClearResponse."""
         mock_conn, mock_cursor = mock_connection
 
         # Mock count query response
@@ -171,9 +169,9 @@ class TestPostgresHandlerClearRecords:
         assert "WHERE session_id = %s" in delete_query
         assert delete_params == (session_id,)
 
-        # Verify result
-        assert result['message'] == 'Successfully cleared all records'
-        assert result['records_deleted'] == 5
+        # Verify result is ClearResponse
+        assert result.message == 'Successfully cleared all records'
+        assert result.records_deleted == 5
 
         # Verify transaction commit
         mock_conn.commit.assert_called_once()
@@ -186,8 +184,8 @@ class TestPostgresHandlerClearRecords:
 
         result = handler.clear_records(session_id)
 
-        assert result['message'] == 'Successfully cleared all records'
-        assert result['records_deleted'] == 0
+        assert result.message == 'Successfully cleared all records'
+        assert result.records_deleted == 0
 
     def test_clear_records_database_error(self, handler, mock_connection, session_id):
         """Test clear_records with database error."""
@@ -203,9 +201,6 @@ class TestPostgresHandlerClearRecords:
         assert exc_info.value.status_code == 500
         assert "Error clearing records from database" in str(exc_info.value.detail)
 
-        # clear_records doesn't call rollback in exception handler
-        # It just raises the HTTPException and closes the connection
-
     def test_clear_records_connection_cleanup(self, handler, mock_connection, session_id):
         """Test that database connection is properly closed."""
         mock_conn, mock_cursor = mock_connection
@@ -220,6 +215,43 @@ class TestPostgresHandlerClearRecords:
 
 @pytest.mark.unit
 @pytest.mark.database
+class TestPostgresHandlerUpdateRecord:
+    """Test the update_record method."""
+
+    def test_update_record_success(self, handler, mock_connection, session_id):
+        """Test successful record update returns TransactionRecord."""
+        mock_conn, mock_cursor = mock_connection
+
+        mock_cursor.rowcount = 1
+        mock_cursor.fetchone.return_value = (1, 'AMEX', date(2025, 1, 1), 'STARBUCKS', -15.50, 'FOOD')
+
+        result = handler.update_record(1, {'category': 'FOOD'}, session_id)
+
+        assert result is not None
+        assert result.id == 1
+        assert result.category == 'FOOD'
+
+    def test_update_record_not_found(self, handler, mock_connection, session_id):
+        """Test update_record when record doesn't exist."""
+        mock_conn, mock_cursor = mock_connection
+
+        mock_cursor.rowcount = 0
+
+        result = handler.update_record(999, {'category': 'FOOD'}, session_id)
+
+        assert result is None
+
+    def test_update_record_no_valid_fields(self, handler, mock_connection, session_id):
+        """Test update_record with no valid fields."""
+        mock_conn, mock_cursor = mock_connection
+
+        result = handler.update_record(1, {'invalid_field': 'value'}, session_id)
+
+        assert result is None
+
+
+@pytest.mark.unit
+@pytest.mark.database
 class TestPostgresHandlerSaveToDatabase:
     """Test the save_to_database method."""
 
@@ -228,7 +260,7 @@ class TestPostgresHandlerSaveToDatabase:
         mock_conn, mock_cursor = mock_connection
 
         # Mock get_records to return empty results (no duplicates)
-        with patch.object(handler, 'get_records', return_value={'records': []}):
+        with patch.object(handler, 'get_records', return_value=[]):
             handler.save_to_database(sample_purchases, session_id)
 
             # Verify INSERT query was executed for each purchase
@@ -249,14 +281,13 @@ class TestPostgresHandlerSaveToDatabase:
         """Test duplicate detection prevents saving existing records."""
         mock_conn, mock_cursor = mock_connection
 
-        # Mock get_records to return existing records (duplicates)
-        # Format: (id, bank, date, description, amount, category)
-        from datetime import datetime
+        # Mock get_records to return existing records as TransactionRecord objects
+        from src.models import TransactionRecord
         existing_records = [
-            (1, 'AMEX', datetime(2025, 1, 1), 'STARBUCKS COFFEE', -15.50, 'FOOD')
+            TransactionRecord(id=1, bank='AMEX', date=date(2025, 1, 1), description='STARBUCKS COFFEE', amount=-15.50, category='FOOD')
         ]
 
-        with patch.object(handler, 'get_records', return_value={'records': existing_records}):
+        with patch.object(handler, 'get_records', return_value=existing_records):
             handler.save_to_database(sample_purchases, session_id)
 
             # Verify only non-duplicate records were inserted
@@ -275,7 +306,7 @@ class TestPostgresHandlerSaveToDatabase:
         """Test saving with empty purchase list."""
         mock_conn, mock_cursor = mock_connection
 
-        with patch.object(handler, 'get_records', return_value={'records': []}):
+        with patch.object(handler, 'get_records', return_value=[]):
             handler.save_to_database([], session_id)
 
             # Verify no INSERT queries were executed
@@ -288,7 +319,7 @@ class TestPostgresHandlerSaveToDatabase:
         """Test save_to_database with database error."""
         mock_conn, mock_cursor = mock_connection
 
-        with patch.object(handler, 'get_records', return_value={'records': []}):
+        with patch.object(handler, 'get_records', return_value=[]):
             mock_cursor.execute.side_effect = Exception("Database error")
 
             # save_to_database doesn't raise exceptions, it catches them and continues
@@ -301,7 +332,7 @@ class TestPostgresHandlerSaveToDatabase:
         """Test that database connection is properly closed."""
         mock_conn, mock_cursor = mock_connection
 
-        with patch.object(handler, 'get_records', return_value={'records': []}):
+        with patch.object(handler, 'get_records', return_value=[]):
             handler.save_to_database(sample_purchases, session_id)
 
             # Verify connection cleanup - only conn.close is called, not cursor.close
@@ -362,22 +393,22 @@ class TestPostgresHandlerSessionIsolation:
                 params = call_args[0][1]
                 if params and len(params) > 0:
                     if params[-1] == session1:
-                        return [(1, 'AMEX', '2025-01-01', 'STARBUCKS', -15.50, 'FOOD')]
+                        return [(1, 'AMEX', date(2025, 1, 1), 'STARBUCKS', -15.50, 'FOOD')]
                     elif params[-1] == session2:
-                        return [(2, 'CITI', '2025-01-02', 'SHELL', -45.00, 'GAS')]
+                        return [(2, 'CITI', date(2025, 1, 2), 'SHELL', -45.00, 'GAS')]
             return []
 
         mock_cursor.fetchall.side_effect = mock_fetchall
 
         # Test session 1
         result1 = handler.get_records("", session1)
-        assert result1['count'] == 1
-        assert result1['records'][0][1] == 'AMEX'  # bank is at index 1
+        assert len(result1) == 1
+        assert result1[0].bank == 'AMEX'
 
         # Test session 2
         result2 = handler.get_records("", session2)
-        assert result2['count'] == 1
-        assert result2['records'][0][1] == 'CITI'  # bank is at index 1
+        assert len(result2) == 1
+        assert result2[0].bank == 'CITI'
 
         # Verify both sessions were queried with correct session_ids
         assert mock_cursor.execute.call_count == 2
@@ -393,11 +424,11 @@ class TestPostgresHandlerSessionIsolation:
 
         # Clear session 1
         result1 = handler.clear_records(session1)
-        assert result1['records_deleted'] == 3
+        assert result1.records_deleted == 3
 
         # Clear session 2
         result2 = handler.clear_records(session2)
-        assert result2['records_deleted'] == 3
+        assert result2.records_deleted == 3
 
         # Verify both sessions were cleared with correct session_ids
         assert mock_cursor.execute.call_count == 4  # 2 SELECTs + 2 DELETEs

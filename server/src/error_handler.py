@@ -29,17 +29,3 @@ def handle_api_errors(error_key: str, status_code: int = 500):
                 raise HTTPException(status_code=status_code, detail=error_message)
         return wrapper
     return decorator
-
-
-def log_and_raise_http_exception(error_key: str, exception: Exception, status_code: int = 500):
-    """
-    Utility function to log an error and raise a standardized HTTPException.
-
-    Args:
-        error_key: Key from ERROR_MESSAGES to use for error detail
-        exception: The original exception that occurred
-        status_code: HTTP status code to return (default: 500)
-    """
-    error_message = ERROR_MESSAGES.get(error_key, "An unexpected error occurred")
-    log.error(f"{error_message}: {exception}")
-    raise HTTPException(status_code=status_code, detail=error_message)

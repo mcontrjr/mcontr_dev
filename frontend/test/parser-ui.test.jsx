@@ -9,20 +9,27 @@ vi.mock('../src/hooks/useParserData', () => ({
     bankName: '',
     bankNames: [],
     sortedRecords: [],
+    allRecords: [],
     selectedMonths: [],
     loading: false,
+    loadingStates: {},
+    isLoading: false,
     error: null,
     lineData: {},
     pieData: {},
+    weeklyData: {},
     totalAmount: {},
+    availableMonths: [],
     setBankName: vi.fn(),
     setSelectedMonths: vi.fn(),
     requestSort: vi.fn(),
     uploadFiles: vi.fn(),
     clearData: vi.fn(),
     fetchRecords: vi.fn(),
-    fetchBankNames: vi.fn(),
-    retryFetch: vi.fn()
+    updateRecord: vi.fn(),
+    retryFetch: vi.fn(),
+    sessionId: 'test-session-id',
+    updateSessionId: vi.fn()
   })
 }));
 

@@ -36,49 +36,54 @@ class TestSessionIsolationIntegration:
             pytest.skip("Server not running on port 8000 - start server with: uvicorn main:app --port 8000")
 
     def test_records_endpoint_isolation(self, session_ids):
-        """Test that /records/ endpoint returns isolated data per session."""
-        # Get records for session 1 (should be empty initially)
-        response_1 = requests.get(f"{self.API_BASE}/records/?session_id={session_ids['session_1']}")
-        assert response_1.status_code == 200
-        data_1 = response_1.json()
+        """Test that /records/ endpoint returns isolated data per session via POST."""
+        try:
+            response_1 = requests.post(f"{self.API_BASE}/records/",
+                json={"session_id": session_ids['session_1']})
+            assert response_1.status_code == 200
+            data_1 = response_1.json()
 
-        # Get records for session 2 (should be empty initially)
-        response_2 = requests.get(f"{self.API_BASE}/records/?session_id={session_ids['session_2']}")
-        assert response_2.status_code == 200
-        data_2 = response_2.json()
+            response_2 = requests.post(f"{self.API_BASE}/records/",
+                json={"session_id": session_ids['session_2']})
+            assert response_2.status_code == 200
+            data_2 = response_2.json()
 
-        # Both sessions should have their own isolated data
-        assert 'records' in data_1
-        assert 'records' in data_2
-        assert 'count' in data_1
-        assert 'count' in data_2
+            assert 'records' in data_1
+            assert 'records' in data_2
+            assert 'count' in data_1
+            assert 'count' in data_2
+        except requests.exceptions.ConnectionError:
+            pytest.skip("Server not running on port 8000")
 
     def test_clear_endpoint_isolation(self, session_ids):
         """Test that /clear/ endpoint only clears data for the specified session."""
-        # Clear session 1
-        clear_data_1 = {'session_id': session_ids['session_1']}
-        clear_response_1 = requests.post(f"{self.API_BASE}/clear/", data=clear_data_1)
-        assert clear_response_1.status_code == 200
-        result_1 = clear_response_1.json()
-        assert 'message' in result_1
-        assert 'records_deleted' in result_1
+        try:
+            clear_response_1 = requests.post(f"{self.API_BASE}/clear/",
+                json={"session_id": session_ids['session_1']})
+            assert clear_response_1.status_code == 200
+            result_1 = clear_response_1.json()
+            assert 'message' in result_1
+            assert 'records_deleted' in result_1
 
-        # Clear session 2
-        clear_data_2 = {'session_id': session_ids['session_2']}
-        clear_response_2 = requests.post(f"{self.API_BASE}/clear/", data=clear_data_2)
-        assert clear_response_2.status_code == 200
-        result_2 = clear_response_2.json()
-        assert 'message' in result_2
-        assert 'records_deleted' in result_2
+            clear_response_2 = requests.post(f"{self.API_BASE}/clear/",
+                json={"session_id": session_ids['session_2']})
+            assert clear_response_2.status_code == 200
+            result_2 = clear_response_2.json()
+            assert 'message' in result_2
+            assert 'records_deleted' in result_2
 
-        # Verify both sessions can be cleared independently
-        assert result_1['message'] == 'Successfully cleared all records'
-        assert result_2['message'] == 'Successfully cleared all records'
+            assert result_1['message'] == 'Successfully cleared all records'
+            assert result_2['message'] == 'Successfully cleared all records'
+        except requests.exceptions.ConnectionError:
+            pytest.skip("Server not running on port 8000")
 
     def test_session_id_required_for_records(self):
         """Test that session_id is required for /records/ endpoint."""
-        response = requests.get(f"{self.API_BASE}/records/")
-        assert response.status_code == 422  # Validation error
+        try:
+            response = requests.post(f"{self.API_BASE}/records/", json={})
+            assert response.status_code == 422  # Validation error
+        except requests.exceptions.ConnectionError:
+            pytest.skip("Server not running on port 8000")
 
     def test_session_id_required_for_clear(self):
         """Test that session_id is required for /clear/ endpoint."""

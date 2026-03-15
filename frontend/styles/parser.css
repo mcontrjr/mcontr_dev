@@ -9,12 +9,15 @@
   color: var(--text-primary);
   min-height: 100vh;
   padding: 2rem;
+  padding-top: 6rem;
   font-family: "Roboto Mono", monospace;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
-  padding-top: 7.5%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .parser-header {
@@ -45,29 +48,22 @@
   font-weight: 400;
 }
 
-/* Session Editor Floating Menu */
+/* Session Bar - Top bar */
 .parser-session-editor {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 200;
+  width: 100%;
   background: var(--bg-card);
   color: var(--text-primary);
   border: 1px solid var(--border);
   border-radius: 12px;
   box-shadow: var(--shadow);
-  padding: 0.75rem 1.25rem;
-  display: inline-flex;
+  padding: 0.75rem 1rem;
+  display: flex;
   align-items: center;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
   font-size: 0.95rem;
   font-family: "Roboto Mono", monospace;
-  min-width: 0;
-  max-width: 90%;
-  width: auto;
-  transition: box-shadow 0.2s;
-  word-break: break-all;
-  white-space: pre-line;
+  box-sizing: border-box;
 }
 
 .parser-session-editor .copy-btn {
@@ -98,6 +94,57 @@
   font-family: "Roboto Mono", monospace;
 }
 
+.parser-session-editor .pull-btn {
+  background: var(--accent);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.95rem;
+  font-family: "Roboto Mono", monospace;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.parser-session-editor .pull-btn:hover {
+  background: var(--accent-hover);
+}
+
+.parser-session-editor .pull-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Upload FAB (floating action button) */
+.upload-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 200;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  font-family: "Roboto Mono", monospace;
+}
+
+.upload-fab:hover {
+  background: var(--accent-hover);
+  transform: scale(1.1);
+}
+
 /* ===================================================================
    UPLOAD SECTION - Theme Consistent
    =================================================================== */
@@ -107,7 +154,6 @@
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 2rem;
-  margin-bottom: 2rem;
   box-shadow: var(--shadow);
   transition: all 0.3s ease;
   width: 100%;
@@ -117,8 +163,6 @@
 
 .upload-section.compact {
   padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  margin-top: 5rem;
 }
 
 .upload-section:hover {
@@ -923,8 +967,63 @@
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1rem;
+  padding: 0;
   box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* ── Internal filter/categories tab strip ── */
+.filter-tab-strip {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+.filter-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.filter-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.filter-tab-btn.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+  font-weight: 600;
+  background: var(--bg-card);
+}
+
+.filter-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding: 0 0.3rem;
+  background: var(--text-primary);
+  color: var(--bg-card);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.filter-panel {
+  padding: 1rem;
 }
 
 .filters-header {
@@ -1132,6 +1231,280 @@
   color: #ef4444;
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
+
+/* ── Categories panel ──────────────────────────────────────────────────── */
+.categories-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-height: 380px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.category-row {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s ease;
+}
+
+.category-row:last-child {
+  border-bottom: none;
+}
+
+.category-row:hover {
+  background: var(--bg-secondary);
+}
+
+.category-row.overridden {
+  border-left: 3px solid var(--text-primary);
+}
+
+.category-row.editing {
+  background: var(--bg-secondary);
+}
+
+.category-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.category-name {
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.category-row-actions {
+  display: flex;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.cat-edit-btn,
+.cat-revert-btn,
+.cat-save-btn,
+.cat-cancel-btn,
+.add-category-btn {
+  padding: 0.2rem 0.55rem;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  transition: background 0.1s, color 0.1s;
+}
+
+.cat-edit-btn:hover,
+.cat-cancel-btn:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.cat-save-btn {
+  background: var(--text-primary);
+  color: var(--bg-card);
+  border-color: var(--text-primary);
+}
+
+.cat-save-btn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.cat-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cat-revert-btn {
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+.cat-revert-btn:hover {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.keyword-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.keyword-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.45rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-family: "Roboto Mono", monospace;
+  color: var(--text-secondary);
+}
+
+.keyword-chip.editable {
+  color: var(--text-primary);
+  background: var(--bg-card);
+}
+
+.kw-remove-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.kw-remove-btn:hover {
+  color: #ef4444;
+}
+
+.keyword-more {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  padding: 0.15rem 0.3rem;
+  font-style: italic;
+}
+
+.keyword-chips-edit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.4rem;
+  min-height: 1.5rem;
+}
+
+.keyword-add-row {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 0.4rem;
+}
+
+.kw-input {
+  flex: 1;
+  padding: 0.25rem 0.5rem;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.kw-input:focus {
+  border-color: var(--text-primary);
+}
+
+.kw-add-btn {
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.kw-add-btn:hover {
+  background: var(--bg-secondary);
+}
+
+.category-edit-area {
+  padding-top: 0.4rem;
+}
+
+.add-category-form {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: var(--bg-secondary);
+}
+
+.add-category-actions {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.add-category-btn {
+  align-self: flex-start;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  border: 1px dashed var(--border);
+}
+
+.add-category-btn:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-style: solid;
+}
+
+/* ── Records tab: local category filter chips ──────────────────────────── */
+.records-category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding-bottom: 0.85rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.cat-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+  white-space: nowrap;
+}
+
+.cat-filter-chip:hover {
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+.cat-filter-chip.active {
+  background: var(--text-primary);
+  color: var(--bg-card);
+  border-color: var(--text-primary);
+}
+
+.cat-filter-chip.all-chip {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
 
 /* Improved month chip states */
 .month-chip.disabled {
@@ -1802,58 +2175,59 @@
    TABBED BREAKDOWN SECTION STYLES
    =================================================================== */
 
-/* Tab navigation */
+/* ── Tab navigation — underline style (matches filter tabs) ─────────────── */
 .tab-navigation {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  padding: 0.5rem;
-  box-shadow: var(--shadow);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  margin: -2rem -2rem 0 -2rem; /* flush with .breakdown-section edges */
+  border-radius: 16px 16px 0 0;  /* match .breakdown-section border-radius */
 }
 
 .tab-list {
   display: flex;
-  gap: 0.5rem;
+  gap: 0;
   flex-wrap: wrap;
 }
 
+/* Shared tab button style — identical to .filter-tab-btn */
 .tab-button {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  gap: 0.4rem;
+  padding: 0.65rem 1.2rem;
   background: transparent;
-  border: 1px solid transparent;
-  border-radius: 8px;
+  border: none;
+  border-bottom: 2px solid transparent;
   color: var(--text-secondary);
   font-family: "Roboto Mono", monospace;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
   white-space: nowrap;
   min-width: 0;
 }
 
 .tab-button:hover {
-  background: var(--bg-secondary);
   color: var(--text-primary);
-  border-color: var(--border);
 }
 
 .tab-button.active {
-  background: var(--accent);
   color: var(--text-primary);
-  border-color: var(--accent);
+  border-bottom-color: var(--text-primary);
   font-weight: 600;
 }
 
 .tab-icon {
-  font-size: 1.1rem;
   flex-shrink: 0;
-  width: 1.2rem;
-  text-align: center;
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.7;
+}
+
+.tab-button.active .tab-icon {
+  opacity: 1;
 }
 
 .tab-label {
@@ -1862,10 +2236,11 @@
   text-overflow: ellipsis;
 }
 
-/* Tab content container */
+/* Tab content area — sits below the tab strip */
 .tab-content-container {
+  padding: 1.5rem 0 0 0;
   min-height: 400px;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.2s ease-in-out;
 }
 
 .tab-content {
@@ -2034,12 +2409,13 @@
 /* Responsive design for tabs */
 @media (max-width: 768px) {
   .tab-list {
-    justify-content: stretch;
+    flex-wrap: wrap;
   }
 
   .tab-button {
     flex: 1;
     justify-content: center;
+    min-width: max-content;
     min-width: 0;
     padding: 0.75rem 0.5rem;
   }
@@ -2088,7 +2464,7 @@
   }
 
   .tab-button.active {
-    border: 2px solid var(--text-primary);
+    border-bottom: 3px solid var(--text-primary);
   }
 }
 /* ═══════════════════════════════════════════════════════════════

@@ -1,5 +1,5 @@
 import shutil
-from fastapi import FastAPI, UploadFile, File, HTTPException, Query, Form
+from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
 
 from typing import List, Optional
@@ -12,11 +12,14 @@ from datetime import datetime
 from src.parser import Parser
 from src.logger import log
 from src.handler import PostgresHandler
+from src.data_processor import DataProcessor
 from src.config import CORS_ORIGINS, CORS_METHODS, MAX_FILE_SIZE, ALLOWED_FILE_TYPES, UPLOAD_DIRECTORY, API_VERSION, API_TITLE
 from src.error_handler import handle_api_errors
 from src.models import (
-    APIInfoResponse, CategoriesResponse, RecordsResponse, ParseResponse,
-    SystemInfoResponse, ClearResponse, TransactionRecord, EditRecordRequest, EditRecordResponse
+    APIInfoResponse, CategoriesResponse, EnrichedRecordsResponse, ParseResponse,
+    SystemInfoResponse, ClearResponse, EditRecordRequest, EditRecordResponse,
+    RecordsRequest, ClearRequest, SessionIncomeRequest, SessionIncomeResponse,
+    CategoryUpsertRequest, CategoryDeleteRequest, CategoryActionResponse, SessionCategoriesResponse
 )
 
 app = FastAPI(
@@ -114,53 +117,80 @@ async def root():
     )
 
 
-@app.get("/categories/", response_model=CategoriesResponse, tags=["Categories"])
+@app.get("/categories/", response_model=SessionCategoriesResponse, tags=["Categories"])
 @handle_api_errors("CATEGORIES_RETRIEVAL")
-async def get_categories():
+async def get_categories(session_id: Optional[str] = None):
     """
-    Retrieve categories from parser. The categories contain keyword strings that map back to it
-    so if any keywords are found in the description we can defer the category.
+    Retrieve categories merged with any session-specific overrides.
+    Pass session_id to get merged view; omit for global defaults only.
 
-    ex: {
-    'GAS': ['GAS', 'CHEVRON', 'SHELL']
-    ...
-    }
-    :return: hashmap of categories and keywords
+    ex: { 'GAS': ['GAS', 'CHEVRON', 'SHELL'], ... }
     """
-    categories = Parser.keyword_to_category
-    return CategoriesResponse(categories=categories)
+    from src.config import CATEGORY_KEYWORDS
+    base = dict(CATEGORY_KEYWORDS)
+    session_overrides: dict = {}
+    if session_id:
+        session_overrides = handler.get_session_categories(session_id)
+    merged = {**base, **session_overrides}
+    return SessionCategoriesResponse(categories=merged, session_overrides=session_overrides)
 
 
-@app.get("/records/", response_model=RecordsResponse, tags=["Records"])
+@app.patch("/categories/{category_name}", response_model=CategoryActionResponse, tags=["Categories"])
+@handle_api_errors("CATEGORY_UPSERT")
+async def upsert_category(category_name: str, request: CategoryUpsertRequest):
+    """
+    Create or update session-specific keywords for a category, then re-categorize all records.
+    """
+    name = category_name.upper()
+    handler.upsert_session_category(request.session_id, name, request.keywords)
+    records_updated = handler.recategorize_records(request.session_id)
+    return CategoryActionResponse(
+        success=True,
+        message=f"Category {name} updated. {records_updated} records re-categorized.",
+        category=name,
+        keywords=request.keywords,
+        records_updated=records_updated
+    )
+
+
+@app.delete("/categories/{category_name}", response_model=CategoryActionResponse, tags=["Categories"])
+@handle_api_errors("CATEGORY_DELETE")
+async def delete_category(category_name: str, request: CategoryDeleteRequest):
+    """
+    Remove a session-specific category override and re-categorize records to revert to global defaults.
+    """
+    name = category_name.upper()
+    deleted = handler.delete_session_category(request.session_id, name)
+    records_updated = handler.recategorize_records(request.session_id) if deleted else 0
+    return CategoryActionResponse(
+        success=deleted,
+        message=f"Override removed. {records_updated} records re-categorized." if deleted else f"No override found for {name}.",
+        category=name,
+        keywords=[],
+        records_updated=records_updated
+    )
+
+
+@app.post("/records/", response_model=EnrichedRecordsResponse, tags=["Records"])
 @handle_api_errors("RECORDS_RETRIEVAL")
-async def get_records(bank_name: Optional[str] = Query(None), session_id: str = Query(...)):
+async def get_records(request: RecordsRequest):
     """
-    Retrieve records from the database, optionally filtering by bank name.
+    Retrieve enriched records with charts and metrics.
 
-    :param bank_name: Optional; filter results by the bank name.
-    :param session_id: Session ID for data isolation.
-    :return: List of records matching the criteria.
+    :param request: RecordsRequest with session_id, optional bank_name filter, and optional months list.
+    :return: Enriched response with records, charts, metrics, and filter options.
     """
-    if bank_name is None:
-        bank_name = ""
-        log.info("No bank name passed in query. Returning all records...")
-    bank_name = bank_name.upper()
+    bank_name = request.bank_name or ""
+    if not bank_name:
+        log.info("No bank name passed. Returning all records...")
 
-    response = handler.get_records(bank_name, session_id)
-    records = response.get('records', [])
+    records = handler.get_records(bank_name, request.session_id)
 
-    typed_records = []
-    for record in records:
-        typed_records.append(TransactionRecord(
-            id=record[0],
-            bank=record[1],
-            date=record[2],
-            description=record[3],
-            amount=record[4],
-            category=record[5]
-        ))
+    processor = DataProcessor(records, request.months if request.months else None)
+    result = processor.process_all()
 
-    return RecordsResponse(records=typed_records, count=len(typed_records))
+    monthly_income = handler.get_income(request.session_id)
+    return EnrichedRecordsResponse(**result, monthly_income=monthly_income)
 
 
 @app.post("/parse/", response_model=ParseResponse, tags=["Processing"])
@@ -274,6 +304,7 @@ async def get_system_info():
 async def edit_record(request: EditRecordRequest):
     """
     Edit a record's fields such as category, description, or amount.
+    After a successful edit, returns enriched records response with updated charts/metrics.
 
     :param request: EditRecordRequest containing id, updates, and session_id
     :return: EditRecordResponse with success status and updated record
@@ -293,28 +324,10 @@ async def edit_record(request: EditRecordRequest):
             message="No fields provided to update"
         )
 
-    # Update the record
-    success = handler.update_record(request.id, updates, request.session_id)
+    # Update the record - handler now returns the updated TransactionRecord directly
+    updated_record = handler.update_record(request.id, updates, request.session_id)
 
-    if success:
-        # Fetch the updated record to return it
-        records_response = handler.get_records(None, request.session_id)
-        records = records_response.get('records', [])
-
-        # Find the updated record
-        updated_record = None
-        for record in records:
-            if record[0] == request.id:
-                updated_record = TransactionRecord(
-                    id=record[0],
-                    bank=record[1],
-                    date=record[2],
-                    description=record[3],
-                    amount=record[4],
-                    category=record[5]
-                )
-                break
-
+    if updated_record:
         return EditRecordResponse(
             success=True,
             message="Record updated successfully",
@@ -329,12 +342,22 @@ async def edit_record(request: EditRecordRequest):
 
 @app.post("/clear/", response_model=ClearResponse, tags=["Records"])
 @handle_api_errors("RECORDS_CLEARING")
-async def clear_records(session_id: str = Form(...)):
+async def clear_records(request: ClearRequest):
     """
     Endpoint to clear all records from the bank_statements table.
     """
-    result = handler.clear_records(session_id)
-    return ClearResponse(
-        message=result.get('message', 'Successfully cleared records'),
-        records_deleted=result.get('records_deleted', 0)
-    )
+    handler.set_income(request.session_id, 0)
+    return handler.clear_records(request.session_id)
+
+
+@app.post("/session/income/", response_model=SessionIncomeResponse, tags=["Records"])
+@handle_api_errors("SESSION_INCOME")
+async def set_session_income(request: SessionIncomeRequest):
+    """
+    Save the user's monthly income for their session.
+
+    :param request: SessionIncomeRequest with session_id and monthly_income.
+    :return: Confirmation with saved income value.
+    """
+    handler.set_income(request.session_id, request.monthly_income)
+    return SessionIncomeResponse(session_id=request.session_id, monthly_income=request.monthly_income)

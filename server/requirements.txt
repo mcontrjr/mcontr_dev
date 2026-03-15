@@ -11,6 +11,7 @@ flake8
 
 # Tools
 pypdf
+pandas
 python-dotenv
 matplotlib
 psutil

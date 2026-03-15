@@ -32,19 +32,19 @@ const ChartContainer = memo(({
 ));
 ChartContainer.displayName = 'ChartContainer';
 
-// Weekly buckets chart with optimized caching
-export const WeeklyBucketsChart = memo(({ lineData, loading }) => {
+// Weekly buckets chart — accepts weeklyData prop directly from backend
+export const WeeklyBucketsChart = memo(({ weeklyData, lineData, loading }) => {
   const [chartLoading, setChartLoading] = useState(loading);
 
   useEffect(() => {
-    if (!loading && lineData) {
+    if (!loading && (weeklyData || lineData)) {
       // Simulate chart processing time for smooth UX
       const timer = setTimeout(() => setChartLoading(false), 200);
       return () => clearTimeout(timer);
     } else {
       setChartLoading(loading);
     }
-  }, [loading, lineData]);
+  }, [loading, weeklyData, lineData]);
 
   return (
     <ChartContainer
@@ -54,7 +54,7 @@ export const WeeklyBucketsChart = memo(({ lineData, loading }) => {
       height={CHART_DIMENSIONS.defaultHeight}
       className="weekly-buckets-container"
     >
-      <AmountBar lineData={lineData} />
+      <AmountBar weeklyData={weeklyData} lineData={lineData} />
     </ChartContainer>
   );
 });

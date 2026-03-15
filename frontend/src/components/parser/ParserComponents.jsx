@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react';
 /* eslint-disable react/prop-types, react/display-name */
-// Floating Session Editor (Session ID display + copy + edit)
-const SessionEditor = ({ sessionId, onSessionIdChange }) => {
+// Session Bar - top of parser page, full-width bar with session management + Pull button
+const SessionBar = ({ sessionId, onSessionIdChange, onPull, loading, monthlyIncome, onIncomeSave, hardReload, lastUpdated }) => {
     const [copied, setCopied] = useState(false);
     const [editing, setEditing] = useState(false);
     const [inputValue, setInputValue] = useState(sessionId);
+    const [incomeInput, setIncomeInput] = useState(monthlyIncome != null ? String(monthlyIncome) : '');
+    const [incomeSaving, setIncomeSaving] = useState(false);
+
+    useEffect(() => {
+        if (monthlyIncome != null) setIncomeInput(String(monthlyIncome));
+    }, [monthlyIncome]);
 
     // Keep inputValue in sync if sessionId changes externally
     useEffect(() => {
@@ -46,8 +52,27 @@ const SessionEditor = ({ sessionId, onSessionIdChange }) => {
         }
     };
 
+    const handleIncomeSave = async () => {
+        const parsed = parseFloat(incomeInput);
+        if (isNaN(parsed) || parsed < 0) return;
+        setIncomeSaving(true);
+        try {
+            await onIncomeSave(parsed);
+        } finally {
+            setIncomeSaving(false);
+        }
+    };
+
+    const handleIncomeKeyDown = (e) => {
+        if (e.key === 'Enter') handleIncomeSave();
+    };
+
+    const minutesAgo = lastUpdated
+        ? Math.floor((Date.now() - lastUpdated) / 60000)
+        : null;
+
     return (
-        <div className="parser-session-editor" title="Session ID">
+        <div className="parser-session-editor" data-test-id="session-bar" title="Session ID">
             <span style={{ fontWeight: 500 }}>Session:</span>
             {editing ? (
                 <input
@@ -56,12 +81,13 @@ const SessionEditor = ({ sessionId, onSessionIdChange }) => {
                     onChange={handleInputChange}
                     onBlur={handleInputBlur}
                     onKeyDown={handleInputKeyDown}
+                    data-test-id="session-input"
                     style={{
                         fontFamily: 'monospace',
                         fontSize: '0.93em',
-                        width: '10em',
+                        width: '22em',
                         border: '1px solid var(--border)',
-                        borderRadius: '4px',
+                        borderRadius: '0px',
                         padding: '0.2em 0.4em',
                         background: 'var(--bg-card)',
                         color: 'var(--text-primary)',
@@ -71,6 +97,7 @@ const SessionEditor = ({ sessionId, onSessionIdChange }) => {
                 />
             ) : (
                 <span
+                    data-test-id="session-input"
                     style={{ fontFamily: 'monospace', fontSize: '0.93em', userSelect: 'all', cursor: 'pointer' }}
                     onClick={handleEdit}
                     title="Click to edit session ID"
@@ -81,9 +108,71 @@ const SessionEditor = ({ sessionId, onSessionIdChange }) => {
             {copied ? (
                 <span className="copied">Copied!</span>
             ) : (
-                <button className="copy-btn" onClick={handleCopy} aria-label="Copy session ID">
+                <button className="copy-btn" onClick={handleCopy} aria-label="Copy session ID" data-test-id="copy-session-button">
                     Copy
                 </button>
+            )}
+            <button
+                className="pull-btn"
+                onClick={onPull}
+                disabled={loading}
+                aria-label="Pull session data"
+                data-test-id="pull-button"
+            >
+                {loading ? 'Loading...' : 'Pull'}
+            </button>
+
+            <span className="session-divider" style={{ margin: '0 0.5em', opacity: 0.3 }}>|</span>
+
+            <span style={{ fontWeight: 500 }}>Income:</span>
+            <input
+                type="number"
+                min="0"
+                step="100"
+                placeholder="Monthly income"
+                value={incomeInput}
+                onChange={e => setIncomeInput(e.target.value)}
+                onKeyDown={handleIncomeKeyDown}
+                data-test-id="income-input"
+                style={{
+                    fontFamily: 'monospace',
+                    fontSize: '0.93em',
+                    width: '9em',
+                    border: '1px solid var(--border)',
+                    borderRadius: '4px',
+                    padding: '0.2em 0.4em',
+                    background: 'var(--bg-card)',
+                    color: 'var(--text-primary)',
+                    outline: 'none',
+                }}
+            />
+            <button
+                className="copy-btn"
+                onClick={handleIncomeSave}
+                disabled={incomeSaving}
+                data-test-id="income-save-button"
+            >
+                {incomeSaving ? '...' : 'Save'}
+            </button>
+
+            {hardReload && (
+                <>
+                    <span className="session-divider" style={{ margin: '0 0.5em', opacity: 0.3 }}>|</span>
+                    {minutesAgo != null && (
+                        <span style={{ fontSize: '0.8em', opacity: 0.6 }}>
+                            {minutesAgo === 0 ? 'Just updated' : `${minutesAgo}m ago`}
+                        </span>
+                    )}
+                    <button
+                        className="copy-btn"
+                        onClick={hardReload}
+                        disabled={loading}
+                        title="Bypass cache and reload from server"
+                        data-test-id="hard-reload-button"
+                    >
+                        Hard Reload
+                    </button>
+                </>
             )}
         </div>
     );
@@ -99,7 +188,7 @@ import { MONTHS } from '../../constants/parserConstants';
 
 
 const BankSelector = ({ bankName, bankNames, setBankName }) => (
-    <div className="my-card">
+    <div className="my-card" data-test-id="bank-filter">
         <div className="my-card-header">
             <h4 className="my-card-title">Bank Selector</h4>
         </div>
@@ -171,14 +260,14 @@ const MonthSelector = memo(({ selectedMonths, setSelectedMonths }) => {
     }, [setSelectedMonths]);
 
     return (
-        <div className="mb-3">
+        <div className="mb-3" data-test-id="month-filter">
             <div className="my-card-header">
                 <h4 className="my-card-title">Select Months</h4>
             </div>
             <div className="my-card-body" style={{ textAlign: 'left', padding: '1rem' }}>
                 <div className="parser-month-grid">
                     {MONTHS.map(({ value, label }) => (
-                        <label key={value} className="parser-month-item">
+                        <label key={value} className="parser-month-item" data-test-id={`month-${value}`}>
                             <input
                                 type="checkbox"
                                 value={value}
@@ -197,7 +286,6 @@ const MonthSelector = memo(({ selectedMonths, setSelectedMonths }) => {
         </div>
     );
 });
-
 
 
 
@@ -259,4 +347,4 @@ const SupportedBanks = memo(() => (
     </div>
 ));
 
-export { BankSelector, MonthSelector, SupportedBanks, SessionEditor };
+export { BankSelector, MonthSelector, SupportedBanks, SessionBar };

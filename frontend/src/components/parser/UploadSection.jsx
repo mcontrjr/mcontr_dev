@@ -297,6 +297,7 @@ const UploadSection = ({ onUploadComplete, uploadMessage, setUploadMessage, sess
         onClick={handleDropZoneClick}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
+        data-test-id="upload-dropzone"
       >
         <input
           type="file"
